@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+	
+	<!-- 使用annotation及設定需scan的路徑  -->
+	<context:annotation-config></context:annotation-config>
+	<context:component-scan base-package="model"></context:component-scan>
+	
+	<!-- 設定dataSource及其來源 -->
+	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" value="java:comp/env/jdbc/CowBaby"></property>
+	</bean>
+	
+	<!-- sessionFactory設定及 Hibernate 設定 -->
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+			</props>
+		</property>
+		<property name="annotatedClasses">
+			<list>
+				<!-- 設定有Hibernate Annotated的檔案(即Bean) -->
+				<value>model.bean.AdvertisementBean</value>
+				<value>model.bean.AdvertisementDetailBean</value>
+				<value>model.bean.BackstageBean</value>
+				<value>model.bean.BlogBean</value>
+				<value>model.bean.ClassficationBean</value>
+				<value>model.bean.CustomerBean</value>
+				<value>model.bean.CustomerServiceBean</value>
+				<value>model.bean.MessageBean</value>
+				<value>model.bean.MessageBoardBean</value>
+				<value>model.bean.MessageBoardDetailBean</value>
+				<value>model.bean.Order01Bean</value>
+				<value>model.bean.OrderDetailBean</value>
+				<value>model.bean.PageViewBean</value>
+				<value>model.bean.ProductBean</value>
+				<value>model.bean.ProductSizeBean</value>
+				<value>model.bean.SellerBackstageManageBean</value>
+				<value>model.bean.StoreRatingBean</value>
+				<value>model.bean.Top5ProductsBean</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- 設定由Spring管理transaction -->
+	<bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+
+</beans>
