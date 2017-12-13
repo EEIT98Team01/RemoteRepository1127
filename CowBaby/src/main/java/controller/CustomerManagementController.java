@@ -9,21 +9,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import model.service.CustomerManagementService;
 
 @Controller
-@RequestMapping("CustomerManagementController.controller")
 public class CustomerManagementController {
 	
 	@Autowired
 	CustomerManagementService customerManagementService;
 	
 	@RequestMapping(
+			value=("CustomerManagementList.controller"),
 			method={RequestMethod.GET, RequestMethod.POST}
 	)
-	public String method(Model model, String account, String userType, String page, String orderBy) {
-		System.out.println("account:" + account);
-		System.out.println("userType:" + userType);
-		System.out.println("page:" + page);
-		System.out.println("orderBy:" + orderBy);
-	
+	public String list(Model model, String account, String userType, String page, String orderBy) {
 	//讀取使用者輸入資料
 	//進行必要的資料型態轉換
 	//進行資料檢查
@@ -73,6 +68,26 @@ public class CustomerManagementController {
 		}
 
 	//依照執行結果挑選適當的View元件
-		return "display";
+		return "member_managment_list";
+	}
+	
+	@RequestMapping(
+			value=("CustomerManagementView.controller"),
+			method={RequestMethod.GET, RequestMethod.POST}
+	)
+	public String view(Model model, String id) {
+		System.out.println("view");
+		model.addAttribute("customerData", customerManagementService.findById(Integer.parseInt(id)));
+		return "member_managment_view";
+	}
+	
+	@RequestMapping(
+			value=("CustomerManagementEdit.controller"),
+			method={RequestMethod.GET, RequestMethod.POST}
+	)
+	public String edit(Model model, String id) {
+		System.out.println("edit");
+		model.addAttribute("customerData", customerManagementService.findById(Integer.parseInt(id)));
+		return "member_managment_edit";
 	}
 }

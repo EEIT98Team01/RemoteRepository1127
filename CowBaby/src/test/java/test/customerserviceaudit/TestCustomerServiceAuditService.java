@@ -1,62 +1,62 @@
-package test.customermanagment;
+package test.customerserviceaudit;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class TestCustomerManagementService {
+public class TestCustomerServiceAuditService {
 
 	public static void main(String[] args) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("beans.config.service.test.xml");
 	/*---------------------------------------------------------------------------------------------*/
 		
 	// 依照要測試的對象進行修改
-		CustomerManagementService service = (CustomerManagementService) context.getBean(CustomerManagementService.class);
+		CustomerServiceAuditService service = (CustomerServiceAuditService) context.getBean(CustomerServiceAuditService.class);
 		
 	// 測試內容
 	  //findById(int id)
 		/*
-		System.out.println(service.findById(1));
+		System.out.println(service.findById(6));
 		*/
 		
 	  //find()
 		/*
-		for(CustomerBean bean: service.find()) {
+		for(CustomerServiceBean bean: service.find()) {
 			System.out.println(bean);
 		}
 		*/
 		
 	  //find(int page, int rows)
 		/*
-		for(CustomerBean bean: service.find(2, 10)) {
+		for(CustomerServiceBean bean: service.find(1, 5)) {
 			System.out.println(bean);
 		}
 		*/
 		
 	  //find(int page, int rows, String sortCondition)
 		/*
-		for(CustomerBean bean: service.find(2, 10, "CustomerName")) {
+		for(CustomerServiceBean bean: service.find(1, 3, "processStatus")) {
 			System.out.println(bean);
 		}
 		*/
 		
-	  //findByCondition(String account, String userType, String clusterID)
+	  //findByCondition(String problemTypes, String processStatus, String customerID)
 		/*
-		for(CustomerBean bean: service.findByCondition("Allen", "1", null)) {
+		for(CustomerServiceBean bean: service.findByCondition(null, null, "33")) {
 			System.out.println(bean);
 		}
 		*/
 		
-	  //findByCondition(String account, String userType, String clusterID, int page, int rows)
+	  //findByCondition(String problemTypes, String processStatus, String customerID, int page, int rows)
 		/*
-		for(CustomerBean bean: service.findByCondition("Allen", "1", null, 2, 3)) {
+		for(CustomerServiceBean bean: service.findByCondition(null, "3", null, 2, 2)) {
 			System.out.println(bean);
 		}
 		*/
 		
-	  //findByCondition(String account, String userType, String clusterID, int page, int rows, String sortCondition)
+	  //findByCondition(String problemTypes, String processStatus, String customerID, int page, int rows, String sortCondition)
 		/*
-		for(CustomerBean bean: service.findByCondition("Allen", "1", null, 1, 3, "customerName")) {
+		for(CustomerServiceBean bean: service.findByCondition(null, "3", null, 1, 5, "customerID")) {
 			System.out.println(bean);
 		}
 		*/
@@ -66,11 +66,9 @@ public class TestCustomerManagementService {
 		System.out.println(service.getQuantity());
 		*/
 		
-	  //getConditionQuantity(String account, String userType, String clusterID)
+	  //getConditionQuantity(String problemTypes, String processStatus, String customerID)
 		
-		System.out.println(service.getConditionQuantity("Allen", "1", null));
-		
-		
+		System.out.println(service.getConditionQuantity("1", null, null));
 		
 		
 	/*---------------------------------------------------------------------------------------------*/

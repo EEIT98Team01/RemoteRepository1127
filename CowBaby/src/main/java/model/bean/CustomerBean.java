@@ -32,11 +32,6 @@ public class CustomerBean {
 	private int bonus;
 	private byte consumerSegmentation; // type 改byte
 
-	
-	
-	
-	
-	
 	@Override
 	public String toString() {
 		return "CustomerBean [customerID=" + customerID + ", customerName=" + customerName + ", password=" + password

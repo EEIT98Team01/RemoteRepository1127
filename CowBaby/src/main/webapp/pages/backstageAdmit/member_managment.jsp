@@ -38,7 +38,7 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="panel panel-addpadding">
-							<form class="form-inline" action="http://localhost:8080/CowBaby/CustomerManagementController.controller" method="POST">
+							<form class="form-inline" action="${pageContext.servletContext.contextPath}/CustomerManagementList.controller" method="POST">
 								<div class="form-group">
 									<label for="exampleInputName2">會員帳號:</label>
 									<input type='text' name='account' id='account' class="form-control" value="${account}"/>
@@ -64,8 +64,8 @@
 								<thead>
 								  <tr>
 								    <th>序號</th>
-									<th><a href="<c:url value="CustomerManagementController.controller?page=1&orderBy=email&account=${account}&userType=${userType}" />">帳號</a></th>
-									<th><a href="<c:url value="CustomerManagementController.controller?page=1&orderBy=customerName&account=${account}&userType=${userType}" />">姓名</a></th>
+									<th><a href="<c:url value="CustomerManagementList.controller?page=1&orderBy=email&account=${account}&userType=${userType}" />">帳號</a></th>
+									<th><a href="<c:url value="CustomerManagementList.controller?page=1&orderBy=customerName&account=${account}&userType=${userType}" />">姓名</a></th>
 									<th>手機</th>
 									<th>性別</th>
 									<th>身份</th>
@@ -87,10 +87,10 @@
 											<td>${customer.consumerSegmentation}</td>
 											<td>${customer.totalAmoutOfConsumption}</td>
 											<td>
-												<a href=# class='btn btn-success'> <i class='fa fa-eye'></i> </a>
+												<a href="<c:url value="CustomerManagementView.controller?id=${customer.customerID}"/>" class='btn btn-success'> <i class='fa fa-eye'></i> </a>
 											</td>
 											<td>
-												<a href=# class='btn btn-primary'> <i class='fa fa-pencil'></i> </a>
+												<a href="<c:url value="CustomerManagementEdit.controller?id=${customer.customerID}"/>" class='btn btn-primary'> <i class='fa fa-pencil'></i> </a>
 											</td>
 										</tr>
 									</c:forEach>
@@ -112,29 +112,29 @@
 						<c:if test="${!empty customerQuantity}">
 							<li>
 								<c:if test="${page != 1}">
-					      			<a href="<c:url value="CustomerManagementController.controller?page=${page-1}&orderBy=${orderBy}&account=${account}&userType=${userType}" />" aria-label="Previous">
+					      			<a href="<c:url value="CustomerManagementList.controller?page=${page-1}&orderBy=${orderBy}&account=${account}&userType=${userType}" />" aria-label="Previous">
 					        			<span aria-hidden="true">&laquo;</span>
 					      			</a>
 					      		</c:if>
 					      		<c:if test="${page == 1}">
-					      			<a href="<c:url value="CustomerManagementController.controller?page=1&orderBy=${orderBy}&account=${account}&userType=${userType}" />" aria-label="Previous">
+					      			<a href="<c:url value="CustomerManagementList.controller?page=1&orderBy=${orderBy}&account=${account}&userType=${userType}" />" aria-label="Previous">
 					        			<span aria-hidden="true">&laquo;</span>
 					      			</a>
 					      		</c:if>
 					      	</li>					      	
 
 							<c:forEach var="pageNumber" begin="1" end="${pageQuantity}">
-								<li><a href="<c:url value="CustomerManagementController.controller?page=${pageNumber}&orderBy=${orderBy}&account=${account}&userType=${userType}" />">${pageNumber}</a></li>
+								<li><a href="<c:url value="CustomerManagementList.controller?page=${pageNumber}&orderBy=${orderBy}&account=${account}&userType=${userType}" />">${pageNumber}</a></li>
 							</c:forEach>
 
 					    	<li>
 					    		<c:if test="${(page) != pageQuantity}">
-					    			<a href="<c:url value="CustomerManagementController.controller?page=${page+1}&orderBy=${orderBy}&account=${account}&userType=${userType}" />" aria-label="Next">
+					    			<a href="<c:url value="CustomerManagementList.controller?page=${page+1}&orderBy=${orderBy}&account=${account}&userType=${userType}" />" aria-label="Next">
 					        			<span aria-hidden="true">&raquo;</span>
 					    			</a>
 					    		</c:if>
 					    		<c:if test="${(page) == pageQuantity}">
-					    			<a href="<c:url value="CustomerManagementController.controller?page=${pageQuantity}&orderBy=${orderBy}&account=${account}&userType=${userType}" />" aria-label="Next">
+					    			<a href="<c:url value="CustomerManagementList.controller?page=${pageQuantity}&orderBy=${orderBy}&account=${account}&userType=${userType}" />" aria-label="Next">
 					        			<span aria-hidden="true">&raquo;</span>
 					    			</a>
 					    		</c:if>

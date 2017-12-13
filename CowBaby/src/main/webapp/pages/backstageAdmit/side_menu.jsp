@@ -13,67 +13,68 @@
 			</div>
 				  	
 			<li class="memberManagment">
-				<a href="member_managment.jsp">
+				<a href="<c:url value="/pages/backstageAdmit/member_managment.jsp"/>">
 			    	<i class="fa fa-dashboard"></i>
 			        <span>會員管理</span>
 			    </a>
 			</li>
 		     
 		    <li class="sub-menu auditComplaints">
-		         <a href="audit_complaints.jsp" >
+		         <a href="<c:url value="/pages/backstageAdmit/audit_complaints.jsp"/>">
 		             <i class="fa fa-cog" aria-hidden="true"></i>
 		             <span>審核管理</span>
-		              <i class="fa fa-chevron-down" aria-hidden="true"></i> 
+		             <i class="fa fa-chevron-down" aria-hidden="true"></i> 
 		         </a>
-		         <ul class="sub">
-		             <li><a href="audit_complaints.jsp">客服申訴</a></li>
-		             <li><a href="audit_advertisement.jsp">廣告審核</a></li>
-		             <li><a href="audit_shop.jsp">賣家審核</a></li>
+		         <ul class="sub"> 
+		             <li><a href="<c:url value="/pages/backstageAdmit/audit_complaints.jsp"/>">客服申訴</a></li>
+		             <li><a href="<c:url value="/pages/backstageAdmit/audit_advertisement.jsp"/>">廣告審核</a></li>
+		             <li><a href="<c:url value="/pages/backstageAdmit/audit_shop.jsp"/>">賣家審核</a></li>
 		         </ul>
 		    </li>
 		     
 		    <li class="sub-menu adManagement">
-		         <a href="ad_management_banner.jsp" >
+		         <a href="<c:url value="/pages/backstageAdmit/ad_management_banner.jsp"/>" >
 		             <i class="fa fa-file-text" aria-hidden="true"></i>
 		             <span>廣告管理</span>
 		              <i class="fa fa-chevron-down" aria-hidden="true"></i> 
 		         </a>
 		         <ul class="sub">
-		             <li><a href="ad_management_banner.jsp">Slideshow</a></li>
-		             <li><a href="ad_management_seller_ad.jsp">賣家廣告欄位</a></li>
+		             <li><a href="<c:url value="/pages/backstageAdmit/ad_management_banner.jsp"/>">Slideshow</a></li>
+		             <li><a href="<c:url value="/pages/backstageAdmit/ad_management_seller_ad.jsp"/>">賣家廣告欄位</a></li>
 		         </ul>
 		     </li>
 		
+		
 		     <li class="sub-menu productManagement">
-		         <a href="product_management_list.jsp" >
+		         <a href="<c:url value="/pages/backstageAdmit/product_management_list.jsp"/>">
 		             <i class="fa fa-gift" aria-hidden="true"></i>
 		             <span>商品管理</span>
 		             <i class="fa fa-chevron-down" aria-hidden="true"></i>
 		         </a>
 		         <ul class="sub">
-		             <li><a href="product_management_list.jsp">商品列表頁</a></li>
-		             <li><a href="product_management_sort.jsp">商品分類設定</a></li>
-		             <li><a href="product_management_sale_report.jsp">銷售報表</a></li> 
+		             <li><a href="<c:url value="/pages/backstageAdmit/product_management_list.jsp"/>">商品列表頁</a></li>
+		             <li><a href="<c:url value="/pages/backstageAdmit/product_management_sort.jsp"/>">商品分類設定</a></li>
+		             <li><a href="<c:url value="/pages/backstageAdmit/product_management_sale_report.jsp"/>">銷售報表</a></li> 
 		         </ul>
 		     </li>
 		     
 		     <li class="sub-menu msg">
-		         <a href="send_msg.jsp">
+		         <a href="<c:url value="/pages/backstageAdmit/send_msg.jsp"/>">
 		             <i class="fa fa-envelope-o"></i>
 		             <span>訊息管理</span>
 		         </a> 
 		     </li>
 		
 		     <li class="sub-menu blog">
-		          <a href="blog_list.jsp">
+		          <a href="<c:url value="/pages/backstageAdmit/blog_list.jsp"/>">
 		          	 <i class="fa fa-th"></i>
 		             <span>媽咪上稿</span>
 		             <i class="fa fa-chevron-down" aria-hidden="true"></i>
 		         </a>
 		         <ul class="sub">
-		             <li><a href="blog_list.jsp">文章列表</a></li>
-		             <li><a href="blog_add.jsp">新增文章</a></li>
-		             <li><a href="blog_delete.jsp">修改文章</a></li> 
+		             <li><a href="<c:url value="/pages/backstageAdmit/blog_list.jsp"/>">文章列表</a></li>
+		             <li><a href="<c:url value="/pages/backstageAdmit/blog_add.jsp"/>">新增文章</a></li>
+		             <li><a href="<c:url value="/pages/backstageAdmit/blog_delete.jsp"/>">修改文章</a></li> 
 		         </ul>
 		     </li>
 		 </ul>
