@@ -32,30 +32,8 @@ public class CustomerManagementWebService {
 	@Autowired
 	SellerBackstageManageService sellerBackstageManageService;
 	
-	@RequestMapping(
-			value="/getCustomerData",
-			method={RequestMethod.GET, RequestMethod.POST},
-			produces={"application/json;charset=UTF-8"}
-	)
-	public String getCustomerData(String customerAccount, String pageSize, String customerStatue, String pageNumber) {
-		
-		if("null".equals(customerAccount)) {
-			customerAccount = null;
-		}
-		
-		System.out.println("customerAccount:" + customerAccount);
-		System.out.println("customerStatue:" + customerStatue);
-		System.out.println("pageNumber:" + pageNumber);
-		System.out.println("pageSize:" + pageSize);
-		
-		for(CustomerBean bean: customerManagementService.findByCondition(customerAccount, customerStatue, null, Integer.parseInt(pageNumber), Integer.parseInt(pageSize))) {
-			System.out.println(bean);
-		}
-		
-		JSONArray array = new JSONArray(customerManagementService.findByCondition(customerAccount, customerStatue, null, Integer.parseInt(pageNumber), Integer.parseInt(pageSize)));
-		return array.toString();
-	}
-	
+
+
 	@RequestMapping(
 			value="/qoo",
 			method={RequestMethod.POST},
@@ -147,5 +125,29 @@ public class CustomerManagementWebService {
 			} 
 
 		return result;
+	}
+
+	public String getCustomerData(String customerAccount, String pageSize, String customerStatue, String pageNumber) {
+		if("null".equals(customerAccount)) {
+			customerAccount = null;
+		}
+		
+		JSONArray array = new JSONArray(customerManagementService.findByCondition(customerAccount, customerStatue, null, Integer.parseInt(pageNumber), Integer.parseInt(pageSize)));
+		int quantity = customerManagementService.getConditionQuantity(customerAccount, customerStatue, null);
+		int pageQuantity;
+		
+		if((quantity%10) == 0) {
+			pageQuantity = quantity/10;
+		} else {
+			pageQuantity = quantity/10+1;
+		}
+		
+		String result = "[\"tatal\":\"" + quantity + "\"," +
+				        "\"tatalPage\":\"" + pageQuantity + "\"," +
+		                "\"pageNumber\":\"" + pageNumber + "\"," +
+		                "\"pageSize\":\"" + pageSize + "\"," +
+		                "\"list\":\"" + array.toString() + "\"]";
+		return result;
+
 	}
 }

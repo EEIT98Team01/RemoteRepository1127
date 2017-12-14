@@ -66,7 +66,7 @@
 													<option>日用品</option>
 													<option>其他</option>		
 												</select>
-		                                    </div>  
+		                                    </div>
 		                                </div>  
 		                    
 		                                <div class="form-group col-md-12">

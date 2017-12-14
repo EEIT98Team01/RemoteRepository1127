@@ -35,7 +35,154 @@
 					<div class="clear-both"></div>
 				</div>
 				<!--這邊開始寫內容-->
-					<span>${customerData.customerID}</span>
+				<span>${customerData.customerID}</span>
+				<div class="container">
+					<div class="row">
+						<section class="panel">
+							<header class="panel-heading product-add-heading" style="background:#93bad1;color: #fff; ">編輯會員資料</header>
+	                        <div class="panel-body">
+								<form class="form-horizontal" action="#" method="POST">
+									<div class="row">
+										<!-- 固定欄位不給修改 -->
+										<div class="form-group col-md-12">
+		                                    <label class="col-md-2 control-label">會員ID</label>
+		                                    <label class="col-md-2 control-label" style="text-align:left">9527</label>
+		                                    <input type="text" style="display:none" value="1" />
+			                            </div>
+			                            <div class="form-group col-md-12">
+		                                    <label class="col-md-2 control-label">會員帳號</label>
+		                                    <label class="col-md-2 control-label" style="text-align:left">9527@gmail.com</label>
+		                                    <input type="text" style="display:none" value="1" />
+			                            </div>
+			                            <div class="form-group col-md-12">
+		                                    <label class="col-md-2 control-label">會員姓名</label>
+		                                    <label class="col-md-2 control-label" style="text-align:left">葉燁燁</label>
+		                                    <input type="text" style="display:none" value="1" />
+			                            </div>
+			                            <div class="form-group col-md-12">
+		                                    <label class="col-md-2 control-label">註冊日期</label>
+		                                    <label class="col-md-2 control-label" style="text-align:left">2017-08-05</label>
+		                                    <input type="text" style="display:none" value="1" />
+			                            </div>
+			                            <div class="form-group col-md-12">
+		                                    <label class="col-md-2 control-label">累積消費金額</label>
+		                                    <label class="col-md-2 control-label" style="text-align:left">5</label>
+		                                    <input type="text" style="display:none" value="1" />
+			                            </div>
+			                            <div class="form-group col-md-12">
+		                                    <label class="col-md-2 control-label">累積消費次數</label>
+		                                    <label class="col-md-2 control-label" style="text-align:left">13987</label>
+		                                    <input type="text" style="display:none" value="1" />
+			                            </div>
+			                            <!-- 基本資料 -->
+			                            <div class="dash-line col-md-12"/></div>
+			                            <div class="form-group col-md-12" style="padding-top: 30px">
+		                                    <label class="col-md-2 control-label">收入</label>
+		                                    <div class="col-md-6 add-prouduct-list-description">
+		                                        <input type="text" class="form-control">
+		                                    </div>
+		                                </div>
+		                                <div class="form-group col-md-12">
+		                                    <label class="col-md-2 control-label">性別</label>
+		                                    <div class="col-md-6">
+		                                        <div class="radio">
+													<label>
+														<input type="radio" />男
+													</label>
+													<label>
+														<input type="radio" />女
+													</label>
+												</div>
+		                                    </div>
+		                                </div>
+		                                <div class="form-group col-md-12">
+		                                    <label class="col-md-2 control-label">婚姻</label>
+		                                    <div class="col-md-6">
+		                                        <div class="radio">
+													<label>
+														<input type="radio" />是
+													</label>
+													<label>
+														<input type="radio" />否
+													</label>
+												</div>
+		                                    </div>
+		                                </div>
+			                            <div class="form-group col-md-12">
+		                                    <label class="col-md-2 control-label">生日</label>
+		                                    <div class="col-md-6 add-prouduct-list-description">
+		                                        <input type="text" class="form-control">
+		                                    </div>
+		                                </div>
+										<!-- 聯絡方式 -->
+		                                <div class="dash-line col-md-12"/></div>
+			                            <div class="form-group col-md-12" style="padding-top: 30px">
+		                                    <label class="col-md-2 control-label">住址</label>
+		                                    <div class="col-md-6 add-prouduct-list-description">
+		                                        <input type="text" class="form-control">
+		                                    </div>
+		                                </div>
+		                                <div class="form-group col-md-12">
+		                                    <label class="col-md-2 control-label">室內電話</label>
+		                                    <div class="col-md-6 add-prouduct-list-description">
+		                                        <input type="text" class="form-control">
+		                                    </div>
+		                                </div>
+		                                <div class="form-group col-md-12">
+		                                    <label class="col-md-2 control-label">行動電話</label>
+		                                    <div class="col-md-6 add-prouduct-list-description">
+		                                        <input type="text" class="form-control">
+		                                    </div>
+		                                </div>
+										<!-- 平台相關資訊 -->
+		                                <div class="dash-line col-md-12"/></div>
+			                            <div class="form-group col-md-12" style="padding-top: 30px">
+		                                    <label class="col-md-2 control-label">紅利點數</label>
+		                                    <div class="col-md-6 add-prouduct-list-description">
+		                                        <input type="text" class="form-control">
+		                                    </div>
+		                                </div>
+		                                <div class="form-group col-md-12">
+		                                    <label class="col-md-2 control-label">所屬身份</label>
+		                                    <div class="col-md-6">
+		                                        <select class="form-control">
+													<option>一般會員</option>
+													<option>平台賣家</option>
+													<option>黑名單</option>	
+												</select>
+		                                    </div>
+		                                </div>
+		                                <div class="form-group col-md-12">
+		                                    <label class="col-md-2 control-label">消費群集</label>
+		                                    <div class="col-md-6">
+		                                        <select class="form-control">
+													<option>群集1</option>
+													<option>群集2</option>
+													<option>群集3</option>
+												</select>
+		                                    </div>
+		                                </div>
+		                                <div class="form-group col-md-12">
+		                                    <label class="col-md-2 control-label">訂閱電子報</label>
+		                                    <div class="col-md-6">
+		                                        <div class="radio">
+													<label>
+														<input type="radio" />是
+													</label>
+													<label>
+														<input type="radio" />否
+													</label>
+												</div>
+		                                    </div>
+		                                </div>
+                                     </div>        
+		                             <input type="submit" class="btn btn-primary pull-right" value="儲存" />
+	                              </form>
+	                          </div>
+	                      	</section>
+						</div>
+					</div>	
+				</div>	
 				<!-- 內容結束 -->
 			</section>
 			<!-- wrapper end -->
@@ -57,29 +204,5 @@
 $(function(){
 	// side_menu 帳戶總覽填充背景色
 	$(".memberManagment a").addClass('active');
-// 	var html="";
-// 	var count = 1;
-// 	$.getJSON('http://localhost:8080/CowBaby/service/getCustomerData',{},function(datas){
-	     
-		
-// 		$.each(datas,function(idx,customer){
-// 	    	 var html="";
-	    	 
-// 		    	html="<tr>"+
-// 							"<td>"+(idx+1)+"</td>" +
-// 							"<td>"+customer.email+"</td>" +
-// 							"<td>"+customer.customerName+"</td>" +
-// 							"<td>"+customer.mobilePhone+"</td>" +
-// 							"<td>"+customer.gender+"</td>" +
-// 							"<td>"+customer.userID+"</td>" +
-// 							"<td>"+customer.consumerSegmentation+"</td>" +
-// 							"<td>"+customer.totalAmoutOfConsumption+"</td>" +
-// 							"<td> <a href=# class='btn btn-success'> <i class='fa fa-eye'></i> </a> </td>" +
-// 							"<td> <a href=# class='btn btn-primary'> <i class='fa fa-pencil'></i> </a> </td>" +
-// 						 "</tr>";				
-// 		    	$('tbody').append(html);
-// 	     });
-//    });
-
 })
 </script>
