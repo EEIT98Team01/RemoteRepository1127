@@ -23,6 +23,7 @@ public class CustomerManagementWebService {
 			method={RequestMethod.GET, RequestMethod.POST},
 			produces={"application/json;charset=UTF-8"}
 	)
+
 	public String getCustomerData(String customerAccount, String pageSize, String customerStatue, String pageNumber) {
 		if("null".equals(customerAccount)) {
 			customerAccount = null;
