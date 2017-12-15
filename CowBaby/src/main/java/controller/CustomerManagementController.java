@@ -1,12 +1,21 @@
 package controller;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import model.bean.CustomerBean;
 import model.service.CustomerManagementService;
+import model.utils.PrimitiveNumberEditor;
 
 @Controller
 public class CustomerManagementController {
@@ -76,7 +85,6 @@ public class CustomerManagementController {
 			method={RequestMethod.GET, RequestMethod.POST}
 	)
 	public String view(Model model, String id) {
-		System.out.println("view");
 		model.addAttribute("customerData", customerManagementService.findById(Integer.parseInt(id)));
 		return "member_managment_view";
 	}
@@ -86,8 +94,8 @@ public class CustomerManagementController {
 			method={RequestMethod.GET, RequestMethod.POST}
 	)
 	public String edit(Model model, String id) {
-		System.out.println("edit");
 		model.addAttribute("customerData", customerManagementService.findById(Integer.parseInt(id)));
 		return "member_managment_edit";
 	}
+	
 }

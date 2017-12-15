@@ -160,14 +160,16 @@ $(function(){
 	 $("#qq").on('click', function () {
 		
 		 $.ajax({
-		     url: "http://localhost:8080/CowBaby/service/qoo",
-		     type: 'POST',
-		     cache: false,
-		     data: new FormData($('#shopSetForm')[0]),
-		     processData: false,
-		     contentType: false,
-		 	 success: function(result){ 
-		 		 BootstrapDialog.alert('I want banana!');
+
+		    url: "http://localhost:8080/CowBaby/service/getCustomerData",
+		    type: 'POST',
+		    cache: false,
+		    data: new FormData($('#shopSetForm')[0]),
+		    processData: false,
+		    contentType: false,
+		 	success: function(result){  //處理回傳成功事件，當請求成功後此事件會被呼叫
+		      //var myObj = $.parseJSON(result);
+		       console.log(result);
 		 	 },
 			 error: function(result){  
 			     //your code here
