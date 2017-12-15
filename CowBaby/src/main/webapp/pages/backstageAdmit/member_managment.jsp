@@ -38,7 +38,8 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="panel panel-addpadding">
-							<form class="form-inline" action="${pageContext.servletContext.contextPath}/CustomerManagementList.controller" method="POST">
+							<%-- <form class="form-inline" action="${pageContext.servletContext.contextPath}/CustomerManagementList.controller" method="POST"> --%>
+							<form class="form-inline memberFrom" >
 								<div class="form-group">
 									<label for="exampleInputName2">會員帳號:</label>
 									<input type='text' name='account' id='account' class="form-control" value="${account}"/>
@@ -46,13 +47,14 @@
 								<div class="form-group">
 									<label for="exampleInputName2">會員身份:</label>
 									<select class="form-control" name="userType">
-										<option <c:if test="${userType==''}">selected="true"</c:if>>全部</option>
-										<option <c:if test="${userType=='1'}">selected="true"</c:if>>一般會員</option>
-										<option <c:if test="${userType=='2'}">selected="true"</c:if>>平台賣家</option>
-										<option <c:if test="${userType=='3'}">selected="true"</c:if>>黑名單</option>	
+										<option value="">全部</option>
+										<option value="1">一般會員</option>
+										<option value="2">平台賣家</option>
+										<option value="3">黑名單</option>	
 									</select>
-								</div>	
-								<button type="submit" class="btn btn-primary">查詢</button>
+								</div>
+								
+								<button type="submit" class="btn btn-primary" id="inquire">查詢</button> 
 							</form>
 						</div>
 					</div>	
@@ -90,7 +92,7 @@
 												<a href="<c:url value="CustomerManagementView.controller?id=${customer.customerID}"/>" class='btn btn-success'> <i class='fa fa-eye'></i> </a>
 											</td>
 											<td>
-												<a href="<c:url value="CustomerManagementEdit.controller?id=${customer.customerID}"/>" class='btn btn-primary'> <i class='fa fa-pencil'></i> </a>
+												<a  href="<c:url value="CustomerManagementEdit.controller?id=${customer.customerID}"/>" class='btn btn-primary'> <i class='fa fa-pencil'></i> </a>
 											</td>
 										</tr>
 									</c:forEach>
@@ -99,6 +101,7 @@
 						</div>
 					</div>
 				</div>
+				<a class="pp">popup</a>
 				<div class="row">
 					<div class="col-md-3 record-number">
 						<c:if test="${!empty page}">
@@ -107,41 +110,8 @@
 							<span>共${customerQuantity}筆</span>
 						</c:if>
 					</div>
-					
-					<ul class="pagination">
-						<c:if test="${!empty customerQuantity}">
-							<li>
-								<c:if test="${page != 1}">
-					      			<a href="<c:url value="CustomerManagementList.controller?page=${page-1}&orderBy=${orderBy}&account=${account}&userType=${userType}" />" aria-label="Previous">
-					        			<span aria-hidden="true">&laquo;</span>
-					      			</a>
-					      		</c:if>
-					      		<c:if test="${page == 1}">
-					      			<a href="<c:url value="CustomerManagementList.controller?page=1&orderBy=${orderBy}&account=${account}&userType=${userType}" />" aria-label="Previous">
-					        			<span aria-hidden="true">&laquo;</span>
-					      			</a>
-					      		</c:if>
-					      	</li>					      	
-
-							<c:forEach var="pageNumber" begin="1" end="${pageQuantity}">
-								<li><a href="<c:url value="CustomerManagementList.controller?page=${pageNumber}&orderBy=${orderBy}&account=${account}&userType=${userType}" />">${pageNumber}</a></li>
-							</c:forEach>
-
-					    	<li>
-					    		<c:if test="${(page) != pageQuantity}">
-					    			<a href="<c:url value="CustomerManagementList.controller?page=${page+1}&orderBy=${orderBy}&account=${account}&userType=${userType}" />" aria-label="Next">
-					        			<span aria-hidden="true">&raquo;</span>
-					    			</a>
-					    		</c:if>
-					    		<c:if test="${(page) == pageQuantity}">
-					    			<a href="<c:url value="CustomerManagementList.controller?page=${pageQuantity}&orderBy=${orderBy}&account=${account}&userType=${userType}" />" aria-label="Next">
-					        			<span aria-hidden="true">&raquo;</span>
-					    			</a>
-					    		</c:if>
-					    	</li>
-					    </c:if>
-					</ul>
-					
+					<!--分頁 -->
+					<ul class="pagination"  id="myPagination"></ul>
 				</div>
 				<!-- 內容結束 -->
 			</section>
@@ -150,6 +120,25 @@
       	<!-- main-content end -->
 	</section>
 	<!-- container end -->
+	
+	<div class="modal fade">
+		  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			       	 	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			        	<h4 class="modal-title">Modal title</h4>
+			      </div>
+			      <div class="modal-body">
+			        	<p>One fine body…</p>
+			      </div>
+			      <div class="modal-footer">
+			        	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			        	<button type="button" class="btn btn-primary">Save changes</button>
+			      </div>
+			    </div><!-- /.modal-content -->
+		  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+    
 </body>
 </html>
 
@@ -160,33 +149,114 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/js/bootstrap-dialog.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
 
+<script src="<c:url value="/pluging/Bootsrap/jquery.twbsPagination.js"/>"></script>
+
 <script>
 $(function(){
+
+	/* $(".pp").click(function(){
+		BootstrapDialog.alert('Hi Apple!');
+	}) */
+	
 	// side_menu 帳戶總覽填充背景色
 	$(".memberManagment a").addClass('active');
-// 	var html="";
-// 	var count = 1;
-// 	$.getJSON('http://localhost:8080/CowBaby/service/getCustomerData',{},function(datas){
-	     
+	
+	// pagination.js 參考網站=> https://esimakin.github.io/twbs-pagination/
+	// 要產生分頁的 DOM 元素
+ 	 var $pagination = $('#myPagination');
+ 	
+	// 分頁預設值
+    var defaultOpts = {visiblePages: 7}; // 一次顯示7筆
+    var mypage = 1 ; //從第1頁開始
+ 	
+ 	// 抓取表單欄位
+	var formData ="";
+	
+    // 查詢
+    $("#inquire").click(function(){
+ 
+        event.preventDefault();
+ 
+		// 抓取表單欄位
+		formData = $(".memberFrom").serializeArray();
+
+	    // 發 ajax 查詢表單資料
+		inqueryData(formData , 1);
 		
-// 		$.each(datas,function(idx,customer){
-// 	    	 var html="";
-	    	 
-// 		    	html="<tr>"+
-// 							"<td>"+(idx+1)+"</td>" +
-// 							"<td>"+customer.email+"</td>" +
-// 							"<td>"+customer.customerName+"</td>" +
-// 							"<td>"+customer.mobilePhone+"</td>" +
-// 							"<td>"+customer.gender+"</td>" +
-// 							"<td>"+customer.userID+"</td>" +
-// 							"<td>"+customer.consumerSegmentation+"</td>" +
-// 							"<td>"+customer.totalAmoutOfConsumption+"</td>" +
-// 							"<td> <a href=# class='btn btn-success'> <i class='fa fa-eye'></i> </a> </td>" +
-// 							"<td> <a href=# class='btn btn-primary'> <i class='fa fa-pencil'></i> </a> </td>" +
-// 						 "</tr>";				
-// 		    	$('tbody').append(html);
-// 	     });
-//    });
+    });
+    
+    // 查詢表單資料
+    function inqueryData(data,pageNum){
+    	
+    	$.ajax({
+	        type:"GET",                   
+	        url: "http://localhost:8080/CowBaby/service/getCustomerData",    
+	        data: {
+		       	 customerAccount:formData[0].value,
+		       	 pageSize:defaultOpts.visiblePages,
+		       	/*  customerStatue:formData[1].value, */
+		       	 customerStatue:1,
+	       		 pageNumber:mypage 	 
+	        }, 
+	         
+	        dataType:"json",   
+	        //回傳成功要做的事
+	        success : function(response){              
+	           console.log("YA");
+	           console.log("response==>"+typeof(response));
+	           console.log("response==>"+typeof(response.list));
+	           
+	           // response 回來的字串轉 json物件
+	           var obj = JSON.parse(response.list);
+	           // 組出 列表塞回 table
+	           $.each(obj, function (index, customer) {
+	           	    var html="";
+	 		    	html="<tr>"+
+	 							"<td>"+(index+1)+"</td>" +
+	 							"<td>"+customer.email+"</td>" +
+	 							"<td>"+customer.customerName+"</td>" +
+	 							"<td>"+customer.mobilePhone+"</td>" +
+	 							"<td>"+customer.gender+"</td>" +
+	 							"<td>"+customer.userID+"</td>" +
+	 							"<td>"+customer.consumerSegmentation+"</td>" +
+	 							"<td>"+customer.totalAmoutOfConsumption+"</td>" +
+	 							"<td> <a href=# class='btn btn-success'> <i class='fa fa-eye'></i> </a> </td>" +
+	 							"<td> <a href=# class='btn btn-primary'> <i class='fa fa-pencil'></i> </a> </td>" +
+							 "</tr>";				
+	 		    		$('tbody').append(html);
+	          	    }) 
+	          
+		          	     
+	               var totalPages = response.tatalPage;
+	               var currentPage = $pagination.twbsPagination('getCurrentPage');
+	             
+	             
+	               $pagination.twbsPagination({
+	                   items: 20,
+	                   itemOnPage: 8,
+	                   currentPage: 1,
+	                   cssStyle: '',
+	                   prevText: '<span aria-hidden="true">&laquo;</span>',
+	                   nextText: '<span aria-hidden="true">&raquo;</span>',
+	                   onInit: function () {
+	                       // fire first page loading
+	                   },
+	                   onPageClick: function (page, evt) {
+	                       // some code
+	                   }
+	               });
+	        },
+	        
+			// 發ajax錯誤要做的事
+	        error:function(xhr, ajaxOptions, thrownError){
+	            alert(xhr.status+"\n"+thrownError);
+	        }
+
+    	});
+    }
+    
+    
+    
 
 })
 </script>
