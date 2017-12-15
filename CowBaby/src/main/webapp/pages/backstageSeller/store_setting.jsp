@@ -148,7 +148,7 @@ $(function(){
 		 console.log("YA");
 		 
 		 $.ajax({
-		    url: "http://localhost:8080/CowBaby/service/qoo",
+		    url: "http://localhost:8080/CowBaby/service/getCustomerData",
 		    type: 'POST',
 		    cache: false,
 		    data: new FormData($('#shopSetForm')[0]),

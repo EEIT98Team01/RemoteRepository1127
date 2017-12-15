@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>cow baby 管理著後台</title>
+<title>CowBaby管理者後台</title>
 <link rel="icon" href="logo.ico">
 </head>
 
@@ -26,60 +26,60 @@
      	<section id="main-content">
 			<section class="wrapper" id="account_overview">
 				<div class="breadcrumb-row">
-					<h3>會員編輯</h3>
+					<h3>會員管理</h3>
 					<ol class="breadcrumb">
-					  	<li><a href="#">會員管理</a></li>
+					  	<li><a href="#">會員編輯</a></li>
 					</ol>
 				</div>
 				<div class="row">
 					<div class="clear-both"></div>
 				</div>
 				<!--這邊開始寫內容-->
-				<span>${customerData.customerID}</span>
 				<div class="container">
 					<div class="row">
 						<section class="panel">
 							<header class="panel-heading product-add-heading" style="background:#93bad1;color: #fff; ">編輯會員資料</header>
 	                        <div class="panel-body">
-								<form class="form-horizontal" action="#" method="POST">
+								<form class="form-horizontal" id="shopSetForm" action="http://localhost:8080/CowBaby/CustomerManagementUpdate.controller" method="POST">
 									<div class="row">
 										<!-- 固定欄位不給修改 -->
+										<input type="text" style="display:none" name="password" value="${customerData.password}" />
 										<div class="form-group col-md-12">
 		                                    <label class="col-md-2 control-label">會員ID</label>
-		                                    <label class="col-md-2 control-label" style="text-align:left">9527</label>
-		                                    <input type="text" style="display:none" value="1" />
+		                                    <label class="col-md-2 control-label" style="text-align:left">${customerData.customerID}</label>
+		                                    <input type="text" style="display:none" name="customerID" value="${customerData.customerID}" />
 			                            </div>
 			                            <div class="form-group col-md-12">
 		                                    <label class="col-md-2 control-label">會員帳號</label>
-		                                    <label class="col-md-2 control-label" style="text-align:left">9527@gmail.com</label>
-		                                    <input type="text" style="display:none" value="1" />
+		                                    <label class="col-md-2 control-label" style="text-align:left">${customerData.email}</label>
+		                                    <input type="text" style="display:none" name="email" value="${customerData.email}" />
 			                            </div>
 			                            <div class="form-group col-md-12">
 		                                    <label class="col-md-2 control-label">會員姓名</label>
-		                                    <label class="col-md-2 control-label" style="text-align:left">葉燁燁</label>
-		                                    <input type="text" style="display:none" value="1" />
+		                                    <label class="col-md-2 control-label" style="text-align:left">${customerData.customerName}</label>
+		                                    <input type="text" style="display:none" name="customerName" value="${customerData.customerName}" />
 			                            </div>
 			                            <div class="form-group col-md-12">
 		                                    <label class="col-md-2 control-label">註冊日期</label>
-		                                    <label class="col-md-2 control-label" style="text-align:left">2017-08-05</label>
-		                                    <input type="text" style="display:none" value="1" />
+		                                    <label class="col-md-2 control-label" style="text-align:left">${customerData.createTime.year+1900}-${customerData.createTime.month+1}-${customerData.createTime.date}</label>
+		                                    <input type="text" style="display:none" name="createTime" value="${customerData.createTime}" />
 			                            </div>
 			                            <div class="form-group col-md-12">
 		                                    <label class="col-md-2 control-label">累積消費金額</label>
-		                                    <label class="col-md-2 control-label" style="text-align:left">5</label>
-		                                    <input type="text" style="display:none" value="1" />
+		                                    <label class="col-md-2 control-label" style="text-align:left">${customerData.totalAmoutOfConsumption}</label>
+		                                    <input type="text" style="display:none" name="totalAmoutOfConsumption" value="${customerData.totalAmoutOfConsumption}" />
 			                            </div>
 			                            <div class="form-group col-md-12">
 		                                    <label class="col-md-2 control-label">累積消費次數</label>
-		                                    <label class="col-md-2 control-label" style="text-align:left">13987</label>
-		                                    <input type="text" style="display:none" value="1" />
+		                                    <label class="col-md-2 control-label" style="text-align:left">${customerData.consumptionTimes}</label>
+		                                    <input type="text" style="display:none" name="consumptionTimes" value="${customerData.consumptionTimes}" />
 			                            </div>
 			                            <!-- 基本資料 -->
 			                            <div class="dash-line col-md-12"/></div>
 			                            <div class="form-group col-md-12" style="padding-top: 30px">
 		                                    <label class="col-md-2 control-label">收入</label>
 		                                    <div class="col-md-6 add-prouduct-list-description">
-		                                        <input type="text" class="form-control">
+		                                        <input type="text" name="income" class="form-control" value="${customerData.income}">
 		                                    </div>
 		                                </div>
 		                                <div class="form-group col-md-12">
@@ -87,10 +87,10 @@
 		                                    <div class="col-md-6">
 		                                        <div class="radio">
 													<label>
-														<input type="radio" />男
+														<input type="radio" name="gender" value="M" <c:if test="${customerData.gender=='M'}">checked</c:if> />男
 													</label>
 													<label>
-														<input type="radio" />女
+														<input type="radio" name="gender" value="F" <c:if test="${customerData.gender=='F'}">checked</c:if> />女
 													</label>
 												</div>
 		                                    </div>
@@ -100,10 +100,10 @@
 		                                    <div class="col-md-6">
 		                                        <div class="radio">
 													<label>
-														<input type="radio" />是
+														<input type="radio" name="marriage" value="1" <c:if test="${customerData.marriage==true}">checked</c:if> />是
 													</label>
 													<label>
-														<input type="radio" />否
+														<input type="radio" name="marriage" value="0" <c:if test="${customerData.marriage==false}">checked</c:if> />否
 													</label>
 												</div>
 		                                    </div>
@@ -111,7 +111,7 @@
 			                            <div class="form-group col-md-12">
 		                                    <label class="col-md-2 control-label">生日</label>
 		                                    <div class="col-md-6 add-prouduct-list-description">
-		                                        <input type="text" class="form-control">
+		                                        <input type="text" name="birthday" class="form-control" value="${customerData.birthday}">
 		                                    </div>
 		                                </div>
 										<!-- 聯絡方式 -->
@@ -119,19 +119,19 @@
 			                            <div class="form-group col-md-12" style="padding-top: 30px">
 		                                    <label class="col-md-2 control-label">住址</label>
 		                                    <div class="col-md-6 add-prouduct-list-description">
-		                                        <input type="text" class="form-control">
+		                                        <input type="text" name="address" class="form-control" value="${customerData.address}">
 		                                    </div>
 		                                </div>
 		                                <div class="form-group col-md-12">
 		                                    <label class="col-md-2 control-label">室內電話</label>
 		                                    <div class="col-md-6 add-prouduct-list-description">
-		                                        <input type="text" class="form-control">
+		                                        <input type="text" name="landline" class="form-control" value="${customerData.landline}">
 		                                    </div>
 		                                </div>
 		                                <div class="form-group col-md-12">
 		                                    <label class="col-md-2 control-label">行動電話</label>
 		                                    <div class="col-md-6 add-prouduct-list-description">
-		                                        <input type="text" class="form-control">
+		                                        <input type="text" name="mobilePhone" class="form-control" value="${customerData.mobilePhone}">
 		                                    </div>
 		                                </div>
 										<!-- 平台相關資訊 -->
@@ -139,26 +139,26 @@
 			                            <div class="form-group col-md-12" style="padding-top: 30px">
 		                                    <label class="col-md-2 control-label">紅利點數</label>
 		                                    <div class="col-md-6 add-prouduct-list-description">
-		                                        <input type="text" class="form-control">
+		                                        <input type="text" name="bonus" class="form-control" value="${customerData.bonus}">
 		                                    </div>
 		                                </div>
 		                                <div class="form-group col-md-12">
 		                                    <label class="col-md-2 control-label">所屬身份</label>
 		                                    <div class="col-md-6">
-		                                        <select class="form-control">
-													<option>一般會員</option>
-													<option>平台賣家</option>
-													<option>黑名單</option>	
+		                                        <select class="form-control" name="userID">
+													<option value="1" <c:if test="${customerData.userID=='1'}">selected="true"</c:if>>一般會員</option>
+													<option value="2" <c:if test="${customerData.userID=='2'}">selected="true"</c:if>>平台賣家</option>
+													<option value="3" <c:if test="${customerData.userID=='3'}">selected="true"</c:if>>黑名單</option>	
 												</select>
 		                                    </div>
 		                                </div>
 		                                <div class="form-group col-md-12">
 		                                    <label class="col-md-2 control-label">消費群集</label>
 		                                    <div class="col-md-6">
-		                                        <select class="form-control">
-													<option>群集1</option>
-													<option>群集2</option>
-													<option>群集3</option>
+		                                        <select class="form-control" name="consumerSegmentation">
+													<option value="1" <c:if test="${customerData.consumerSegmentation=='1'}">selected="true"</c:if>>群集1</option>
+													<option value="2" <c:if test="${customerData.consumerSegmentation=='2'}">selected="true"</c:if>>群集2</option>
+													<option value="3" <c:if test="${customerData.consumerSegmentation=='3'}">selected="true"</c:if>>群集3</option>
 												</select>
 		                                    </div>
 		                                </div>
@@ -167,16 +167,17 @@
 		                                    <div class="col-md-6">
 		                                        <div class="radio">
 													<label>
-														<input type="radio" />是
+														<input type="radio" name="subscription" value="1" <c:if test="${customerData.subscription==true}">checked</c:if> />是
 													</label>
 													<label>
-														<input type="radio" />否
+														<input type="radio" name="subscription" value="0" <c:if test="${customerData.subscription==false}">checked</c:if> />否
 													</label>
 												</div>
 		                                    </div>
 		                                </div>
-                                     </div>        
-		                             <input type="submit" class="btn btn-primary pull-right" value="儲存" />
+                                     </div>
+                                     <input type="button" id="beforePage" class="btn btn-primary pull-left" value="返回查詢頁面" />
+		                             <input type="button" id="update" class="btn btn-primary pull-right" value="儲存會員資料" />
 	                              </form>
 	                          </div>
 	                      	</section>
@@ -204,5 +205,41 @@
 $(function(){
 	// side_menu 帳戶總覽填充背景色
 	$(".memberManagment a").addClass('active');
+	
+	$("#beforePage").on('click', function () {
+		window.location.assign('<c:url value="/pages/backstageAdmit/member_managment.jsp" />');
+	})
+	
+	 $("#update").on('click', function () {
+		 console.log("YA");
+		 
+		 $.ajax({
+		    url: "http://localhost:8080/CowBaby/service/cutomerDataUpdate",
+		    type: 'POST',
+		    cache: false,
+		    data: new FormData($('#shopSetForm')[0]),
+		    processData: false,
+		    contentType: false,
+		 	success: function(result){  //處理回傳成功事件，當請求成功後此事件會被呼叫
+		      //var myObj = $.parseJSON(result);
+		       console.log(result);
+
+		 	 },
+			 error: function(result){   //處理回傳錯誤事件，當請求失敗後此事件會被呼叫
+			     //your code here
+
+			 },
+			 complete: function(result) {
+
+			 },
+			 statusCode: {                     //狀態碼處理
+			     404: function() {
+			        alert("page not found");
+			     }
+			 }
+		});
+     
+	 }) 
+
 })
 </script>

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>cow baby 管理著後台</title>
+<title>CowBaby管理者後台</title>
 <link rel="icon" href="logo.ico">
 </head>
 
@@ -28,7 +28,7 @@
 				<div class="breadcrumb-row">
 					<h3>會員管理</h3>
 					<ol class="breadcrumb">
-					  	<li><a href="#">會員管理</a></li>
+					  	<li><a href="#">會員查詢</a></li>
 					</ol>
 				</div>
 				<div class="row">

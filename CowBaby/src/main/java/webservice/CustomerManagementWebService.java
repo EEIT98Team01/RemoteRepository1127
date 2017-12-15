@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +15,7 @@ import javax.xml.ws.Response;
 import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -127,6 +129,11 @@ public class CustomerManagementWebService {
 		return result;
 	}
 
+	@RequestMapping(
+			value="/getCustomerData",
+			method={RequestMethod.GET},
+			produces={"application/json;charset=UTF-8"}
+	)
 	public String getCustomerData(String customerAccount, String pageSize, String customerStatue, String pageNumber) {
 		if("null".equals(customerAccount)) {
 			customerAccount = null;
@@ -148,6 +155,31 @@ public class CustomerManagementWebService {
 		                "\"pageSize\":\"" + pageSize + "\"," +
 		                "\"list\":\"" + array.toString() + "\"]";
 		return result;
+	}
+	
+	@SuppressWarnings("deprecation")
+	@RequestMapping(
+			value="/cutomerDataUpdate",
+			method={RequestMethod.POST},
+			produces={"application/json;charset=UTF-8"}
+	)
+	public String cutomerDataUpdate(CustomerBean bean, BindingResult bindingResult, String birthday, String createTime) {
+		bean.setBirthday(new java.sql.Date(Integer.parseInt(birthday.substring(0, 3)), 
+										   Integer.parseInt(birthday.substring(5, 6)), 
+										   Integer.parseInt(birthday.substring(8, 9))));
 
+		bean.setCreateTime(new Timestamp(Integer.parseInt(createTime.substring(0, 3)), 
+										 Integer.parseInt(createTime.substring(5, 6)), 
+										 Integer.parseInt(createTime.substring(8, 9)), 
+										 Integer.parseInt(createTime.substring(11, 12)), 
+										 Integer.parseInt(createTime.substring(14, 15)), 
+										 Integer.parseInt(createTime.substring(17, 18)),
+										 0));
+
+		bean.setLoginPhoto( (customerManagementService.findById(bean.getCustomerID())).getLoginPhoto() );
+
+		customerManagementService.updateCustomerData(bean);
+
+		return "{\"123\":\"456\"}";
 	}
 }
