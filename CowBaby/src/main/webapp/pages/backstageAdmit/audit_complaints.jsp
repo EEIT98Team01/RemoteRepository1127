@@ -79,11 +79,10 @@
 								<thead>
 								  <tr>
 								    <th>序號</th>
-									<th>申訴人</th>
+									<th>申訴人帳號</th>
 									<th>申訴日期</th>
 									<th>案件類型</th>
 									<th>審核狀態</th>
-									<th>檢視案件</th>
 									<th>申訴處理</th>
 								  </tr>
 								</thead>
@@ -94,7 +93,6 @@
 										<td>2017-10-10 10:05:05</td>
 										<td>檢舉黑名單</td>
 										<td><span class="label label-danger">未處理</span></td>
-										<td><a href="#" class='btn btn-success'> <i class='fa fa-eye'></i> </a></td>
 										<td><a href="#" class='btn btn-primary'> <i class='fa fa-pencil'></i> </a></td>
 								  	</tr>
 								  	<tr>
@@ -103,7 +101,6 @@
 										<td>2017-10-10 10:05:05</td>
 										<td>帳號問題</td>
 										<td><span class="label label-info">處理中</span></td>
-										<td><a href="#" class='btn btn-success'> <i class='fa fa-eye'></i> </a></td>
 										<td><a href="#" class='btn btn-primary'> <i class='fa fa-pencil'></i> </a></td>
 								  	</tr>	
 								  	<tr>
@@ -113,10 +110,7 @@
 										<td>其他</td>
 										<td><span class="label label-default">已處理</span></td>
 										<td><a href="#" class='btn btn-success'> <i class='fa fa-eye'></i> </a></td>
-										<td><button type="button" class="btn disabled">結案</button></td>
 								  	</tr>
-								  	
-
 								</tbody>
 							</table>
 						</div>

@@ -36,7 +36,79 @@
 					<div class="clear-both"></div>
 				</div>
 				<!--這邊開始寫內容-->
-				商品分類設定
+				<div class="row">
+					<div class="col-md-12">
+						<div class="panel panel-addpadding">
+							<form class="form-inline">
+								<div class="form-group">
+									<label for="exampleInputName2">分類名稱:</label>
+									<input type='text' class="form-control"/>
+								</div>
+								<button type="submit" class="btn btn-primary">查詢</button>
+								<button type="submit" class="btn btn-primary">新增分類</button>
+							</form>
+						</div>
+					</div>	
+				</div>
+				<div class="row">	
+					<div class="col-md-12">
+						<div class="panel">	
+							<table class="table table-striped table-bordered"> 
+							<!-- <table class="table table-hover table-bordered orderlist"> -->
+								<thead>
+								  <tr>
+								  	<th>序號</th>
+								    <th>分類名稱</th>
+									<th>分類描述</th>
+									<th>使用狀態</th>
+									<th>編輯</th>
+								  </tr>
+								</thead>
+								<tbody>
+								  	<tr>
+								  		<td>1</td>
+										<td>玩具</td>
+										<td>給小朋友玩的東東唷</td>
+										<td><span class="label label-success">啟用</span></td>
+										<td><a href="#" class='btn btn-primary'> <i class='fa fa-pencil'></i> </a></td>
+									</tr>
+									<tr>
+								  		<td>2</td>
+										<td>圖書</td>
+										<td>給小朋友看的書唷</td>
+										<td><span class="label label-danger">停用</span></td>
+										<td><a href="#" class='btn btn-primary'> <i class='fa fa-pencil'></i> </a></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-3 record-number">
+						<span>第2頁</span>
+						<span>第10 - 20 筆</span>
+						<span>共150筆</span>
+					</div>
+					<ul class="pagination">
+						<li>
+					      <a href="#" aria-label="Previous">
+					        <span aria-hidden="true">&laquo;</span>
+					      </a>
+					    </li>
+					    <li><a href="#">1</a></li>
+					    <li><a href="#">2</a></li>
+					    <li><a href="#">3</a></li>
+					    <li><a href="#">4</a></li>
+					    <li><a href="#">5</a></li>
+					    <li>
+					    <a href="#" aria-label="Next">
+					        <span aria-hidden="true">&raquo;</span>
+					    </a>
+					    </li>
+					</ul>
+				</div>
+				<!--內容結束  -->
 			</section>
 			<!-- wrapper end -->
       	</section>
