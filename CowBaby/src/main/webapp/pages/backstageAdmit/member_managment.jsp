@@ -38,7 +38,6 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="panel panel-addpadding">
-							<%-- <form class="form-inline" action="${pageContext.servletContext.contextPath}/CustomerManagementList.controller" method="POST"> --%>
 							<form class="form-inline memberFrom" >
 								<div class="form-group">
 									<label for="exampleInputName2">會員帳號:</label>
@@ -78,37 +77,19 @@
 								  </tr>
 								</thead>
 								<tbody>
-									<c:forEach var="customer" varStatus="st" items="${customerList}">
-										<tr>
-											<td>${st.count}</td>
-											<td>${customer.email}</td>
-											<td>${customer.customerName}</td>
-											<td>${customer.mobilePhone}</td>
-											<td>${customer.gender}</td>
-											<td>${customer.userID}</td>
-											<td>${customer.consumerSegmentation}</td>
-											<td>${customer.totalAmoutOfConsumption}</td>
-											<td>
-												<a href="<c:url value="CustomerManagementView.controller?id=${customer.customerID}"/>" class='btn btn-success'> <i class='fa fa-eye'></i> </a>
-											</td>
-											<td>
-												<a  href="<c:url value="CustomerManagementEdit.controller?id=${customer.customerID}"/>" class='btn btn-primary'> <i class='fa fa-pencil'></i> </a>
-											</td>
-										</tr>
-									</c:forEach>
+								   <td colspan="10">目前無任何資料</td>
 								</tbody>
+								
 							</table>
 						</div>
 					</div>
 				</div>
-				<a class="pp">popup</a>
+				<!-- <a class="pp">popup</a> -->
 				<div class="row">
 					<div class="col-md-3 record-number">
-						<c:if test="${!empty page}">
-							<span>第${page}頁</span>
-							<span>第${(page-1)*10+1} - ${page*10}筆</span>
-							<span>共${customerQuantity}筆</span>
-						</c:if>
+						<span>第 <span class="pageNum">0</span>頁</span>|
+						<span>第 <span class="firstNum">0</span> - <span class="endNum">0</span>筆</span>|
+						<span>共 <span class="totalNum">0</span>筆</span>
 					</div>
 					<!--分頁 -->
 					<ul class="pagination"  id="myPagination"></ul>
@@ -138,7 +119,6 @@
 			    </div><!-- /.modal-content -->
 		  </div><!-- /.modal-dialog -->
 	</div><!-- /.modal -->
-    
 </body>
 </html>
 
@@ -148,115 +128,129 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/js/bootstrap-switch.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/js/bootstrap-dialog.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
-
 <script src="<c:url value="/pluging/Bootsrap/jquery.twbsPagination.js"/>"></script>
+<script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@1.5.4/src/loadingoverlay.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@1.5.4/extras/loadingoverlay_progress/loadingoverlay_progress.min.js"></script>
 
 <script>
 $(function(){
 
-	/* $(".pp").click(function(){
+	 /* $(".pp").click(function(){
 		BootstrapDialog.alert('Hi Apple!');
-	}) */
+	 }) */
 	
-	// side_menu 帳戶總覽填充背景色
-	$(".memberManagment a").addClass('active');
+	 // side_menu 帳戶總覽填充背景色
+	 $(".memberManagment a").addClass('active');
 	
-	// pagination.js 參考網站=> https://esimakin.github.io/twbs-pagination/
-	// 要產生分頁的 DOM 元素
- 	 var $pagination = $('#myPagination');
- 	
-	// 分頁預設值
-    var defaultOpts = {visiblePages: 7}; // 一次顯示7筆
-    var mypage = 1 ; //從第1頁開始
- 	
- 	// 抓取表單欄位
-	var formData ="";
+	 // 設置 loaading圖案
+	 $.LoadingOverlaySetup({ 
+		/* image : "/CowBaby/src/main/webapp/images/loading_icon.gif", */
+		/*  maxSize         : "80px",
+		    minSize         : "20px",
+		    resizeInterval  : 0, */
+		    size            : "10%"
+	 });
+	 
+ 	 // 抓取表單欄位
+	 var formData ="";
+   	 // 預設當前頁
+   	 var pagenow = 1; 
+   	 // 預設總頁數
+   	 var totalPage = 1; 
+   	 // 預設每頁顯示筆數
+   	 var visiblecount = 10; 
 	
     // 查詢
     $("#inquire").click(function(){
- 
-        event.preventDefault();
- 
+        event.preventDefault(); 
+        $('#myPagination').twbsPagination('destroy');
 		// 抓取表單欄位
 		formData = $(".memberFrom").serializeArray();
-
 	    // 發 ajax 查詢表單資料
-		inqueryData(formData , 1);
-		
+		inqueryData(formData , pagenow);
     });
     
     // 查詢表單資料
     function inqueryData(data,pageNum){
     	
+    	console.log("data",data);
+    	console.log("pageNum",pageNum);	
+      	// 將畫面清空
+      	$('tbody').empty();
+    
     	$.ajax({
 	        type:"GET",                   
 	        url: "http://localhost:8080/CowBaby/service/getCustomerData",    
 	        data: {
 		       	 customerAccount:formData[0].value,
-		       	 pageSize:defaultOpts.visiblePages,
-		       	/*  customerStatue:formData[1].value, */
-		       	 customerStatue:1,
-	       		 pageNumber:mypage 	 
+		       	 pageSize:visiblecount,
+		       	 customerStatue:formData[1].value,
+	       		 pageNumber:pageNum	 
 	        }, 
 	         
 	        dataType:"json",   
-	        //回傳成功要做的事
+	        
+	        // ajax載入前
+	        beforeSend: function(){
+	        	//顯示laoding 參考網址=>https://gasparesganga.com/labs/jquery-loading-overlay/#quick-demo
+	        	$("#customerList").LoadingOverlay("show");
+			}, 
+			
+			// 成功要做的事
 	        success : function(response){              
-	           console.log("YA");
-	           console.log("response==>"+typeof(response));
-	           console.log("response==>"+typeof(response.list));
-	           
 	           // response 回來的字串轉 json物件
 	           var obj = JSON.parse(response.list);
 	           // 組出 列表塞回 table
 	           $.each(obj, function (index, customer) {
 	           	    var html="";
 	 		    	html="<tr>"+
-	 							"<td>"+(index+1)+"</td>" +
-	 							"<td>"+customer.email+"</td>" +
-	 							"<td>"+customer.customerName+"</td>" +
-	 							"<td>"+customer.mobilePhone+"</td>" +
-	 							"<td>"+customer.gender+"</td>" +
-	 							"<td>"+customer.userID+"</td>" +
-	 							"<td>"+customer.consumerSegmentation+"</td>" +
-	 							"<td>"+customer.totalAmoutOfConsumption+"</td>" +
-	 							"<td> <a href=# class='btn btn-success'> <i class='fa fa-eye'></i> </a> </td>" +
-	 							"<td> <a href=# class='btn btn-primary'> <i class='fa fa-pencil'></i> </a> </td>" +
-							 "</tr>";				
-	 		    		$('tbody').append(html);
-	          	    }) 
+ 							"<td>"+(index+1+ (response.pageSize*(response.pageNumber-1)))+"</td>" +
+ 							"<td>"+customer.email+"</td>" +
+ 							"<td>"+customer.customerName+"</td>" +
+ 							"<td>"+customer.mobilePhone+"</td>" +
+ 							"<td>"+customer.gender+"</td>" +
+ 							"<td>"+customer.userID+"</td>" +
+ 							"<td>"+customer.consumerSegmentation+"</td>" +
+ 							"<td>"+customer.totalAmoutOfConsumption+"</td>" +
+ 							"<td> <a href=# class='btn btn-success'> <i class='fa fa-eye'></i> </a> </td>" +
+ 							"<td> <a href=# class='btn btn-primary'> <i class='fa fa-pencil'></i> </a> </td>" +
+						 "</tr>";				
+ 		    		$('tbody').append(html);
+	           }) 
+	          	    
+         		// 自動產生分頁
+	         	var totalPages = response.tatalPage;
+	            var pageSize  = response.pageSize;
 	          
-		          	     
-	               var totalPages = response.tatalPage;
-	               var currentPage = $pagination.twbsPagination('getCurrentPage');
-	             
-	             
-	               $pagination.twbsPagination({
-	                   items: 20,
-	                   itemOnPage: 8,
-	                   currentPage: 1,
-	                   cssStyle: '',
-	                   prevText: '<span aria-hidden="true">&laquo;</span>',
-	                   nextText: '<span aria-hidden="true">&raquo;</span>',
-	                   onInit: function () {
-	                       // fire first page loading
-	                   },
-	                   onPageClick: function (page, evt) {
-	                       // some code
-	                   }
-	               });
+	            $('#myPagination').twbsPagination({
+	                totalPages: totalPages,
+	                visiblePages: pageSize,
+	                onPageClick: function (evt, page) { //分頁切換事件
+						inqueryData(formData,page);
+	       	　　　　      }
+	       	　　	}) 
+	            
+	            // 把頁數 ，筆數，開始筆數-結束筆數 塞回去
+	            $(".pageNum").html(response.pageNumber);
+	            $(".firstNum").html( ((response.pageNumber-1)*response.pageSize) +1);
+	            $(".endNum").html(response.pageNumber*response.pageSize);
+	            $(".totalNum").html(response.tatal);
+	            
 	        },
-	        
-			// 發ajax錯誤要做的事
+
+	        // ajax完成~隱藏loading
+	        complete: function(){
+	        	setTimeout(function(){
+	        		$("#customerList").LoadingOverlay("hide");
+	        	},300)	
+			},
+			     
+			// 發ajax錯誤
 	        error:function(xhr, ajaxOptions, thrownError){
 	            alert(xhr.status+"\n"+thrownError);
 	        }
 
     	});
     }
-    
-    
-    
-
 })
 </script>

@@ -76,24 +76,23 @@
 							<div class="form-group col-md-12" style="padding-top: 30px;">
 								<label class="col-md-2 control-label">商店logo</label>
 								<div class="col-md-2 add-prouduct-list-description">
-									<img style="width: 150px; height: 110px" src="<c:url value="/images/emptyImg.jpg"/>" class="img-thumbnail">
+									<img style="width: 150px; height: 110px" src="<c:url value="/images/emptyImg.jpg"/>" class="previewStoreLogo">
 								</div>
 								<div class="col-md-3" style="padding-top: 35px;">
-									<input type="file" name="storeLogo" id="aa"
-										style="margin-bottom: 10px;"> <span class="pictip">(長寬為1024*768，大小不得超過1M)</span>
+									<input type="file" name="storeLogo" class="logoUpl" style="margin-bottom: 10px;">
+									<span class="pictip">(長寬為1024*768，大小不得超過1M)</span>
 								</div>
 							</div>
 	
 							<div class="form-group col-md-12" style="padding-top: 30px;">
 								<label class="col-md-2 control-label">商店橫幅</label>
 								<div class="col-md-2 add-prouduct-list-description">
-									<img style="width: 150px; height: 110px"
-										src="<c:url value="/images/emptyImg.jpg"/>"
-										class="img-thumbnail">
+									<img style="width: 150px; height: 110px" src="<c:url value="/images/emptyImg.jpg"/>" class="previewBanner">
 								</div>
 	
 								<div class="col-md-3" style="padding-top: 35px;">
-									<input type="file" name="storeBanner" id="aa" style="margin-bottom: 10px;"> <span class="pictip">(長寬為1024*768，大小不得超過1M)</span>
+									<input type="file" name="storeBanner" class="bannerUpl" style="margin-bottom: 10px;"> 
+									<span class="pictip">(長寬為1024*768，大小不得超過1M)</span>
 								</div>
 							</div>
 						</div>
@@ -112,7 +111,10 @@
 	</section>
  <!--containe end--> 
  </section>
- 
+ 	 <!-- overlayPanel--->
+	 <div class="qqq">
+	  56+56+5
+	</div>
  
 	 <!-- 警告視窗--->
 	 <div class="modal fade">
@@ -137,52 +139,85 @@
 
 <!-- javasript pluging link CDN-->
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-<script
-	src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/js/bootstrap-switch.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/js/bootstrap-dialog.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
-<script
-	src="<c:url value="/pluging/Bootsrap/bootstrap-datetimepicker.min.js"/>"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/js/bootstrap-switch.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/js/bootstrap-dialog.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+<script src="<c:url value="/pluging/Bootsrap/bootstrap-datetimepicker.min.js"/>"></script>
+<script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@1.5.4/src/loadingoverlay.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@1.5.4/extras/loadingoverlay_progress/loadingoverlay_progress.min.js"></script>
 
 
 
 <script>
 $(function(){
+	
 	 // side_menu 商店設置填充背景色
 	 $("#nav-accordion").find('li a').eq(1).addClass('active');
-	
 	 
-	 // 儲存發AJAX
+	// 設置 loaading圖案
+	 $.LoadingOverlaySetup({ 
+		/* image : "/CowBaby/src/main/webapp/images/loading_icon.gif", */
+		size : "10%"
+	 });
+	 
+	 // 圖片預覽功能
+	 $("body").on("change", ".logoUpl", function (){
+         preview(this);
+     })
+     
+     $("body").on("change",".bannerUpl", function (){
+        preview(this);
+     })
+
+     function preview(input) {
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+            	$(input).parent().siblings().eq(1).find('img').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+     }
+	
+	 // 保存 發AJAX
 	 $("#qq").on('click', function () {
 		
 		 $.ajax({
-
-		    url: "http://localhost:8080/CowBaby/service/getCustomerData",
-		    type: 'POST',
+		    url: "http://localhost:8080/CowBaby/service/qoo",
+		    type: 'post',
 		    cache: false,
 		    data: new FormData($('#shopSetForm')[0]),
 		    processData: false,
 		    contentType: false,
+		    
 		 	success: function(result){  //處理回傳成功事件，當請求成功後此事件會被呼叫
-		      //var myObj = $.parseJSON(result);
 		       console.log(result);
-		 	 },
-			 error: function(result){  
+		     
+		       //通知儲存成功  ，call BootstrapDialog      		       
+		       BootstrapDialog.show({
+	                type: BootstrapDialog.TYPE_INFO,
+	                title: "訊息",
+	                message: '儲存成功!!',
+	                buttons: [{
+	                	label: 'Close',
+	                    action: function(dialogItself){
+	                        dialogItself.close();
+	                    }
+	                }]
+	            });     
+		       
+		 	},
+			error: function(result){  
 			     //your code here
-
-			 },
-			 complete: function(result) {
-
-			 },
-			 statusCode: {               
+			},
+			
+			statusCode: {               
 			     404: function() {
 			        alert("page not found");
 			     }
-			 }
+			}
 		});
 	 }) 
 

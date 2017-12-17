@@ -46,13 +46,13 @@ public class CustomerManagementWebService {
 	)
 	public String qoogood(MultipartFile storeLogo, MultipartFile storeBanner, String storeName, String storePhone,
 			Boolean storeStatus, String storeDescription, HttpServletRequest request,HttpServletResponse response, Model model) throws Exception {
-//		
-//		System.out.println("storeLogo==>"+storeLogo.getOriginalFilename());
-//		System.out.println("storeBanner==>"+storeBanner);
-//		System.out.println("storeName==>"+storeName);
-//		System.out.println("storePhone==>"+storePhone);
-//		System.out.println("storeStatus==>"+storeStatus);
-//		System.out.println("storeDescription==>"+storeDescription);
+		
+		System.out.println("storeLogo==>"+storeLogo.getOriginalFilename());
+		System.out.println("storeBanner==>"+storeBanner);
+		System.out.println("storeName==>"+storeName);
+		System.out.println("storePhone==>"+storePhone);
+		System.out.println("storeStatus==>"+storeStatus);
+		System.out.println("storeDescription==>"+storeDescription);
 		
 		
 		// 存放回傳給AJAX 的 response jsonObj
@@ -61,29 +61,30 @@ public class CustomerManagementWebService {
 		   String storeBannerImg = null;
 		  
 		// 表單檢查
-		// 1. 驗證 storeName長度
-		   if(storeName.length()>10){
-			    jsonObj.put("msg_error", "商店名稱不可超過10字");
-				return jsonObj.toJSONString();
-		   }
-		// 2. 驗證 storePhone長度 只可為數字，且不可超過10字
-		   if(storePhone.length()>10){
-			    jsonObj.put("msg_error", "電話不可超過10字");
-				return jsonObj.toJSONString();
-		   }
-		   
-		// 3. 驗證 storeDescription長度 不可超過30字
-		   if(storeDescription.length()>30){
-			    jsonObj.put("msg_error", "商店描述不可超過30字");
-				return jsonObj.toJSONString();
-		   }
+//		// 1. 驗證 storeName長度
+//		   if(storeName.length()>10){
+//			    jsonObj.put("msg_error", "商店名稱不可超過10字");
+//				return jsonObj.toJSONString();
+//		   }
+//		// 2. 驗證 storePhone長度 只可為數字，且不可超過10字
+//		   if(storePhone.length()>10){
+//			    jsonObj.put("msg_error", "電話不可超過10字");
+//				return jsonObj.toJSONString();
+//		   }
+//		   
+//		// 3. 驗證 storeDescription長度 不可超過30字
+//		   if(storeDescription.length()>30){
+//			    jsonObj.put("msg_error", "商店描述不可超過30字");
+//				return jsonObj.toJSONString();
+//		   }
 		   
 	
 		// 4. storeLogo檔案圖片檢查   
 		   // 把 storeBanner 類型轉為  File 類型  
-		   File convFile = new File( storeLogo.getOriginalFilename());
-		   if(convFile.exists()){
+		  
+		   if(storeLogo.getOriginalFilename() != null || storeLogo.getOriginalFilename() !=""){
 			   System.out.println("COME1");
+			   File convFile = new File( storeLogo.getOriginalFilename());
 			   storeLogo.transferTo(convFile);
 			    // 把 storeBanner 類型轉為 BYTE[] 類型
 			    byte[] storeLogoImgByte = new byte[(int) convFile.length()];
@@ -96,9 +97,10 @@ public class CustomerManagementWebService {
 		   
 		
 		// 5. storeBanner檔案圖片檢查	   
-		 File convFile1 = new File( storeBanner.getOriginalFilename());    
-		 if(convFile1.exists()){
+		
+		 if(storeBanner.getOriginalFilename() != null || storeBanner.getOriginalFilename() != "" ){
 			 System.out.println("COME2");
+			 
 			//storeBanner 存【路徑】到資料庫
 	        // 建立一個存放圖片資料夾，資料匣名稱為upload
 	        File uploadPath = new File(request.getServletContext().getRealPath("upload"));  
@@ -144,7 +146,9 @@ public class CustomerManagementWebService {
 			 // 如果 storeLogoImg 圖片不是空的才寫入資料庫
 			 if(storeLogoImg!=null){
 				 bean.setStoreLogo(new javax.sql.rowset.serial.SerialBlob(storeLogoImg));   
-			 }   
+			 } else{
+				 bean.setStoreLogo(null);   
+			 }  
 	         bean.setCustomerID(2);
 			 bean.setStoreDescription(storeDescription); 
 			 bean.setStoreName(storeName);
@@ -153,6 +157,8 @@ public class CustomerManagementWebService {
 			 // 如果 storeLogoImg 圖片不是空的才寫入資料庫
 			 if(storeLogoImg!=null){
 				 bean.setStoreBanner(storeBannerImg);
+			 }else{
+				 bean.setStoreBanner(null);
 			 }
 			 
 			 System.out.println("===========================");
