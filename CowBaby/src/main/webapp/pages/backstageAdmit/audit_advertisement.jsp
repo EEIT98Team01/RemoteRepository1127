@@ -48,6 +48,7 @@
 								<div class="form-group">
 									<label for="exampleInputName2">審核狀態:</label>
 									<select class="form-control">
+										<option>全部</option>
 										<option>未審核</option>
 										<option>審核中</option>
 										<option>審核通過</option>
@@ -80,7 +81,7 @@
 										<td><a href="<c:url value="/pages/backstageSeller/order_detail.jsp"/>" class="linklist">a001</a></td>
 										<td>2017-10-10 10:05:05</td>
 										<td><span class="label label-danger">未審核</span></td>
-										<td><img src="${pageContext.request.contextPath}/images/01.jpg"></td>>
+										<td><img src="${pageContext.request.contextPath}/images/01.jpg"></td>
 										<td><a href="#" class='btn btn-primary'> <i class='fa fa-pencil'></i> </a></td>
 								  	</tr>
 								  	<tr>
@@ -88,7 +89,7 @@
 										<td><a href="<c:url value="/pages/backstageSeller/order_detail.jsp"/>" class="linklist">a001</a></td>
 										<td>2017-10-10 10:05:05</td>
 										<td><span class="label label-info">審核中</span></td>
-										<td><img src="${pageContext.request.contextPath}/images/01.jpg"></td>>
+										<td><img src="${pageContext.request.contextPath}/images/01.jpg"></td>
 										<td><a href="#" class='btn btn-primary'> <i class='fa fa-pencil'></i> </a></td>
 								  	</tr>
 								  	<tr>
@@ -96,15 +97,15 @@
 										<td><a href="<c:url value="/pages/backstageSeller/order_detail.jsp"/>" class="linklist">a001</a></td>
 										<td>2017-10-10 10:05:05</td>
 										<td><span class="label label-primary">審核完成</span></td>
-										<td><img src="${pageContext.request.contextPath}/images/01.jpg"></td>>
-										<td><a href="#" class='btn btn-primary'> <i class='fa fa-pencil'></i> </a></td>
+										<td><img src="${pageContext.request.contextPath}/images/01.jpg"></td>
+										<td><a href="#" class='btn btn-success'> <i class='fa fa-eye'></i> </a></td>
 								  	</tr>
 								  	<tr>
 								  		<td>4</td>
 										<td><a href="<c:url value="/pages/backstageSeller/order_detail.jsp"/>" class="linklist">a001</a></td>
 										<td>2017-10-10 10:05:05</td>
 										<td><span class="label label-warning">審核未通過</span></td>
-										<td><img src="${pageContext.request.contextPath}/images/01.jpg"></td>>
+										<td><img src="${pageContext.request.contextPath}/images/01.jpg"></td>
 										<td><a href="#" class='btn btn-success'> <i class='fa fa-eye'></i> </a></td>
 								  	</tr>
 								</tbody>
