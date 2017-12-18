@@ -14,15 +14,66 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"> 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/css/bootstrap3/bootstrap-switch.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/css/bootstrap-dialog.min.css">
-<link rel="stylesheet" href="<c:url value="/pluging/Bxsliders/jquery.bxslider.min.css"/>"> 
 <link rel="stylesheet" href="<c:url value="/css/frontDesk/basic.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/frontDesk/index.css"/>">
 
+<%-- <link rel="stylesheet" href="<c:url value="/pluging/Bxsliders/jquery.bxslider.min.css"/>"> --%>
+
 <!--body-->
 <body>
-	<!--引入 topbar 跟  header-->
-	<jsp:include page="/pages/common/topbar_and_header.jsp"/>
+	<!--topbar-->
+	<div class="container-fliud top-bar">
+		<section class="container">
+			<ul class="top-bar-menu pull-right">
+				<li><a class="facebook" href="#">FB</a></li>
+				<li>
+					<a class="shopcart" href="#">
+						<i class="fa fa-cart-plus fa-2x" aria-hidden="true"></i>
+						<span class="shopcart-total-number">5</span>
+					</a>
+				</li>
+				<li><a class="login" href="#">登入/註冊</a></li>
+				<li><img src="<c:url value="/images/line.jpg"/>">HI!雄大</li>
+			</ul>
+		</section>
+	</div>
 
+	<!--header-->
+	<header>
+		<section class="container">
+			<row>
+				<div class="col-md-2 logo">
+					<img src="<c:url value="/images/logo.jpg"/>">
+				</div>
+				<div class="col-md-2 slogan" >
+					<span>開心玩樂開心學習~</span>
+					<span>給孩子最好的就在牛寶貝!!</span>
+				</div>
+
+				<form class="col-md-5 pull-right searchProduct" role="search">
+				    <div class="input-group add-on">
+				      	<input class="form-control" style="border: 2px solid #9ee2ea;" placeholder="Search" name="srch-term" id="srch-term" type="text">
+				      	<div class="input-group-btn">
+				        	<button class="btn btn-default searchStyle" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+				      	</div>
+				    </div>
+			  	</form>
+			</row>			
+		</section>
+	
+		<section class="container-fliud">
+			<section class="container main-nav">
+				<ul class="nav navbar-nav">
+					<li><a href="#"><i class="fa fa-gift fa-2x" aria-hidden="true"></i>全部商品</a></li>
+					<li><a href="#"><i class="fa fa-diamond fa-2x" aria-hidden="true"></i>最新商品</a></li>
+					<li><a href="#"><i class="fa fa-heartbeat fa-2x" aria-hidden="true"></i>精選商家</a></li>
+					<li><a href="#"><i class="fa fa-star-half-o fa-2x" aria-hidden="true"></i>媽咪推薦</a></li>
+					<li><a href="#"><i class="fa fa-thumbs-up fa-2x" aria-hidden="true"></i>客戶服務</a></li>
+				</ul>
+			</section>
+		</section>
+	</header>
+	<!--header end-->
 	<!--banner-->
 	<section class="banner">
 		<div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -121,34 +172,7 @@
 					<p class="title">英國Blade ＆ Rose 聖誕款內搭褲</p>
 					<div class="originalPrice">原價 NT 190</div>
 					<div class="specialPrice">特價 NT <span class="specialPriceNum">190</span></div>
-				</div>	
-				<div class="item">
-					<img src="<c:url value="/images/newArrived1.jpg"/>">
-					<p class="title">英國Blade ＆ Rose 聖誕款內搭褲</p>
-					<div class="originalPrice">原價 NT 190</div>
-					<div class="specialPrice">特價 NT <span class="specialPriceNum">190</span></div>
-				</div>
-
-				<div class="item">
-					<img src="<c:url value="/images/newArrived2.jpg"/>">
-					<p class="title">英國Blade ＆ Rose 聖誕款內搭褲</p>
-					<div class="originalPrice">原價 NT 190</div>
-					<div class="specialPrice">特價 NT <span class="specialPriceNum">190</span></div>
-				</div>
-
-				<div class="item">
-					<img src="<c:url value="/images/newArrived3.jpg"/>">
-					<p class="title">英國Blade ＆ Rose 聖誕款內搭褲</p>
-					<div class="originalPrice">原價 NT 190</div>
-					<div class="specialPrice">特價 NT <span class="specialPriceNum">190</span></div>
-				</div>
-
-				<div class="item">
-					<img src="<c:url value="/images/newArrived4.jpg"/>">
-					<p class="title">英國Blade ＆ Rose 聖誕款內搭褲</p>
-					<div class="originalPrice">原價 NT 190</div>
-					<div class="specialPrice">特價 NT <span class="specialPriceNum">190</span></div>
-				</div>					
+				</div>			
 			</div>
 		</section>
 	</section>
@@ -259,13 +283,13 @@
 		<section class="waveTop"></section>
 		<section class="waveBottom"></section>
 		<section class="hotSohp">
-			<img  class="illustration1" src="<c:url value="/images/img1.png"/>">
-			<img  class="illustration2" src="<c:url value="/images/img2.png"/>">
-			<img  class="cutImgL" src="<c:url value="/images/cutImgL.png"/>  ">
-			<img  class="cutImgR" src="<c:url value="/images/cutImgR.png"/> ">
+			<img  class="illustration1" src="img/img1.png">
+			<img  class="illustration2" src="img/img2.png">
+			<img  class="cutImgL" src="img/cutImgL.png">
+			<img  class="cutImgR" src="img/cutImgR.png">
 			<section class="mainTitle">
 				<div class="topic">
-					<img src="<c:url value="/images/pop_store.png"/>">
+					<img src="img/pop_store.png">
 					<p>走過路過快來看看喔!跳樓大牌賣!!</p>
 				</div>
 			</section>
@@ -275,7 +299,7 @@
 				<div class="slidershow-Wrapper3">
 					<div class="item">
 						<div class="choice"></div>
-						<img src="<c:url value="/images/newArrived1.jpg"/>">
+						<img src="img/newArrived1.jpg">
 						<div class="shopName">兔兔的家</div>
 						<div class="description">
 							秋冬新款全面鋪貨中 每一款都是精心挑選出來了 這裏有最好的質量歡迎來諮詢 ！！
@@ -298,7 +322,7 @@
 
 					<div class="item">
 						<div class="choice"></div>
-						<img src="<c:url value="/images/newArrived1.jpg"/>">
+						<img src="img/newArrived1.jpg">
 						<div class="shopName">兔兔的家</div>
 						<div class="description">
 							秋冬新款全面鋪貨中 每一款都是精心挑選出來了 這裏有最好的質量歡迎來諮詢 ！！
@@ -321,7 +345,7 @@
 
 					<div class="item">
 						<div class="choice"></div>
-						<img src="<c:url value="/images/newArrived1.jpg"/>">
+						<img src="img/newArrived1.jpg">
 						<div class="shopName">雄大的農場</div>
 						<div class="description">
 							秋冬新款全面鋪貨中 每一款都是精心挑選出來了 這裏有最好的質量歡迎來諮詢 ！！
@@ -345,7 +369,7 @@
 
 					<div class="item">
 						<div class="choice"></div>
-						<img src="<c:url value="/images/newArrived1.jpg"/>">
+						<img src="img/newArrived1.jpg">
 						<div class="shopName">珠珠的小天地</div>
 						<div class="description">
 							秋冬新款全面鋪貨中 每一款都是精心挑選出來了 這裏有最好的質量歡迎來諮詢 ！！
@@ -368,7 +392,7 @@
 
 					<div class="item">
 						<div class="choice"></div>
-						<img src="<c:url value="/images/newArrived1.jpg"/>">
+						<img src="img/newArrived1.jpg">
 						<div class="shopName">汪汪的小舖鋪</div>
 						<div class="description">
 							秋冬新款全面鋪貨中 每一款都是精心挑選出來了 這裏有最好的質量歡迎來諮詢 ！！
@@ -397,12 +421,12 @@
 	<section class="otherContent">
 		<!--媽咪文章-->
 		<div class="momBlog">
-			<img class="momlogo" src="<c:url value="/images/mon_pic.png"/>">
-			<div class="momTitle"><img src="<c:url value="/images/monBlog_title.png"/>"><span><a href="#">看更多..</a></span></div>
+			<img class="momlogo" src="img/mon_pic.png">
+			<div class="momTitle"><img src="img/monBlog_title.png"><span><a href="#">看更多..</a></span></div>
 
 			<div class="momArtical">
 				<div class="articalL">
-					<img src="<c:url value="/images/artical_img1.png"/>">
+					<img src="img/artical_img1.png">
 					<p>部落客 牛牛媽咪</p>
 				</div>
 
@@ -414,7 +438,7 @@
 
 				<div class="momArtical">
 				<div class="articalL">
-					<img src="<c:url value="/images/artical_img1.png"/>">
+					<img src="img/artical_img1.png">
 					<p>部落客 牛牛媽咪</p>
 				</div>
 
@@ -426,7 +450,7 @@
 
 			<div class="momArtical">
 				<div class="articalL">
-					<img src="<c:url value="/images/artical_img1.png"/>">
+					<img src="img/artical_img1.png">
 					<p>部落客 牛牛媽咪</p>
 				</div>
 
@@ -437,7 +461,7 @@
 			</div>
 			<div class="momArtical">
 				<div class="articalL">
-					<img src="<c:url value="/images/artical_img1.png"/>">
+					<img src="img/artical_img1.png">
 					<p>部落客 牛牛媽咪</p>
 				</div>
 
@@ -451,7 +475,7 @@
 		<!--友情連結-->
 		<div class="otherLink">
 			<div class="link facebookLink">asdas</div>
-			<div class="link"><img src="<c:url value="/images/link_ad.png"/>"></div>
+			<div class="link"><img src="img/link_ad.png"></div>
 			<div class="link">asdasdads</div>
 		</div>
 	</section>
@@ -478,7 +502,7 @@
 					</form>
 				</div>
 				<div class="register_part">
-					<a href="#""><img src="<c:url value="/images/mem-join.png"/>"></a>
+					<a href="#""><img src="img/mem-join.png"></a>
 				</div>	
 			</div>
 			<div class="box_button">
@@ -500,9 +524,36 @@
 			</div>
 		</div>	
 	</div>
-	
-	<!--引入 footer-->
-	<jsp:include page="/pages/common/footer.jsp"/>
+
+	<!--footer-->
+	<section class="container-fliud footerWrapper">
+
+		<div class="footerBk"></div>
+		<div class="container footerContainer">
+
+			<div class="containerBox container-1">
+				<ul>
+					<li><a href="#">關於我們</a></li>
+					<li><a href="#">媽咪推薦</a></li>
+					<li><a href="#">服務說明</a></li>
+					<li><a href="#">客服專區</a></li>
+				</ul>
+			</div>
+			<div class="containerBox container-1">
+				<ul>
+					<li><a href="#">關於我們</a></li>
+					<li><a href="#">媽咪推薦</a></li>
+					<li><a href="#">服務說明</a></li>
+					<li><a href="#">客服專區</a></li>
+				</ul>
+			</div>
+
+			<div class="containerBox container-1">
+				<img src="img/content_img.png">
+			</div>	
+		</div>
+		<div class="footerCopyright">COPYREGHT @ 2017  COWBABY MAKE</div>
+	</section>
 </body>
 </html>
 
@@ -512,12 +563,12 @@
 <script type="text/javascript" src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/js/bootstrap-switch.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/js/bootstrap-dialog.min.js"></script>
-<script src="<c:url value="/pluging/Bxsliders/jquery.bxslider.min.js"/>"></script>
 
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.12/jquery.bxslider.js"></script> -->
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.12/jquery.bxslider.css">  -->
- 
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.12/jquery.bxslider.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.12/jquery.bxslider.css">
+<%-- 
+<script src="<c:url value="/pluging/Bxsliders/jquery.bxslider.min.js"/>"></script> --%>
 
 
 <script type="text/javascript">
@@ -535,17 +586,10 @@
 		})
 
 
-		$('.slidershow-Wrapper1').bxSlider({
-		    slideWidth: 255,
-		    moveSlides: 1,
-		    minSlides: 4,
-		    maxSlides: 4,
-		    slideMargin: 40,
-		    pager: false
-  		}); 
+		$('.slidershow-Wrapper1').bxSlider(); 
 
 
-  		 $('.slidershow-Wrapper2').bxSlider({
+  		/* $('.slidershow-Wrapper2').bxSlider({
 		    slideWidth: 255,
 		    moveSlides: 1,
 		    minSlides: 4,
@@ -561,6 +605,9 @@
 		    maxSlides: 4,
 		    slideMargin: 40,
 		    pager: false
-  		}); 
+  		}); */
+
+		
+
 	})
-</script>
+

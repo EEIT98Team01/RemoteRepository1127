@@ -1,0 +1,115 @@
+
+/*****member_information sidebar*****/
+
+
+.member_information_container .title{
+    font-size: 21px;
+    padding-bottom: 15px;
+    padding-left: 10px;
+}
+
+.member_information_container .member_infor_menu{
+    border: 1px #ccc solid;
+
+}
+
+.member_information_container .member_infor_menu li a{
+    display: block;
+    padding:  15px 15px 15px 20px;
+    font-size: 16px;
+    border-bottom: 1px dashed #ccc;
+    color: #79798d;
+}
+
+.member_information_container .member_infor_menu li a:hover{
+    background: #ccc;
+}
+
+.member_information_container .member_infor_menu li:nth-child(4) a{
+    border-bottom: none;
+}
+
+.member_information_container .member_infor_menu li a i{
+    padding-right: 10px;
+  
+}
+
+
+/*****member_information*****/
+
+.breadcrumb {
+    margin-bottom: 5px;
+}
+   
+.member_information_container .member_information .welcome_text{
+    font-size: 14px; 
+    letter-spacing: 1px;
+    padding: 10px 0;
+    border-bottom: 1px dashed #ccc;
+}
+
+.member_information_container .member_information .welcome_text .user_stauts{
+    padding: 5px 10px;
+    background:#ccc; 
+    border-radius:20px; 
+}
+
+.member_information_container .member_information .welcome_text .open_shop {
+    display: inline-block;
+    padding: 8px 10px;
+    margin-left: 15px;
+    background: #ec82a3;
+    border-radius: 20px;
+    color: #fff;
+
+}
+
+
+/*******review_member_infor**********/
+
+.member_information_container  .order_detail{
+    margin-top: 30px;
+}
+
+.member_information_container .order_detail table{
+    width: 100%;
+    border: 1px solid #cccc;
+    margin-bottom: 40px;
+}
+.member_information_container .order_detail table tr td,
+.member_information_container .order_detail table tr th{
+    padding: 10px;
+    border-right: 1px solid #d6d6d6;
+}
+
+.member_information_container .order_detail table tr th{
+   background: #80c5cd;
+   color:#FFF; 
+   border-right: 1px solid #dbe8ea;;
+}
+
+.member_information_container .order_detail table tr td{
+    border-bottom: 1px solid #ccc;
+}
+
+.member_information_container .order_detail table tr:last-child td{
+    background: #def4f6;
+    font-weight: bolder;
+}
+
+.price{
+    font-size: 16px;
+    color: #d15179;
+}
+
+.bonus{
+    font-size: 14px;
+    color: #d15179;
+}
+
+
+
+  
+
+
+
