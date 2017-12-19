@@ -5,7 +5,7 @@ import java.util.Map;
 
 import model.bean.CustomerBean;
 
-public interface CustomerManagementDao {
+public interface CustomerDao {
 	
 	// 由CustomerID取得相對應資料
 	public CustomerBean findById(int id);

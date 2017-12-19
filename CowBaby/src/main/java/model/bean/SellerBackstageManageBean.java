@@ -21,13 +21,14 @@ public class SellerBackstageManageBean {
 	private int storeRating;
 	private String storeBanner;
 	private java.sql.Blob storeLogo;
-
+	private int totalPageView;
+	
 	@Override
 	public String toString() {
 		return "SellerBackstageManageBean [storeID=" + storeID + ", storeName=" + storeName + ", customerID="
 				+ customerID + ", storeStatus=" + storeStatus + ", storePhone=" + storePhone + ", storeDescription="
 				+ storeDescription + ", storeRating=" + storeRating + ", storeBanner=" + storeBanner + ", storeLogo="
-				+ storeLogo + "]";
+				+ storeLogo + ", totalPageView=" + totalPageView + "]";
 	}
 
 	public int getStoreID() {
@@ -100,6 +101,14 @@ public class SellerBackstageManageBean {
 
 	public void setStoreLogo(java.sql.Blob storeLogo) {
 		this.storeLogo = storeLogo;
+	}
+
+	public int getTotalPageView() {
+		return totalPageView;
+	}
+
+	public void setTotalPageView(int totalPageView) {
+		this.totalPageView = totalPageView;
 	}
 
 }

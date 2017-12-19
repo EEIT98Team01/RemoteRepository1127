@@ -28,7 +28,9 @@ public class Order01Bean {
 	private String receiverPhone;
 	private int usebonus;
 	private int storeID;
-
+	private int status;
+	private int paymentMethod;
+	
 	@Override
 	public String toString() {
 		return "Order01Bean [orderID=" + orderID + ", customerID=" + customerID + ", orderDate=" + orderDate
@@ -36,7 +38,8 @@ public class Order01Bean {
 				+ shippedDate + ", transactionComplete=" + transactionComplete + ", orderCancellation="
 				+ orderCancellation + ", pickUpStore=" + pickUpStore + ", totalAmount=" + totalAmount + ", totalItems="
 				+ totalItems + ", receiverName=" + receiverName + ", receiverEmail=" + receiverEmail
-				+ ", receiverPhone=" + receiverPhone + ", usebonus=" + usebonus + ", storeID=" + storeID + "]";
+				+ ", receiverPhone=" + receiverPhone + ", usebonus=" + usebonus + ", storeID=" + storeID + ", status="
+				+ status + ", paymentMethod=" + paymentMethod + "]";
 	}
 
 	public int getOrderID() {
@@ -165,6 +168,22 @@ public class Order01Bean {
 
 	public void setStoreID(int storeID) {
 		this.storeID = storeID;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	public int getPaymentMethod() {
+		return paymentMethod;
+	}
+
+	public void setPaymentMethod(int paymentMethod) {
+		this.paymentMethod = paymentMethod;
 	}
 
 }

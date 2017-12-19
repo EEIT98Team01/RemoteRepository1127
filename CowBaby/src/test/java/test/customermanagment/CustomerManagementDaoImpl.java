@@ -12,10 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import model.bean.CustomerBean;
-import model.dao.CustomerManagementDao;
+import model.dao.CustomerDao;
 
 @Repository
-public class CustomerManagementDaoImpl implements CustomerManagementDao {
+public class CustomerManagementDaoImpl implements CustomerDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 	

@@ -13,18 +13,18 @@ public class AdvertisementBean {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int adID;
-	private int customerID;
+	private int storeID;
 	private int adState;
 	private java.sql.Timestamp orderAdTime;
 	private int adFee;
 	private byte adPackage; 			  // type改byte
 	private java.sql.Blob adPreviewPhoto; // 新增adPreviewPhoto 廣告預覽小圖
-
+	
 	@Override
 	public String toString() {
-		return "AdvertisementBean [adID=" + adID + ", customerID=" + customerID + ", adState=" + adState
-				+ ", orderAdTime=" + orderAdTime + ", adFee=" + adFee + ", adPackage=" + adPackage + ", adPreviewPhoto="
-				+ adPreviewPhoto + "]";
+		return "AdvertisementBean [adID=" + adID + ", storeID=" + storeID + ", adState=" + adState + ", orderAdTime="
+				+ orderAdTime + ", adFee=" + adFee + ", adPackage=" + adPackage + ", adPreviewPhoto=" + adPreviewPhoto
+				+ "]";
 	}
 
 	public int getAdID() {
@@ -35,12 +35,12 @@ public class AdvertisementBean {
 		this.adID = adID;
 	}
 
-	public int getCustomerID() {
-		return customerID;
+	public int getStoreID() {
+		return storeID;
 	}
 
-	public void setCustomerID(int customerID) {
-		this.customerID = customerID;
+	public void setStoreID(int storeID) {
+		this.storeID = storeID;
 	}
 
 	public int getAdState() {
@@ -82,5 +82,5 @@ public class AdvertisementBean {
 	public void setAdPreviewPhoto(java.sql.Blob adPreviewPhoto) {
 		this.adPreviewPhoto = adPreviewPhoto;
 	}
-
+	
 }

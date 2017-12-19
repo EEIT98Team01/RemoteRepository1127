@@ -8,13 +8,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import model.bean.CustomerServiceBean;
-import model.dao.CustomerServiceAuditDao;
+import model.dao.CustomerServiceDao;
 
 @Service
 @Transactional
 public class CustomerServiceAuditService {
 	@Autowired
-	private CustomerServiceAuditDao CustomerServiceAuditDao;
+	private CustomerServiceDao CustomerServiceAuditDao;
 	
 	// 回傳客訴資料,若資料不存在,則回傳null
 	@Transactional(readOnly=true)

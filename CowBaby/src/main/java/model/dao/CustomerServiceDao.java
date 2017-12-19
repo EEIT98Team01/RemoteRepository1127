@@ -5,7 +5,7 @@ import java.util.Map;
 
 import model.bean.CustomerServiceBean;
 
-public interface CustomerServiceAuditDao {
+public interface CustomerServiceDao {
 
 		// 由ReportID取得相對應資料
 		public CustomerServiceBean findById(int id);

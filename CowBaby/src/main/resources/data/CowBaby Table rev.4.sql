@@ -1,10 +1,6 @@
-
-
 USE CowBaby;
 
-
 --顧客表
-
 IF OBJECT_ID('CowBaby..Customer') IS NOT NULL DROP TABLE Customer;
 CREATE TABLE Customer (    
     CustomerID  int IDENTITY primary key, 
@@ -28,13 +24,7 @@ CREATE TABLE Customer (
 	ConsumerSegmentation  tinyint,    --消費者區隔  
 );
 
-
-
-
-
-
 --分類表
-
 IF OBJECT_ID('CowBaby..Classfication') IS NOT NULL DROP TABLE Classfication;
 CREATE TABLE Classfication (    
     ClassficationID  int IDENTITY primary key, 
@@ -43,12 +33,7 @@ CREATE TABLE Classfication (
 	StartStopStatus  bit,
 );
 
-
-
-
-
 --後台表
-
 IF OBJECT_ID('CowBaby..Backstage') IS NOT NULL DROP TABLE Backstage;
 CREATE TABLE Backstage (    
     ApplicationID int IDENTITY primary key, 
@@ -58,11 +43,7 @@ CREATE TABLE Backstage (
 	ApplicationDescription  varchar(max),
 );
 
-
-
-
 --訊息表
-
 IF OBJECT_ID('CowBaby..Message') IS NOT NULL DROP TABLE Message;
 CREATE TABLE Message (    
     MsgID int IDENTITY primary key, 
@@ -75,11 +56,7 @@ CREATE TABLE Message (
 	MsgMarker       bit,
 );
 
-
-
-
 --Blog 媽咪推薦
-
 IF OBJECT_ID('CowBaby..Blog') IS NOT NULL DROP TABLE Blog;
 CREATE TABLE Blog (    
     ArticleID int IDENTITY primary key, 
@@ -89,12 +66,7 @@ CREATE TABLE Blog (
 	ArticleContent     varchar(Max),
 );
 
-
-
-
-
 --產品Size表
-
 IF OBJECT_ID('CowBaby..ProductSize') IS NOT NULL DROP TABLE ProductSize;
 CREATE TABLE ProductSize (    
     ProductSizeID int IDENTITY primary key, 
@@ -103,12 +75,7 @@ CREATE TABLE ProductSize (
 	SpecStock		   int,
 );
 
-
-
-
-
 --訂單表
-
 IF OBJECT_ID('CowBaby..Order01') IS NOT NULL DROP TABLE Order01;
 CREATE TABLE Order01 (    
     OrderID int IDENTITY primary key, 
@@ -127,14 +94,11 @@ CREATE TABLE Order01 (
 	ReceiverPhone			varchar(20),
 	Usebonus				int,
 	StoreID					int,           --FK關聯至賣家後台設置表StoreID
+	Status					tinyint,
+	PaymentMethod			tinyint,
 );
 
-
-
-
-
 --賣家後台設置表(賣家開的店)
-
 IF OBJECT_ID('CowBaby..SellerBackstageManage') IS NOT NULL DROP TABLE SellerBackstageManage;
 CREATE TABLE SellerBackstageManage (    
     StoreID int IDENTITY primary key, 
@@ -146,17 +110,14 @@ CREATE TABLE SellerBackstageManage (
 	StoreRating         int,
 	StoreBanner         varchar(Max),
 	StoreLogo           image,
+	TotalPageView		int,
 );
 
-
-
-
 --廣告表
-
 IF OBJECT_ID('CowBaby..Advertisement') IS NOT NULL DROP TABLE Advertisement;
 CREATE TABLE Advertisement (    
     AdID int IDENTITY primary key, 
-	CustomerID          int,
+	StoreID          int,
 	AdState			    tinyint,
 	OrderAdTime			datetime2(0),
 	AdFee               int,
@@ -164,12 +125,7 @@ CREATE TABLE Advertisement (
 	AdPreviewPhoto      image,               --新增AdPreviewPhoto 廣告預覽小圖
 );
 
-
-
-
-
 --廣告明細表
-
 IF OBJECT_ID('CowBaby..AdvertisementDetail') IS NOT NULL DROP TABLE AdvertisementDetail;
 CREATE TABLE AdvertisementDetail (    
     AdDetailID int IDENTITY primary key, 
@@ -178,11 +134,7 @@ CREATE TABLE AdvertisementDetail (
 	AdPurchasedState    bit,             --type改bit 廣告購買狀態
 );
 
-
-
-
 --瀏覽量表
-
 IF OBJECT_ID('CowBaby..PageView') IS NOT NULL DROP TABLE PageView;
 CREATE TABLE PageView (    
     PageViewsID int IDENTITY primary key, 
@@ -191,11 +143,7 @@ CREATE TABLE PageView (
 	PageViews			int,
 );
 
-
-
-
 --留言細節板
-
 IF OBJECT_ID('CowBaby..MessageBoardDetail') IS NOT NULL DROP TABLE MessageBoardDetail;
 CREATE TABLE MessageBoardDetail (    
     MessageDetailID int IDENTITY primary key, 
@@ -205,14 +153,11 @@ CREATE TABLE MessageBoardDetail (
 	CustomerID			  int,          --改欄名/type
 );
 
-
-
-
 --訂單明細表
-
 IF OBJECT_ID('CowBaby..OrderDetail') IS NOT NULL DROP TABLE OrderDetail;
 CREATE TABLE OrderDetail (    
-    OrderID int IDENTITY primary key, 
+	OrderDetailID int IDENTITY primary key, 
+    OrderID				  int, 
 	ProductID             int,
 	UnitPrice			  int,
 	Quantity			  int,
@@ -220,16 +165,12 @@ CREATE TABLE OrderDetail (
 	ProductSpec			  varchar(max),		   --新增商品規格
 );
 
-
-
-
 --產品表
-
 IF OBJECT_ID('CowBaby..Product') IS NOT NULL DROP TABLE Product;
 CREATE TABLE Product (    
     ProductID int IDENTITY primary key, 
 	StoreID				  int,
-	Title			      varchar(50),
+	Title			      varchar(Max),
 	Summary			      varchar(Max),
 	UnitPrice			  int,
 	ProductDescription    varchar(Max),
@@ -238,16 +179,10 @@ CREATE TABLE Product (
 	SuitableAges		  tinyint,			--type改tinyint
 	GenderPreference      char(1),
 	DisplayTime           datetime2(0),
+	ProductImage		  varchar(Max),
 );
 
-
-
-
-
-
-
 --商店評價表
-
 IF OBJECT_ID('CowBaby..StoreRating') IS NOT NULL DROP TABLE StoreRating;
 CREATE TABLE StoreRating (    
     RatingID int IDENTITY primary key, 
@@ -257,32 +192,18 @@ CREATE TABLE StoreRating (
 	RatingTime			      datetime2(0),
 );
 
-
-
-
-
 --留言板表
-
 IF OBJECT_ID('CowBaby..MessageBoard') IS NOT NULL DROP TABLE MessageBoard;
 CREATE TABLE MessageBoard (    
     MessageID int IDENTITY primary key, 
 	StoreID					  int,
 	CustomerID			      int,
-	ProductID			      int,
+	ProductID			      int,					 
 	MessageTopic		      varchar(max),          --type改varchar(max)
 	MessageTime				  datetime2(0),
 );
 
-
-
-
-
-
-
-
-
 --Top5 產品表(店家)
-
 IF OBJECT_ID('CowBaby..Top5Products') IS NOT NULL DROP TABLE Top5Products;
 CREATE TABLE Top5Products (    
     Top5ProductID int IDENTITY primary key, 
@@ -295,12 +216,7 @@ CREATE TABLE Top5Products (
 	Top5Product				  int,
 );
 
-
-
-
-
 --客服表
-
 IF OBJECT_ID('CowBaby..CustomerService') IS NOT NULL DROP TABLE CustomerService;
 CREATE TABLE CustomerService (    
     ReportID int IDENTITY primary key, 
@@ -341,7 +257,7 @@ ALTER TABLE SellerBackstageManage
 ADD FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID);
 
 ALTER TABLE Advertisement
-ADD FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID);
+ADD FOREIGN KEY (StoreID) REFERENCES SellerBackstageManage(StoreID);
 
 ALTER TABLE AdvertisementDetail
 ADD FOREIGN KEY (AdID) REFERENCES Advertisement(AdID);
@@ -356,13 +272,11 @@ ADD FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID);
 
 ALTER TABLE OrderDetail
 ADD FOREIGN KEY (ProductID) REFERENCES Product(ProductID);
+ALTER TABLE OrderDetail
+ADD FOREIGN KEY (OrderID) REFERENCES Order01(OrderID);
 
 ALTER TABLE Product
 ADD FOREIGN KEY (StoreID) REFERENCES SellerBackstageManage(StoreID);
-
-ALTER TABLE Product
-ADD FOREIGN KEY (ClassficationID) REFERENCES Classfication(ClassficationID);
-
 ALTER TABLE Product
 ADD FOREIGN KEY (ClassficationID) REFERENCES Classfication(ClassficationID);
 
@@ -396,9 +310,32 @@ ADD FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID);
 
 
 
+-- 顧客假資料
+INSERT INTO Customer VALUES ('方芳芳', 'MD5', '999@gmail.com', '台北市信義區忠孝東路三段333號', '02-2977-7777', '0988-888888', Null, '1999-10-10', 'F', '1', '30000', '1', '2017-10-10', '0', '0', '1' , '0', '0' );
+INSERT INTO Customer VALUES ('葉燁燁', 'MD5', '888@gmail.com', '台北市信義區忠孝西路二段123號', '02-2977-4523', '0988-881663', Null, '1990-03-11', 'M', '0', '50000', '0', '2017-10-11', '0', '0', '1' , '0', '0' );
+INSERT INTO Customer VALUES ('陳依宸', 'MD5', '777@gmail.com', '台北市大安區復興南路一段333號', '02-2871-6377', '0987-978987', Null, '1980-04-11', 'M', '0', '85000', '1', '2017-10-12', '0', '0', '1' , '0', '0' );
+INSERT INTO Customer VALUES ('張東熙', 'MD5', '666@gmail.com', '台北市信義區忠孝東路三段332號', '02-2977-5566', '0978-978987', Null, '1985-07-31', 'M', '0', '22000', '0', '2017-10-13', '0', '0', '1' , '0', '0' );
+INSERT INTO Customer VALUES ('曾汜瑑', 'MD5', '555@gmail.com', '新北市淡水區中山北路一段387號', '02-2977-7777', '0965-556556', Null, '1987-09-21', 'F', '1', '45000', '1', '2017-10-20', '0', '0', '2' , '0', '0' );
 
-INSERT INTO Customer VALUES ('hahaha',  '123s', '999@gmail.com', '台北市信義區忠孝東路三段333號', '022977-7777', '0988-888888', Null, '1999-10-10', 'F', '1', 
-							'30000', '1', '2017-10-10', '10', '5', '10' , '10', '5' );
+-- 商店假資料
+INSERT INTO SellerBackstageManage VALUES ('瑑瑑的店', '5', '1', '02-2977-7777', '瑑很大!!', '0', NULL, NULL, '0');
 
-INSERT INTO Product VALUES (null,  'DinDin鞋', '我是一雙DinDin鞋喔', '10000', '真是一雙好穿的鞋鞋', '20', null, '45', '1', '2017-11-10');
+-- 商品分類假資料
+INSERT INTO Classfication VALUES ('玩具', '給寶寶的玩具', '1')
+INSERT INTO Classfication VALUES ('圖書', '給寶寶的圖書', '1')
+INSERT INTO Classfication VALUES ('衣服', '給寶寶的衣服', '1')
+INSERT INTO Classfication VALUES ('鞋子', '給寶寶的鞋子', '1')
+INSERT INTO Classfication VALUES ('日用品', '給寶寶的日用品', '1')
 
+-- 商品假資料
+INSERT INTO Product VALUES 
+(1, 'DinDin鞋', '我是一雙DinDin鞋喔', '10000', '真是一雙好穿的鞋鞋', '1', '4', '1', 'F', '2017-11-10', NULL);
+INSERT INTO Product VALUES 
+(1, 'DinDin衣', '我是一件DinDin衣喔', '10000', '真是一件好穿的衣衣', '1', '3', '1', 'F', '2017-11-10', NULL);
+INSERT INTO Product VALUES 
+(1, 'DinDin書', '我是一件DinDin書喔', '10000', '真是一本好看的書書', '1', '2', '1', 'F', '2017-11-10', NULL);
+
+-- 規格假資料
+INSERT INTO ProductSize VALUES ('1', '22黑', '51');
+INSERT INTO ProductSize VALUES ('1', '22白', '43');
+INSERT INTO ProductSize VALUES ('1', '22藍', '32');
