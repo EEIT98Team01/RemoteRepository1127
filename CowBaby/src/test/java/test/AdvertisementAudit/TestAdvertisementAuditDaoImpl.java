@@ -1,6 +1,6 @@
-package test.customermanagment;
+package test.AdvertisementAudit;
 
-import java.util.HashMap;
+import java.sql.Timestamp;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -8,10 +8,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import model.bean.CustomerBean;
-import model.dao.CustomerManagementDao;
+import model.dao.AdvertisementAuditDao;
 
-public class TestCustomerManagementDaoImpl {
+public class TestAdvertisementAuditDaoImpl {
 
 	public static void main(String[] args) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("beans.config.dao.test.xml");
@@ -21,39 +20,50 @@ public class TestCustomerManagementDaoImpl {
 	/*---------------------------------------------------------------------------------------------*/
 		
 	// 依照要測試的對象進行修改
-		CustomerManagementDao dao = (CustomerManagementDao) context.getBean("customerManagementDaoImpl");
+		AdvertisementAuditDao dao = (AdvertisementAuditDao) context.getBean("advertisementAuditDaoImpl");
 		
 	// 測試內容
 	  //findById(int id)
 		/*
-		 System.out.println(dao.findById(10));
+		System.out.println(dao.findById(1));
 		*/
 		
-	  //update(CustomerBean bean)
+	  //findDisplayTime(int id)
+		for(Timestamp date: dao.findDisplayTime(1)) {
+			System.out.println(date);
+		}
+		
+	  //update(CustomerServiceBean bean)
 		/*
-		CustomerBean bean = new CustomerBean();
-		bean.setCustomerID(10);
-		bean.setEmail("test@gmail.com");;
+		CustomerServiceBean bean = new CustomerServiceBean();
+		bean.setReportID(6);
+		bean.setProblemTypes(2);
+		bean.setProblemDescription("帳號消失了....");
+		bean.setServiceFeedback("客服消失了....");
+		bean.setProcessStatus(3);
+		bean.setReportTime(new Timestamp((new Date("2017/12/10 13:54:11")).getTime()));
+		bean.setReportiInProcess(new Timestamp((new Date("2017/12/11 14:55:22")).getTime()));
+		bean.setReportFix(new Timestamp((new Date()).getTime()));
 		dao.update(bean);
 		*/
 		
 	  //find()
 		/*
-		for(CustomerBean bean: dao.find()) {
+		for(CustomerServiceBean bean: dao.find()) {
 			System.out.println(bean);
 		}
 		*/
 		
 	  //find(int page, int rows)
 		/*
-		for(CustomerBean bean: dao.find(1, 999)) {
+		for(CustomerServiceBean bean: dao.find(2, 4)) {
 			System.out.println(bean);
 		}
 		*/
 		
 	  //find(int page, int rows, String sortCondition)
 		/*
-		for(CustomerBean bean: dao.find(2, 300, "customerName")) {
+		for(CustomerServiceBean bean: dao.find(1, 5, "customerID")) {
 			System.out.println(bean);
 		}
 		*/
@@ -61,9 +71,9 @@ public class TestCustomerManagementDaoImpl {
 	  //findByCondition(Map<String, String> condition)
 		/*
 		HashMap<String, String> condition = new HashMap<String, String>();
-		condition.put("email", "like '%AllenLewis75129@gmail.com%'");
-		//condition.put("customerID", "= 369");
-		for(CustomerBean bean: dao.findByCondition(condition)) {
+		condition.put("problemTypes", "= 2");
+		condition.put("processStatus", "= 3");
+		for(CustomerServiceBean bean: dao.findByCondition(condition)) {
 			System.out.println(bean);
 		}
 		*/
@@ -71,21 +81,20 @@ public class TestCustomerManagementDaoImpl {
 	  //findByCondition(Map<String, String> condition, int page, int rows)
 		/*
 		HashMap<String, String> condition = new HashMap<String, String>();
-		condition.put("customerName", "like '%Harry%'");
-		for(CustomerBean bean: dao.findByCondition(condition, 2, 5)) {
+		condition.put("problemTypes", "= 2");
+		for(CustomerServiceBean bean: dao.findByCondition(condition, 1, 5)) {
+			System.out.println(bean);
+		}*/
+		
+		
+	  //findByCondition(Map<String, String> condition, int page, int rows, String sortCondition)
+		/*
+		HashMap<String, String> condition = new HashMap<String, String>();
+		condition.put("problemTypes", "= 1");
+		for(CustomerServiceBean bean: dao.findByCondition(condition, 1, 5, "customerID")) {
 			System.out.println(bean);
 		}
 		*/
-		
-	  //findByCondition(Map<String, String> condition, int page, int rows, String sortCondition)
-		
-		HashMap<String, String> condition = new HashMap<String, String>();
-		condition.put("address", "like '%士林區%'");
-		                               
-		for(CustomerBean bean: dao.findByCondition(condition, 1, 999, "customerID")) {
-			System.out.println(bean);
-		}
-		
 		
 	  //getQuantity()
 		/*
@@ -95,7 +104,7 @@ public class TestCustomerManagementDaoImpl {
 	  //getConditionQuantity(Map<String, String> condition)
 		/*
 		HashMap<String, String> condition = new HashMap<String, String>();
-		condition.put("customerName", "like '%Harry%'");
+		condition.put("problemTypes", "= 2");
 		System.out.println(dao.getConditionQuantity(condition));
 		*/
 		
