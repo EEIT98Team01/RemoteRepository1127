@@ -17,7 +17,7 @@
 
 <link rel="stylesheet" href="<c:url value="/pluging/Bxsliders/jquery.bxslider.min.css"/>"> 
 <link rel="stylesheet" href="<c:url value="/css/frontDesk/basic.css"/>">
-<link rel="stylesheet" href="<c:url value="/css/frontDesk/member_account_infor.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/frontDesk/member_account_update_infor.css"/>">
 
 
 <!--body-->
@@ -40,7 +40,7 @@
 			</div>	
 		</div>
 
-		<!-- 會員專區-->
+		<!-- 個人商店頁面-->
 		<div class="main_container_col_2 member_information">
 			<ul class="breadcrumb">
 			    <li><a href="#">首頁</a></li>
@@ -72,13 +72,12 @@
 							</tr>
 							<tr>
 								<td>修改密碼</td>
-								<td>123456</td>
+								<td><input type="text" class="form-control"></td>
 								<td>確認密碼</td>
-								<td>123456</td>
+								<td><input type="text" class="form-control"></td>
 							</tr>
 						</table>
 					</div>
-
 					<div class="title" style="margin-top: 40px;">個人基本資料 Personal information </div>
 					<div class="wrapper_box1 num2">
 						<table>
@@ -96,31 +95,49 @@
 							</tr>
 							<tr>
 								<td>您的職業 :</td>
-								<td>資訊</td>
+								<td>
+									<select class="form-control">
+									    <option>1</option>
+									    <option>2</option>
+									    <option>3</option>
+									    <option>4</option>
+								 	 </select>
+								 </td>
 								<td>月收入狀況 :</td>
-								<td>10000-50000</td>
+								<td>
+									<select class="form-control">
+									    <option>1</option>
+									    <option>2</option>
+									    <option>3</option>
+									    <option>4</option>
+								 	</select>
+								</td>
 							</tr>
 							<tr>
 								<td>您的電話 *:</td>
-								<td>03-1234567</td>
+								<td><input type="text" class="form-control"></td>
 								<td>行動電話*</td>
-								<td>0922-123456</td>
+								<td><input type="text" class="form-control"></td>
 							</tr>
 							<tr>
 								<td>聯絡地址 * :</td>
-								<td colspan="3">台北市大安區和平東路3樓-資策會</td>
+								<td colspan="3"><input type="text" class="form-control"></td>
 							</tr>
 							<tr>
 								<td>是否定閱電子報 :</td>
-								<td colspan="3">否</td>
+								<td colspan="3">
+									<label class="radio-inline"><input type="radio" name="optradio"> 是 </label>
+									<label class="radio-inline"><input type="radio" name="optradio"> 否 </label>
+								</td>
 							</tr>
-						
 						</table>	
-					</div>
+					</div>	
 				</div>
+				<div class="submit_btn"><button type="button" class="btn btn-primary pull-right">確認提交</button></div>
 			</div>
 		</div>		
 	</section>
+
 	<!--引入 footer-->
 	<jsp:include page="/pages/common/footer.jsp"/>
 </body>

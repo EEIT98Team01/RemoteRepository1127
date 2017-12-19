@@ -1,0 +1,137 @@
+
+/*****member_information sidebar*****/
+
+.member_information_container .title{
+    font-size: 21px;
+    padding-bottom: 15px;
+    padding-left: 10px;
+}
+
+.member_information_container .member_infor_menu{
+    border: 1px #ccc solid;
+
+}
+
+.member_information_container .member_infor_menu li a{
+    display: block;
+    padding:  15px 15px 15px 20px;
+    font-size: 16px;
+    border-bottom: 1px dashed #ccc;
+    color: #79798d;
+}
+
+.member_information_container .member_infor_menu li a:hover{
+    background: #ccc;
+}
+
+.member_information_container .member_infor_menu li:nth-child(4) a{
+    border-bottom: none;
+}
+
+.member_information_container .member_infor_menu li a i{
+    padding-right: 10px;
+  
+}
+
+
+/*****member_information*****/
+
+.breadcrumb {
+    margin-bottom: 5px;
+}
+   
+.member_information_container .member_information .welcome_text{
+    font-size: 14px; 
+    letter-spacing: 1px;
+    padding: 10px 0;
+    border-bottom: 1px dashed #ccc;
+}
+
+.member_information_container .member_information .welcome_text .user_stauts{
+    padding: 5px 10px;
+    background:#ccc; 
+    border-radius:20px; 
+}
+
+.member_information_container .member_information .welcome_text .open_shop {
+    display: inline-block;
+    padding: 8px 10px;
+    margin-left: 15px;
+    background: #ec82a3;
+    border-radius: 20px;
+    color: #fff;
+
+}
+
+
+/*******review_member_infor**********/
+.member_information_container .review_member_infor{
+    padding: 20px 0;
+}
+
+.member_information_container .review_member_infor .title{
+    font-size: 18px;
+    font-weight: bolder;
+}
+
+
+.member_information_container .review_member_infor .wrapper_box1{
+    border-radius:10px;
+    border: 1px dashed #ccc;
+    font-size: 15px;
+}
+
+
+.member_information_container .review_member_infor .wrapper_box1 table{
+    width: 100%;
+}
+
+.member_information_container .review_member_infor .wrapper_box1 td{
+    padding: 18px;
+    border-bottom:  1px solid #e6e6e6;
+}
+
+
+
+.member_information_container .review_member_infor .wrapper_box1 tr td:nth-child(1),
+.member_information_container .review_member_infor .wrapper_box1 tr td:nth-child(3){
+    background: #f8f8f8;
+    width: 160px;
+    min-width:160px;
+} 
+
+.member_information_container .review_member_infor .wrapper_box1 tr:nth-child(3) td{
+    border-bottom:none;
+}
+
+
+.member_information_container .review_member_infor .wrapper_box1 tr td:nth-child(1),
+.member_information_container .review_member_infor .wrapper_box1 tr td:nth-child(3){
+    text-align: right;
+}
+
+.member_information_container .review_member_infor .wrapper_box1 tr td:nth-child(2),
+.member_information_container .review_member_infor .wrapper_box1 tr td:nth-child(4){
+    text-align: left;
+    width: 300px;
+    min-width: 300px;
+    
+}
+
+.member_information_container .review_member_infor .wrapper_box1.num2 tr:nth-child(3) td{
+    border-bottom: 1px solid #e6e6e6;
+}
+
+
+.member_information_container .review_member_infor .wrapper_box1.num2 tr:nth-child(6) td{
+    border-bottom: none;
+}
+
+
+.docline {
+    border-bottom: 1px dashed #ccc;
+    width: 100%;
+    height: 8px;
+    margin: 25px auto;
+    clear: both;
+}
