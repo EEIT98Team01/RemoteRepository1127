@@ -17,7 +17,7 @@ public class AdvertisementBean {
 	private int adState;
 	private java.sql.Timestamp orderAdTime;
 	private int adFee;
-	private byte adPackage; 			  // type改byte
+	private int adPackage;
 	private java.sql.Blob adPreviewPhoto; // 新增adPreviewPhoto 廣告預覽小圖
 	
 	@Override
@@ -67,11 +67,11 @@ public class AdvertisementBean {
 		this.adFee = adFee;
 	}
 
-	public byte getAdPackage() {
+	public int getAdPackage() {
 		return adPackage;
 	}
 
-	public void setAdPackage(byte adPackage) {
+	public void setAdPackage(int adPackage) {
 		this.adPackage = adPackage;
 	}
 

@@ -10,6 +10,9 @@ public interface CustomerDao {
 	// 由CustomerID取得相對應資料
 	public CustomerBean findById(int id);
 	
+	// 新增 會員 資料用
+	public CustomerBean insert(CustomerBean bean);
+	
 	// 編輯會員資料用
 	public CustomerBean update(CustomerBean bean);
 	
