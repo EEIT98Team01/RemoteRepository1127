@@ -16,7 +16,7 @@ public class TestCustomerManagementService {
 	// 測試內容
 	  //findById(int id)
 		/*
-		System.out.println(service.findById(1));
+		System.out.println(service.findById(355));
 		*/
 		
 	  //find()
@@ -68,7 +68,7 @@ public class TestCustomerManagementService {
 		
 	  //getConditionQuantity(String account, String userType, String clusterID)
 		
-		System.out.println(service.getConditionQuantity("Allen", "1", null));
+//		System.out.println(service.getConditionQuantity("Allen", "1", null));
 		
 		
 		

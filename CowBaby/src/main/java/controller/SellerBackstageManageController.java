@@ -38,11 +38,12 @@ public class SellerBackstageManageController {
 			Boolean storeStatus, String storeDescription, HttpServletRequest request, Model model) throws SQLException, IOException {
 	
 		/***************************************************/
-		System.out.println("開始");
-			// 把 storeBanner 類型轉為  File 類型
+		//storeLogo 存【圖片】到資料庫
+			System.out.println("開始");
+			// 把 storeLogo 類型轉為  File 類型
 		    File convFile = new File( storeLogo.getOriginalFilename());
 		    storeLogo.transferTo(convFile);
-		    // 把 storeBanner 類型轉為 BYTE[] 類型
+		    // 把 storeLogo 類型轉為 BYTE[] 類型
 		    byte[] storeLogoImgByte = new byte[(int) convFile.length()];
 		    FileInputStream fis = new FileInputStream(convFile);
 			
@@ -135,22 +136,28 @@ public class SellerBackstageManageController {
 		// SellerBackstageManageBean bean =
 		// sellerBackstageManageService.insertStoreData(bean);
 
-		// // 從資料庫抓取LOGO圖片編碼(二進制)
-		// SellerBackstageManageBean selectBean =
-		// sellerBackstageManageService.getStoreData(1);
-		// java.sql.Blob blobimg = selectBean.getStoreLogo();
-		//
-		// try {
-		// // LOGO圖片編碼(二進制)->轉base64
-		// byte[] img = Base64.getEncoder().encode(blobimg.getBytes(1, (int)
-		// blobimg.length()));
-		// // base64 ->轉字串顯示於畫面上
-		// String logoImg = new String(img);
-		// model.addAttribute("logoImg", logoImg);
-		//
-		// } catch (Exception e) {
-		// e.printStackTrace();
-		// }
+			 
+		
+			 
+			 
+			 
+			 
+		 // 從資料庫抓取LOGO圖片編碼(二進制)
+		 SellerBackstageManageBean selectBean =
+		 sellerBackstageManageService.getStoreData(1);
+		 java.sql.Blob blobimg = selectBean.getStoreLogo();
+		
+		 try {
+		 // LOGO圖片編碼(二進制)->轉base64
+		 byte[] img = Base64.getEncoder().encode(blobimg.getBytes(1, (int)
+		 blobimg.length()));
+		 // base64 ->轉字串顯示於畫面上
+		 String logoImg = new String(img);
+		 model.addAttribute("logoImg", logoImg);
+		 
+		 } catch (Exception e) {
+		 e.printStackTrace();
+		 }
 
 		return "sellerShop";
 	}

@@ -15,9 +15,19 @@
 		<property name="url" value="/pages/backstageAdmit/member_managment_edit.jsp"></property>
 	</bean>
 	
+	<bean id="login_success" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/index.jsp"></property>
+	</bean>
+	
+	<bean id="login_error" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/pages/member/user_login.jsp"></property>
+	</bean>
+	
+	<!-- 丁測試用不要刪 -->
+	<!--
 	<bean id="sellerShop" class="org.springframework.web.servlet.view.InternalResourceView">
 		<property name="url" value="sellerShop.jsp"></property>
-	</bean>
+	</bean>-->
 	
 	
 	

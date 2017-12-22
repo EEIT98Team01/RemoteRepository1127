@@ -23,23 +23,29 @@ public class TestCustomerManagementDaoImpl {
 		
 	// 測試內容
 	  //findById(int id)
-		/*
+		
 		 System.out.println(dao.findById(10));
-		*/
+		
 		
 	  //update(CustomerBean bean)
-		/*
-		CustomerBean bean = new CustomerBean();
-		bean.setCustomerID(10);
-		bean.setEmail("test@gmail.com");;
-		dao.update(bean);
-		*/
+		
+//		CustomerBean bean = new CustomerBean();
+		 CustomerBean bean = session.get(CustomerBean.class, 20);
+		 bean.setCustomerName("NONO");
+		
+		 
+//		bean.setCustomerID(11);
+//		bean.setCustomerName("NONO");
+//		bean.setPassword("123456");
+//		bean.setAddress("台北市士林區大西路86號2樓");
+//		dao.update(bean);
+		
 		
 	  //find()
 		
-		for(CustomerBean bean: dao.find()) {
-			System.out.println(bean);
-		}
+//		for(CustomerBean bean: dao.find()) {
+//			System.out.println(bean);
+//		}
 		
 		
 	  //find(int page, int rows)
