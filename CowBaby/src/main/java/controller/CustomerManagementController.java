@@ -81,7 +81,7 @@ public class CustomerManagementController {
 	}
 	
 	@RequestMapping(
-			value=("CustomerManagementView.controller"),
+			value=("/pages/backstageAdmit/CustomerManagementView.controller"),
 			method={RequestMethod.GET, RequestMethod.POST}
 	)
 	public String view(Model model, String id) {
@@ -90,7 +90,7 @@ public class CustomerManagementController {
 	}
 	
 	@RequestMapping(
-			value=("CustomerManagementEdit.controller"),
+			value=("/pages/backstageAdmit/CustomerManagementEdit.controller"),
 			method={RequestMethod.GET, RequestMethod.POST}
 	)
 	public String edit(Model model, String id) {

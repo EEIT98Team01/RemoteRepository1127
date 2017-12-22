@@ -163,7 +163,9 @@ $(function(){
     // 查詢
     $("#inquire").click(function(){
         event.preventDefault(); 
+        
         $('#myPagination').twbsPagination('destroy');
+        
 		// 抓取表單欄位
 		formData = $(".memberFrom").serializeArray();
 	    // 發 ajax 查詢表單資料
@@ -201,7 +203,9 @@ $(function(){
 	           // response 回來的字串轉 json物件
 	           var obj = JSON.parse(response.list);
 	           // 組出 列表塞回 table
+	           
 	           $.each(obj, function (index, customer) {
+	        	   console.log("customer",customer);
 	           	    var html="";
 	 		    	html="<tr>"+
  							"<td>"+(index+1+ (response.pageSize*(response.pageNumber-1)))+"</td>" +
@@ -212,30 +216,45 @@ $(function(){
  							"<td>"+customer.userID+"</td>" +
  							"<td>"+customer.consumerSegmentation+"</td>" +
  							"<td>"+customer.totalAmoutOfConsumption+"</td>" +
- 							"<td> <a href=# class='btn btn-success'> <i class='fa fa-eye'></i> </a> </td>" +
- 							"<td> <a href=# class='btn btn-primary'> <i class='fa fa-pencil'></i> </a> </td>" +
+ 							"<td> <a href='<c:url value='CustomerManagementView.controller'/>?id=" + customer.customerID + 
+ 							"' class='btn btn-success'> <i class='fa fa-eye'></i> </a> </td>" +
+ 							"<td> <a href='<c:url value='CustomerManagementEdit.controller'/>?id=" + customer.customerID + 
+ 							"' class='btn btn-primary'> <i class='fa fa-pencil'></i> </a> </td>" +
 						 "</tr>";				
  		    		$('tbody').append(html);
 	           }) 
+	           
 	          	    
          		// 自動產生分頁
 	         	var totalPages = response.tatalPage;
 	            var pageSize  = response.pageSize;
-	          
-	            $('#myPagination').twbsPagination({
-	                totalPages: totalPages,
-	                visiblePages: pageSize,
-	                onPageClick: function (evt, page) { //分頁切換事件
-						inqueryData(formData,page);
-	       	　　　　      }
-	       	　　	}) 
-	            
-	            // 把頁數 ，筆數，開始筆數-結束筆數 塞回去
-	            $(".pageNum").html(response.pageNumber);
-	            $(".firstNum").html( ((response.pageNumber-1)*response.pageSize) +1);
-	            $(".endNum").html(response.pageNumber*response.pageSize);
-	            $(".totalNum").html(response.tatal);
-	            
+ 
+ 				if(!totalPages==0){
+ 				// 如果查詢有資料
+				   $('#myPagination').twbsPagination({
+		                  totalPages: totalPages,
+		                  visiblePages: pageSize,
+		                  
+		                  onPageClick: function (evt, page) { 
+								inqueryData(formData,page);
+			       	　　　　     }
+	                });
+ 				  
+					// 把頁數 ，筆數，開始筆數-結束筆數 塞回去
+		            $(".pageNum").html(response.pageNumber);
+		            $(".firstNum").html( ((response.pageNumber-1)*response.pageSize) +1);
+		            $(".endNum").html(response.pageNumber*response.pageSize);
+		            $(".totalNum").html(response.tatal);
+				  
+ 				}else{
+ 			 	// 如果查詢無資料	
+ 					$(".pageNum").html(0);
+ 		            $(".firstNum").html(0);
+ 		            $(".endNum").html(0);
+ 		            $(".totalNum").html(0);
+ 		            $('tbody').html('<tr><td colspan="10">目前無任何資料</td></tr>');	
+ 				}
+  
 	        },
 
 	        // ajax完成~隱藏loading

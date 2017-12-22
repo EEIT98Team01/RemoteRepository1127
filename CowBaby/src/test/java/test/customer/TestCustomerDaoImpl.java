@@ -32,19 +32,20 @@ public class TestCustomerDaoImpl {
 	  //insert(CustomerBean bean)
 		/*
 		CustomerBean bean = new CustomerBean();
-		bean.setCustomerID(10);
+		bean.setBirthday(new java.util.Date("2017/12/22"));
 		System.out.println(dao.insert(bean));
 		*/
 		
 	  //update(CustomerBean bean)
-		/*
+		
 		CustomerBean bean = new CustomerBean();
 		bean.setCustomerID(6);
 		bean.setCustomerName("好想睡");
 		bean.setPassword("MD5");
-		bean.setEmail("test@gmail.com");;
+		bean.setEmail("test@gmail.com");
+		bean.setBirthday(new java.util.Date("2017/12/23"));
 		dao.update(bean);
-		*/
+		
 		
 	  //find()
 		/*
@@ -87,14 +88,14 @@ public class TestCustomerDaoImpl {
 		*/
 		
 	  //findByCondition(Map<String, String> condition, int page, int rows, String sortCondition)
-		
+		/*
 		HashMap<String, String> condition = new HashMap<String, String>();
 		condition.put("address", "like '%士林區%'");
 		                               
 		for(CustomerBean bean: dao.findByCondition(condition, 1, 999, "customerID")) {
 			System.out.println(bean);
 		}
-		
+		*/
 
 	  //getQuantity()
 		/*

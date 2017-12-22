@@ -5,13 +5,10 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.sql.rowset.serial.SerialException;
 import javax.xml.ws.Response;
 
@@ -22,7 +19,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.alibaba.fastjson.JSONObject;
@@ -36,7 +32,6 @@ import com.alibaba.fastjson.JSONObject;
 
 @RestController
 @RequestMapping("/service")
-@SessionAttributes(names={"orderDetail"})
 public class CustomerManagementWebService {
 	@Autowired
 	CustomerManagementService customerManagementService;
@@ -229,11 +224,11 @@ public class CustomerManagementWebService {
 	
 	@SuppressWarnings("deprecation")
 	@RequestMapping(
-			value="/customerDataUpdate",
+			value="/cutomerDataUpdate",
 			method={RequestMethod.POST},
 			produces={"application/json;charset=UTF-8"}
 	)
-	public String customerDataUpdate(CustomerBean bean, BindingResult bindingResult, String birthday, String createTime) {
+	public String cutomerDataUpdate(CustomerBean bean, BindingResult bindingResult, String birthday, String createTime) {
 		bean.setBirthday(new java.sql.Date(Integer.parseInt(birthday.substring(0, 3)), 
 										   Integer.parseInt(birthday.substring(5, 6)), 
 										   Integer.parseInt(birthday.substring(8, 9))));
@@ -251,73 +246,5 @@ public class CustomerManagementWebService {
 		customerManagementService.updateCustomerData(bean);
 
 		return "{\"123\":\"456\"}";
-	}
-	
-	@Autowired
-	private HttpSession session;
-	
-	@RequestMapping(
-			value="/addOrderList",
-			method={RequestMethod.POST},
-			produces={"application/json;charset=UTF-8"}
-	)
-	public String addOrderList(Model model, String productID) {
-		// 由session取得先前購物車商品列表
-		String productList = (String) session.getAttribute("orderDetail");
-
-		// 將某商品加入購物車
-		if(productList == null || productList.equals("")) {
-			productList = productID;
-		} else {
-			productList = productList + "-" + productID;
-		}
-
-		// 將購物車商品列表塞回session
-		model.addAttribute("orderDetail", productList);
-
-		// 將購物車商品資訊轉成json形式並回傳
-		List<String> result = new LinkedList<String>();
-		for(String listProductID: productList.split("-")) {
-			result.add(listProductID);
-		}
-
-		return (new JSONArray(result)).toString();
-	}
-	
-	
-	@RequestMapping(
-			value="/removeOrderList",
-			method={RequestMethod.POST},
-			produces={"application/json;charset=UTF-8"}
-	)
-	public String removeOrderList(Model model, String productID) {
-		// 由session取得先前購物車商品列表
-		String productList = (String) session.getAttribute("orderDetail");
-		
-		if(productList != null && !productList.equals("")) {
-			String temp = "";
-			int count = 0;
-			for(String listProductID: productList.split("-")) {
-				if( !listProductID.equals(productID) && count == 0 ) {
-					temp = listProductID;
-					count++;
-				} else if( !listProductID.equals(productID) && count != 0 ) {
-					temp = temp + "-" + listProductID;
-				}
-			}
-			
-			model.addAttribute("orderDetail", temp);
-			
-			if("".equals(temp)) {
-				List<String> result = new LinkedList<String>();
-				for(String listProductID: temp.split("-")) {
-					result.add(listProductID);
-				}
-
-				return (new JSONArray(result)).toString();
-			}
-		}
-
-		return "[]";
 	}
 }

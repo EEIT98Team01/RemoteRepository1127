@@ -32,10 +32,10 @@
 			<div class="title">會員專區</div>
 			<div class="member_infor_menu">
 				<ul>
-					<li> <a href="#"><i class="fa fa-user" aria-hidden="true"></i>會員資料</a></li>
-					<li> <a href="#"><i class="fa fa-pencil" aria-hidden="true"></i>修改會員資料</a></li>
-					<li> <a href="#"><i class="fa fa-shopping-basket" aria-hidden="true"></i>我的消費明細</a></li>
-					<li> <a href="#"><i class="fa fa-envelope" aria-hidden="true"></i>訊息</a></li>
+					<li> <a href="<c:url value="/pages/member/member_account_infor.jsp"/>"><i class="fa fa-user" aria-hidden="true"></i>會員資料</a></li>
+					<li> <a href="<c:url value="/pages/member/member_account_update_infor.jsp"/>"><i class="fa fa-pencil" aria-hidden="true"></i>修改會員資料</a></li>
+					<li> <a href="<c:url value="/pages/member/member_account_order.jsp"/>"><i class="fa fa-shopping-basket" aria-hidden="true"></i>我的消費明細</a></li>
+					<li> <a href="<c:url value="/pages/member/member_account_msg.jsp"/>"><i class="fa fa-envelope" aria-hidden="true"></i>訊息</a></li>
 				</ul>	
 			</div>	
 		</div>
@@ -94,26 +94,6 @@
 								<td>未婚</td>
 							</tr>
 							<tr>
-								<td>您的職業 :</td>
-								<td>
-									<select class="form-control">
-									    <option>1</option>
-									    <option>2</option>
-									    <option>3</option>
-									    <option>4</option>
-								 	 </select>
-								 </td>
-								<td>月收入狀況 :</td>
-								<td>
-									<select class="form-control">
-									    <option>1</option>
-									    <option>2</option>
-									    <option>3</option>
-									    <option>4</option>
-								 	</select>
-								</td>
-							</tr>
-							<tr>
 								<td>您的電話 *:</td>
 								<td><input type="text" class="form-control"></td>
 								<td>行動電話*</td>
@@ -121,7 +101,9 @@
 							</tr>
 							<tr>
 								<td>聯絡地址 * :</td>
-								<td colspan="3"><input type="text" class="form-control"></td>
+								<td><input type="text" class="form-control"></td>
+								<td>月收入狀況 :</td>
+								<td><input type="text" class="form-control"></td>
 							</tr>
 							<tr>
 								<td>是否定閱電子報 :</td>

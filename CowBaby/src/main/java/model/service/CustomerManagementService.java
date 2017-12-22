@@ -14,65 +14,65 @@ import model.dao.CustomerDao;
 @Transactional
 public class CustomerManagementService {
 	@Autowired
-	private CustomerDao customerManagementDao;
+	private CustomerDao customerDao;
 	
 	// 回傳會員資料,若資料不存在,則回傳null
 	@Transactional(readOnly=true)
 	public CustomerBean findById(int id){
-		return customerManagementDao.findById(id);
+		return customerDao.findById(id);
 	}
 	
 	// 回傳所有會員資料,若無資料,則回傳之List為空集合
 	@Transactional(readOnly=true)
 	public List<CustomerBean> find() {
-		return customerManagementDao.find();
+		return customerDao.find();
 	}
 	
 	// 回傳某頁的N筆資料,若無資料,則回傳之List為空集合
 	@Transactional(readOnly=true)
 	public List<CustomerBean> find(int page, int rows) {
-		return customerManagementDao.find(page, rows);
+		return customerDao.find(page, rows);
 	}
 	
 	// 先依某條件進行排序,再回傳某頁的N筆資料
 	@Transactional(readOnly=true)
 	public List<CustomerBean> find(int page, int rows, String sortCondition) {
-		return customerManagementDao.find(page, rows, sortCondition);
+		return customerDao.find(page, rows, sortCondition);
 	}
 	
 	// 回傳符合某條件的資料
 	@Transactional(readOnly=true)
 	public List<CustomerBean> findByCondition(String account, String userType, String clusterID) {
-		return customerManagementDao.findByCondition(this.createCondition(account, userType, clusterID));
+		return customerDao.findByCondition(this.createCondition(account, userType, clusterID));
 	}
 	
 	// 回傳符合某條件的N筆資料,若無資料,則回傳之List為空集合
 	@Transactional(readOnly=true)
 	public List<CustomerBean> findByCondition(String account, String userType, String clusterID, int page, int rows) {
-		return customerManagementDao.findByCondition(this.createCondition(account, userType, clusterID), page, rows);
+		return customerDao.findByCondition(this.createCondition(account, userType, clusterID), page, rows);
 	}
 	
 	// 先依某條件進行排序,回傳符合某某條件的N筆資料
 	@Transactional(readOnly=true)
 	public List<CustomerBean> findByCondition(String account, String userType, String clusterID, int page, int rows, String sortCondition) {
-		return customerManagementDao.findByCondition(this.createCondition(account, userType, clusterID), page, rows, sortCondition);
+		return customerDao.findByCondition(this.createCondition(account, userType, clusterID), page, rows, sortCondition);
 	}
 
 	// 回傳資料總筆數
 	@Transactional(readOnly=true)
 	public int getQuantity() {
-		return customerManagementDao.getQuantity();
+		return customerDao.getQuantity();
 	}
 
 	// 回傳符合條件之資料筆數
 	@Transactional(readOnly=true)
 	public int getConditionQuantity(String account, String userType, String clusterID) {
-		return customerManagementDao.getConditionQuantity(this.createCondition(account, userType, clusterID));
+		return customerDao.getConditionQuantity(this.createCondition(account, userType, clusterID));
 	}
 	
 	// 更新會員資料
 	public boolean updateCustomerData(CustomerBean bean) {
-		CustomerBean update = customerManagementDao.update(bean);
+		CustomerBean update = customerDao.update(bean);
 		
 		if(update != null) {
 			return true;
@@ -102,4 +102,11 @@ public class CustomerManagementService {
 		
 		return condition;
 	}
+	
+	// 新增會員資料
+	public CustomerBean inSert(CustomerBean bean) {		
+	
+		return  customerDao.insert(bean);
+	}
+	
 }

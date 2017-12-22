@@ -456,51 +456,6 @@
 		</div>
 	</section>
 
-	<!--登入框彈跳框-->
-	<div class="overlay"></div>
-	<div class="popupBox">
-		<div class="loginBox">
-			<a href="#" class="cancel_btn"></a>
-			<div class="box_top">
-				<div class="login_part">
-					<h3>會員登入</h3>
-					<form class="form-inline">
-						<div class="form-group" style="margin-right: 15px">
-							<label for="email">Email帳號</label>
-							<input type="email" class="form-control" id="email">
-						</div>
-						<div class="form-group">
-							<label for="pwd">密碼</label>
-							<input type="password" class="form-control" id="pwd">
-					    </div>
-					    <button type="button" class="btn btn-primary btn-md">我要登入</button>
-					    <button type="button" class="btn btn-warning btn-md">忘記密碼</button>
-					</form>
-				</div>
-				<div class="register_part">
-					<a href="#""><img src="<c:url value="/images/mem-join.png"/>"></a>
-				</div>	
-			</div>
-			<div class="box_button">
-				<h3>防詐騙提醒</h3>
-				<table>
-					<tr>
-						<td>不操作ATM</td>
-						<td>ATM最主要的功能是提款與轉帳，並沒有解除分期付款的選項。</td>
-					</tr>
-					<tr>
-						<td>不透露信用卡資料</td>
-						<td>請勿告知來電者信用卡號與卡片到期日。</td>
-					</tr>
-					<tr>
-						<td>求證相關單位</td>
-						<td>懷疑來電者是詐騙集團，請撥警政署反詐騙諮詢專線165，或洽客服人員07-721-0219，維護自身網路資料安全，建議您不定期進行掃毒，更新自己在各網站帳號的密碼，若使用公共電腦記得使用完畢要登出。</td>
-					</tr>
-				</table>
-			</div>
-		</div>	
-	</div>
-	
 	<!--引入 footer-->
 	<jsp:include page="/pages/common/footer.jsp"/>
 </body>
@@ -523,17 +478,6 @@
 <script type="text/javascript">
 
 	$(function(){
-
-		$(".login").click(function(){
-			$(".overlay").show();
-			$(".popupBox").show();
-		})
-
-		$(".cancel_btn").click(function(){
-			$(".overlay").hide();
-			$(".popupBox").hide();
-		})
-
 
 		$('.slidershow-Wrapper1').bxSlider({
 		    slideWidth: 255,

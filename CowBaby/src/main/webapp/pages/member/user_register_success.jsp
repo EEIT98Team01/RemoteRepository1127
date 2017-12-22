@@ -15,9 +15,10 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/css/bootstrap3/bootstrap-switch.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/css/bootstrap-dialog.min.css">
 
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/> 
 <link rel="stylesheet" href="<c:url value="/pluging/Bxsliders/jquery.bxslider.min.css"/>"> 
 <link rel="stylesheet" href="<c:url value="/css/frontDesk/basic.css"/>">
-<link rel="stylesheet" href="<c:url value="/css/frontDesk/member_account_order.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/frontDesk/user_register.css"/>">
 
 
 <!--body-->
@@ -27,35 +28,12 @@
 	
 	<!-- 這邊 開始寫內容-->
 	<!--每頁 page_container-->
-	<section class="page_container member_information_container">
-		<div class="side_bar">
-			<div class="title">會員專區</div>
-			<div class="member_infor_menu">
-				<ul>
-					<li> <a href="<c:url value="/pages/member/member_account_infor.jsp"/>"><i class="fa fa-user" aria-hidden="true"></i>會員資料</a></li>
-					<li> <a href="<c:url value="/pages/member/member_account_update_infor.jsp"/>"><i class="fa fa-pencil" aria-hidden="true"></i>修改會員資料</a></li>
-					<li> <a href="<c:url value="/pages/member/member_account_order.jsp"/>"><i class="fa fa-shopping-basket" aria-hidden="true"></i>我的消費明細</a></li>
-					<li> <a href="<c:url value="/pages/member/member_account_msg.jsp"/>"><i class="fa fa-envelope" aria-hidden="true"></i>訊息</a></li>
-				</ul>	
-			</div>	
-		</div>
-
-		<!-- 個人訊息--->
-		<div class="main_container_col_2 member_information">
-			<ul class="breadcrumb">
-			    <li><a href="#">首頁</a></li>
-			    <li>會員專區</li>
-			    <li class="active">我的訂單明細</li>
-			</ul>
-			<div class="welcome_text">
-				<p>HI! 
-					<span>雄大</span>~歡迎來到CowBaby~<span class="user_stauts">ㄧ般會員</span> 
-					<a class="open_shop">我要開店</a>
-				</p>
-			</div>
-			 個人訊息個人訊息個人訊息個人訊息
+	
+	<section class="page_container member_register_container">
+		<!-- 主要內容-->
+		<div class="main_container_col_1">
+			YAYAYAYAY成功快去EMAIL登入雞活!!!!
 		</div>	
-			
 	</section>
 	
 	<!--引入 footer-->
@@ -70,14 +48,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/js/bootstrap-switch.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/js/bootstrap-dialog.min.js"></script>
 <script src="<c:url value="/pluging/Bxsliders/jquery.bxslider.min.js"/>"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.12/jquery.bxslider.js"></script> -->
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.12/jquery.bxslider.css">  -->
- 
+
+
 <script type="text/javascript">
 
-	$(function(){
-
-
-	})
+	
 </script>

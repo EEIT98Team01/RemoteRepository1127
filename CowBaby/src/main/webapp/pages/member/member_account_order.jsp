@@ -32,10 +32,10 @@
 			<div class="title">會員專區</div>
 			<div class="member_infor_menu">
 				<ul>
-					<li> <a href="#"><i class="fa fa-user" aria-hidden="true"></i>會員資料</a></li>
-					<li> <a href="#"><i class="fa fa-pencil" aria-hidden="true"></i>修改會員資料</a></li>
-					<li> <a href="#"><i class="fa fa-shopping-basket" aria-hidden="true"></i>我的消費明細</a></li>
-					<li> <a href="#"><i class="fa fa-envelope" aria-hidden="true"></i>訊息</a></li>
+					<li> <a href="<c:url value="/pages/member/member_account_infor.jsp"/>"><i class="fa fa-user" aria-hidden="true"></i>會員資料</a></li>
+					<li> <a href="<c:url value="/pages/member/member_account_update_infor.jsp"/>"><i class="fa fa-pencil" aria-hidden="true"></i>修改會員資料</a></li>
+					<li> <a href="<c:url value="/pages/member/member_account_order.jsp"/>"><i class="fa fa-shopping-basket" aria-hidden="true"></i>我的消費明細</a></li>
+					<li> <a href="<c:url value="/pages/member/member_account_msg.jsp"/>"><i class="fa fa-envelope" aria-hidden="true"></i>訊息</a></li>
 				</ul>	
 			</div>	
 		</div>

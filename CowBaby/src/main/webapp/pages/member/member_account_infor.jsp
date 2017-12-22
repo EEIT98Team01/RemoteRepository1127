@@ -32,10 +32,10 @@
 			<div class="title">會員專區</div>
 			<div class="member_infor_menu">
 				<ul>
-					<li> <a href="#"><i class="fa fa-user" aria-hidden="true"></i>會員資料</a></li>
-					<li> <a href="#"><i class="fa fa-pencil" aria-hidden="true"></i>修改會員資料</a></li>
-					<li> <a href="#"><i class="fa fa-shopping-basket" aria-hidden="true"></i>我的消費明細</a></li>
-					<li> <a href="#"><i class="fa fa-envelope" aria-hidden="true"></i>訊息</a></li>
+					<li> <a href="<c:url value="/pages/member/member_account_infor.jsp"/>"><i class="fa fa-user" aria-hidden="true"></i>會員資料</a></li>
+					<li> <a href="<c:url value="/pages/member/member_account_update_infor.jsp"/>"><i class="fa fa-pencil" aria-hidden="true"></i>修改會員資料</a></li>
+					<li> <a href="<c:url value="/pages/member/member_account_order.jsp"/>"><i class="fa fa-shopping-basket" aria-hidden="true"></i>我的消費明細</a></li>
+					<li> <a href="<c:url value="/pages/member/member_account_msg.jsp"/>"><i class="fa fa-envelope" aria-hidden="true"></i>訊息</a></li>
 				</ul>	
 			</div>	
 		</div>
@@ -49,7 +49,18 @@
 			</ul>
 			<div class="welcome_text">
 				<p>HI! 
-					<span>雄大</span>~歡迎來到CowBaby~<span class="user_stauts">ㄧ般會員</span> 
+					<span>${user.customerName}</span>~歡迎來到CowBaby~
+					<span class="user_stauts">
+						<c:if test="${user.userID==1}">
+						   <c:out value="一般會員"/>
+						</c:if>
+						<c:if test="${user.userID==2}">
+						   <c:out value="平台賣家"/>
+						</c:if>	
+						<c:if test="${user.userID==3}">
+						   <c:out value="黑名單"/>
+						</c:if>				
+					</span> 
 					<a class="open_shop">我要開店</a>
 				</p>
 			</div>
@@ -60,15 +71,15 @@
 						<table>
 							<tr>
 								<td>帳號E-mail</td>
-								<td>jessicadin8@gmail.com</td>
+								<td>${user.email}</td>
 								<td>會員註冊日</td>
-								<td>2017-10-22 07:57</td>
+								<td>${user.createTime}</td>
 							</tr>
 							<tr>
 								<td>累積消費金額</td>
-								<td>$ 100</td>
+								<td>${user.totalAmoutOfConsumption}</td>
 								<td>消費紅利</td>
-								<td>0</td>
+								<td>${user.bonus}</td>
 							</tr>
 							<tr>
 								<td>修改密碼</td>
@@ -84,37 +95,35 @@
 						<table>
 							<tr>
 								<td>您的大名 * :</td>
-								<td>王雄大</td>
+								<td>${user.customerName}</td>
 								<td>您的性別 * :</td>
-								<td>男</td>
+								<td>${user.gender}</td>
 							</tr>
 							<tr>
 								<td>您的生日 * :</td>
-								<td>1980-10-10</td>
+								<td>${user.birthday}</td>
 								<td>婚姻狀況 * :</td>
-								<td>未婚</td>
-							</tr>
-							<tr>
-								<td>您的職業 :</td>
-								<td>資訊</td>
-								<td>月收入狀況 :</td>
-								<td>10000-50000</td>
+								<td>${user.marriage}</td>
 							</tr>
 							<tr>
 								<td>您的電話 *:</td>
-								<td>03-1234567</td>
-								<td>行動電話*</td>
-								<td>0922-123456</td>
+								<td>${user.landline}</td>
+								<td>行動電話* :</td>
+								<td>${user.mobilePhone}</td>
 							</tr>
+							
 							<tr>
 								<td>聯絡地址 * :</td>
-								<td colspan="3">台北市大安區和平東路3樓-資策會</td>
+								<td >${user.address}</td>
+								<td>月收入狀況 :</td>
+								<td>${user.income}</td>
 							</tr>
+								
 							<tr>
 								<td>是否定閱電子報 :</td>
-								<td colspan="3">否</td>
+								<td colspan="3">${user.subscription}</td>
 							</tr>
-						
+
 						</table>	
 					</div>
 				</div>

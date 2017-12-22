@@ -221,8 +221,18 @@ $(function(){
 		    processData: false,
 		    contentType: false,
 		 	success: function(result){  //處理回傳成功事件，當請求成功後此事件會被呼叫
-		      //var myObj = $.parseJSON(result);
-		       console.log(result);
+		 	   //通知儲存成功  ，call BootstrapDialog      		       
+		       BootstrapDialog.show({
+	                type: BootstrapDialog.TYPE_INFO,
+	                title: "訊息",
+	                message: '儲存成功!!',
+	                buttons: [{
+	                	label: 'Close',
+	                    action: function(dialogItself){
+	                        dialogItself.close();
+	                    }
+	                }]
+	            });     
 
 		 	 },
 			 error: function(result){   //處理回傳錯誤事件，當請求失敗後此事件會被呼叫

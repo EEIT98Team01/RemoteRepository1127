@@ -119,12 +119,49 @@
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.12/jquery.bxslider.css">  -->
  
 
-
-
 <script type="text/javascript">
 
 	$(function(){
-
+		
+		 // 加入購物車
+		 $("#qq").on('click', function () {
+			
+			 $.ajax({
+			    url: "http://localhost:8080/CowBaby/service/qoo",
+			    type: 'post',
+			    cache: false,
+			    data: new FormData($('#shopSetForm')[0]),
+			    processData: false,
+			    contentType: false,
+			    
+			 	success: function(result){  //處理回傳成功事件，當請求成功後此事件會被呼叫
+			       console.log(result);
+			     
+			       //通知儲存成功  ，call BootstrapDialog      		       
+			       BootstrapDialog.show({
+		                type: BootstrapDialog.TYPE_INFO,
+		                title: "訊息",
+		                message: '儲存成功!!',
+		                buttons: [{
+		                	label: 'Close',
+		                    action: function(dialogItself){
+		                        dialogItself.close();
+		                    }
+		                }]
+		            });     
+			       
+			 	},
+				error: function(result){  
+				     //your code here
+				},
+				
+				statusCode: {               
+				     404: function() {
+				        alert("page not found");
+				     }
+				}
+			});
+		 }) 
 
 	})
 </script>

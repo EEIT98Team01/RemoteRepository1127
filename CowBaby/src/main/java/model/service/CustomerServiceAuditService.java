@@ -14,65 +14,65 @@ import model.dao.CustomerServiceDao;
 @Transactional
 public class CustomerServiceAuditService {
 	@Autowired
-	private CustomerServiceDao CustomerServiceAuditDao;
+	private CustomerServiceDao CustomerServiceDao;
 	
 	// 回傳客訴資料,若資料不存在,則回傳null
 	@Transactional(readOnly=true)
 	public CustomerServiceBean findById(int id){
-		return CustomerServiceAuditDao.findById(id);
+		return CustomerServiceDao.findById(id);
 	}
 	
 	// 回傳所有客訴資料,若無資料,則回傳之List為空集合
 	@Transactional(readOnly=true)
 	public List<CustomerServiceBean> find() {
-		return CustomerServiceAuditDao.find();
+		return CustomerServiceDao.find();
 	}
 	
 	// 回傳某頁的N筆資料,若無資料,則回傳之List為空集合
 	@Transactional(readOnly=true)
 	public List<CustomerServiceBean> find(int page, int rows) {
-		return CustomerServiceAuditDao.find(page, rows);
+		return CustomerServiceDao.find(page, rows);
 	}
 	
 	// 先依某條件進行排序,再回傳某頁的N筆資料
 	@Transactional(readOnly=true)
 	public List<CustomerServiceBean> find(int page, int rows, String sortCondition) {
-		return CustomerServiceAuditDao.find(page, rows, sortCondition);
+		return CustomerServiceDao.find(page, rows, sortCondition);
 	}
 	
 	// 回傳符合某條件的資料
 	@Transactional(readOnly=true)
 	public List<CustomerServiceBean> findByCondition(String problemTypes, String processStatus, String customerID) {
-		return CustomerServiceAuditDao.findByCondition(this.createCondition(problemTypes, processStatus, customerID));
+		return CustomerServiceDao.findByCondition(this.createCondition(problemTypes, processStatus, customerID));
 	}
 	
 	// 回傳符合某條件的N筆資料,若無資料,則回傳之List為空集合
 	@Transactional(readOnly=true)
 	public List<CustomerServiceBean> findByCondition(String problemTypes, String processStatus, String customerID, int page, int rows) {
-		return CustomerServiceAuditDao.findByCondition(this.createCondition(problemTypes, processStatus, customerID), page, rows);
+		return CustomerServiceDao.findByCondition(this.createCondition(problemTypes, processStatus, customerID), page, rows);
 	}
 	
 	// 先依某條件進行排序,回傳符合某某條件的N筆資料
 	@Transactional(readOnly=true)
 	public List<CustomerServiceBean> findByCondition(String problemTypes, String processStatus, String customerID, int page, int rows, String sortCondition) {
-		return CustomerServiceAuditDao.findByCondition(this.createCondition(problemTypes, processStatus, customerID), page, rows, sortCondition);
+		return CustomerServiceDao.findByCondition(this.createCondition(problemTypes, processStatus, customerID), page, rows, sortCondition);
 	}
 
 	// 回傳資料總筆數
 	@Transactional(readOnly=true)
 	public int getQuantity() {
-		return CustomerServiceAuditDao.getQuantity();
+		return CustomerServiceDao.getQuantity();
 	}
 
 	// 回傳符合條件之資料筆數
 	@Transactional(readOnly=true)
 	public int getConditionQuantity(String problemTypes, String processStatus, String customerID) {
-		return CustomerServiceAuditDao.getConditionQuantity(this.createCondition(problemTypes, processStatus, customerID));
+		return CustomerServiceDao.getConditionQuantity(this.createCondition(problemTypes, processStatus, customerID));
 	}
 	
 	// 更新客訴資料
 	public boolean updateCustomerData(CustomerServiceBean bean) {
-		CustomerServiceBean update = CustomerServiceAuditDao.update(bean);
+		CustomerServiceBean update = CustomerServiceDao.update(bean);
 		
 		if(update != null) {
 			return true;
