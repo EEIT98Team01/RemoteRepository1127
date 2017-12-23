@@ -1,0 +1,16 @@
+
+/***********order_details*************
+**************訂單明細**************/
+
+#order-details table{
+      font-size: 14px;
+}
+
+#order-details table thead{
+    font-size: 15px;
+    text-align: center;   
+    background: #5da9ba;
+    color: #fff;
+}
+
+/*先留者再考慮*/
