@@ -24,7 +24,6 @@ public class TestAdvertisementDaoImpl {
 		AdvertisementDao dao = (AdvertisementDao) context.getBean("advertisementDaoImpl");
 		
 	// 測試內容
-		
 	  //findById(int id)
 		/*
 		System.out.println(dao.findById(3));

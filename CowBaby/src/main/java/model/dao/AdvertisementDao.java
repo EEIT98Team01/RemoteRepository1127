@@ -6,7 +6,6 @@ import java.util.Map;
 import model.bean.AdvertisementBean;
 
 public interface AdvertisementDao {
-
 	// 由adID取得相對應資料
 	public AdvertisementBean findById(int id);
 	
