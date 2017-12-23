@@ -1,5 +1,7 @@
 package model.bean;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,10 +16,10 @@ public class MessageBoardDetailBean {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int messageDetailID;
 	private int messageID;
-	private java.sql.Timestamp messageTime;
+	private Date messageTime;
 	private String messageContent;
 	private int customerID; 								// 改type/宣告名稱 回覆者
-
+	
 	@Override
 	public String toString() {
 		return "MessageBoardDetailBean [messageDetailID=" + messageDetailID + ", messageID=" + messageID
@@ -41,11 +43,11 @@ public class MessageBoardDetailBean {
 		this.messageID = messageID;
 	}
 
-	public java.sql.Timestamp getMessageTime() {
+	public Date getMessageTime() {
 		return messageTime;
 	}
 
-	public void setMessageTime(java.sql.Timestamp messageTime) {
+	public void setMessageTime(Date messageTime) {
 		this.messageTime = messageTime;
 	}
 
@@ -64,5 +66,5 @@ public class MessageBoardDetailBean {
 	public void setCustomerID(int customerID) {
 		this.customerID = customerID;
 	}
-
+	
 }

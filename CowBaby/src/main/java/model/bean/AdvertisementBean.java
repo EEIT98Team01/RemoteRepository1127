@@ -1,5 +1,7 @@
 package model.bean;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,7 +17,7 @@ public class AdvertisementBean {
 	private int adID;
 	private int storeID;
 	private int adState;
-	private java.sql.Timestamp orderAdTime;
+	private Date orderAdTime;
 	private int adFee;
 	private int adPackage;
 	private java.sql.Blob adPreviewPhoto; // 新增adPreviewPhoto 廣告預覽小圖
@@ -51,11 +53,11 @@ public class AdvertisementBean {
 		this.adState = adState;
 	}
 
-	public java.sql.Timestamp getOrderAdTime() {
+	public Date getOrderAdTime() {
 		return orderAdTime;
 	}
 
-	public void setOrderAdTime(java.sql.Timestamp orderAdTime) {
+	public void setOrderAdTime(Date orderAdTime) {
 		this.orderAdTime = orderAdTime;
 	}
 

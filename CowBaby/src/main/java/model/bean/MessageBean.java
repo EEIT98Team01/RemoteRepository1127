@@ -1,5 +1,7 @@
 package model.bean;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,12 +17,12 @@ public class MessageBean {
 	private int msgID;
 	private int msgSenderID;
 	private int msgReceiverID;
-	private java.sql.Timestamp msgTime;
+	private Date msgTime;
 	private boolean readStatus;
 	private String msgContent;
 	private String msgResponse;
 	private boolean msgMarker;
-
+	
 	@Override
 	public String toString() {
 		return "MessageBean [msgID=" + msgID + ", msgSenderID=" + msgSenderID + ", msgReceiverID=" + msgReceiverID
@@ -52,11 +54,11 @@ public class MessageBean {
 		this.msgReceiverID = msgReceiverID;
 	}
 
-	public java.sql.Timestamp getMsgTime() {
+	public Date getMsgTime() {
 		return msgTime;
 	}
 
-	public void setMsgTime(java.sql.Timestamp msgTime) {
+	public void setMsgTime(Date msgTime) {
 		this.msgTime = msgTime;
 	}
 

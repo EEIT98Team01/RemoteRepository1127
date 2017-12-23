@@ -1,5 +1,7 @@
 package model.bean;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,9 +22,9 @@ public class ProductBean {
 	private String productDescription;
 	private boolean productStatus; 				// type改bit
 	private int classficationID;
-	private byte suitableAges; 					// type改tinyint
+	private int suitableAges; 					// type改tinyint
 	private String genderPreference;
-	private java.sql.Timestamp displayTime;
+	private Date displayTime;
 	private String productImage;
 	
 	@Override
@@ -98,11 +100,11 @@ public class ProductBean {
 		this.classficationID = classficationID;
 	}
 
-	public byte getSuitableAges() {
+	public int getSuitableAges() {
 		return suitableAges;
 	}
 
-	public void setSuitableAges(byte suitableAges) {
+	public void setSuitableAges(int suitableAges) {
 		this.suitableAges = suitableAges;
 	}
 
@@ -114,11 +116,11 @@ public class ProductBean {
 		this.genderPreference = genderPreference;
 	}
 
-	public java.sql.Timestamp getDisplayTime() {
+	public Date getDisplayTime() {
 		return displayTime;
 	}
 
-	public void setDisplayTime(java.sql.Timestamp displayTime) {
+	public void setDisplayTime(Date displayTime) {
 		this.displayTime = displayTime;
 	}
 
@@ -129,5 +131,5 @@ public class ProductBean {
 	public void setProductImage(String productImage) {
 		this.productImage = productImage;
 	}
-
+	
 }

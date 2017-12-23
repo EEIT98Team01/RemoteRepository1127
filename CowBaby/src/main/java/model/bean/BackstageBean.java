@@ -1,5 +1,7 @@
 package model.bean;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,10 +16,10 @@ public class BackstageBean {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int applicationID;
 	private int customerID;
-	private java.sql.Timestamp applicationDate;
+	private Date applicationDate;
 	private int applicationState;
 	private String applicationDescription;
-
+	
 	@Override
 	public String toString() {
 		return "BackstageBean [applicationID=" + applicationID + ", customerID=" + customerID + ", applicationDate="
@@ -41,11 +43,11 @@ public class BackstageBean {
 		this.customerID = customerID;
 	}
 
-	public java.sql.Timestamp getApplicationDate() {
+	public Date getApplicationDate() {
 		return applicationDate;
 	}
 
-	public void setApplicationDate(java.sql.Timestamp applicationDate) {
+	public void setApplicationDate(Date applicationDate) {
 		this.applicationDate = applicationDate;
 	}
 

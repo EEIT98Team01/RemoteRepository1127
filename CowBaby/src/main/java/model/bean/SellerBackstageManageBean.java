@@ -1,5 +1,7 @@
 package model.bean;
 
+import java.sql.Blob;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,7 +22,7 @@ public class SellerBackstageManageBean {
 	private String storeDescription;
 	private int storeRating;
 	private String storeBanner;
-	private java.sql.Blob storeLogo;
+	private Blob storeLogo;
 	private int totalPageView;
 	
 	@Override

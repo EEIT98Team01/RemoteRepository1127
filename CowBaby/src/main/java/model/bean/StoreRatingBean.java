@@ -1,5 +1,7 @@
 package model.bean;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,8 +18,8 @@ public class StoreRatingBean {
 	private int customerID;
 	private int storeID;
 	private int ratingScore;
-	private java.sql.Timestamp ratingTime;
-
+	private Date ratingTime;
+	
 	@Override
 	public String toString() {
 		return "StoreRatingBean [ratingID=" + ratingID + ", customerID=" + customerID + ", storeID=" + storeID
@@ -56,12 +58,12 @@ public class StoreRatingBean {
 		this.ratingScore = ratingScore;
 	}
 
-	public java.sql.Timestamp getRatingTime() {
+	public Date getRatingTime() {
 		return ratingTime;
 	}
 
-	public void setRatingTime(java.sql.Timestamp ratingTime) {
+	public void setRatingTime(Date ratingTime) {
 		this.ratingTime = ratingTime;
 	}
-
+	
 }

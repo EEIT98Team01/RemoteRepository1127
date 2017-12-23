@@ -1,5 +1,7 @@
 package model.bean;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,10 +20,10 @@ public class CustomerServiceBean {
 	private String problemDescription;
 	private String serviceFeedback;
 	private int processStatus;
-	private java.sql.Timestamp reportTime;
-	private java.sql.Timestamp reportiInProcess;
-	private java.sql.Timestamp reportFix;
-
+	private Date reportTime;
+	private Date reportiInProcess;
+	private Date reportFix;
+	
 	@Override
 	public String toString() {
 		return "CustomerServiceBean [reportID=" + reportID + ", problemTypes=" + problemTypes + ", customerID="
@@ -78,28 +80,28 @@ public class CustomerServiceBean {
 		this.processStatus = processStatus;
 	}
 
-	public java.sql.Timestamp getReportTime() {
+	public Date getReportTime() {
 		return reportTime;
 	}
 
-	public void setReportTime(java.sql.Timestamp reportTime) {
+	public void setReportTime(Date reportTime) {
 		this.reportTime = reportTime;
 	}
 
-	public java.sql.Timestamp getReportiInProcess() {
+	public Date getReportiInProcess() {
 		return reportiInProcess;
 	}
 
-	public void setReportiInProcess(java.sql.Timestamp reportiInProcess) {
+	public void setReportiInProcess(Date reportiInProcess) {
 		this.reportiInProcess = reportiInProcess;
 	}
 
-	public java.sql.Timestamp getReportFix() {
+	public Date getReportFix() {
 		return reportFix;
 	}
 
-	public void setReportFix(java.sql.Timestamp reportFix) {
+	public void setReportFix(Date reportFix) {
 		this.reportFix = reportFix;
 	}
-
+	
 }

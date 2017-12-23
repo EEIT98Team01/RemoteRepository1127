@@ -3,7 +3,6 @@ package model.dao;
 import java.util.List;
 import java.util.Map;
 
-import model.bean.CustomerBean;
 import model.bean.CustomerServiceBean;
 
 public interface CustomerServiceDao {
