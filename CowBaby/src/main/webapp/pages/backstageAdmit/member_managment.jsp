@@ -24,7 +24,7 @@
 		<!--main-content-->
 		<!--主要內容-->
      	<section id="main-content">
-			<section class="wrapper" id="account_overview">
+			<section class="wrapper" id="member_managment">
 				<div class="breadcrumb-row">
 					<h3>會員管理</h3>
 					<ol class="breadcrumb">
@@ -53,7 +53,7 @@
 									</select>
 								</div>
 								
-								<button type="submit" class="btn btn-primary" id="inquire">查詢</button> 
+								<button type="submit" class="btn btn-primary inquire">查詢</button> 
 							</form>
 						</div>
 					</div>	
@@ -61,12 +61,14 @@
 				<div class="row">	
 					<div class="col-md-12">
 						<div class="panel">	
-							<table class="table table-striped table-bordered" id='customerList'> 
+							<table class="table table-striped table-bordered table_thead" id="customerList"> 
 								<thead>
 								  <tr>
 								    <th>序號</th>
-									<th><a href="<c:url value="CustomerManagementList.controller?page=1&orderBy=email&account=${account}&userType=${userType}" />">帳號</a></th>
-									<th><a href="<c:url value="CustomerManagementList.controller?page=1&orderBy=customerName&account=${account}&userType=${userType}" />">姓名</a></th>
+								    <th>帳號</th>
+									<th>姓名</th>
+								<%-- 	<th><a href="<c:url value="CustomerManagementList.controller?page=1&orderBy=email&account=${account}&userType=${userType}" />">帳號</a></th>
+									<th><a href="<c:url value="CustomerManagementList.controller?page=1&orderBy=customerName&account=${account}&userType=${userType}" />">姓名</a></th> --%>
 									<th>手機</th>
 									<th>性別</th>
 									<th>身份</th>
@@ -84,7 +86,6 @@
 						</div>
 					</div>
 				</div>
-				<!-- <a class="pp">popup</a> -->
 				<div class="row">
 					<div class="col-md-3 record-number">
 						<span>第 <span class="pageNum">0</span>頁</span>|
@@ -161,7 +162,7 @@ $(function(){
    	 var visiblecount = 10; 
 	
     // 查詢
-    $("#inquire").click(function(){
+    $(".inquire").click(function(){
         event.preventDefault(); 
         
         $('#myPagination').twbsPagination('destroy');
@@ -236,8 +237,8 @@ $(function(){
 		                  visiblePages: pageSize,
 		                  
 		                  onPageClick: function (evt, page) { 
-								inqueryData(formData,page);
-			       	　　　　     }
+							inqueryData(formData,page);
+			       	　　　　 }
 	                });
  				  
 					// 把頁數 ，筆數，開始筆數-結束筆數 塞回去

@@ -1,5 +1,7 @@
 package model.bean;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,14 +15,14 @@ public class MessageBean {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int msgID;
-	private int msgSenderID;
-	private int msgReceiverID;
-	private java.sql.Timestamp msgTime;
+	private String msgSenderID;
+	private String msgReceiverID;
+	private Date msgTime;
 	private boolean readStatus;
 	private String msgContent;
 	private String msgResponse;
 	private boolean msgMarker;
-
+	
 	@Override
 	public String toString() {
 		return "MessageBean [msgID=" + msgID + ", msgSenderID=" + msgSenderID + ", msgReceiverID=" + msgReceiverID
@@ -36,27 +38,27 @@ public class MessageBean {
 		this.msgID = msgID;
 	}
 
-	public int getMsgSenderID() {
+	public String getMsgSenderID() {
 		return msgSenderID;
 	}
 
-	public void setMsgSenderID(int msgSenderID) {
+	public void setMsgSenderID(String msgSenderID) {
 		this.msgSenderID = msgSenderID;
 	}
 
-	public int getMsgReceiverID() {
+	public String getMsgReceiverID() {
 		return msgReceiverID;
 	}
 
-	public void setMsgReceiverID(int msgReceiverID) {
+	public void setMsgReceiverID(String msgReceiverID) {
 		this.msgReceiverID = msgReceiverID;
 	}
 
-	public java.sql.Timestamp getMsgTime() {
+	public Date getMsgTime() {
 		return msgTime;
 	}
 
-	public void setMsgTime(java.sql.Timestamp msgTime) {
+	public void setMsgTime(Date msgTime) {
 		this.msgTime = msgTime;
 	}
 
@@ -91,5 +93,5 @@ public class MessageBean {
 	public void setMsgMarker(boolean msgMarker) {
 		this.msgMarker = msgMarker;
 	}
-
+	
 }

@@ -50,7 +50,7 @@ public class MessageBoardDetailDaoImpl implements MessageBoardDetailDao {
 			select.setMessageID(bean.getMessageID());
 			select.setMessageTime(bean.getMessageTime());
 			select.setMessageContent(bean.getMessageContent());
-			select.setCustomerID(bean.getCustomerID());
+			select.setEmail(bean.getEmail());
 			return select;
 		}
 

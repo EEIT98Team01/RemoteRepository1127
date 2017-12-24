@@ -1,5 +1,7 @@
 package model.bean;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,15 +16,15 @@ public class MessageBoardBean {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int messageID;
 	private int storeID;
-	private int customerID;
+	private String email;
 	private int productID;
 	private String messageTopic; 						// varchar(max)
-	private java.sql.Timestamp messageTime;
-
+	private Date messageTime;
+	
 	@Override
 	public String toString() {
-		return "MessageBoardBean [messageID=" + messageID + ", storeID=" + storeID + ", customerID=" + customerID
-				+ ", productID=" + productID + ", messageTopic=" + messageTopic + ", messageTime=" + messageTime + "]";
+		return "MessageBoardBean [messageID=" + messageID + ", storeID=" + storeID + ", email=" + email + ", productID="
+				+ productID + ", messageTopic=" + messageTopic + ", messageTime=" + messageTime + "]";
 	}
 
 	public int getMessageID() {
@@ -41,12 +43,12 @@ public class MessageBoardBean {
 		this.storeID = storeID;
 	}
 
-	public int getCustomerID() {
-		return customerID;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setCustomerID(int customerID) {
-		this.customerID = customerID;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public int getProductID() {
@@ -65,12 +67,12 @@ public class MessageBoardBean {
 		this.messageTopic = messageTopic;
 	}
 
-	public java.sql.Timestamp getMessageTime() {
+	public Date getMessageTime() {
 		return messageTime;
 	}
 
-	public void setMessageTime(java.sql.Timestamp messageTime) {
+	public void setMessageTime(Date messageTime) {
 		this.messageTime = messageTime;
 	}
-
+	
 }

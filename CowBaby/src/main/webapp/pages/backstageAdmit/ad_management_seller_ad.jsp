@@ -28,15 +28,44 @@
 				<div class="breadcrumb-row">
 					<h3>賣家廣告欄位</h3>
 					<ol class="breadcrumb">
-					  	<li><a href="#">廣告管理</a></li>
-					  	<li><a href="#">賣家廣告欄位</a></li>
+					  	<li>廣告管理</li>
+					  	<li>賣家廣告欄位</li>
 					</ol>
 				</div>
 				<div class="row">
 					<div class="clear-both"></div>
 				</div>
 				<!--這邊開始寫內容-->
-				賣家廣告欄位
+						
+				<div class="row">	
+					<div class="col-md-12">
+						<div class="panel">	
+							<table class="table table-striped table-bordered"> 
+								<thead style="font-size: 15px;text-align:center;background:#5da9ba;color: #fff;">
+								  <tr>
+								    <th>欄位序號</th>
+									<th>廣告圖示</th>
+									<th>圖片連結</th>
+									<th>操作</th>
+								  </tr>
+								</thead>
+								<tbody>
+								  	<tr>
+								  		<td>1</td>
+										<td>
+											<img src="${pageContext.request.contextPath}/images/01.jpg">
+											<input type="file">   
+										</td>
+										<td>
+											<input type="text" class="form-control">   
+		                                </td>			
+										<td><a href="#" class='btn btn-primary'> 更新</a></td>
+								  	</tr>	
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
 			</section>
 			<!-- wrapper end -->
       	</section>

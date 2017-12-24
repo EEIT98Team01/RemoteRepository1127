@@ -47,7 +47,7 @@ public class Order01DaoImpl implements Order01Dao {
 		Order01Bean select = this.findById(bean.getOrderID());
 
 		if(select != null) {
-			select.setCustomerID(bean.getCustomerID());
+			select.setEmail(bean.getEmail());
 			select.setOrderDate(bean.getOrderDate());
 			select.setAcceptDate(bean.getAcceptDate());
 			select.setBuyerRequestCancel(bean.getBuyerRequestCancel());

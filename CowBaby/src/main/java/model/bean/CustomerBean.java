@@ -1,5 +1,8 @@
 package model.bean;
 
+import java.sql.Blob;
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,13 +22,13 @@ public class CustomerBean {
 	private String address;
 	private String landline;
 	private String mobilePhone;
-	private java.sql.Blob loginPhoto;
-	private java.util.Date birthday;
+	private Blob loginPhoto;
+	private Date birthday;
 	private String gender;
 	private boolean marriage;
 	private int income;
 	private boolean subscription;
-	private java.sql.Timestamp createTime;
+	private Date createTime;
 	private int totalAmoutOfConsumption;
 	private int consumptionTimes;
 	private int userID;
@@ -147,11 +150,11 @@ public class CustomerBean {
 		this.subscription = subscription;
 	}
 
-	public java.sql.Timestamp getCreateTime() {
+	public java.util.Date getCreateTime() {
 		return createTime;
 	}
 
-	public void setCreateTime(java.sql.Timestamp createTime) {
+	public void setCreateTime(java.util.Date createTime) {
 		this.createTime = createTime;
 	}
 
@@ -194,5 +197,5 @@ public class CustomerBean {
 	public void setConsumerSegmentation(byte consumerSegmentation) {
 		this.consumerSegmentation = consumerSegmentation;
 	}
-
+	
 }

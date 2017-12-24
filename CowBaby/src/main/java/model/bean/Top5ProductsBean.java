@@ -1,5 +1,7 @@
 package model.bean;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,13 +16,13 @@ public class Top5ProductsBean {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int top5ProductID;
 	private int storeID;
-	private java.sql.Timestamp monthlyTime;
+	private Date monthlyTime;
 	private int top1Product;
 	private int top2Product;
 	private int top3Product;
 	private int top4Product;
 	private int top5Product;
-
+	
 	@Override
 	public String toString() {
 		return "Top5ProductsBean [top5ProductID=" + top5ProductID + ", storeID=" + storeID + ", monthlyTime="
@@ -44,11 +46,11 @@ public class Top5ProductsBean {
 		this.storeID = storeID;
 	}
 
-	public java.sql.Timestamp getMonthlyTime() {
+	public Date getMonthlyTime() {
 		return monthlyTime;
 	}
 
-	public void setMonthlyTime(java.sql.Timestamp monthlyTime) {
+	public void setMonthlyTime(Date monthlyTime) {
 		this.monthlyTime = monthlyTime;
 	}
 
@@ -91,5 +93,5 @@ public class Top5ProductsBean {
 	public void setTop5Product(int top5Product) {
 		this.top5Product = top5Product;
 	}
-
+	
 }

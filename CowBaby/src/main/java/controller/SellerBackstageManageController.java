@@ -102,7 +102,7 @@ public class SellerBackstageManageController {
 
 		
 	         bean.setStoreLogo(new javax.sql.rowset.serial.SerialBlob(storeLogoImgByte));    
-	         bean.setCustomerID(2);
+	         bean.setEmail("999@gmail.com");
 			 bean.setStoreDescription(storeDescription); 
 			 bean.setStoreName(storeName);
 			 bean.setStorePhone(storePhone);

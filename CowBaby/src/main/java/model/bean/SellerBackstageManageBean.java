@@ -1,5 +1,7 @@
 package model.bean;
 
+import java.sql.Blob;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,19 +16,19 @@ public class SellerBackstageManageBean {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int storeID;
 	private String storeName;
-	private int customerID;
+	private String email;
 	private boolean storeStatus;
 	private String storePhone;
 	private String storeDescription;
 	private int storeRating;
 	private String storeBanner;
-	private java.sql.Blob storeLogo;
+	private Blob storeLogo;
 	private int totalPageView;
 	
 	@Override
 	public String toString() {
-		return "SellerBackstageManageBean [storeID=" + storeID + ", storeName=" + storeName + ", customerID="
-				+ customerID + ", storeStatus=" + storeStatus + ", storePhone=" + storePhone + ", storeDescription="
+		return "SellerBackstageManageBean [storeID=" + storeID + ", storeName=" + storeName + ", email=" + email
+				+ ", storeStatus=" + storeStatus + ", storePhone=" + storePhone + ", storeDescription="
 				+ storeDescription + ", storeRating=" + storeRating + ", storeBanner=" + storeBanner + ", storeLogo="
 				+ storeLogo + ", totalPageView=" + totalPageView + "]";
 	}
@@ -47,12 +49,12 @@ public class SellerBackstageManageBean {
 		this.storeName = storeName;
 	}
 
-	public int getCustomerID() {
-		return customerID;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setCustomerID(int customerID) {
-		this.customerID = customerID;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public boolean isStoreStatus() {
@@ -95,11 +97,11 @@ public class SellerBackstageManageBean {
 		this.storeBanner = storeBanner;
 	}
 
-	public java.sql.Blob getStoreLogo() {
+	public Blob getStoreLogo() {
 		return storeLogo;
 	}
 
-	public void setStoreLogo(java.sql.Blob storeLogo) {
+	public void setStoreLogo(Blob storeLogo) {
 		this.storeLogo = storeLogo;
 	}
 
@@ -110,5 +112,5 @@ public class SellerBackstageManageBean {
 	public void setTotalPageView(int totalPageView) {
 		this.totalPageView = totalPageView;
 	}
-
+	
 }

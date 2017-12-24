@@ -445,4 +445,13 @@ a, a:hover, a:focus {
     margin-bottom: 0;
 }
 
+/****每個TABLE 的TH****/
+table.table_thead>thead {
+	font-size: 15px;
+    text-align: center;   
+    background: #5da9ba;
+    color: #fff;
+}
+
+
 

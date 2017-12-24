@@ -1,5 +1,7 @@
 package model.bean;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,13 +15,13 @@ public class Order01Bean {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int orderID;
-	private int customerID;
-	private java.sql.Timestamp orderDate;
-	private java.sql.Timestamp acceptDate;
-	private java.sql.Timestamp buyerRequestCancel;
-	private java.sql.Timestamp shippedDate;
-	private java.sql.Timestamp transactionComplete;
-	private java.sql.Timestamp orderCancellation;
+	private String email;
+	private Date orderDate;
+	private Date acceptDate;
+	private Date buyerRequestCancel;
+	private Date shippedDate;
+	private Date transactionComplete;
+	private Date orderCancellation;
 	private String pickUpStore;
 	private int totalAmount;
 	private int totalItems;
@@ -33,13 +35,13 @@ public class Order01Bean {
 	
 	@Override
 	public String toString() {
-		return "Order01Bean [orderID=" + orderID + ", customerID=" + customerID + ", orderDate=" + orderDate
-				+ ", acceptDate=" + acceptDate + ", buyerRequestCancel=" + buyerRequestCancel + ", shippedDate="
-				+ shippedDate + ", transactionComplete=" + transactionComplete + ", orderCancellation="
-				+ orderCancellation + ", pickUpStore=" + pickUpStore + ", totalAmount=" + totalAmount + ", totalItems="
-				+ totalItems + ", receiverName=" + receiverName + ", receiverEmail=" + receiverEmail
-				+ ", receiverPhone=" + receiverPhone + ", usebonus=" + usebonus + ", storeID=" + storeID + ", status="
-				+ status + ", paymentMethod=" + paymentMethod + "]";
+		return "Order01Bean [orderID=" + orderID + ", email=" + email + ", orderDate=" + orderDate + ", acceptDate="
+				+ acceptDate + ", buyerRequestCancel=" + buyerRequestCancel + ", shippedDate=" + shippedDate
+				+ ", transactionComplete=" + transactionComplete + ", orderCancellation=" + orderCancellation
+				+ ", pickUpStore=" + pickUpStore + ", totalAmount=" + totalAmount + ", totalItems=" + totalItems
+				+ ", receiverName=" + receiverName + ", receiverEmail=" + receiverEmail + ", receiverPhone="
+				+ receiverPhone + ", usebonus=" + usebonus + ", storeID=" + storeID + ", status=" + status
+				+ ", paymentMethod=" + paymentMethod + "]";
 	}
 
 	public int getOrderID() {
@@ -50,59 +52,59 @@ public class Order01Bean {
 		this.orderID = orderID;
 	}
 
-	public int getCustomerID() {
-		return customerID;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setCustomerID(int customerID) {
-		this.customerID = customerID;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
-	public java.sql.Timestamp getOrderDate() {
+	public Date getOrderDate() {
 		return orderDate;
 	}
 
-	public void setOrderDate(java.sql.Timestamp orderDate) {
+	public void setOrderDate(Date orderDate) {
 		this.orderDate = orderDate;
 	}
 
-	public java.sql.Timestamp getAcceptDate() {
+	public Date getAcceptDate() {
 		return acceptDate;
 	}
 
-	public void setAcceptDate(java.sql.Timestamp acceptDate) {
+	public void setAcceptDate(Date acceptDate) {
 		this.acceptDate = acceptDate;
 	}
 
-	public java.sql.Timestamp getBuyerRequestCancel() {
+	public Date getBuyerRequestCancel() {
 		return buyerRequestCancel;
 	}
 
-	public void setBuyerRequestCancel(java.sql.Timestamp buyerRequestCancel) {
+	public void setBuyerRequestCancel(Date buyerRequestCancel) {
 		this.buyerRequestCancel = buyerRequestCancel;
 	}
 
-	public java.sql.Timestamp getShippedDate() {
+	public Date getShippedDate() {
 		return shippedDate;
 	}
 
-	public void setShippedDate(java.sql.Timestamp shippedDate) {
+	public void setShippedDate(Date shippedDate) {
 		this.shippedDate = shippedDate;
 	}
 
-	public java.sql.Timestamp getTransactionComplete() {
+	public Date getTransactionComplete() {
 		return transactionComplete;
 	}
 
-	public void setTransactionComplete(java.sql.Timestamp transactionComplete) {
+	public void setTransactionComplete(Date transactionComplete) {
 		this.transactionComplete = transactionComplete;
 	}
 
-	public java.sql.Timestamp getOrderCancellation() {
+	public Date getOrderCancellation() {
 		return orderCancellation;
 	}
 
-	public void setOrderCancellation(java.sql.Timestamp orderCancellation) {
+	public void setOrderCancellation(Date orderCancellation) {
 		this.orderCancellation = orderCancellation;
 	}
 
@@ -185,5 +187,5 @@ public class Order01Bean {
 	public void setPaymentMethod(int paymentMethod) {
 		this.paymentMethod = paymentMethod;
 	}
-
+	
 }
