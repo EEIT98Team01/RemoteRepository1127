@@ -4,6 +4,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import test.customer.CustomerManagementService;
+
 public class TestCustomerManagementService {
 
 	public static void main(String[] args) {

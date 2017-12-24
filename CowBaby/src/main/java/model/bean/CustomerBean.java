@@ -20,7 +20,7 @@ public class CustomerBean {
 	private String landline;
 	private String mobilePhone;
 	private java.sql.Blob loginPhoto;
-	private java.sql.Date birthday; // type 改java.sql.Date
+	private java.util.Date birthday;
 	private String gender;
 	private boolean marriage;
 	private int income;
@@ -31,7 +31,7 @@ public class CustomerBean {
 	private int userID;
 	private int bonus;
 	private byte consumerSegmentation; // type 改byte
-
+	
 	@Override
 	public String toString() {
 		return "CustomerBean [customerID=" + customerID + ", customerName=" + customerName + ", password=" + password
@@ -107,11 +107,11 @@ public class CustomerBean {
 		this.loginPhoto = loginPhoto;
 	}
 
-	public java.sql.Date getBirthday() {
+	public java.util.Date getBirthday() {
 		return birthday;
 	}
 
-	public void setBirthday(java.sql.Date birthday) {
+	public void setBirthday(java.util.Date birthday) {
 		this.birthday = birthday;
 	}
 

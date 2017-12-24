@@ -7,7 +7,8 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import model.bean.CustomerBean;
-import model.dao.CustomerManagementDao;
+import model.dao.CustomerDao;
+
 
 public class TestCustomerManagementDaoImpl {
 
@@ -19,7 +20,7 @@ public class TestCustomerManagementDaoImpl {
 	/*---------------------------------------------------------------------------------------------*/
 		
 	// 依照要測試的對象進行修改
-		CustomerManagementDao dao = (CustomerManagementDao) context.getBean("customerManagementDaoImpl");
+		CustomerDao dao = (CustomerDao) context.getBean("customerDaoDaoImpl");
 		
 	// 測試內容
 	  //findById(int id)

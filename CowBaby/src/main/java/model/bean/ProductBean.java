@@ -23,13 +23,15 @@ public class ProductBean {
 	private byte suitableAges; 					// type改tinyint
 	private String genderPreference;
 	private java.sql.Timestamp displayTime;
-
+	private String productImage;
+	
 	@Override
 	public String toString() {
 		return "ProductBean [productID=" + productID + ", storeID=" + storeID + ", title=" + title + ", summary="
 				+ summary + ", unitPrice=" + unitPrice + ", productDescription=" + productDescription
 				+ ", productStatus=" + productStatus + ", classficationID=" + classficationID + ", suitableAges="
-				+ suitableAges + ", genderPreference=" + genderPreference + ", displayTime=" + displayTime + "]";
+				+ suitableAges + ", genderPreference=" + genderPreference + ", displayTime=" + displayTime
+				+ ", productImage=" + productImage + "]";
 	}
 
 	public int getProductID() {
@@ -118,6 +120,14 @@ public class ProductBean {
 
 	public void setDisplayTime(java.sql.Timestamp displayTime) {
 		this.displayTime = displayTime;
+	}
+
+	public String getProductImage() {
+		return productImage;
+	}
+
+	public void setProductImage(String productImage) {
+		this.productImage = productImage;
 	}
 
 }

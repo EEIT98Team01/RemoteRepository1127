@@ -1,6 +1,5 @@
 package model.service;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -9,19 +8,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import model.bean.CustomerBean;
-import model.dao.CustomerUserLoginDao;
+import model.dao.CustomerDao;
 
 @Service
 @Transactional
 public class CustomerUserLoginService {
 	
 	@Autowired
-	private CustomerUserLoginDao customerUserLoginDao;
+	private CustomerDao customerDao;
 	
 	// 回傳符合某條件的資料
 	@Transactional(readOnly=true)
 	public CustomerBean findByCondition(String useremail, String password) {
-		List<CustomerBean> list = customerUserLoginDao.findByCondition(this.createCondition(useremail, password));
+		List<CustomerBean> list = customerDao.findByCondition(this.createCondition(useremail, password));
 		
 		if(list.size() == 0) {
 			return null;

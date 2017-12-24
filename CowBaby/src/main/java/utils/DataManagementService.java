@@ -70,7 +70,7 @@ public class DataManagementService {
 			bean.setEmail(email);
 			
 			// 4. 產生password
-			String password = "base64";
+			String password = "123";
 			bean.setPassword(password);
 			
 			// 5. 取得使用者頭像

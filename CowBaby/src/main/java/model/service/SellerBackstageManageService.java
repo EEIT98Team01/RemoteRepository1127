@@ -1,7 +1,5 @@
 package model.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +16,7 @@ public class SellerBackstageManageService {
 	// 查詢該店家設店設置資料
 	@Transactional(readOnly=true)
 	public SellerBackstageManageBean getStoreData(int storeID) {
-		return sellerBackstageManageDao.findStoreID(storeID);
+		return sellerBackstageManageDao.findById(storeID);
 	}
 	
 	// 儲存新增商店設置資料
