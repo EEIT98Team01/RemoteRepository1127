@@ -3,11 +3,13 @@ package controller;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.sql.Blob;
 import java.sql.SQLException;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Base64;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,14 +41,8 @@ public class CustomerRegisterController {
 	@Autowired
 	CustomerManagementService customerManagementService;
 
-//	@InitBinder
-//	public void init(WebDataBinder binder) {
-//		binder.registerCustomEditor(java.util.Date.class,
-//				new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true));
-//	}
-
 	@RequestMapping(method = {RequestMethod.POST })
-	public String method(CustomerBean customerBean,@RequestParam (name="checkPassword") String checkPassword,BindingResult bindingResult, MultipartFile loginPhoto,Model model)
+	public String method(CustomerBean customerBean,BindingResult bindingResult,String checkPassword, MultipartFile loginPhoto,Model model)
 			throws IllegalStateException, IOException, SerialException, SQLException {
 
 		System.out.println("customerBean" + customerBean.toString());
@@ -81,9 +77,9 @@ public class CustomerRegisterController {
 		
 		/*************** 資料檢查 ******************/
 		// 檢查Email
-		if(!this.isValidEmail(customerBean.getEmail())){
-			errors.put("password_error", "Email欄位不可為空，並且須符合email格式");
-		}
+//		if(!this.isValidEmail(customerBean.getEmail())){
+//			errors.put("password_error", "Email欄位不可為空，並且須符合email格式");
+//		}
 		
 
 		// 如果有錯誤則把錯誤 顯示在畫面上
@@ -95,7 +91,7 @@ public class CustomerRegisterController {
 
 		 CustomerBean myCustomerBean =new CustomerBean();
 		 
-		 myCustomerBean.setCustomerID(1);
+//		 myCustomerBean.setCustomerID(0);
 		 myCustomerBean.setCustomerName(customerBean.getCustomerName());
 		 myCustomerBean.setEmail(customerBean.getEmail());
 		 myCustomerBean.setPassword(customerBean.getPassword());
@@ -116,20 +112,22 @@ public class CustomerRegisterController {
 	     System.out.println("***myCustomerBean 裡面內容**"+myCustomerBean.toString());
 
 		 // 把資料儲存到資料庫
-//		 System.out.println("myCustomerBean 裡面內容"+myCustomerBean.toString());
-//		 customerManagementService.inSert(myCustomerBean);
-//		 System.out.println("成功!!");
+		 System.out.println("myCustomerBean 裡面內容"+myCustomerBean.toString());
+		 customerManagementService.inSert(myCustomerBean);
+		 System.out.println("成功!!");
 
 	 return "register_success";
 	}
 	
-	// EMAIL 驗證
-	public static boolean isValidEmail(String email) {
-        if (email == null) {
-            return false;
-        }
-        String emailPattern = "^([\\w]+)(([-\\.][\\w]+)?)*@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([\\w-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)$";
-        return email.matches(emailPattern);
-    }
+
+//	// EMAIL 驗證
+//	public static boolean isValidEmail(String email) {
+//        if (email == null) {
+//            return false;
+//        }
+//        String emailPattern = "^([\\w]+)(([-\\.][\\w]+)?)*@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([\\w-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)$";
+//        return email.matches(emailPattern);
+//    }
 	
+
 }

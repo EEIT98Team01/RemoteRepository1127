@@ -153,8 +153,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/js/bootstrap-dialog.min.js"></script>
 <script src="<c:url value="/pluging/Bxsliders/jquery.bxslider.min.js"/>"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-
+<!-- YA -->
 
 <script type="text/javascript">
 
