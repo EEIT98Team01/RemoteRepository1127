@@ -14,5 +14,7 @@
 @import url("backstageAdmit/basic.css");
 
 /*import pages style*/
-@import url("backstageAdmit/member_managment.css");
+@import url("backstageAdmit/message_list.css");
+@import url("backstageAdmit/message_detail.css");
+@import url("backstageAdmit/product_management_sort.css");
 
