@@ -1,5 +1,7 @@
 package model.bean;
 
+import java.sql.Blob;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,7 +15,7 @@ public class BlogBean {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int articleID;
-	private java.sql.Blob articlePhoto;
+	private Blob articlePhoto;
 	private String bloggerName;
 	private String articleHeader;
 	private String articleContent;

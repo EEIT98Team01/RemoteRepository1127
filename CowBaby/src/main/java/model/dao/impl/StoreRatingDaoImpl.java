@@ -47,7 +47,7 @@ public class StoreRatingDaoImpl implements StoreRatingDao {
 		StoreRatingBean select = this.findById(bean.getRatingID());
 
 		if(select != null) {
-			select.setCustomerID(bean.getCustomerID());
+			select.setEmail(bean.getEmail());
 			select.setStoreID(bean.getStoreID());
 			select.setRatingScore(bean.getRatingScore());
 			select.setRatingTime(bean.getRatingTime());

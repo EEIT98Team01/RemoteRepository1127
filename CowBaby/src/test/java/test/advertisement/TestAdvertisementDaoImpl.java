@@ -94,14 +94,14 @@ public class TestAdvertisementDaoImpl {
 		*/
 		
 	  //findByCondition(Map<String, String> condition, int page, int rows, String sortCondition)
-		
+		/*
 		HashMap<String, String> condition = new HashMap<String, String>();
 		condition.put("adState", "= 4");
 		condition.put("adFee", "= 1500");                     
 		for(AdvertisementBean bean: dao.findByCondition(condition, 2, 2, "adFee")) {
 			System.out.println(bean);
 		}
-		
+		*/
 
 	  //getQuantity()
 		/*

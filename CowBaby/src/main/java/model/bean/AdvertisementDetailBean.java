@@ -1,5 +1,7 @@
 package model.bean;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,9 +16,9 @@ public class AdvertisementDetailBean {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int adDetailID;
 	private int adID;
-	private java.sql.Timestamp displayAdTime;
+	private Date displayAdTime;
 	private boolean adPurchasedState; 					// type改boolean
-
+	
 	@Override
 	public String toString() {
 		return "AdvertisementDetailBean [adDetailID=" + adDetailID + ", adID=" + adID + ", displayAdTime="
@@ -39,11 +41,11 @@ public class AdvertisementDetailBean {
 		this.adID = adID;
 	}
 
-	public java.sql.Timestamp getDisplayAdTime() {
+	public Date getDisplayAdTime() {
 		return displayAdTime;
 	}
 
-	public void setDisplayAdTime(java.sql.Timestamp displayAdTime) {
+	public void setDisplayAdTime(Date displayAdTime) {
 		this.displayAdTime = displayAdTime;
 	}
 
@@ -54,5 +56,5 @@ public class AdvertisementDetailBean {
 	public void setAdPurchasedState(boolean adPurchasedState) {
 		this.adPurchasedState = adPurchasedState;
 	}
-
+	
 }

@@ -48,7 +48,7 @@ public class SellerBackstageManageDaoImpl implements SellerBackstageManageDao {
 		
 		if(select != null) {
 			select.setStoreName(bean.getStoreName());
-			select.setCustomerID(bean.getCustomerID());
+			select.setEmail(bean.getEmail());
 			select.setStoreStatus(bean.isStoreStatus());
 			select.setStorePhone(bean.getStorePhone());
 			select.setStoreDescription(bean.getStoreDescription());

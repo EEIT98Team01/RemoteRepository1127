@@ -48,8 +48,8 @@ public class MessageBoardDaoImpl implements MessageBoardDao {
 
 		if(select != null) {
 			select.setStoreID(bean.getStoreID());
-			select.setCustomerID(bean.getCustomerID());
-			select.setProductID(bean.getCustomerID());
+			select.setEmail(bean.getEmail());
+			select.setProductID(bean.getProductID());
 			select.setMessageTopic(bean.getMessageTopic());
 			select.setMessageTime(bean.getMessageTime());
 			return select;

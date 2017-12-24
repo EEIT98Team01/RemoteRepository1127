@@ -18,7 +18,7 @@
 		<!--引入 header-->
 		<jsp:include page="/pages/backstageAdmit/header_backstage.jsp"/>
 		
-		<!--引入 側邊蘭選單-->
+		<!--引入 側邊欄選單-->
 		<jsp:include page="/pages/backstageAdmit/side_menu.jsp"/>
 		
 		<!--main-content-->
@@ -28,7 +28,8 @@
 				<div class="breadcrumb-row">
 					<h3>會員管理</h3>
 					<ol class="breadcrumb">
-					  	<li><a href="#">會員編輯</a></li>
+						<li><a href="<c:url value='/pages/backstageAdmit/member_managment.jsp'/>">會員管理</a></li>
+					  	<li><a href="<c:url value='/pages/backstageAdmit/CustomerManagementEdit?id=${customerData.customerID}'/>">會員編輯</a></li>
 					</ol>
 				</div>
 				<div class="row">
@@ -46,32 +47,32 @@
 										<input type="text" style="display:none" name="password" value="${customerData.password}" />
 										<div class="form-group col-md-12">
 		                                    <label class="col-md-2 control-label">會員ID</label>
-		                                    <label class="col-md-2 control-label" style="text-align:left">${customerData.customerID}</label>
+		                                    <label class="col-md-2 control-label" style="text-align:left; width:auto;">${customerData.customerID}</label>
 		                                    <input type="text" style="display:none" name="customerID" value="${customerData.customerID}" />
 			                            </div>
 			                            <div class="form-group col-md-12">
 		                                    <label class="col-md-2 control-label">會員帳號</label>
-		                                    <label class="col-md-2 control-label" style="text-align:left">${customerData.email}</label>
+		                                    <label class="col-md-2 control-label" style="text-align:left; width:auto;">${customerData.email}</label>
 		                                    <input type="text" style="display:none" name="email" value="${customerData.email}" />
 			                            </div>
 			                            <div class="form-group col-md-12">
 		                                    <label class="col-md-2 control-label">會員姓名</label>
-		                                    <label class="col-md-2 control-label" style="text-align:left">${customerData.customerName}</label>
+		                                    <label class="col-md-2 control-label" style="text-align:left; width:auto;">${customerData.customerName}</label>
 		                                    <input type="text" style="display:none" name="customerName" value="${customerData.customerName}" />
 			                            </div>
 			                            <div class="form-group col-md-12">
 		                                    <label class="col-md-2 control-label">註冊日期</label>
-		                                    <label class="col-md-2 control-label" style="text-align:left">${customerData.createTime.year+1900}-${customerData.createTime.month+1}-${customerData.createTime.date}</label>
+		                                    <label class="col-md-2 control-label" style="text-align:left; width:auto;">${customerData.createTime.year+1900}-${customerData.createTime.month+1}-${customerData.createTime.date}</label>
 		                                    <input type="text" style="display:none" name="createTime" value="${customerData.createTime}" />
 			                            </div>
 			                            <div class="form-group col-md-12">
 		                                    <label class="col-md-2 control-label">累積消費金額</label>
-		                                    <label class="col-md-2 control-label" style="text-align:left">${customerData.totalAmoutOfConsumption}</label>
+		                                    <label class="col-md-2 control-label" style="text-align:left; width:auto;">${customerData.totalAmoutOfConsumption}</label>
 		                                    <input type="text" style="display:none" name="totalAmoutOfConsumption" value="${customerData.totalAmoutOfConsumption}" />
 			                            </div>
 			                            <div class="form-group col-md-12">
 		                                    <label class="col-md-2 control-label">累積消費次數</label>
-		                                    <label class="col-md-2 control-label" style="text-align:left">${customerData.consumptionTimes}</label>
+		                                    <label class="col-md-2 control-label" style="text-align:left; width:auto;">${customerData.consumptionTimes}</label>
 		                                    <input type="text" style="display:none" name="consumptionTimes" value="${customerData.consumptionTimes}" />
 			                            </div>
 			                            <!-- 基本資料 -->
@@ -111,7 +112,7 @@
 			                            <div class="form-group col-md-12">
 		                                    <label class="col-md-2 control-label">生日</label>
 		                                    <div class="col-md-6 add-prouduct-list-description">
-		                                        <input type="text" name="birthday" class="form-control" value="${customerData.birthday}">
+		                                        <input type="text" name="birthday" class="form-control" value="${customerData.birthday.year+1900}-${customerData.birthday.month+1}-${customerData.birthday.date}">
 		                                    </div>
 		                                </div>
 										<!-- 聯絡方式 -->
@@ -210,46 +211,43 @@ $(function(){
 		window.location.assign('<c:url value="/pages/backstageAdmit/member_managment.jsp" />');
 	})
 	
-	 $("#update").on('click', function () {
-		 console.log("YA");
-		 
-		 $.ajax({
-		    url: "http://localhost:8080/CowBaby/service/cutomerDataUpdate",
-		    type: 'POST',
-		    cache: false,
-		    data: new FormData($('#shopSetForm')[0]),
-		    processData: false,
-		    contentType: false,
-		 	success: function(result){  //處理回傳成功事件，當請求成功後此事件會被呼叫
-		 	   //通知儲存成功  ，call BootstrapDialog      		       
-		       BootstrapDialog.show({
-	                type: BootstrapDialog.TYPE_INFO,
-	                title: "訊息",
-	                message: '儲存成功!!',
-	                buttons: [{
-	                	label: 'Close',
-	                    action: function(dialogItself){
-	                        dialogItself.close();
-	                    }
-	                }]
-	            });     
+	$("#update").on('click', function () {
+		$.ajax({
+			type: 'POST',
+			url: "<c:url value='/service/cutomerDataUpdate' />",
+			cache: false,
+			processData: false,
+			contentType: false,
+			data: new FormData($('#shopSetForm')[0]),
+			success: function(result){  //處理回傳成功事件，當請求成功後此事件會被呼叫
+				//通知儲存成功  ，call BootstrapDialog      		       
+				BootstrapDialog.show({
+					type: BootstrapDialog.TYPE_INFO,
+					title: "訊息",
+					message: '儲存成功!!',
+					buttons: [{
+						label: 'Close',
+						action: function(dialogItself){
+							dialogItself.close();
+						}
+					}]
+				});     
+			},
+			error: function(result){   //處理回傳錯誤事件，當請求失敗後此事件會被呼叫
+				//your code here
 
-		 	 },
-			 error: function(result){   //處理回傳錯誤事件，當請求失敗後此事件會被呼叫
-			     //your code here
+			},
+			complete: function(result) {
 
-			 },
-			 complete: function(result) {
-
-			 },
-			 statusCode: {                     //狀態碼處理
-			     404: function() {
-			        alert("page not found");
-			     }
-			 }
+			},
+			statusCode: {                     //狀態碼處理
+				404: function() {
+					alert("page not found");
+				}
+			}
 		});
      
-	 }) 
+	}) 
 
 })
 </script>

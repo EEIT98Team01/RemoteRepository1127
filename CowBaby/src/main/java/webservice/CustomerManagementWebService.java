@@ -2,20 +2,19 @@ package webservice;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
-import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.sql.rowset.serial.SerialException;
-import javax.xml.ws.Response;
 
 import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,8 +26,7 @@ import model.bean.CustomerBean;
 import model.bean.SellerBackstageManageBean;
 import model.service.CustomerManagementService;
 import model.service.SellerBackstageManageService;
-import com.alibaba.fastjson.JSONObject;  
-
+import model.utils.PrimitiveNumberEditor;  
 
 @RestController
 @RequestMapping("/service")
@@ -149,7 +147,7 @@ public class CustomerManagementWebService {
 			 } else{
 				 bean.setStoreLogo(null);   
 			 }  
-	         bean.setCustomerID(2);
+	         bean.setEmail("999@gmail.com");
 			 bean.setStoreDescription(storeDescription); 
 			 bean.setStoreName(storeName);
 			 bean.setStorePhone(storePhone);
@@ -176,22 +174,30 @@ public class CustomerManagementWebService {
 		return jsonObj.toJSONString();
 	}
 
+	// FormBean客製化
+	@InitBinder
+	public void initialize(WebDataBinder webDataBinder) {
+		webDataBinder.registerCustomEditor(java.util.Date.class,
+				new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true));
+		
+		webDataBinder.registerCustomEditor(int.class,
+				new PrimitiveNumberEditor(java.lang.Integer.class, true));
+	}
+	
+	// 取得會員資料
 	@RequestMapping(
 			value="/getCustomerData",
 			method={RequestMethod.GET},
 			produces={"application/json;charset=UTF-8"}
 	)
 	public String getCustomerData(String customerAccount, String pageSize, String customerStatue, String pageNumber) {
-		if("".equals(customerAccount)) {
-			customerAccount = null;
-		}
-		if("".equals(customerStatue)) {
-			customerStatue = null;
-		}
+		JSONObject jsonObj = new JSONObject();	// json物件,儲存欲回傳資料
+		JSONArray array;						// 儲存List<CustomerBean>的json物件
+		int quantity;							// 回傳的資料筆數
+		int pageQuantity;						// 總頁數
 		
-		JSONArray array;
-		int quantity;
-		if(customerAccount == null && customerStatue == null) {
+		// 檢查使用者輸入條件之情形，呼叫相對應方法
+		if( (customerAccount == null || "".equals(customerAccount.trim())) && (customerStatue == null || "".equals(customerStatue.trim()))) {
 			array = new JSONArray(customerManagementService.find(Integer.parseInt(pageNumber), Integer.parseInt(pageSize)));
 			quantity = customerManagementService.getQuantity();
 		} else {
@@ -199,52 +205,36 @@ public class CustomerManagementWebService {
 			quantity = customerManagementService.getConditionQuantity(customerAccount, customerStatue, null);
 		}
 		
-		int pageQuantity;
-		
+		// 計算總頁數
 		if((quantity%10) == 0) {
 			pageQuantity = quantity/10;
 		} else {
 			pageQuantity = quantity/10+1;
 		}
-		
-		JSONObject jsonObj = new JSONObject(); 
-		
+
+		// 將回傳資料塞入json物件
 		jsonObj.put("tatal", quantity); 
 		jsonObj.put("tatalPage", pageQuantity); 
 		jsonObj.put("pageNumber", pageNumber);
 		jsonObj.put("pageSize", pageSize); 
 		jsonObj.put("list", array.toString()); 
-		
-		System.out.println(jsonObj); 
-		
-		String result = jsonObj.toString();
-		
-		return result;
+
+		return jsonObj.toString();
 	}
 	
-	@SuppressWarnings("deprecation")
+	// 更新會員資料
 	@RequestMapping(
 			value="/cutomerDataUpdate",
 			method={RequestMethod.POST},
 			produces={"application/json;charset=UTF-8"}
 	)
-	public String cutomerDataUpdate(CustomerBean bean, BindingResult bindingResult, String birthday, String createTime) {
-		bean.setBirthday(new java.sql.Date(Integer.parseInt(birthday.substring(0, 3)), 
-										   Integer.parseInt(birthday.substring(5, 6)), 
-										   Integer.parseInt(birthday.substring(8, 9))));
-
-		bean.setCreateTime(new Timestamp(Integer.parseInt(createTime.substring(0, 3)), 
-										 Integer.parseInt(createTime.substring(5, 6)), 
-										 Integer.parseInt(createTime.substring(8, 9)), 
-										 Integer.parseInt(createTime.substring(11, 12)), 
-										 Integer.parseInt(createTime.substring(14, 15)), 
-										 Integer.parseInt(createTime.substring(17, 18)),
-										 0));
-
+	public String cutomerDataUpdate(CustomerBean bean, BindingResult bindingResult) {
 		bean.setLoginPhoto( (customerManagementService.findById(bean.getCustomerID())).getLoginPhoto() );
 
-		customerManagementService.updateCustomerData(bean);
-
-		return "{\"123\":\"456\"}";
+		if(customerManagementService.updateCustomerData(bean)) {
+			return "{\"status\":\"updateOK\"}";
+		} else {
+			return "{\"status\":\"updateError\"}";
+		}
 	}
 }

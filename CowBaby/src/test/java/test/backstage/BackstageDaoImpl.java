@@ -47,7 +47,7 @@ public class BackstageDaoImpl implements BackstageDao {
 		BackstageBean select = this.findById(bean.getApplicationID());
 		
 		if(select != null) {
-			select.setCustomerID(bean.getCustomerID());
+			select.setEmail(bean.getEmail());
 			select.setApplicationDate(bean.getApplicationDate());
 			select.setApplicationState(bean.getApplicationState());
 			select.setApplicationDescription(bean.getApplicationDescription());

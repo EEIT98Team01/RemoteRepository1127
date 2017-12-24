@@ -18,7 +18,7 @@
 		<!--引入 header-->
 		<jsp:include page="/pages/backstageAdmit/header_backstage.jsp"/>
 		
-		<!--引入 側邊蘭選單-->
+		<!--引入 側邊欄選單-->
 		<jsp:include page="/pages/backstageAdmit/side_menu.jsp"/>
 		
 		<!--main-content-->
@@ -28,7 +28,8 @@
 				<div class="breadcrumb-row">
 					<h3>會員管理</h3>
 					<ol class="breadcrumb">
-					  	<li><a href="#">會員檢視</a></li>
+						<li><a href="<c:url value='/pages/backstageAdmit/member_managment.jsp'/>">會員管理</a></li>
+					  	<li><a href="<c:url value='/pages/backstageAdmit/CustomerManagementView?id=${customerData.customerID}'/>">會員檢視</a></li>
 					</ol>
 				</div>
 				<div class="row">
@@ -43,7 +44,7 @@
 								<div class="row">
 									<div class="form-group col-md-12">
 										<label class="col-md-2 control-label">會員ID</label>
-										<label class="col-md-2 control-label" style="text-align:left">${customerData.customerID}</label>
+										<label class="col-md-2 control-label" style="text-align:left; width:auto;">${customerData.customerID}</label>
 									</div>
 									
 									<div class="form-group col-md-12">
@@ -53,44 +54,54 @@
 									
 									<div class="form-group col-md-12">
 										<label class="col-md-2 control-label">會員姓名</label>
-										<label class="col-md-2 control-label" style="text-align:left">${customerData.customerName}</label>
+										<label class="col-md-2 control-label" style="text-align:left; width:auto;">${customerData.customerName}</label>
 									</div>
 									
 									<div class="form-group col-md-12">
 										<label class="col-md-2 control-label">註冊日期</label>
-										<label class="col-md-2 control-label" style="text-align:left">${customerData.createTime.year+1900}-${customerData.createTime.month+1}-${customerData.createTime.date}</label>
+										<label class="col-md-2 control-label" style="text-align:left; width:auto;">${customerData.createTime.year+1900}-${customerData.createTime.month+1}-${customerData.createTime.date}</label>
 									</div>
 									
 									<div class="form-group col-md-12">
 										<label class="col-md-2 control-label">累積消費金額</label>
-										<label class="col-md-2 control-label" style="text-align:left">${customerData.totalAmoutOfConsumption}</label>
+										<label class="col-md-2 control-label" style="text-align:left; width:auto;">${customerData.totalAmoutOfConsumption}</label>
 									</div>
 									
 									<div class="form-group col-md-12">
 										<label class="col-md-2 control-label">累積消費次數</label>
-										<label class="col-md-2 control-label" style="text-align:left">${customerData.consumptionTimes}</label>
+										<label class="col-md-2 control-label" style="text-align:left; width:auto;">${customerData.consumptionTimes}</label>
 									</div>
 									
 									<div class="dash-line col-md-12"/></div>
 									
 									<div class="form-group col-md-12" style="padding-top: 30px">
 										<label class="col-md-2 control-label">收入</label>
-										<label class="col-md-2 control-label" style="text-align:left">${customerData.income}</label>
+										<label class="col-md-2 control-label" style="text-align:left; width:auto;">${customerData.income}</label>
 									</div>
 									
 									<div class="form-group col-md-12">
 										<label class="col-md-2 control-label">性別</label>
-										<label class="col-md-2 control-label" style="text-align:left">${customerData.gender}</label>
+										<c:if test="${customerData.gender == 'F'}">
+											<label class="col-md-2 control-label" style="text-align:left; width:auto;">女</label>
+										</c:if>
+										<c:if test="${customerData.gender == 'M'}">
+											<label class="col-md-2 control-label" style="text-align:left; width:auto;">男</label>
+										</c:if>
 									</div>
 									
 									<div class="form-group col-md-12">
 										<label class="col-md-2 control-label">婚姻</label>
-										<label class="col-md-2 control-label" style="text-align:left">${customerData.marriage}</label>
+										<c:if test="${customerData.marriage == true}">
+											<label class="col-md-2 control-label" style="text-align:left; width:auto;">已婚</label>
+										</c:if>
+										<c:if test="${customerData.marriage == false}">
+											<label class="col-md-2 control-label" style="text-align:left; width:auto;">未婚</label>
+										</c:if>
 									</div>
 									
 									<div class="form-group col-md-12">
 										<label class="col-md-2 control-label">生日</label>
-										<label class="col-md-2 control-label" style="text-align:left">${customerData.birthday}</label>
+										<label class="col-md-2 control-label" style="text-align:left; width:auto;">${customerData.birthday.year+1900}-${customerData.birthday.month+1}-${customerData.birthday.date}</label>
 									</div>
 
 									<div class="dash-line col-md-12"/></div>
@@ -102,34 +113,47 @@
 									
 									<div class="form-group col-md-12">
 										<label class="col-md-2 control-label">室內電話</label>
-										<label class="col-md-2 control-label" style="text-align:left">${customerData.landline}</label>
+										<label class="col-md-2 control-label" style="text-align:left; width:auto;">${customerData.landline}</label>
 									</div>
 									
 									<div class="form-group col-md-12">
 										<label class="col-md-2 control-label">行動電話</label>
-										<label class="col-md-2 control-label" style="text-align:left">${customerData.mobilePhone}</label>
+										<label class="col-md-2 control-label" style="text-align:left; width:auto;">${customerData.mobilePhone}</label>
 									</div>
 									
 									<div class="dash-line col-md-12"/></div>
 									
 									<div class="form-group col-md-12" style="padding-top: 30px">
 										<label class="col-md-2 control-label">紅利點數</label>
-										<label class="col-md-2 control-label" style="text-align:left">${customerData.bonus}</label>
+										<label class="col-md-2 control-label" style="text-align:left; width:auto;">${customerData.bonus}</label>
 									</div>
 									
 									<div class="form-group col-md-12">
 										<label class="col-md-2 control-label">所屬身份</label>
-										<label class="col-md-2 control-label" style="text-align:left">${customerData.userID}</label>
+										<c:if test="${customerData.userID == 1}">
+											<label class="col-md-2 control-label" style="text-align:left; width:auto;">一般會員</label>
+										</c:if>
+										<c:if test="${customerData.userID == 2}">
+											<label class="col-md-2 control-label" style="text-align:left; width:auto;">平台賣家</label>
+										</c:if>
+										<c:if test="${customerData.userID == 3}">
+											<label class="col-md-2 control-label" style="text-align:left; width:auto;">黑名單</label>
+										</c:if>
 									</div>
 									
 									<div class="form-group col-md-12">
 										<label class="col-md-2 control-label">消費群集</label>
-										<label class="col-md-2 control-label" style="text-align:left">${customerData.consumerSegmentation}</label>
+										<label class="col-md-2 control-label" style="text-align:left; width:auto;">群集${customerData.consumerSegmentation}</label>
 									</div>
 		                                
 									<div class="form-group col-md-12">
 										<label class="col-md-2 control-label">訂閱電子報</label>
-										<label class="col-md-2 control-label" style="text-align:left">${customerData.subscription}</label>
+										<c:if test="${customerData.subscription == true}">
+											<label class="col-md-2 control-label" style="text-align:left; width:auto;">有</label>
+										</c:if>
+										<c:if test="${customerData.subscription == false}">
+											<label class="col-md-2 control-label" style="text-align:left; width:auto;">無</label>
+										</c:if>
 									</div>
 								</div>
 								<input type="button" id="beforePage" class="btn btn-primary pull-left" value="返回查詢頁面" />
@@ -161,13 +185,13 @@
 $(function(){
 	// side_menu 帳戶總覽填充背景色
 	$(".memberManagment a").addClass('active');
-	
+	// 返回查詢頁面
 	$("#beforePage").on('click', function () {
-		history.go(-1);
+		window.location.assign("<c:url value='/pages/backstageAdmit/member_managment.jsp'/>");
 	})
-	
+	// 前往編輯頁面
 	$("#editCustomerData").on('click', function () {
-		window.location.assign('<c:url value="CustomerManagementEdit.controller?id=" />${customerData.customerID}');
+		window.location.assign("<c:url value='CustomerManagementEdit?id=${customerData.customerID}'/>");
 	})
 })
 </script>

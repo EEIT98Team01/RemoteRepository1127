@@ -1,5 +1,7 @@
 package model.bean;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,9 +16,9 @@ public class PageViewBean {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int pageViewsID;
 	private int storeID;
-	private java.sql.Timestamp pageViewsDate;
+	private Date pageViewsDate;
 	private int pageViews;
-
+	
 	@Override
 	public String toString() {
 		return "PageViewBean [pageViewsID=" + pageViewsID + ", storeID=" + storeID + ", pageViewsDate=" + pageViewsDate
@@ -39,11 +41,11 @@ public class PageViewBean {
 		this.storeID = storeID;
 	}
 
-	public java.sql.Timestamp getPageViewsDate() {
+	public Date getPageViewsDate() {
 		return pageViewsDate;
 	}
 
-	public void setPageViewsDate(java.sql.Timestamp pageViewsDate) {
+	public void setPageViewsDate(Date pageViewsDate) {
 		this.pageViewsDate = pageViewsDate;
 	}
 
