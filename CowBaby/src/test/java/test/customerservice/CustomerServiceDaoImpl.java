@@ -30,7 +30,15 @@ public class CustomerServiceDaoImpl implements CustomerServiceDao {
 
 	@Override
 	public CustomerServiceBean insert(CustomerServiceBean bean) {
-		// TODO Auto-generated method stub
+		if (bean != null) {
+			CustomerServiceBean temp = this.findById(bean.getReportID());
+			
+			if (temp == null) {
+				getSession().save(bean);
+				return bean;
+			}
+		}
+		
 		return null;
 	}
 	
