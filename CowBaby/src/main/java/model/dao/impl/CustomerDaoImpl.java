@@ -32,7 +32,7 @@ public class CustomerDaoImpl implements CustomerDao {
 	public CustomerBean insert(CustomerBean bean) {
 		if (bean != null) {
 			CustomerBean temp = this.findById(bean.getCustomerID());
-			
+			System.out.println("temp"+temp);
 			if (temp == null) {
 				getSession().save(bean);
 				return bean;

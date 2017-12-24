@@ -161,7 +161,7 @@
 	$(function(){
 		
 		$( "#datetimepicker").datepicker({
-			 dateFormat: 'yy-mm-dd'
+			 dateFormat: 'yy/mm/dd'
 		});
 	})
 </script>
