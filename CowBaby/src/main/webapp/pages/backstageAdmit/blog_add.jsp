@@ -36,7 +36,51 @@
 					<div class="clear-both"></div>
 				</div>
 				<!--這邊開始寫內容-->
-				新增文章
+				<div class="container">
+					<section class="panel">
+						<header class="panel-heading product-add-heading" style="background:#93bad1;color: #fff; ">文章資訊</header>
+                        <div class="panel-body">
+							<form class="form-horizontal" method="get">
+								<div class="row">
+									<div class="form-group col-md-12">
+	                                    <label class="col-md-2 control-label">文章主題</label>
+	                                    <div class="col-md-6">
+	                                        <input type="text" class="form-control">
+	                                    </div>
+	                                    <span class="col-md-4 text-limit-description">(限制15字內)<span>
+		                            </div>   
+
+	                                <div class="form-group col-md-12">
+	                                    <label class="col-md-2 control-label">文章作著</label>
+	                                    <div class="col-md-6">
+	                                        <input type="text" class="form-control">
+	                                    </div>  
+	                                </div>
+	                                
+	                                <div class="form-group col-md-12">
+	                                    <label class="col-md-2 control-label">文章大頭貼</label>
+	                                    <div class="col-md-2">
+	                                        <img style="width: 150px; height: 130px" src="<c:url value="/images/emptyImg.jpg"/>" class="previewStoreLogo">
+	                                    </div>                       
+										<div class="col-md-3" style="padding-top: 35px;">
+											<input type="file" name="storeLogo" class="logoUpl" style="margin-bottom: 10px;">
+											<span class="pictip" style="color:#ff6c60;font-size: 12px;">(長寬為1024*768，大小不得超過1M)</span>
+										</div>
+	                                </div>  
+	                                
+	                                <div class="dash-line col-md-12"/></div>
+							
+	                                <div class="form-group">
+                                            <label class="col-sm-2 control-label col-sm-2">CKEditor</label>
+                                                <div class="col-sm-10"><div id="editor"></div>
+                                       </div>
+                                    </div>        
+                              </form>
+                          </div>
+                      	</section>
+					</div>
+				</div>	
+				
 			</section>
 			<!-- wrapper end -->
       	</section>

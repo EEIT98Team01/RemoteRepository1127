@@ -24,7 +24,7 @@
 		<!--main-content-->
 		<!--主要內容-->
      	<section id="main-content">
-			<section class="wrapper" id="audit_advertisement">
+			<section class="wrapper" id="product_management_sort">
 				<div class="breadcrumb-row">
 					<h3>商品分類設定</h3>
 					<ol class="breadcrumb">
@@ -45,7 +45,9 @@
 									<input type='text' class="form-control"/>
 								</div>
 								<button type="submit" class="btn btn-primary">查詢</button>
-								<button type="submit" class="btn btn-primary">新增分類</button>
+								<button  class="btn btn-warning add_sort">
+									<i class="fa fa-plus-circle" aria-hidden="true"></i>新增分類
+								</button>
 							</form>
 						</div>
 					</div>	
@@ -53,7 +55,7 @@
 				<div class="row">	
 					<div class="col-md-12">
 						<div class="panel">	
-							<table class="table table-striped table-bordered"> 
+							<table class="table table-striped table-bordered table_thead"> 
 							<!-- <table class="table table-hover table-bordered orderlist"> -->
 								<thead>
 								  <tr>
@@ -129,10 +131,38 @@
 
 <script>
 $(function(){
+	
 	// side_menu 帳戶總覽填充背景色	
 	$(".productManagement").css({'background':'#3a4152'});
 	$(".productManagement").find('.sub').css({'display':'block'});
 	$(".productManagement").find('.sub a').eq(1).css({'color':'yellow'});	
+	
+	//增加商品彈跳框
+	$(".add_sort").click(function(){
+		event.preventDefault();
+	console.log("AAA");
+		BootstrapDialog.show({
+			 message: $('<div></div>').load('../common/add_prouduct_popup.jsp'),
+            title:"新增商品分類",
+            buttons: [{
+		                label: '確定',
+		                // no title as it is optional
+		                cssClass: 'btn-primary',
+		                data: {
+		                    js: 'btn-confirm',
+		                    'user-id': '3'
+		                },
+		                action: function(){
+		                    alert('Hi Orange!');
+		                }
+		            },{
+		                label: '取消',
+		                action: function(dialogItself){
+		                    dialogItself.close();
+		               }
+		            }]
+	     });
+	})
 })
 </script>
 

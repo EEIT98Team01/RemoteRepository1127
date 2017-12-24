@@ -11,6 +11,7 @@
 	<a href="#" class="logo"><b>管理員後台</b></a>
 	<div class="nav notify-row">
 		<ul class="nav notify-menu">
+			<!-- 
 			<li>
 			  <a href="#"> 
 					<i class="fa fa-file-text" aria-hidden="true"></i>
@@ -23,6 +24,7 @@
 					<span class="badge mail">5</span>
 				</a>
 			</li>
+			 -->
 		</ul>
 	</div>
 	<div class="login">

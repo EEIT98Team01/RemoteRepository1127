@@ -24,7 +24,7 @@
 		<!--main-content-->
 		<!--主要內容-->
      	<section id="main-content">
-			<section class="wrapper" id="account_overview">
+			<section class="wrapper" id="member_managment">
 				<div class="breadcrumb-row">
 					<h3>會員管理</h3>
 					<ol class="breadcrumb">
@@ -61,8 +61,8 @@
 				<div class="row">	
 					<div class="col-md-12">
 						<div class="panel">	
-							<table class="table table-striped table-bordered" id='customerList'> 
-								<thead>
+							<table class="table table-striped table-bordered" id="customerList"> 
+								<thead style="font-size: 15px;text-align:center;background:#5da9ba;color: #fff;">
 								  <tr>
 								    <th>序號</th>
 									<th><a href="<c:url value="CustomerManagementList.controller?page=1&orderBy=email&account=${account}&userType=${userType}" />">帳號</a></th>
