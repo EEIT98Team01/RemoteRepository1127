@@ -1,0 +1,20 @@
+/*********** message list ************
+*************訊息***************/
+
+#message table{
+      font-size: 14px;
+     
+      background-color: #fff;
+}
+
+#message table thead{
+    font-size: 15px;
+    text-align: center;   
+    background: #5da9ba;
+    color: #fff;
+}
+
+
+#message a.linklist{
+    text-decoration: underline;
+}

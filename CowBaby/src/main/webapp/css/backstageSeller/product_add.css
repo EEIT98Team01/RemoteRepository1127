@@ -1,0 +1,14 @@
+/***********product management************
+*************增加產品**************/
+
+ #product_add >.container>.panel>.panel-heading.product-add-heading{
+     padding:10px 0; 
+    color: #fff;
+    background: #73afe4;
+ }
+
+ .panel-heading {
+    border-color: #eff2f7;
+     font-size: 18px;
+     font-weight: 300;
+}
