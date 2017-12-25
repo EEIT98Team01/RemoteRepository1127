@@ -148,7 +148,7 @@ $(function(){
 	 
  	 // 查詢表單資料
 	 function inqueryData(data,pageNum){
-	 	console.log("********data***********",data);
+	 	console.log("data",data);
 	 	console.log("pageNum",pageNum);	
 	 	
 	   	// 將畫面清空

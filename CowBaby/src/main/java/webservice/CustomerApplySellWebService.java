@@ -95,14 +95,12 @@ public class CustomerApplySellWebService {
 		
 		
 		BackstageBean bean = customerApplySellerService.findById(applicationID);
-		System.out.println("*****bean*********-->"+bean.toString());
+		System.out.println("bean-->"+bean.toString());
 		
-		/*if(bean.getApplicationState() != processStatus){
+		if(bean.getApplicationState() != processStatus){
 			 bean.setApplicationState(processStatus);
 		     customerApplySellerService.update(bean);
-		}
-		*/
-		
+		}		
 	
 		// 將回傳資料塞入json物件
 		
