@@ -85,7 +85,7 @@ public class CustomerApplySellerService {
  			
  		// processStatus對應到資料庫中的ApplicationDescription,若為null或"",表不設定該條件
  		if(processStatus != null && processStatus.trim().length() != 0) {
- 			condition.put("ApplicationDescription", "= " + processStatus);
+ 			condition.put("applicationState", "= " + processStatus);
  		}
  			
  		return condition;

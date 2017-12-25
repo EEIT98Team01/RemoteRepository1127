@@ -45,16 +45,16 @@ public class CustomerApplySellWebService {
 		System.out.println("pageNumber"+pageNumber);
 
 		if( (email == null || "".equals(email.trim())) && (processStatus == null || "".equals(processStatus.trim()))) {
-			System.out.println("AAA");
+			;
 			array = new JSONArray(customerApplySellerService.find(Integer.parseInt(pageNumber), Integer.parseInt(pageSize)));
 			quantity = customerApplySellerService.getQuantity();
 		} else {
-			System.out.println("BBB");
+			
 			array = new JSONArray(customerApplySellerService.findByCondition(email, processStatus,Integer.parseInt(pageNumber), Integer.parseInt(pageSize)));
 			quantity = customerApplySellerService.getConditionQuantity(email, processStatus);
 		}
 		
-		System.out.println("aa"+array);
+		
 				
 		// 計算總頁數
 		if((quantity%10) == 0) {
@@ -93,15 +93,15 @@ public class CustomerApplySellWebService {
 		System.out.println("applicationDescription-->"+applicationDescription);
 		System.out.println("processStatus-->"+processStatus);
 		
-		
 		BackstageBean bean = customerApplySellerService.findById(applicationID);
 		System.out.println("bean-->"+bean.toString());
-		
+
 		if(bean.getApplicationState() != processStatus){
 			 bean.setApplicationState(processStatus);
-		     customerApplySellerService.update(bean);
-		}		
-	
+			 bean.setApplicationDescription(applicationDescription);
+		     customerApplySellerService.update(bean);    
+		}
+
 		// 將回傳資料塞入json物件
 		
 		jsonObj.put("auditStatus","OK");
