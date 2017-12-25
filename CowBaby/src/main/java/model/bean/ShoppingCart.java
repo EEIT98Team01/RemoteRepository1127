@@ -173,7 +173,7 @@ public class ShoppingCart {
 		return productInfo;
 	}
 
-	public void setProductInfo(Map<String, List<Product>> productInfo) {
+	public void setProductInfo(Map<String, List<ShoppingCart.Product>> productInfo) {
 		this.productInfo = productInfo;
 	}
 

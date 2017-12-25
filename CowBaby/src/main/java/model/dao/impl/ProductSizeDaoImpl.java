@@ -10,13 +10,11 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import model.bean.ProductSizeBean;
 import model.dao.ProductSizeDao;
 
 @Repository
-@Transactional
 public class ProductSizeDaoImpl implements ProductSizeDao {
 	@Autowired
 	private SessionFactory sessionFactory;
