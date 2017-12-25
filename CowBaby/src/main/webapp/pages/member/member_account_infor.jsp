@@ -61,7 +61,7 @@
 						   <c:out value="黑名單"/>
 						</c:if>				
 					</span> 
-					<a class="open_shop">我要開店</a>
+					<a class="open_shop" href="<c:url value="/pages/member/member_apply_shop.jsp"/>">我要開店</a>
 				</p>
 			</div>
 			<div class="review_member_infor">

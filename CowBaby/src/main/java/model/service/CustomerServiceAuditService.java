@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import model.bean.CustomerServiceBean;
+import model.bean.SellerBackstageManageBean;
 import model.dao.CustomerServiceDao;
 
 @Service
@@ -101,5 +102,16 @@ public class CustomerServiceAuditService {
 		}
 		
 		return condition;
+	}
+	
+	// 新增客訴資料
+	public CustomerServiceBean insertCustomerData(CustomerServiceBean bean) {
+		
+		CustomerServiceBean result =  null;	
+		if(bean != null) {
+			result = CustomerServiceDao.insert(bean);
+		} 
+		
+		return result;
 	}
 }

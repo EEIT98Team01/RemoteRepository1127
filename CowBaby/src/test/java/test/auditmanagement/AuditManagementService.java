@@ -155,4 +155,7 @@ public class AuditManagementService {
 	public BackstageBean updateBackstage(BackstageBean bean) {
 		return backstageDao.update(bean);
 	}
+	
+	
+	// 發送訊息
 }

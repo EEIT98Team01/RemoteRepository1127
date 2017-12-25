@@ -152,4 +152,10 @@ public class BackstageDaoImpl implements BackstageDao {
 		return hql;
 	}
 
+	@Override
+	public BackstageBean findByEmail(String email) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
