@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Blob;
 import java.sql.SQLException;
+
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Base64;
@@ -118,6 +119,7 @@ public class CustomerRegisterController {
 	 return "register_success";
 	}
 	
+
 //	// EMAIL 驗證
 //	public static boolean isValidEmail(String email) {
 //        if (email == null) {
@@ -127,4 +129,5 @@ public class CustomerRegisterController {
 //        return email.matches(emailPattern);
 //    }
 	
+
 }

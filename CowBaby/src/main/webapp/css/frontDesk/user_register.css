@@ -67,6 +67,8 @@ input[type='text'],input[type='password'],select{
     margin: 25px auto;
     clear: both;
 }
+<<<<<<< HEAD
+=======
 
 .error_text{
 	padding: 5px;
@@ -74,3 +76,4 @@ input[type='text'],input[type='password'],select{
     color: red;
     text-align: left;
 }
+>>>>>>> branch 'master' of https://github.com/EEIT98Team01/RemoteRepository1127.git

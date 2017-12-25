@@ -10,12 +10,14 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import model.bean.SellerBackstageManageBean;
 import model.dao.SellerBackstageManageDao;
 
 
 @Repository
+@Transactional
 public class SellerBackstageManageDaoImpl implements SellerBackstageManageDao {
 	@Autowired
 	private SessionFactory sessionFactory;
