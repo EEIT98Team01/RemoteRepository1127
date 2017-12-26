@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import model.bean.CustomerBean;
 import model.dao.CustomerDao;
+import utils.EmailUtil;
 
 @Service
 @Transactional
@@ -105,7 +106,10 @@ public class CustomerManagementService {
 	
 	// 新增會員資料
 	public CustomerBean inSert(CustomerBean bean) {		
-	
+		if(bean!=null){
+			String result = EmailUtil.sendEmail("CowBabydin@gmail.com", "會員註冊成功認證信",
+				"<h3>CowBaby歡迎您加入會員，請點擊以下網址登入會員後啟動帳號功能^^</h3><br><a href='http://localhost:8080/CowBaby/pages/member/user_login.jsp'>牛寶貝官方網站<a/>",null);	
+		}
 		return  customerDao.insert(bean);
 	}
 	

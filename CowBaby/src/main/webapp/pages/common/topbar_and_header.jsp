@@ -7,13 +7,47 @@
 <div class="container-fliud top-bar">
 	<section class="container">
 		<ul class="top-bar-menu pull-right">
-			<li><a class="facebook" href="#">FB</a></li>
+			<li><a class="facebook" href="#">FB</a></li>	
 			<li>
 				<a class="shopcart" href="#">
 					<i class="fa fa-cart-plus fa-2x" aria-hidden="true"></i>
 					<span class="shopcart-total-number">5</span>
 				</a>
+				<div class="currentShoppingCartList">
+					<ul>
+						<li>
+							<img src="<c:url value="/images/ad1.jpg"/>">
+							<div class="cartList">
+								<p>兔寶寶的店</p>
+								<p>DINDIN鞋<span> - M號</span></p>
+								<p>100元</p>
+								<p>數量-2</p>
+							</div>
+						</li>
+						<li>
+							<img src="<c:url value="/images/ad1.jpg"/>">
+							<div class="cartList">
+								<p>兔寶寶的店</p>
+								<p>DINDIN鞋<span> - M號</span></p>
+								<p>100元</p>
+								<p>數量-2</p>
+							</div>
+						</li>
+						<li>
+							<img src="<c:url value="/images/ad1.jpg"/>">
+							<div class="cartList">
+								<p>兔寶寶的店</p>
+								<p>DINDIN鞋<span> - M號</span></p>
+								<p>100元</p>
+								<p>數量-2</p>
+							</div>
+						</li>
+					</ul>
+				</div>
 			</li>
+		
+			<li><a href="<c:url value="/pages/member/shopping_cart_check.jsp"/>">結帳去</a></li>
+			
 			<c:if test="${empty user}">
 				<li style="margin-top: 15px;"><a href="<c:url value="/pages/member/user_login.jsp"/>">登入</a></li>
 				<li style="margin: 15px 0 0 0;">/</li>
@@ -62,10 +96,46 @@
 				<li><a href="<c:url value="/pages/member/user_register.jsp"/>"><i class="fa fa-gift fa-2x" aria-hidden="true"></i>全部商品</a></li>
 				<li><a href="<c:url value="/pages/member/all_products.jsp"/>"><i class="fa fa-diamond fa-2x" aria-hidden="true"></i>最新商品</a></li>
 				<li><a href="<c:url value="/pages/member/all_shops.jsp"/>"><i class="fa fa-heartbeat fa-2x" aria-hidden="true"></i>精選商家</a></li>
-				<li><a href="#"/><i class="fa fa-star-half-o fa-2x" aria-hidden="true"></i>媽咪推薦</a></li>
-				<li><a href="#"/><i class="fa fa-thumbs-up fa-2x" aria-hidden="true"></i>客戶服務</a></li>
+				<li><a href="<c:url value="/pages/member/all_blog.jsp"/>"/><i class="fa fa-star-half-o fa-2x" aria-hidden="true"></i>媽咪推薦</a></li>
+				<li><a href="<c:url value="/pages/member/customer_service.jsp"/>"/><i class="fa fa-thumbs-up fa-2x" aria-hidden="true"></i>客戶服務</a></li>
 			</ul>
 		</section>
 	</section>
 </header>
 <!--header end-->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+
+		$(".currentShoppingCartList").hide();
+
+		$(".shopcart").hover(function(event) {
+		    $(".currentShoppingCartList").show();
+		});
+		
+		$(".currentShoppingCartList").hover(function(event) {
+		    $(".currentShoppingCartList").show();
+		});
+		
+		
+		$(".currentShoppingCartList").mouseleave( 'mouseleave', function() {
+		    $(".currentShoppingCartList").hide();
+		});
+
+		/* $(".shopcart").hover(function() {
+		console.log("AA");
+			 $(".currentShoppingCartList").show();
+		}, function() {
+			 $(".currentShoppingCartList").hide();
+		}
+		); */
+
+		/* $(".shopcart").hover(function() {
+				console.log("AA");
+		   		 $(".currentShoppingCartList").show();
+		 	 }, function() {
+		 		 $(".currentShoppingCartList").hide();
+		  	}
+		); */
+</script>
