@@ -17,7 +17,7 @@
 <link rel="stylesheet" href="<c:url value="/pluging/Bxsliders/jquery.bxslider.min.css"/>"> 
 <link rel="stylesheet" href="<c:url value="/css/frontDesk/basic.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/frontDesk/index.css"/>">
-<!-- qq -->
+
 <!--body-->
 <body>
 	<!--引入 topbar 跟  header-->
