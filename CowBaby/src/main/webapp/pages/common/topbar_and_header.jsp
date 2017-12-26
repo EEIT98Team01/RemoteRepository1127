@@ -62,8 +62,8 @@
 				<li><a href="<c:url value="/pages/member/user_register.jsp"/>"><i class="fa fa-gift fa-2x" aria-hidden="true"></i>全部商品</a></li>
 				<li><a href="<c:url value="/pages/member/all_products.jsp"/>"><i class="fa fa-diamond fa-2x" aria-hidden="true"></i>最新商品</a></li>
 				<li><a href="<c:url value="/pages/member/all_shops.jsp"/>"><i class="fa fa-heartbeat fa-2x" aria-hidden="true"></i>精選商家</a></li>
-				<li><a href="#"/><i class="fa fa-star-half-o fa-2x" aria-hidden="true"></i>媽咪推薦</a></li>
-				<li><a href="#"/><i class="fa fa-thumbs-up fa-2x" aria-hidden="true"></i>客戶服務</a></li>
+				<li><a href="<c:url value="/pages/member/all_blog.jsp"/>"/><i class="fa fa-star-half-o fa-2x" aria-hidden="true"></i>媽咪推薦</a></li>
+				<li><a href="<c:url value="/pages/member/customer_service.jsp"/>"/><i class="fa fa-thumbs-up fa-2x" aria-hidden="true"></i>客戶服務</a></li>
 			</ul>
 		</section>
 	</section>
