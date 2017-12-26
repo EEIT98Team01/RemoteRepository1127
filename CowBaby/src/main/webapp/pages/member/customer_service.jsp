@@ -17,7 +17,7 @@
 
 <link rel="stylesheet" href="<c:url value="/pluging/Bxsliders/jquery.bxslider.min.css"/>"> 
 <link rel="stylesheet" href="<c:url value="/css/frontDesk/basic.css"/>">
-<link rel="stylesheet" href="<c:url value="/css/frontDesk/shipping_cart.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/frontDesk/customer_service.css"/>">
 
 
 <!--body-->
@@ -26,61 +26,58 @@
 	<jsp:include page="/pages/common/topbar_and_header.jsp"/>
 	
 	<!-- 這邊 開始寫內容-->
-	<!--每頁 page_container-->
-	<section class="page_container shopping_cart_container">
+	<div class="main_page_title">
+		<h3>客戶服務申請</h3>
+		<h5>有任何問題可聯絡客服，我們將盡快為您處理<h5>
+	</div>
+	<!--每頁主要內容-->
+	<!--從這邊開始寫-->
+	<section class="page_container customer_service">
+
 		<!-- 主要內容-->
 		<div class="main_container_col_1">
-			<h5>親愛的DIN (jane74726)會員您好：</h5>
-			<div class="shopping_order">
-				<table>
-				    <thead>
-				      	<tr>
-					        <th>訂單編號</th>
-					        <th>訂購店家</th>
-					        <th>商品名稱</th>
-					        <th>訂購日期</th>
-					        <th>總金額</th>
-					        <th>狀態</th>
-					        <th>訂單處理狀態</th>
-				      	</tr>
-				    </thead>
-				    <tbody>
-					    <tr>
-					        <td>S123456</td>
-					        <td>兔兔商店</td>
-					        <td>保暖寒冬大外套</td>
-					        <td>2017-10-10 20:08:08</td>
-					        <td>1000</td>
-					        <td>訂單未完成</td>
-					        <td>尚未處理</td>
-					    </tr>
+			<form>
+				<div>
 
-					     <tr>
-					        <td>S123456</td>
-					        <td>兔兔商店</td>
-					        <td>保暖寒冬大外套</td>
-					        <td>2017-10-10 20:08:08</td>
-					        <td>1000</td>
-					        <td>訂單未完成</td>
-					        <td>尚未處理</td>
-					    </tr>
-
-					    <tr>
-					        <td colspan="6" style="text-align: right;">本次紅利</td>
-					        <td><span class="bonus">50</span>點</td>
-					    </tr>
-
-					    <tr>
-					        <td colspan="5" style="text-align: right;">共3筆</td>
-					        <td style="text-align: right;">總價</td>
-					        <td><span class="price">10000</span>$</td>
-					    </tr>
-				    </tbody>
-				</table>
-			</div>
-		</div>
+					<table>
+						<tr>
+							<td><label>申訴人</label></td>
+							<td><input type="text"></td>
+											
+						</tr>
+						<tr>
+							<td><label>問題種類</label></td>
+							<td>
+								<select>
+								    <option>帳號問題</option>
+								    <option>BUG問題</option>
+								    <option>黑名單撿舉</option>
+								    <option>其他</option>
+							 	</select>
+							</td>
+							
+						</tr>
+						<tr>
+							<td><label>申訴人ID</label></td>
+							<td><input type="password"></td>
+							
+						</tr>
+						<tr>
+							<td><label>檔案上傳</label></td>
+ 							<td> <input name="myFile" type="file"></td>
+							
+						</tr>
+						<tr>
+							<td><label>問題描述</label></td>
+ 							<td> <textarea id="comment" rows="50" cols="50"></textarea></td>
+						</tr>
+						<tr>
+					</table>
+					<button type="button" class="btn btn-primary pull-right serviceBtn">提交問題</button>
+				</div>
+			</form>
+		</div>	
 	</section>
-	
 	
 	
 	<!--引入 footer-->

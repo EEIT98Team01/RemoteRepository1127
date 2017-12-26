@@ -127,6 +127,18 @@ public class MessageDaoImpl implements MessageDao {
 		return this.findByCondition(condition).size();
 	}
 	
+	@Override
+	public Boolean delete(int id) {
+		MessageBean select = this.findById(id);
+		
+		if(select != null) {
+			this.getSession().delete(select);
+			return true;
+		}
+		
+		return false;
+	}
+	
 	private List<MessageBean> subList(List<MessageBean> list, int start, int end) {
 		List<MessageBean> result = new LinkedList<MessageBean>();
 		
@@ -154,4 +166,5 @@ public class MessageDaoImpl implements MessageDao {
 		
 		return hql;
 	}
+
 }

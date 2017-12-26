@@ -38,4 +38,7 @@ public interface MessageDao {
 			
 	// 取得符合某條件之 Message 數量
 	public int getConditionQuantity(Map<String, String> condition);
+	
+	// 刪除某筆Message
+	public Boolean delete(int id);
 }
