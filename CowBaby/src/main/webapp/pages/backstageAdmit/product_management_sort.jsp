@@ -92,7 +92,7 @@
 	</div>
 	<div class="row">
 		<div class="col-md-3 record-number">
-			<span>第2頁</span> <span>第10 - 20 筆</span> <span>共150筆</span>
+			<span>第1頁</span> <span>第0 - 10 筆</span> <span>共150筆</span>
 		</div>
 		<ul class="pagination">
 			<li><a href="#" aria-label="Previous"> <span
