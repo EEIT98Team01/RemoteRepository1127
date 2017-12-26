@@ -1,4 +1,4 @@
-package model.service;
+package test.product;
 
 import java.util.HashMap;
 import java.util.List;

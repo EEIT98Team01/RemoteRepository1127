@@ -27,7 +27,6 @@ public class CustomerForgetPasswordService {
 		} else {
 			return list.get(0);
 		}
-
 	}
 
 	// 將查詢條件塞進Map
