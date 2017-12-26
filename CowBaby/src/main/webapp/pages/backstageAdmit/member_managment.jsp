@@ -161,6 +161,12 @@ $(function(){
    	 // 預設每頁顯示筆數
    	 var visiblecount = 10; 
 	
+  // 抓取表單欄位
+		formData = $(".memberFrom").serializeArray();
+		
+	    // 發 ajax 查詢表單資料
+		inqueryData(formData , pagenow);
+   	 
     // 查詢
     $(".inquire").click(function(){
     	console.log("AA");
