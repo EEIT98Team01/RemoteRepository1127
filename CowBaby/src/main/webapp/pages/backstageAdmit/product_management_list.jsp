@@ -72,14 +72,16 @@
 					<thead>
 						<tr>
 							<th>序號</th>
-							<th>帳號</th>
-							<th>姓名</th>
-							<th>手機</th>
+							<th>商品名稱</th>
+							<th>摘要</th>
+							<th>單價</th>
+							<th>商品內容描述</th>
+							<th>狀態</th>
+							<th>分類</th>
+							<th>適用年齡</th>
 							<th>性別</th>
-							<th>身份</th>
-							<th>所屬會員群集</th>
-							<th>累積消費金額</th>
-							<th>檢視</th>
+							<th>上架時間</th>
+							<th>商品圖示</th>
 							<th>編輯</th>
 						</tr>
 					</thead>
@@ -87,7 +89,6 @@
 						<c:forEach var="classfication" varStatus="st" items="${classficationIDList}">
 						<tr>
 							<td>${st.count}</td>
-							<td>${classfication.storeID}</td>
 							<td>${classfication.title}</td>
 							<td>${classfication.summary}</td>
 							<td>${classfication.unitPrice}</td>
@@ -96,6 +97,8 @@
 							<td>${classfication.classficationID}</td>
 							<td>${classfication.suitableAges}</td>
 							<td>${classfication.genderPreference}</td>
+							<td>${classfication.displayTime}</td>
+							<td>${classfication.productImage}</td>
 							<!-- <td><span class="label label-success">啟用</span></td>
 							 -->
 							<td><a href="#" class='btn btn-primary'> 
@@ -111,10 +114,10 @@
 	</div>
 	<div class="row">
 		<div class="col-md-3 record-number">
-			<span>第 <span class="pageNum">0</span>頁
+			<span>第 <span class="pageNum">1</span>頁
 			</span>| <span>第 <span class="firstNum">0</span> - <span
-				class="endNum">0</span>筆
-			</span>| <span>共 <span class="totalNum">0</span>筆
+				class="endNum">10</span>筆
+			</span>| <span>共 <span class="totalNum">150</span>筆
 			</span>
 		</div>
 		<!--分頁 -->
