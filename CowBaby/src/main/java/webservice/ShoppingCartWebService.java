@@ -11,37 +11,24 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import model.bean.ProductBean;
-import model.bean.ProductSizeBean;
 import model.bean.SellerBackstageManageBean;
 import model.bean.ShoppingCart;
-import model.dao.ProductDao;
-import model.dao.ProductSizeDao;
-import model.dao.SellerBackstageManageDao;
+import model.service.ShoppingCartService;
 
 @RestController
 @RequestMapping("/shopping")
 @SessionAttributes(names={"shoppingCart"})
 public class ShoppingCartWebService {
 	@Autowired
-	ProductDao productDao;
-	@Autowired
-	SellerBackstageManageDao sellerBackstageManageDao;
-	@Autowired
-	ProductSizeDao productSizeDao;
+	ShoppingCartService shoppingCartService;
 	
 	@RequestMapping(
 			value="/addShoppingCart",
 			method={RequestMethod.POST},
 			produces={"application/json;charset=UTF-8"}
 	)
-	public String addShoppingCart(int storeID, int productID, int productSizeID, int productNum, Model model, HttpSession session) {
-
-		// 1，用ID獲得全部商品資訊
-		ProductBean product = productDao.findById(productID);
-		SellerBackstageManageBean store = sellerBackstageManageDao.findById(storeID);
-		ProductSizeBean spec = productSizeDao.findById(productSizeID);
-		
-		// 2，獲取購物車物件，並判斷現在有無購物車，沒有則建立購物車
+	public String addShoppingCart(int productID, String spec, int productNum, Model model, HttpSession session) {
+		// 獲取購物車物件，並判斷現在有無購物車，沒有則建立購物車
 		ShoppingCart shoppingCart = (ShoppingCart) session.getAttribute("shoppingCart");
 
 		if (shoppingCart == null) {
@@ -49,10 +36,20 @@ public class ShoppingCartWebService {
 			session.setAttribute("shoppingCart", shoppingCart);
 		}
 		
-		// 3，把点击的选项加入到购物车中；
-		shoppingCart.addProduct(store.getStoreID(), store.getStoreName(), product.getProductID(), product.getTitle(), 
-				                spec.getProductSpec(), product.getProductImage(), product.getUnitPrice(), productNum);
-
+		// 利用ID取得商品資訊
+		ProductBean product = shoppingCartService.findProductById(productID);
+		
+		// 商品存在,才可加入購物車
+		if(product != null) {
+			// 取得商店資訊
+			SellerBackstageManageBean store = shoppingCartService.findSellerBackstageManageById(product.getStoreID());
+			
+			// 將該商品加入購物車中
+			shoppingCart.addProduct(store.getStoreID(), store.getStoreName(), product.getProductID(), product.getTitle(), 
+					                spec, product.getProductImage(), product.getUnitPrice(), productNum);
+		}
+		
+		// 回傳購物車清單
 		return new JSONObject(shoppingCart).toString();
 	}
 	
@@ -61,22 +58,20 @@ public class ShoppingCartWebService {
 			method={RequestMethod.POST},
 			produces={"application/json;charset=UTF-8"}
 	)
-	public String removeShoppingCart(int productID, int productSizeID, Model model, HttpSession session) {
-
-		// 1，用ID獲得全部商品資訊
-		ProductSizeBean spec = productSizeDao.findById(productSizeID);
-		
-		// 2，獲取購物車物件，並判斷現在有無購物車，沒有則建立購物車
+	public String removeShoppingCart(int productID, String spec, Model model, HttpSession session) {
+		// 獲取購物車物件，並判斷現在有無購物車，沒有則建立購物車
 		ShoppingCart shoppingCart = (ShoppingCart) session.getAttribute("shoppingCart");
 
 		if (shoppingCart == null) {
-			return "{\"stauts\":\"error\"}";
+			shoppingCart = new ShoppingCart();
+			session.setAttribute("shoppingCart", shoppingCart);
 		}
 		
-		// 3，把点击的选项加入到购物车中；
-		shoppingCart.removeProduct(productID, spec.getProductSpec());
+		// 將該商品從購物車移除
+		shoppingCart.removeProduct(productID, spec);
 		
-		
+		// 回傳購物車清單
 		return new JSONObject(shoppingCart).toString();
 	}
+	
 }

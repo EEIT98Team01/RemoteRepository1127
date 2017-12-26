@@ -154,4 +154,10 @@ public class MessageDaoImpl implements MessageDao {
 		
 		return hql;
 	}
+
+	@Override
+	public Boolean delete(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

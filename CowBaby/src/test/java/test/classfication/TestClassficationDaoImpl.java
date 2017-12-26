@@ -49,11 +49,11 @@ public class TestClassficationDaoImpl {
 		*/
 		
 	  //find()
-		/*
+		
 		for(ClassficationBean bean: dao.find()) {
 			System.out.println(bean);
 		}
-		*/
+		
 		
 	  //find(int page, int rows)
 		/*
@@ -91,13 +91,13 @@ public class TestClassficationDaoImpl {
 		
 	  //findByCondition(Map<String, String> condition, int page, int rows, String sortCondition)
 		
-		HashMap<String, String> condition = new HashMap<String, String>();
-		condition.put("startStopStatus", "= 1");
-		//condition.put("classficationID", "= 5");     
-		for(ClassficationBean bean: dao.findByCondition(condition, 1, 3, "classificationDescription")) {
-			System.out.println(bean);
-		}
-		
+//		HashMap<String, String> condition = new HashMap<String, String>();
+//		condition.put("startStopStatus", "= 1");
+//		//condition.put("classficationID", "= 5");     
+//		for(ClassficationBean bean: dao.findByCondition(condition, 1, 3, "classificationDescription")) {
+//			System.out.println(bean);
+//		}
+//		
 
 	  //getQuantity()
 		/*

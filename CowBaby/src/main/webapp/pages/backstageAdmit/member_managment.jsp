@@ -163,12 +163,16 @@ $(function(){
 	
     // 查詢
     $(".inquire").click(function(){
+    	console.log("AA");
+    	//擋掉超連結的預設值
         event.preventDefault(); 
         
+      //分頁的插件，一定要加
         $('#myPagination').twbsPagination('destroy');
         
 		// 抓取表單欄位
 		formData = $(".memberFrom").serializeArray();
+		
 	    // 發 ajax 查詢表單資料
 		inqueryData(formData , pagenow);
     });
@@ -183,7 +187,7 @@ $(function(){
     
     	$.ajax({
 	        type:"GET",                   
-	        url: "http://localhost:8080/CowBaby/service/getCustomerData",    
+	        url: "/CowBaby/service/getCustomerData",    
 	        data: {
 		       	 customerAccount:formData[0].value,
 		       	 pageSize:visiblecount,
@@ -200,11 +204,15 @@ $(function(){
 			}, 
 			
 			// 成功要做的事
-	        success : function(response){              
+	        success : function(response){   
+	        	//測試列出接收到的資料
+	        	console.log("response",response);
+	        		        	
 	           // response 回來的字串轉 json物件
 	           var obj = JSON.parse(response.list);
-	           // 組出 列表塞回 table
 	           
+	           // 組出 列表塞回 table  
+	           //讀取物件中的資料$.each(object,function(name,value){});
 	           $.each(obj, function (index, customer) {
 	        	   console.log("customer",customer);
 	           	    var html="";

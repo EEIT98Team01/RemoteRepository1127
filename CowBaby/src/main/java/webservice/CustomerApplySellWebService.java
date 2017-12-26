@@ -93,19 +93,15 @@ public class CustomerApplySellWebService {
 		System.out.println("applicationDescription-->"+applicationDescription);
 		System.out.println("processStatus-->"+processStatus);
 		
-		
 		BackstageBean bean = customerApplySellerService.findById(applicationID);
+		System.out.println("bean-->"+bean.toString());
 
-		
 		if(bean.getApplicationState() != processStatus){
 			 bean.setApplicationState(processStatus);
 			 bean.setApplicationDescription(applicationDescription);
-		     customerApplySellerService.update(bean);
-		    
+		     customerApplySellerService.update(bean);    
 		}
-		
-		
-	
+
 		// 將回傳資料塞入json物件
 		
 		jsonObj.put("auditStatus","OK");
