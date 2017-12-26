@@ -46,11 +46,12 @@
 						    	<div class="row">
 							      	<div class="col-md-6">
 							      		<i class="fa fa-asterisk" aria-hidden="true"></i>
-							      		訂單編號 A123456
+							      		訂單編號 :<span>${orderID}</span>
+				
 							      	</div>
 							      	<div class="col-md-6 pull-right text-right">
 							      		<i class="fa fa-calendar-minus-o" aria-hidden="true"></i>
-							      		下訂日期 2017-10-10
+							      		下訂日期<!-- 2017-10-10          怎麼插阿 -->
 							      	</div>
 						      	</div>
 						    </div>
@@ -63,52 +64,22 @@
 										<th>商品圖片</th>
 										<th>數量</th>
 										<th>庫存</th>
-										<th>原價</th>
-										<th>特價</th>
+										<th>價錢</th>
 										<th>總計</th>
 								  	</tr>
 								</thead>
 								<tbody>
-								  	<tr>
-										<td>啾啾英文小故書</td>
-										<td><img src="${pageContext.request.contextPath}/images/01.jpg"></td>
-										<td>3</td>
-										<td>有</td>
-										<td>100</td>
-										<td>20</td>
-										<td>240</td>		
-								  	</tr>  
-								  	<tr>
-										<td>啾啾英文小故書</td>
-										<td><img src="${pageContext.request.contextPath}/images/01.jpg"></td>
-										<td>3</td>
-										<td>有</td>
-										<td>100</td>
-										<td>20</td>
-										<td>240</td>		
-								  	</tr>
-								  	<tr>
-										<td>啾啾英文小故書</td>
-										<td><img src="${pageContext.request.contextPath}/images/01.jpg"></td>
-										<td>3</td>
-										<td>有</td>
-										<td>100</td>
-										<td>20</td>
-										<td>240</td>		
-								  	</tr>
-								  	<tr class="totalnumber">
-										<td>抵用金</td>
-										<td colspan="4"></td>
-
-										<td></td>
-										<td>100</td>		
-								  	</tr> 
-                                    <tr class="totalmoneny">
-										<td>金額</td>
-										<td colspan="4" style="text-align: right;">數量  3 個</td>
-										<td>合計</td>
-										<td style="color: red;">500$</td>		
-								  	</tr> 	
+																		<!-- EL語法  從request裡面拉 識別字串是在controller裡面 -->
+									<c:forEach var="orderDetail" items="${orderDetail_list}">
+									  	<tr>
+											<td>${orderDetail.title}</td>
+											<td><img src="${pageContext.request.contextPath}/images/01.jpg"></td>
+											<td>${orderDetail.quantity}</td>
+											<td>有</td>
+											<td>${orderDetail.unitPrice}</td>
+											<td>240</td>		
+									  	</tr>  
+									</c:forEach> 									 
 								</tbody>
 							</table> 							
 						</div>

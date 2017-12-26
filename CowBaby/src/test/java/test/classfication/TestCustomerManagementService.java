@@ -22,11 +22,11 @@ public class TestCustomerManagementService {
 		*/
 		
 	  //find()
-		
+		/*
 		for(ClassficationBean bean: service.find()) {
 			System.out.println(bean);
 		}
-		
+		*/
 		
 	  //find(int page, int rows)
 		/*
@@ -43,11 +43,11 @@ public class TestCustomerManagementService {
 		*/
 		
 	  //findByCondition(String account, String userType, String clusterID)
-		/*
-		for(CustomerBean bean: service.findByCondition("Allen", "1", null)) {
+		
+		for(ClassficationBean bean: service.findByCondition(null, "'玩具'")) {
 			System.out.println(bean);
 		}
-		*/
+		
 		
 	  //findByCondition(String account, String userType, String clusterID, int page, int rows)
 		/*

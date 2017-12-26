@@ -34,23 +34,16 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="panel panel-addpadding">
-				<form class="form-inline"
-					action="<c:url value="/ClassficationController" />" method="POST">
+				<form class="form-inline" 
+				action="${pageContext.servletContext.contextPath}/ClassficationController" 
+				method="POST" >
 					<div class="form-group">
-						<label for="exampleInputName2">分類名稱:</label> <select
-							class="form-control">
-							<option value="">全部</option>
-							<option value="1">衣服</option>
-							<option value="2">鞋子</option>
-							<option value="3">玩具</option>
-							<option value="4">圖書</option>
-							<option value="5">日用品</option>
-						</select>
+						<label for="exampleInputName2">分類名稱:</label> 
+						<input type='text' name="classficatoinName" class="form-control" 
+						value="" /> <!-- 回填分類名稱 -->
 					</div>
 					<button type="submit" class="btn btn-primary">查詢</button>
-					<button class="btn btn-warning add_sort">
-						<i class="fa fa-plus-circle" aria-hidden="true"></i>新增分類
-					</button>
+					<button type="button" class="btn btn-primary">新增分類</button>
 				</form>
 			</div>
 		</div>
@@ -70,24 +63,28 @@
 						</tr>
 					</thead>
 					<tbody>
+						<c:forEach var="Classfication" varStatus="st" items="${ClassficationList}">
 						<tr>
-							<td>1</td>
-							<td>玩具</td>
-							<td>給小朋友玩的東東唷</td>
-							<td><span class="label label-success">啟用</span></td>
-							<td><a href="#" class='btn btn-primary'> <i
-									class='fa fa-pencil'></i>
+							<td>${st.count}</td>
+							<td>${Classfication.classficatoinName}</td>
+							<td>${Classfication.classificationDescription}</td>
+							<td>${Classfication.startStopStatus}</td>
+							<!-- <td><span class="label label-success">啟用</span></td>
+							 -->
+							<td><a href="#" class='btn btn-primary'> 
+							<i class='fa fa-pencil'></i>
 							</a></td>
 						</tr>
-						<tr>
-							<td>2</td>
-							<td>圖書</td>
-							<td>給小朋友看的書唷</td>
-							<td><span class="label label-danger">停用</span></td>
-							<td><a href="#" class='btn btn-primary'> <i
-									class='fa fa-pencil'></i>
-							</a></td>
-						</tr>
+<!-- 						<tr> -->
+<!-- 							<td>2</td> -->
+<!-- 							<td>圖書</td> -->
+<!-- 							<td>給小朋友看的書唷</td> -->
+<!-- 							<td><span class="label label-danger">停用</span></td> -->
+<!-- 							<td><a href="#" class='btn btn-primary'> <i -->
+<!-- 									class='fa fa-pencil'></i> -->
+<!-- 							</a></td> -->
+<!-- 						</tr> -->
+						</c:forEach>
 					</tbody>
 				</table>
 			</div>
@@ -175,8 +172,10 @@ $(function(){
 	
    // 查詢
    $(".inquire").click(function(){
+	   //擋掉超連結的預設值
        event.preventDefault(); 
        
+       //分頁的插件，一定要加
        $('#myPagination').twbsPagination('destroy');
        
 		// 抓取表單欄位
@@ -195,7 +194,7 @@ $(function(){
    
    	$.ajax({
 	        type:"GET",                   
-	        url: "http://localhost:8080/CowBaby/service/getCustomerData",    
+	        url: "http://localhost:8080/CowBaby/getClassficationData",    
 	        data: {
 		       	 customerAccount:formData[0].value,
 		       	 pageSize:visiblecount,
@@ -217,14 +216,15 @@ $(function(){
 	           var obj = JSON.parse(response.list);
 	           // 組出 列表塞回 table
 	           
+	           //讀取物件中的資料
 	           $.each(obj, function (index, customer) {
 	        	   console.log("customer",customer);
 	           	    var html="";
 	 		    	html="<tr>"+
 							"<td>"+(index+1+ (response.pageSize*(response.pageNumber-1)))+"</td>" +
-							"<td>"+customer.email+"</td>" +
-							"<td>"+customer.customerName+"</td>" +
-							"<td>"+customer.mobilePhone+"</td>" +
+							"<td>"+customer.classficatoinName+"</td>" +
+							"<td>"+customer.classificationDescription+"</td>" +
+							"<td>"+customer.startStopStatus+"</td>" +
 							"<td>"+customer.gender+"</td>" +
 							"<td>"+customer.userID+"</td>" +
 							"<td>"+customer.consumerSegmentation+"</td>" +
