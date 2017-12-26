@@ -80,7 +80,7 @@ public class CustomerManagementService {
 		} else {
 			return false;
 		}
-	}
+	}	
 	
 	// 將查詢條件塞進Map
 	private HashMap<String, String> createCondition(String account, String userType, String clusterID) {

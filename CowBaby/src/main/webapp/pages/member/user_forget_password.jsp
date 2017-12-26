@@ -30,7 +30,15 @@
 	<section class="page_container member_register_container">
 		<!-- 主要內容-->
 		<div class="main_container_col_1">
-			請輸入帳號
+			<form class="form-inline"
+					action="${pageContext.servletContext.contextPath}/"
+					method="POST">
+					<div class="form-group">
+						<label for="exampleInputName2">會員帳號:</label> 
+						<input type='text' name='classficationID' class="form-control" value="" />
+					</div>
+					<button type="submit" class="btn btn-primary inquire">查詢</button>
+				</form>
 		</div>	
 	</section>
 	

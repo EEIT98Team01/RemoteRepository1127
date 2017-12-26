@@ -38,8 +38,8 @@
 					action="${pageContext.servletContext.contextPath}/ProductController"
 					method="POST">
 					<div class="form-group">
-						<label for="exampleInputName2">會員帳號:</label> <input type='text'
-							name='classficationID' class="form-control" value="" />
+						<label for="exampleInputName2">會員帳號:</label> 
+						<input type='text' name='classficationID' class="form-control" value="" />
 					</div>
 					<div class="form-group">
 						<label for="exampleInputName2">會員身份:</label> 
