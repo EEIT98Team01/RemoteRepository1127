@@ -1,6 +1,7 @@
 package model.service;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import model.bean.ProductBean;
 import model.dao.ProductDao;
+import model.dao.SellerBackstageManageDao;
 
 @Service
 @Transactional
@@ -17,6 +19,8 @@ public class ProductService {
 	
 	@Autowired
 	private ProductDao productDao;
+	@Autowired
+	private SellerBackstageManageDao sellerBackstageManageDao;
 	
 	// 查詢商品分類單一設置資料
 		@Transactional(readOnly = true)
@@ -28,6 +32,24 @@ public class ProductService {
 		@Transactional(readOnly = true)
 		public List<ProductBean> find() {
 			return productDao.find();
+		}
+		
+		// 回傳有商店名稱的商品
+		public List<Object[]> findObject() {
+			List<ProductBean> list = this.find();
+			List<Object[]> objList = new LinkedList<Object[]>();
+			
+			for(ProductBean bean: list) {
+				Object[] obj = new Object[5];
+				obj[0] = bean.getProductImage();
+				obj[1] = sellerBackstageManageDao.findById(bean.getStoreID()).getStoreName();
+				obj[2] = bean.getTitle();
+				obj[3] = bean.getProductDescription();
+				obj[4] = bean.getUnitPrice();
+				objList.add(obj);
+			}
+			
+			return objList;
 		}
 		
 		// 回傳某頁的N筆資料,若無資料,則回傳之List為空集合

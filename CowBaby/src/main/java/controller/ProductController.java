@@ -1,11 +1,14 @@
 package controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import model.bean.ProductBean;
 import model.service.ProductService;
 
 @Controller
@@ -40,5 +43,19 @@ public class ProductController {
 		}
 		return "product_managment_list";
 	}
+	
+	// 前台商品頁面
+	@RequestMapping(value = ("AllProductController"), method = { RequestMethod.GET, RequestMethod.POST })
+	public String view(Model model) {
+		
+		List<Object[]> list = productService.findObject();
+		
+		
+		
+		model.addAttribute("productList", list);
+		
+		return "all_product_list";
+	}
+	
 }
 
