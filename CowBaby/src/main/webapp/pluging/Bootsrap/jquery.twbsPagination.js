@@ -32,8 +32,11 @@
             throw new Error('Visible pages option is not correct!');
         }
 
-        if (this.options.onPageClick instanceof Function) {
+        /*if (this.options.onPageClick instanceof Function) {
             this.$element.first().on('page', this.options.onPageClick);
+        }*/
+        if (_this.options.onPageClick instanceof Function) {
+            _this.options.onPageClick(evt, _this.currentPage);
         }
 
         // hide if only one page exists

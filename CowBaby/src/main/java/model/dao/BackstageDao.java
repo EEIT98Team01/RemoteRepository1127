@@ -8,6 +8,9 @@ import model.bean.BackstageBean;
 public interface BackstageDao {
 	// 由applicationID取得相對應資料
 	public BackstageBean findById(int id);
+	
+	// 由applicationEmail取得相對應資料
+	public BackstageBean findByEmail(String email);
 		
 	// 新增 Backstage 資料用
 	public BackstageBean insert(BackstageBean bean);

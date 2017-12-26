@@ -39,29 +39,29 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="panel panel-addpadding">
-							<form class="form-inline">
+							<form class="form-inline audit_complaints_form">
 								<div class="form-group">
 									<label for="exampleInputName2">申訴人帳號:</label>
-									<input type='text' class="form-control"/>
+									<input type='text' class="form-control" name="email"/>
 								</div>
 
 								<div class="form-group">
 									<label for="exampleInputName2">審核狀態:</label>
-									<select class="form-control">
-										<option>全部</option>
-										<option>未處理</option>
-										<option>處理中</option>
-										<option>已處理</option>	
+									<select class="form-control" name="processStatus">
+										<option value="">全部</option>
+										<option value="1">未處理</option>
+										<option value="2">處理中</option>
+										<option value="3">已處理</option>	
 									</select>
 								</div>
 								<div class="form-group">
 									<label for="exampleInputName2">案件類型:</label>
-									<select class="form-control">
-										<option>全部</option>
-										<option>檢舉黑名單</option>
-										<option>帳號問題</option>
-										<option>BUG回報</option>
-										<option>其他</option>
+									<select class="form-control" name="problemTypes">
+										<option value="">全部</option>
+										<option value="1">檢舉黑名單</option>
+										<option value="2">帳號問題</option>
+										<option value="3">BUG回報</option>
+										<option value="4">其他</option>
 									</select>
 								</div>
 								<button class="btn btn-primary inquire">查詢</button>
@@ -74,7 +74,6 @@
 					<div class="col-md-12">
 						<div class="panel">	
 							<table class="table table-striped table-bordered table_thead" id="audit_complaints_List"> 
-							<!-- <table class="table table-hover table-bordered orderlist"> -->
 								<thead>
 								  <tr>
 								    <th>序號</th>
@@ -178,7 +177,7 @@ $(function(){
 		$(".auditComplaints").css({'background':'#3a4152'});
 		$(".auditComplaints").find('.sub').css({'display':'block'});
 		$(".auditComplaints").find('.sub a').eq(0).css({'color':'yellow'});
-	
+		
 	// 設置 loaading icon大小
 		$.LoadingOverlaySetup({ size : "10%"});
 	
@@ -192,113 +191,120 @@ $(function(){
 		var visiblecount = 10; 
 
 	// 查詢
-		$("#inquire").click(function(){
+		$(".inquire").click(function(){
 			event.preventDefault(); 
 			$('#audit_complaints_Pagination').twbsPagination('destroy'); 
 			
 			// 抓取表單欄位
-			formData = $(".memberFrom").serializeArray();
+			formData = $(".audit_complaints_form").serializeArray();
 			
 		    // 發 ajax 查詢表單資料
 			inqueryData(formData , pagenow);
 		});
 	 
 	 // 查詢表單資料
-		 function inqueryData(data,pageNum){
-		 	
+		function inqueryData(data,pageNum){
 		 	console.log("data",data);
 		 	console.log("pageNum",pageNum);	
 		   	// 將畫面清空
 		   	$('tbody').empty();
-		 
-		 	$.ajax({
-		       type:"GET",                   
-		       url: "http://localhost:8080/json/text1",    
-		       data: {
-		       	 customerAccount:formData[0].value,
-		       	 pageSize:visiblecount,
-		       	 customerStatue:formData[1].value,
-		      		 pageNumber:pageNum	 
-		       }, 
+		   	
+		   	$.ajax({
+		        type:"GET",                   
+		        url: "http://localhost:8080/CowBaby/audit/complaints",    
+		        data: {
+		        	 pageSize:visiblecount,
+		        	 pageNumber:pageNum, 
+		        	 customerID:formData[0].value,
+		        	 processStatus:formData[1].value,
+		        	 problemTypes:formData[2].value,
+		        }, 
+		         
+		        dataType:"json",   
 		        
-		       dataType:"json",   
-		       
-		       	// ajax載入前
-		       	beforeSend: function(){
-			       	//顯示laoding 參考網址=>https://gasparesganga.com/labs/jquery-loading-overlay/#quick-demo
-			       	$("#audit_complaints_List").LoadingOverlay("show");
-				}, 
-			
-			// 成功要做的事
-		       success : function(response){   
-		    	   
-		    	   console.log("response",response)
-		          // response 回來的字串轉 json物件
-		          /*   var obj = JSON.parse(response.list); */
-		          
-		          // 組出 列表塞回 table
-		          $.each(obj, function (index, customer) {
-		       	  		console.log("customer",customer);
-		          	    var html="";
-				    	html="<tr>"+
-							"<td>"+(index+1+ (response.pageSize*(response.pageNumber-1)))+"</td>" +
-							"<td>"+customer.email+"</td>" +
-							"<td>"+customer.customerName+"</td>" +
-							"<td>"+customer.mobilePhone+"</td>" +
-							"<td>"+customer.gender+"</td>" +
-							"<td>"+customer.userID+"</td>" +
-							"<td>"+customer.consumerSegmentation+"</td>" +
-							"<td>"+customer.totalAmoutOfConsumption+"</td>" +
-							"<td> <a href='<c:url value='CustomerManagementView.controller'/>?id=" + customer.customerID + 
-							"' class='btn btn-success'> <i class='fa fa-eye'></i> </a> </td>" +
-							"<td> <a href='<c:url value='CustomerManagementEdit.controller'/>?id=" + customer.customerID + 
-							"' class='btn btn-primary'> <i class='fa fa-pencil'></i> </a> </td>" +
-						 "</tr>";				
-		    			$('tbody').append(html);
-		          }) 
-		            
-		      		// 自動產生分頁
-		        	var totalPages = response.tatalPage;
+		        // ajax載入前
+		       /*  beforeSend: function(){
+		        	//顯示laoding 參考網址=>https://gasparesganga.com/labs/jquery-loading-overlay/#quick-demo
+		        	$("#customerList").LoadingOverlay("show");
+				},  */
+				
+				// 成功要做的事
+		        success : function(response){              
+		           // response 回來的字串轉 json物件
+		           var obj = JSON.parse(response.list);
+		           console.log("obj",obj);
+		           
+		           // 組出 列表塞回 table
+		           
+		           $.each(obj, function (index, item) {
+		        	   console.log("item",item);
+		           	    var html="";
+		 		    	html="<tr>"+
+	 							"<td>"+(index+1+ (response.pageSize*(response.pageNumber-1)))+"</td>" +
+	 							"<td>"+item.email+"</td>" +
+	 							"<td>"+item.customerName+"</td>" +
+	 							"<td>"+item.mobilePhone+"</td>" +
+	 							"<td>"+item.gender+"</td>" +
+	 							"<td>"+item.userID+"</td>" +
+	 							"<td>"+item.consumerSegmentation+"</td>" +
+	 							"<td>"+item.totalAmoutOfConsumption+"</td>" +
+	 							"<td> <a href='<c:url value='CustomerManagementView.controller'/>?id=" + customer.customerID + 
+	 							"' class='btn btn-success'> <i class='fa fa-eye'></i> </a> </td>" +
+	 							"<td> <a href='<c:url value='CustomerManagementEdit.controller'/>?id=" + customer.customerID + 
+	 							"' class='btn btn-primary'> <i class='fa fa-pencil'></i> </a> </td>" +
+							 "</tr>";				
+	 		    		$('tbody').append(html);
+		           })
+		           
+		          	    
+	         		// 自動產生分頁
+		         	/* var totalPages = response.tatalPage;
 		            var pageSize  = response.pageSize;
-		
-		            // 如果查詢有資料
-					if(!totalPages==0){
-					   $('#audit_complaints_Pagination').twbsPagination({
+	 
+	 				if(!totalPages==0){
+	 				// 如果查詢有資料
+					   $('#myPagination').twbsPagination({
 			                  totalPages: totalPages,
 			                  visiblePages: pageSize,
+			                  
 			                  onPageClick: function (evt, page) { 
 								inqueryData(formData,page);
 				       	　　　　 }
-					   });
-					  
+		                });
+	 				  
 						// 把頁數 ，筆數，開始筆數-結束筆數 塞回去
 			            $(".pageNum").html(response.pageNumber);
 			            $(".firstNum").html( ((response.pageNumber-1)*response.pageSize) +1);
 			            $(".endNum").html(response.pageNumber*response.pageSize);
 			            $(".totalNum").html(response.tatal);
 					  
-					}else{
-				 	// 如果查詢無資料	
-						$(".pageNum").html(0);
-			            $(".firstNum").html(0);
-			            $(".endNum").html(0);
-			            $(".totalNum").html(0);
-			            $('tbody').html('<tr><td colspan="10">目前無任何資料</td></tr>');	
-					}
-				
-					// loading hide
-					setTimeout(function(){
-			       		$("#audit_complaints_List").LoadingOverlay("hide");
-			       	},300)	
-		       },
-		
-			   // 發ajax錯誤
-		       error:function(xhr, ajaxOptions, thrownError){
-		           alert(xhr.status+"\n"+thrownError);
-		       }
-		
-		 	});
+	 				}else{
+	 			 	// 如果查詢無資料	
+	 					$(".pageNum").html(0);
+	 		            $(".firstNum").html(0);
+	 		            $(".endNum").html(0);
+	 		            $(".totalNum").html(0);
+	 		            $('tbody').html('<tr><td colspan="10">目前無任何資料</td></tr>');	
+	 				}
+	   */
+		        },
+
+		        // ajax完成~隱藏loading
+		        complete: function(){
+		        	setTimeout(function(){
+		        		$("#customerList").LoadingOverlay("hide");
+		        	},300)	
+				},
+				     
+				// 發ajax錯誤
+		        error:function(xhr, ajaxOptions, thrownError){
+		            alert(xhr.status+"\n"+thrownError);
+		        }
+
+	    	});
 		}
+	 
+	 
 	 
 	 // 申訴審核彈出框
 	 	$(".audit_popupbox_btn").click(function(){	

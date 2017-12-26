@@ -51,32 +51,32 @@ public class CustomerUserLoginController {
 		//進行商業服務	
 		CustomerBean bean = customerUserLoginService.findByCondition(useremail, password);
 		
-		// 從資料庫抓取LOGO圖片編碼(二進制)
-		 java.sql.Blob logingPhoto = bean.getLoginPhoto();
-		 
-		 try {
-			 
-		 // LOGO圖片編碼(二進制)->轉base64
-		 byte[] img = Base64.getEncoder().encode(logingPhoto.getBytes(1, (int)logingPhoto.length()));
-		 
-		 // base64 -> 轉字串顯示於畫面上
-		 String logingPhotoImg = new String(img);
-		 System.out.println("logingPhotoImg"+logingPhotoImg);
-		 model.addAttribute("logingPhotoImg", logingPhotoImg);
-		 } catch (Exception e) {
-			 
-		 e.printStackTrace();
-		 
-		 }
-		 
-		 
+		System.out.println("bean==>"+bean.toString());
+		
+		// 如果大頭貼為空
+		if(bean.getLoginPhoto()!=null){
+			
+			// 從資料庫抓取LOGO圖片編碼(二進制)
+			 java.sql.Blob logingPhoto = bean.getLoginPhoto();
+			 try {
+				 
+				 // LOGO圖片編碼(二進制)->轉base64
+				 byte[] img = Base64.getEncoder().encode(logingPhoto.getBytes(1, (int)logingPhoto.length())); 
+				 // base64 -> 轉字串顯示於畫面上
+				 String logingPhotoImg = new String(img);
+				 model.addAttribute("logingPhotoImg", logingPhotoImg);
+			 } catch (Exception e) {
+				 
+				 e.printStackTrace();
+			 }
+		}
+		
 		//依照執行結果挑選適當的View元件
 		if(bean==null) {
 			errors.put("password", "登入失敗 ");
 			return "login_error";
 		} else {
 			model.addAttribute("user", bean);
-			
 			return "login_success";
 		}
 	}

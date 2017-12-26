@@ -10,7 +10,7 @@ public class ExecuteCreateData {
 		ApplicationContext context = new ClassPathXmlApplicationContext("beans.config.service.test.xml");
 		
 		DataManagementService service = (DataManagementService) context.getBean("dataManagementService");
-		service.createCustomersData(500);
+		service.createCustomersData(95);
 		
 		((ConfigurableApplicationContext) context).close();
 	}

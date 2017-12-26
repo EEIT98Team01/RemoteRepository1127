@@ -29,6 +29,12 @@ public class BackstageDaoImpl implements BackstageDao {
 	}
 
 	@Override
+	public BackstageBean findByEmail(String email) {
+		System.out.println("AAA");
+		return this.getSession().get(BackstageBean.class, email);
+		
+	} 
+	@Override
 	public BackstageBean insert(BackstageBean bean) {
 		if (bean != null) {
 			BackstageBean temp = this.findById(bean.getApplicationID());
@@ -82,6 +88,7 @@ public class BackstageDaoImpl implements BackstageDao {
 
 			// 查詢並將結果回傳
 			Query<BackstageBean> query = this.getSession().createQuery(hql, BackstageBean.class);
+			System.out.println(query);
 			return query.getResultList();
 		}
 		
@@ -138,6 +145,7 @@ public class BackstageDaoImpl implements BackstageDao {
 	
 	private String hqlAddCondition(String hql, Map<String, String> condition) {
 		Set<String> fieldNameSet = condition.keySet();
+		System.out.println("**********"+fieldNameSet);
 		
 		int count = 0;
 		for(String fieldName: fieldNameSet) {
@@ -151,5 +159,7 @@ public class BackstageDaoImpl implements BackstageDao {
 		
 		return hql;
 	}
+
+	
 
 }

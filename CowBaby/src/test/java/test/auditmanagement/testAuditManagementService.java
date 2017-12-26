@@ -4,10 +4,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import model.bean.AdvertisementBean;
-import model.bean.AdvertisementDetailBean;
 import model.bean.BackstageBean;
-import model.bean.CustomerServiceBean;
 
 public class testAuditManagementService {
 
@@ -74,7 +71,8 @@ public class testAuditManagementService {
 			*/
 			
 		  // findBackstage(String account, String applicationState, int page, int rows, String sortCondition)
-			for(BackstageBean bean: service.findBackstage("", "", 2, 2, "email")) {
+			
+			for(BackstageBean bean: service.findBackstage("", "", 1, 999, "applicationDate desc, applicationID")) {
 				System.out.println(bean);
 			}
 			

@@ -161,6 +161,7 @@ $(function(){
 	     });
 	})
 	
+<<<<<<< HEAD
 	 // 抓取表單欄位
 	 var formData ="";
   	 // 預設當前頁
@@ -284,6 +285,127 @@ $(function(){
 
    		});
    	 }
+=======
+	/*********************************************/
+	
+	
+   // 查詢
+   $(".inquire").click(function(){
+       event.preventDefault(); 
+       
+       console.log("aaa")
+       
+     /*   $('#myPagination').twbsPagination('destroy');
+       
+		// 抓取表單欄位
+		formData = $(".memberFrom").serializeArray();*/
+	    // 發 ajax 查詢表單資料
+		inqueryData(formData , pagenow); 
+		
+   });
+	
+	// 查詢資料
+	function inqueryData(data,pageNum){
+	    	
+	    	console.log("data",data);
+	    	console.log("pageNum",pageNum);	
+	      	// 將畫面清空
+	      	$('tbody').empty();
+	    
+	    	$.ajax({
+		        type:"GET",                   
+		        url: "http://localhost:8080/CowBaby/service/getCustomerData",    
+		        data: {
+			       	 customerAccount:formData[0].value,
+			       	 pageSize:visiblecount,
+			       	 customerStatue:formData[1].value,
+		       		 pageNumber:pageNum	 
+		        }, 
+		         
+		        dataType:"json",   
+		        
+		        // ajax載入前
+		        beforeSend: function(){
+		        	//顯示laoding 參考網址=>https://gasparesganga.com/labs/jquery-loading-overlay/#quick-demo
+		        	$("#customerList").LoadingOverlay("show");
+				}, 
+				
+				// 成功要做的事
+		        success : function(response){              
+		           // response 回來的字串轉 json物件
+		           var obj = JSON.parse(response.list);
+		           // 組出 列表塞回 table
+		           
+		           $.each(obj, function (index, customer) {
+		        	   console.log("customer",customer);
+		           	    var html="";
+		 		    	html="<tr>"+
+	 							"<td>"+(index+1+ (response.pageSize*(response.pageNumber-1)))+"</td>" +
+	 							"<td>"+customer.email+"</td>" +
+	 							"<td>"+customer.customerName+"</td>" +
+	 							"<td>"+customer.mobilePhone+"</td>" +
+	 							"<td>"+customer.gender+"</td>" +
+	 							"<td>"+customer.userID+"</td>" +
+	 							"<td>"+customer.consumerSegmentation+"</td>" +
+	 							"<td>"+customer.totalAmoutOfConsumption+"</td>" +
+	 							"<td> <a href='<c:url value='CustomerManagementView.controller'/>?id=" + customer.customerID + 
+	 							"' class='btn btn-success'> <i class='fa fa-eye'></i> </a> </td>" +
+	 							"<td> <a href='<c:url value='CustomerManagementEdit.controller'/>?id=" + customer.customerID + 
+	 							"' class='btn btn-primary'> <i class='fa fa-pencil'></i> </a> </td>" +
+							 "</tr>";				
+	 		    		$('tbody').append(html);
+		           }) 
+		           
+		          	    
+	         		// 自動產生分頁
+		         	var totalPages = response.tatalPage;
+		            var pageSize  = response.pageSize;
+	 
+	 				if(!totalPages==0){
+	 				// 如果查詢有資料
+					   $('#myPagination').twbsPagination({
+			                  totalPages: totalPages,
+			                  visiblePages: pageSize,
+			                  
+			                  onPageClick: function (evt, page) { 
+								inqueryData(formData,page);
+				       	　　　　 }
+		                });
+	 				  
+						// 把頁數 ，筆數，開始筆數-結束筆數 塞回去
+			            $(".pageNum").html(response.pageNumber);
+			            $(".firstNum").html( ((response.pageNumber-1)*response.pageSize) +1);
+			            $(".endNum").html(response.pageNumber*response.pageSize);
+			            $(".totalNum").html(response.tatal);
+					  
+	 				}else{
+	 			 	// 如果查詢無資料	
+	 					$(".pageNum").html(0);
+	 		            $(".firstNum").html(0);
+	 		            $(".endNum").html(0);
+	 		            $(".totalNum").html(0);
+	 		            $('tbody').html('<tr><td colspan="10">目前無任何資料</td></tr>');	
+	 				}
+	  
+		        },
+
+		        // ajax完成~隱藏loading
+		        complete: function(){
+		        	setTimeout(function(){
+		        		$("#customerList").LoadingOverlay("hide");
+		        	},300)	
+				},
+				     
+				// 發ajax錯誤
+		        error:function(xhr, ajaxOptions, thrownError){
+		            alert(xhr.status+"\n"+thrownError);
+		        }
+
+	    	});
+	    }
+	
+	
+>>>>>>> branch 'master' of https://github.com/EEIT98Team01/RemoteRepository1127.git
 })
 </script>
 
