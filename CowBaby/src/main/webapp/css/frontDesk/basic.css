@@ -81,6 +81,10 @@ a, a:hover, a:focus {
     margin:10px 12px 0 10px;
 }
 
+.top-bar .top-bar-menu li:nth-child(2){
+	position:relative;
+}
+
 .top-bar .top-bar-menu li:nth-child(2),
 .top-bar .top-bar-menu li:nth-child(1){
     padding-right:20px;
@@ -343,6 +347,47 @@ a, a:hover, a:focus {
     z-index: 999;
     top: 30px;
 }
+
+/***********currentShoppingCartList****************/
+
+.currentShoppingCartList{
+	position: absolute;
+    width: 250px;
+    border: 1px solid;
+    height: 200px;
+    left: -75px;
+    top:50px;
+    z-index:999;
+    background:#fff;
+    overflow: auto;
+}
+
+.top-bar .top-bar-menu li:nth-child(2) .currentShoppingCartList li{
+		max-width: 300px;
+		padding-bottom: 10px;
+	    border-right: none;
+	    border-bottom: 1px dashed #ccc;
+}
+
+.top-bar .top-bar-menu li:nth-child(2) .currentShoppingCartList img{
+	margin-right: 10px;
+    vertical-align: middle;
+    width: 80px;
+    height: 60px;
+    border-radius: 0px;
+    float:left;
+}
+.top-bar .top-bar-menu li:nth-child(2) .currentShoppingCartList .cartList{
+	float:left;
+}
+
+.top-bar .top-bar-menu li:nth-child(2) .currentShoppingCartList .cartList p{
+	padding: 2px;
+    font-size: 12px;
+}
+
+
+
 
 
 
