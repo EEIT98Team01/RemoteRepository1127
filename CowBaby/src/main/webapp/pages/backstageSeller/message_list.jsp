@@ -40,6 +40,11 @@
 						<div class="panel panel-addpadding">
 							<form class="form-inline">
 								<div class="form-group">
+									<label for="exampleInputName2">會員帳號:</label>
+									<input type='text' name='account' id='account' class="form-control" value="${account}"/>
+								</div>
+							
+								<div class="form-group">
 									<label for="exampleInputName2">信件狀態</label>
 									<select class="form-control">
 										<option>全部</option>
@@ -52,13 +57,12 @@
 									<label for="exampleInputName2">寄件者</label>
 									<select class="form-control">
 										<option>全部</option>
-										<option>一般</option>
-										<option>系統</option>
+										<option>系統訊息</option>
+										<option>一般會員</option>
+										<option>平台賣家</option>
 									</select>
 								</div>
-								<button type="submit" class="btn btn-warning">
-									<i class=" fa fa-refresh"></i>
-								</button>	
+
 								<button type="submit" class="btn btn-primary">查詢</button>
 							</form>
 						</div>
@@ -71,32 +75,22 @@
                         	<thead>
 							  	<tr>
 									<th>刪除</th>
+									<th>標記</th>
 									<th>寄件人</th>
-									<th>主題</th>
+									<th>敘述</th>
 									<th>時間</th>
 									<th>狀態</th>
-									<th>回覆</th>	
 								</tr>
 							</thead>
                            <tr>
                               	<td>
                                     <input type="checkbox" class="mail-checkbox">
                               	</td>
+                              	<td>*</td>>
                                 <td>金毛獅王</td>
                                 <td> <a href="<c:url value="/pages/backstageSeller/message_detail.jsp"/>" class="linklist">9大派圍攻光明頂!!快火速前來支援</td>
                                 <td>2017-10-10 20:08:08</td>
-                                <td>未讀</td> 
-                                <td><button type="submit" class="btn btn-primary">回覆</button></td>    
-                            </tr> 	
-                          	<tr>
-                              	<td>
-                                    <input type="checkbox" class="mail-checkbox">
-                              	</td>
-                                <td>金毛獅王</td>
-                                <td> <a href="#" class="linklist">9大派圍攻光明頂!!快火速前來支援</td>
-                                <td>2017-10-10 20:08:08</td>
-                                <td>未讀</td> 
-                                <td><button type="submit" class="btn btn-primary">回覆</button></td>    
+                                <td>未讀</td>  
                             </tr> 	
 	                    </table>   
 	                </div>
