@@ -1,0 +1,394 @@
+
+/********** banner *********/
+.banner{
+    width:1170px;
+    margin: 0 auto;
+
+}
+/********** searchGift *********/
+.searchGift{
+   background: url("../../images/searchbox.jpg");
+   width: 1170px;
+   height: 164px;
+   margin: 20px auto;
+}
+
+/********** docline *********/
+.docline{
+    border-bottom:1px dotted #ccc; 
+    width: 1170px;
+    height: 8px;
+    margin: 25px auto;
+    clear: both;
+}
+
+/********** adSectione *********/
+.adSection{
+    width: 1170px;
+    margin: 0px auto;
+}
+.adSection li{
+    float: left;
+    margin-bottom: 15px;
+}
+
+.adSection li:nth-child(2){
+    margin:0 35px;
+}
+
+.adSection li img{
+    width: 365px;
+    height: 140px;
+}
+
+
+/**********new arrived *********/
+/**********hot prouduct *********/
+
+.newArrived,
+.hotprouduct{
+    width: 1170px;
+    margin: 0 auto;
+}
+
+.topic{
+    padding-top: 10px;
+    text-align: center;
+}
+
+.topic p{
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/***mainTitle共用***/
+.mainTitle{
+    width: 100%;
+    height: 130px;
+    position: relative;
+}
+
+.mainTitle .flagL,
+.mainTitle .flagR{
+    position: absolute;
+
+}
+
+.mainTitle .flagL{
+    top: -18px;
+    left:0; 
+}
+
+.mainTitle .flagR{
+    top: -18px;
+    right:0; 
+}
+
+
+/***slidere共用***/
+
+.slidershow{
+    width: 1170px;
+    margin: 0 auto;
+}
+.slidershow .item{
+    position: relative;
+    width: 255px;
+    height: 315px;
+    border: 1px solid #e6e4e4;
+    float: left;
+    background: #fff;
+   
+}
+
+
+.slidershow .item img{
+    width: 253px;
+    height: 190px;
+}
+
+.slidershow .item .title{
+    padding: 15px;
+    font-size: 15px;
+    line-height: 24px;
+    font-weight: bold;
+    color:#5f5f5f;
+    text-align: center;
+}
+
+
+.slidershow .item .originalPrice{
+    font-size: 14px;
+    text-align: center;
+    padding-bottom: 5px;
+    text-decoration:line-through;
+}
+
+.slidershow .item .specialPrice{
+    font-size: 14px;
+    text-align: center;
+}
+
+.slidershow .item .specialPrice .specialPriceNum{
+    font-size: 20px;
+    color: #e64242;
+}
+
+.slidershow .item .topIcon{
+    background-image: url("../../images/topIcon_bk.png");
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    font-size: 16px;
+    text-align: center;
+    line-height: 73px;
+    font-family: fantasy;
+    color: #fff;
+    z-index: 1;
+    left: 0px;
+    top:0px;
+}
+
+
+.slidershow .item .choice{
+    background-image: url("../../images/choice.png");
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    font-size: 16px;
+    text-align: center;
+    line-height: 73px;
+    font-family: fantasy;
+    color: #fff;
+    z-index: 1;
+    left: 0px;
+    top:0px;
+}
+
+
+/***hotSohp***/
+
+.hotSohpWrapper{
+    margin: 100px 0 ;
+    background-color: #e7efef;
+    padding:15px 0 50px 0;
+    background-image:url("../../images/star_bk.png");
+    position: relative;
+}
+
+.hotSohpWrapper .hotSohp{
+    position: relative;
+    width: 1170px;
+    margin: 0 auto;
+}
+
+.hotSohpWrapper .cutImgL,
+.hotSohpWrapper .cutImgR{
+    position: absolute;
+    top:20px;
+}
+
+.hotSohpWrapper .cutImgL{
+    left:-110px;
+}
+
+.hotSohpWrapper .cutImgR{
+    right:-110px;
+}
+
+.hotSohpWrapper .waveTop,
+.hotSohpWrapper .waveBottom{
+    position: absolute;
+    width: 100%;
+    height: 16px;
+}
+
+.hotSohpWrapper .waveTop{
+    background-image: url("../../images/waveTop.png");
+    top: -4px; 
+}
+
+.hotSohpWrapper .waveBottom{
+    background-image: url("../../images/waveBottom.png");
+    bottom: -10px;
+}
+
+.hotSohpWrapper .illustration1,
+.hotSohpWrapper .illustration2{
+    position: absolute;
+}
+
+.hotSohpWrapper .illustration1{
+    z-index: 10;
+    right: -40px;
+    bottom: -30px;
+}
+
+.hotSohpWrapper .illustration2{
+    z-index: 10;
+    left: -40px;
+    bottom: -30px;
+}
+
+.hotSohpWrapper .slidershow img{
+   
+    padding: 10px;
+}
+
+
+.hotSohpWrapper .slidershow .shopName{
+    color: #5c9d97;
+    font-size: 16px;
+    padding: 8px 0;
+    text-align: center;
+    font-weight: bolder;
+}
+
+.hotSohpWrapper .slidershow .description{  
+    font-size: 13px;
+    padding: 0px 12px;
+    line-height: 18px;
+}
+
+.hotSohpWrapper .slidershow .stars{
+    padding-top: 5px;
+    padding-left: 10px;
+    float: left;
+} 
+
+.hotSohpWrapper .slidershow .stars ul li{
+    margin: 0 2px;
+    float: left;
+}
+
+.hotSohpWrapper .slidershow .stars i{
+    color: #e5b856;
+    font-size: 15px;
+}
+
+.hotSohpWrapper .slidershow .likes{
+    padding-top: 2px;
+    float:right;
+    padding-right: 12px;
+    color: #cf6262;
+}
+
+.hotSohpWrapper .slidershow .likes i{
+    font-size: 18px;
+}
+
+.hotSohpWrapper .slidershow .likes span{
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    padding-left: 2px;
+}
+
+
+/***媽咪推薦***/
+
+.otherContent{
+    width: 1170px;
+    margin: 50px auto 150px auto;
+    height: 500px;
+   
+}
+
+.otherContent .momBlog{
+    width: 750px;
+    height: 440px;
+    background: #cae5e5;
+    border-radius: 20px 20px 0px 0px;
+    position: relative;
+    font-size: 20px;
+    float: left;
+}
+
+.otherContent .momBlog .momlogo{
+    position: absolute;
+    top: -63px;
+    width: 130px;
+    left: 20px;
+}
+
+.otherContent .momBlog .momTitle{
+    padding: 10px 0 10px 170px;
+    background: #a2d7d7;
+    border-radius: 10px 10px 0 0;
+}
+
+.otherContent .momBlog .momTitle img{
+    width:150px;
+}
+
+.otherContent .momBlog .momTitle span a{
+    font-size: 16px;
+    /* line-height: 48px; */
+    vertical-align: super;
+    padding-left: 350px;
+    color: #fff
+}
+
+
+
+
+.otherContent .momBlog .momArtical{
+    width: 350px;
+    height: 170px;
+    background-color: #fff;
+    border: 1px #ccc solid;
+    font-size: 16px;
+    padding: 15px;
+    margin: 10px 10px 10px 13px;
+    float: left;
+    border-radius: 10px;
+
+}
+
+
+.otherContent .momBlog .momArtical .articalL{
+    float: left;
+    padding-right: 10px;
+    font-size: 14px;
+    font-weight: bolder;
+    color: #434343;
+}
+
+
+
+.otherContent .momBlog .momArtical .articalR{
+   font-size: 13px;
+}
+
+.otherContent .momBlog .momArtical .articalR p:nth-child(1){
+   font-size: 16px;
+   color: #d66363;
+   font-weight: bolder;
+}
+
+.otherContent .momBlog .momArtical .articalR p:nth-child(2){
+    line-height: 18px;
+}
+
+
+.otherContent .otherLink{
+    width: 350px;
+    float: left;
+    padding-left: 50px;
+    
+}
+
+.otherContent .otherLink .link{
+    width: 350px;
+    border: 1px solid #ccc;
+    height: 100px;
+    margin-bottom: 25px;
+}
+
+.otherContent .otherLink .facebookLink{
+     height: 188px;
+}
+
+
+

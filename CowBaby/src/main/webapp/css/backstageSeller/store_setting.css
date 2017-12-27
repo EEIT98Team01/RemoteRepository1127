@@ -1,0 +1,24 @@
+
+/***********shop setting*************
+*************商店設置**************/
+
+#shop_setting > .panel > .panel-body > form{
+    font-size: 15px; 
+}
+
+#shop_setting > .panel > .panel-body > form .form-group{
+    margin-bottom: 20px;
+}
+
+
+#shop_setting > .panel > .panel-body > form > .row{
+   margin-bottom: 20px;
+}
+
+
+    
+.pictip{
+	padding-top:10px;
+    font-size: 12px;
+    color: #df3d3d;
+}

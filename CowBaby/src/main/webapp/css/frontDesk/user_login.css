@@ -1,0 +1,72 @@
+/*********loginBox*****************/
+
+.loginBox{
+	margin: 50px auto 100px auto;
+    /* padding: 40px; */
+    width: 800px;
+    height: 500px;
+    border-radius: 10px;
+    background: #fff;
+    margin-top: 50xp;
+    margin-button: 100xp;
+    
+}
+
+.loginBox .cancel_btn{
+    position: absolute;
+    right: -10px;
+    top: -15px;
+    width: 37px;
+    height: 37px;
+    background:url("../../images/mem-cancel.png");
+} 
+
+
+.login_part{
+    width: 500px;
+    // border-right: 1px dashed #ccc;
+    float: left;
+}
+
+.login_part form{
+    margin-top: 30px;
+}
+ 
+.login_part  button{
+    width: 120px;
+    margin-top: 20px;
+    margin-right: 15px;
+}
+.register_part{
+    width: 220px;
+    float: left;
+    height: 200px;
+   /*  background: #ccc; */
+
+}
+
+.register_part img{
+    width: 250px;
+
+}
+
+.box_button{
+    clear: both;
+    border-top: 1px dashed #ccc;
+}
+
+.box_button table td{
+    padding: 7px 6px;
+    text-align:right; 
+}
+
+.box_button table td:nth-child(1){
+    color:#d86c2a;;
+    width: 120px;
+}
+
+.box_button table td:nth-child(2){
+    text-align:left;
+    line-height: 18px;
+}
+

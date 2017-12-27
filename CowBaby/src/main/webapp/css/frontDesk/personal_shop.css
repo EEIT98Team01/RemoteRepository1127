@@ -1,0 +1,174 @@
+
+/*****personal shop sidebar*****/
+
+.personal_shop_page_container .personal_infor{
+    width: 100%;
+    height: 370px;
+    border: 1px #e8e8e8 solid;
+    text-align: center;
+    font-size: 15px;
+}
+
+.personal_shop_page_container .personal_infor .seller_title{
+    text-align: center;
+    font-size: 16px;
+    padding: 10px;
+    background: #9ad8df;
+    color: #fff;
+}
+
+.personal_shop_page_container .personal_infor .seller_img{
+    width: 140px;
+    height: 140px;
+    text-align: center;
+    border: 5px solid #d4dcdd;
+    border-radius: 50%;
+    margin: 20px auto;
+   
+}
+.personal_shop_page_container .personal_infor .seller_img img{
+    margin-top: 7px;
+    width: 115px;
+    border-radius: 50%; 
+}
+
+.personal_shop_page_container .personal_infor .infor_titile{
+    text-align: left;
+    padding: 5px 10px 5px 40px;
+    // padding: 8px 20px 8px 50px;
+}
+
+.personal_shop_page_container .personal_infor .infor_titile span:nth-child(1){
+    margin-right: 5px;
+    font-size: 16px;
+}
+
+
+.personal_shop_page_container .personal_infor .infor_valuation{
+    text-align: left;
+    font-size: 16px;
+    margin-top: 15px;
+    padding: 10px 10px 5px 40px;
+    font-weight: bolder;
+    border-top: 1px dashed #ccc;
+}
+
+.personal_shop_page_container .personal_infor .infor_valuation .score{
+    font-size: 20px;
+    color: #f1648f;
+   
+}
+
+.personal_shop_page_container .personal_infor .stars{
+    overflow: hidden;
+    padding:0;
+   
+}
+
+.personal_shop_page_container .personal_infor .stars li{
+    padding-top: 10px;
+    padding-left: 2px;
+    float: left;
+}
+
+.personal_shop_page_container .personal_infor .stars li i{
+    color: #e5b856;
+    font-size: 18px;
+}
+
+
+/**************other_function****************/
+
+.other_function{
+    width: 100%;
+    height: 100px;
+    padding: 15px;
+}
+
+.other_function a{
+    float: left;
+    display: block;
+    padding: 8px 10px;
+    background: #66a0b6;
+    border-radius: 50px;
+    margin-top: 10px;
+    color: #fff;
+    font-size: 14px;
+
+}
+
+
+
+/*****personal shop introduction*****/
+
+.personal_shop_page_container .shop_introduction{
+    padding: 20px;
+    border-top: 1px solid #8bd1d9;
+}
+
+.personal_shop_page_container .shop_introduction .personal_shop_name{
+    text-align: center;
+    font-size: 18px;
+    letter-spacing: 1px;
+    font-weight: bolder;
+}
+
+.personal_shop_page_container .shop_introduction .personal_shop_description{
+    padding:20px 0;
+    line-height: 20px;
+    font-size: 14px;
+}
+
+/*****personal shop iproudectList*****/
+
+.personal_shop_page_container .proudectList {
+    margin-top: 25px;
+}
+
+.personal_shop_page_container .proudectList .item{
+    width: 207px;
+    float: left;
+    border:1px solid #e6e6e6;
+    margin-right: 24px;
+    margin-bottom: 30px;
+}
+
+.personal_shop_page_container .proudectList .item:nth-child(4n+4){
+   margin-right:0; 
+}
+
+.personal_shop_page_container .proudectList .item img{
+    width: 205px;
+}
+
+.personal_shop_page_container .proudectList .item .title{
+    padding: 10px 15px;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 18px;
+}
+
+.personal_shop_page_container .proudectList .item .originalPrice,
+.personal_shop_page_container .proudectList .item .specialPrice{
+    text-align: center;
+}
+
+.personal_shop_page_container .proudectList .item .originalPrice{
+    font-size: 13px;
+    padding-bottom: 5px;
+    text-decoration: line-through;
+}
+
+.personal_shop_page_container .proudectList .item .specialPrice{
+    font-size: 13px;
+    text-align: center;
+    padding: 0px 0 12px 0;
+}
+
+.personal_shop_page_container .proudectList .item .specialPrice .specialPriceNum {
+    font-size: 16px;
+    color: #e64242;
+}
+
+
+
