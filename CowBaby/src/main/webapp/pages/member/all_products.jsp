@@ -100,12 +100,12 @@
  							
 			<section class="proudectList">
 				<c:forEach var="array" varStatus="st" items="${productList}">
-					<div class="item">
-						<a href="<c:url value="/pages/member/prouduct_item.jsp"/>?id=" + ${array[1]}">
+					<div class="item"> 
+						<a href="<c:url value="ProductItemOfShop"/>?storeID=${array[0]}&productID=${array[6]}" >
 							<img src=" <c:url value="/images/newArrived1.jpg"/>">
-							<p class="stroe_name">${array[1]}</p>
-							<p class="title">${array[2]}</p>
-							<div class="specialPrice">特價 NT <span class="specialPriceNum">${array[4]}</span></div>
+							<p class="stroe_name">${array[2]}</p>
+							<p class="prouduct_name">${array[3]}</p>
+							<div class="specialPrice">特價 NT <span class="specialPriceNum">${array[5]}</span></div>
 						</a>
 					</div>
 				</c:forEach>
@@ -127,6 +127,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/js/bootstrap-switch.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/js/bootstrap-dialog.min.js"></script>
 <script src="<c:url value="/pluging/Bxsliders/jquery.bxslider.min.js"/>"></script>
+<script src="<c:url value="/js/frontDesk/callshopingCartAPI.js"/>"></script>
 
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.12/jquery.bxslider.js"></script> -->
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.12/jquery.bxslider.css">  -->
@@ -137,7 +138,7 @@
 <script type="text/javascript">
 
 	$(function(){
-
-
+		// 一進來先獲取購物車內的內容
+		/* new ShoppingCatAPI("","",""); */
 	})
 </script>

@@ -139,6 +139,10 @@ public class ShoppingCart {
 		}
 	}
 	
+	
+	
+		
+	
 	@Override
 	public String toString() {
 		return "ShoppingCart [totalItems=" + totalItems + ", totalAmount=" + totalAmount + ", storeNumber="

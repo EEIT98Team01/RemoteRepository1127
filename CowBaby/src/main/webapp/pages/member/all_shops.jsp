@@ -252,8 +252,9 @@
 
 <script type="text/javascript">
 
-	$(function(){
+$(function(){
+	// 一進來先獲取購物車內的內容
+	/* new ShoppingCatAPI("","",""); */
 
-
-	})
+})
 </script>

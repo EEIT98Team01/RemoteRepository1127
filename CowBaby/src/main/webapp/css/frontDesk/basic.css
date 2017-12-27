@@ -367,6 +367,7 @@ a, a:hover, a:focus {
 		padding-bottom: 10px;
 	    border-right: none;
 	    border-bottom: 1px dashed #ccc;
+	    color:#685e5e;
 }
 
 .top-bar .top-bar-menu li:nth-child(2) .currentShoppingCartList img{
