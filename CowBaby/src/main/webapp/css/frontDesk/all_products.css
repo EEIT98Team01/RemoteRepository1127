@@ -163,6 +163,8 @@
     border: 1px solid #ccc;
 }
 
+
+
 .all_products_page_container .proudect_detail .product_infor .product_size p{
     font-size: 14px;
 }
@@ -213,3 +215,7 @@
     margin: 10px;
 }
 
+
+.all_products_page_container .proudect_detail .product_infor .product_size .productSpec.select{
+	background:#beeadc;
+}

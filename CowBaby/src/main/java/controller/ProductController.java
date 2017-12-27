@@ -1,7 +1,8 @@
 package controller;
 
-
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,11 +12,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import model.bean.ProductBean;
 import model.service.ProductService;
+import model.service.ProductSizeService;
 
 @Controller
 public class ProductController {
 	@Autowired
 	ProductService productService;
+	
+	@Autowired
+	ProductSizeService productSizeService;
 	
 	@RequestMapping(value = ("ProductController"), method = { RequestMethod.GET, RequestMethod.POST })
 	public String view(Model model, String classficationID,String productStatus) {
@@ -47,16 +52,37 @@ public class ProductController {
 	
 	// 前台商品頁面
 	@RequestMapping(value = ("AllProductController"), method = { RequestMethod.GET, RequestMethod.POST })
-	public String view(Model model) {
+	public String allProduct(Model model) {
 		
 		List<Object[]> list = productService.findObject();
-		
-		
-		
 		model.addAttribute("productList", list);
 		
 		return "all_product_list";
 	}
+	
+	
+	// 前台單品資訊
+	@RequestMapping(
+			value=("ProductItemOfShop"),
+			method={RequestMethod.GET, RequestMethod.POST}
+	)
+	public String productItem(Model model, String storeID,String productID) {
+		
+		if(storeID != null && !"".equals(storeID.trim()) || productID != null && !"".equals(productID.trim())) {
+			//查詢該商品的全部資訊
+			model.addAttribute("productData", productService.getStoreData(Integer.parseInt(productID)));
+			
+			//查詢該商品的size
+			Map<String,String> condition = new HashMap<String,String>();
+			condition.put("productID","= " + productID);
+			model.addAttribute("productSize", productSizeService.findByCondition(condition));
+		}
+	
+		
+		return "prouduct_item";
+	}
+	
+	
 	
 }
 

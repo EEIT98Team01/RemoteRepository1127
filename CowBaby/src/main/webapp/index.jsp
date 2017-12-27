@@ -468,17 +468,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/js/bootstrap-switch.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/js/bootstrap-dialog.min.js"></script>
 <script src="<c:url value="/pluging/Bxsliders/jquery.bxslider.min.js"/>"></script>
-
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.12/jquery.bxslider.js"></script> -->
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.12/jquery.bxslider.css">  -->
- 
-
-
+<script src="<c:url value="/js/frontDesk/callshopingCartAPI.js"/>"></script>
 
 <script type="text/javascript">
-
-	$(function(){
-
+$(function(){
+		// 一進來先獲取購物車內的內容
+		
 		$('.slidershow-Wrapper1').bxSlider({
 		    slideWidth: 255,
 		    moveSlides: 1,
@@ -506,5 +501,5 @@
 		    slideMargin: 40,
 		    pager: false
   		}); 
-	})
+})
 </script>

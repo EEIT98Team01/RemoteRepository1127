@@ -44,7 +44,6 @@
 									<label for="exampleInputName2">申請人帳號:</label>
 									<input type='text' class="form-control" name="email"/>
 								</div>
-
 								<div class="form-group">
 									<label for="exampleInputName2">審核狀態:</label>
 									<select class="form-control" name="applicationState">
@@ -52,7 +51,7 @@
 										<option value="1">未審核</option>
 										<option value="2">審核中</option>
 										<option value="3">審核通過</option>
-										<option value="4">審核未通過</option>		
+										<option value="4">未通過審核</option>		
 									</select>
 								</div>
 								<button type="submit" class="btn btn-primary inquire">查詢</button>
@@ -114,3 +113,11 @@
 <script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@1.5.4/extras/loadingoverlay_progress/loadingoverlay_progress.min.js"></script>
 <script src="<c:url value="/js/frontDesk/audit_shop.js"/>"></script>
 
+<script>
+$(function(){
+	
+ 	
+ 	
+	
+})
+</script>
