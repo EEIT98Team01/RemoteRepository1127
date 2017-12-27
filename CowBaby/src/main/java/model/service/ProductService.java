@@ -28,6 +28,7 @@ public class ProductService {
 	@Autowired
 	private ProductSizeDao productSizeDao;
 	
+
 	// 查詢商品分類單一設置資料
 	@Transactional(readOnly = true)
 	public ProductBean getStoreData(int classficationID) {
@@ -110,6 +111,7 @@ public class ProductService {
 		// account對應到資料庫中的email,若為null或"",表不設定該條件
 		if (account != null && account.trim().length() != 0) {
 			condition.put("email", "like '%" + account + "%'");
+
 		}
 
 		// userType對應到資料庫中的userID,若為null或"",表不設定該條件

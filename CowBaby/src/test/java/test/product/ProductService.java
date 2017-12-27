@@ -18,7 +18,6 @@ public class ProductService {
 	@Autowired
 	private ProductDao productDao;
 	
-	// 查詢商品分類單一設置資料
 		@Transactional(readOnly = true)
 		public ProductBean getStoreData(int classficationID) {
 			return productDao.findById(classficationID);

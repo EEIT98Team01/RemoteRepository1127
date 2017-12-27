@@ -6,14 +6,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import model.service.Order01Service;
+
 @Controller
 public class Order01ManagementController {
 	
-	//@Autowired
-	//private OrderDetailService OrderDetailService;
+	@Autowired
+	private Order01Service order01Service;
 	
 	@RequestMapping(
-			value=("Order01ManagementList.controller"),    //對應到JSP order_list, "識別字串"要跟JSP對應
+			value=("Order01List.controller"),    //對應到JSP order_list, "識別字串"要跟JSP對應
 			method={RequestMethod.GET, RequestMethod.POST}
 	)
 						//Client端送資料過來，從請求裡面把需要的值拿出來  等於Servlet getParameter key 
@@ -61,14 +63,14 @@ public class Order01ManagementController {
 		
 		
 	
-//		if(orderID == null && orderStatus == null && (endTime == null || startTime == null)) {
-//			model.addAttribute("order01List", order01Service.find());   //"order01List" 要跟JSP對應
-//		} else {
-//			model.addAttribute("order01List", order01Service.findByCondition(orderID, orderStatus, startTime, endTime));  //"order01List" 要跟JSP對應
-//		}
+		if(orderID == null && orderStatus == null && (endTime == null || startTime == null)) {
+			model.addAttribute("order01List", order01Service.find());   //"order01List" 要跟JSP對應
+		} else {
+			model.addAttribute("order01List", order01Service.findByCondition(orderID, orderStatus, startTime, endTime));  //"order01List" 要跟JSP對應
+		}
 		
 		//依照執行結果挑選適當的View元件
-		return "order01_managment_list";  //"order01_managment_list 要跟view對應
+		return "order01_list";  //"order01_list 要跟view對應
 	}
 		public String edit(Model model, String orderStatus) {
 			System.out.println("edit");																//id改為orderStatus

@@ -32,7 +32,7 @@
 	<section class="page_container member_register_container">
 		<!-- 主要內容-->
 		<div class="main_container_col_1">
-			YAYAYAYAY成功快去EMAIL登入雞活!!!!
+			YAYAYAYAY成功快去EMAIL登入查看認證信件!!!!
 		</div>	
 	</section>
 	

@@ -97,6 +97,36 @@
 				
 			</div>
 			<!--產品LIST-->
+<<<<<<< HEAD
+			<section class="proudectList">
+				<div class="item">
+					<img src=" <c:url value="/images/newArrived1.jpg"/>">
+					<p class="title">英國Blade ＆ Rose 聖誕款聖誕款聖款內內搭褲</p>
+					<div class="originalPrice">原價 NT 190</div>
+					<div class="specialPrice">特價 NT <span class="specialPriceNum">190</span></div>
+				</div>
+
+				<div class="item">
+					<img src="<c:url value="/images/newArrived2.jpg"/>">
+					<p class="title">英國Blade ＆ Rose 聖誕款內搭褲</p>
+					<div class="originalPrice">原價 NT 190</div>
+					<div class="specialPrice">特價 NT <span class="specialPriceNum">190</span></div>
+				</div>
+
+				<div class="item">
+					<img src=" <c:url value="/images/newArrived3.jpg"/>">
+					<p class="title">英國Blade ＆ Rose 聖誕款內搭褲</p>
+					<div class="originalPrice">原價 NT 190</div>
+					<div class="specialPrice">特價 NT <span class="specialPriceNum">190</span></div>
+				</div>
+
+				<div class="item">
+					<img src=" <c:url value="/images/newArrived4.jpg"/>">
+					<p class="title">英國Blade ＆ Rose 聖誕款內搭褲</p>
+					<div class="originalPrice">原價 NT 190</div>
+					<div class="specialPrice">特價 NT <span class="specialPriceNum">190</span></div>
+				</div>
+=======
  							
 			<section class="proudectList">
 				<c:forEach var="array" varStatus="st" items="${productList}">
@@ -109,6 +139,7 @@
 						</a>
 					</div>
 				</c:forEach>
+>>>>>>> branch 'master' of https://github.com/EEIT98Team01/RemoteRepository1127.git
 
 			</section>
 		</div>

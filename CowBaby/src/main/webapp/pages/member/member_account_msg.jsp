@@ -53,6 +53,9 @@
 					<a class="open_shop">我要開店</a>
 				</p>
 			</div>
+<<<<<<< HEAD
+			 個人訊息個人訊息個人訊息個人訊息
+=======
 			
 			<!--這邊開始寫內容-->
 				<div class="row">
@@ -146,6 +149,7 @@
 			 
 			 
 			 
+>>>>>>> branch 'master' of https://github.com/EEIT98Team01/RemoteRepository1127.git
 		</div>	
 			
 	</section>

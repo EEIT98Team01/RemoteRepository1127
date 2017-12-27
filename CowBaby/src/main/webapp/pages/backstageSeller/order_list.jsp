@@ -37,7 +37,7 @@
 			<div class="panel panel-addpadding">
 				<!-- 問熊大-->
 				<form class="form-inline"																	
-				action="${pageContext.servletContext.contextPath}/Order01ManagementList.controller" 
+				action="${pageContext.servletContext.contextPath}/Order01List.controller" 
 					method="POST">										<!--↑識別字串 要跟controller對應 -->
 					<div class="form-group">
 						<label for="exampleInputName2">訂單編號:</label> 
@@ -117,7 +117,7 @@
 									class="linklist">${order01.orderID}</a></td>  <!--←${order01} 為上面var值設定  .orderID 為欄位值 -->
 								<td>${order01.orderDate}</td>  
 								<td>${order01.totalItems}</td>
-								<td>${order01.customerID}</td>
+								<td>${order01.email}</td>
 								<td>${order01.totalAmount}</td>
 								<td><span class="label label-danger">未處理</span></td>
 								<td><button type="button" class="btn btn-success">變更狀態</button></td>
@@ -129,46 +129,6 @@
 				</table>
 			</div>
 		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-3 record-number">
-			<c:if test="${!empty page}">
-				<span>第{page}頁</span>
-				<span>第${(page-1)*10+1} - ${page*10}筆</span>
-				<span>共${orderQuantity}筆</span>
-			</c:if>
-		</div>
-		<ul class="pagination">
-			<li><c:if test="${!empty orderQuantity}">
-					<a
-						href="<c:url value="Order01ManagementList.controller?page=${page-1}&orderBy=${orderBy}&orderID=${orderID}&orderStatus=${orderStatus}" />"
-						aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-					</a>
-				</c:if>
-				<c:if test="${page==1}">
-	      			<a href="<c:url value="Order01ManagementList.controller?page=1&orderBy=${orderBy}&orderID=${orderID}&orderStatus=${orderStatus}" />" aria-label="Previous">
-						<span aria-hidden="true">&laquo;</span>
-					</a>
-				</c:if>
-			</li>
-	
-			<c:forEach var="pageNumber" begin="1" end="${pageQuantity}">
-				<li><a href="<c:url value="Order01ManagementList.controller?page=${pageNumber}&orderBy=${orderBy}&order01=${order01}&orderStatus=${orderStatus}" />">${pageNumber}</a></li>
-			</c:forEach>
-			
-	    	<li>
-	    		<c:if test="${(page) != pageQuantity}">
-	    			<a href="<c:url value="Order01ManagementList.controller?page=${page+1}&orderBy=${orderBy}&orderID=${orderID}&orderStatus=${orderStatus}" />" aria-label="Next">
-	        			<span aria-hidden="true">&raquo;</span>
-	    			</a>
-	    		</c:if>
-	    		<c:if test="${(page) == pageQuantity}">
-	    			<a href="<c:url value="Order01ManagementList.controller?page=${pageQuantity}&orderBy=${orderBy}&orderID=${orderID}&orderStatus=${orderStatus}" />" aria-label="Next">
-	        			<span aria-hidden="true">&raquo;</span>
-	    			</a>
-	    		</c:if>
-	    	</li>
-		</ul>
 	</div>
 
 	</section> </section> </section>

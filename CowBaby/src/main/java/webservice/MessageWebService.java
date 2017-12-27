@@ -1,5 +1,6 @@
 package webservice;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -50,15 +51,63 @@ public class MessageWebService {
 			method={RequestMethod.GET},
 			produces={"application/json;charset=UTF-8"}
 	)
-	public String getMessageList(String receiverAccount, String msgSenderID, String readStatus, String msgMarker, int pageNumber, int pageSize, String sortCondition) {
+	public String getMessageList(String receiverAccount, String msgSenderID, String userType, String readStatus, String msgMarker, int pageNumber, int pageSize, String sortCondition) {
 		JSONObject jsonObj = new JSONObject();	// json物件,儲存欲回傳資料
 		JSONArray array;						// 儲存List<MessageBean>的json物件
-		int quantity;							// 回傳的資料筆數
+		int quantity = 0;						// 回傳的資料筆數
 		int pageQuantity;						// 總頁數
+		List<MessageBean> messageList = messageService.receiverMessage(receiverAccount, msgSenderID, readStatus, msgMarker, pageNumber, pageSize, sortCondition);
 		
-		// 取得資料及總筆數
-		array = new JSONArray(messageService.receiverMessage(receiverAccount, msgSenderID, readStatus, msgMarker, pageNumber, pageSize, sortCondition));
-		quantity = messageService.getQuantity(receiverAccount, msgSenderID, readStatus, msgMarker);
+		if( (msgSenderID != null  && !"".equals(msgSenderID.trim())) || "全部".equals(userType) ) {
+			// 有指定寄件人或不選擇寄件者身份
+			array = new JSONArray(messageList);
+			quantity = messageService.getQuantity(receiverAccount, msgSenderID, readStatus, msgMarker);
+		} else {
+			// 沒有指定寄件人,且指定寄件者身份
+			List<MessageBean> resultMessageList = new LinkedList<MessageBean>();	// 儲存寄件者符合身份的訊息
+			
+			if("系統訊息".equals(userType)) {
+				// 只看系統訊息
+				for(int i = 0; i < messageList.size(); i++) {
+					// 取得訊息發送者資訊
+					CustomerBean customer = customerManagementService.findByCondition(messageList.get(i).getMsgSenderID(), null, null).get(0);
+					
+					if(customer.getCustomerID() == 1) {
+						// ID為1表示為系統管理者
+						resultMessageList.add(messageList.get(i));
+						quantity++;
+					}
+				}
+				
+			} else if("一般會員".equals(userType)) {
+				// 只看一般會員訊息
+				for(int i = 0; i < messageList.size(); i++) {
+					// 取得訊息發送者資訊
+					CustomerBean customer = customerManagementService.findByCondition(messageList.get(i).getMsgSenderID(), null, null).get(0);
+					
+					if(customer.getUserID() == 1) {
+						// UserID為1表示為一般會員
+						resultMessageList.add(messageList.get(i));
+						quantity++;
+					}
+				}
+			} else {
+				// 只看平台賣家訊息
+				for(int i = 0; i < messageList.size(); i++) {
+					// 取得訊息發送者資訊
+					CustomerBean customer = customerManagementService.findByCondition(messageList.get(i).getMsgSenderID(), null, null).get(0);
+					
+					if(customer.getUserID() == 2) {
+						// UserID為2表示為平台賣家
+						resultMessageList.add(messageList.get(i));
+						quantity++;
+					}
+				}
+			}
+			
+			array = new JSONArray(resultMessageList);
+		}
+
 		
 		// 計算總頁數
 		if((quantity%pageSize) == 0) {
