@@ -18,7 +18,7 @@ public class TestCustomerManagementService {
 	// 測試內容
 	  //findById(int id)
 		/*
-		System.out.println(service.getClassficationData(1));
+		System.out.println(service.getStoreData(1));
 		*/
 		
 	  //find()
@@ -27,6 +27,12 @@ public class TestCustomerManagementService {
 			System.out.println(bean);
 		}
 		*/
+		//insert
+		ClassficationBean bean = new ClassficationBean();
+		bean.setClassficatoinName("圖書");
+		bean.setClassificationDescription("白雪公主與七個小矮人");
+		bean.setStartStopStatus(true);
+		System.out.println(service.insertStoreData(bean));
 		
 	  //find(int page, int rows)
 		/*
@@ -43,10 +49,11 @@ public class TestCustomerManagementService {
 		*/
 		
 	  //findByCondition(String account, String userType, String clusterID)
-		
+		/*
 		for(ClassficationBean bean: service.findByCondition(null, "'玩具'")) {
 			System.out.println(bean);
 		}
+		*/
 		
 		
 	  //findByCondition(String account, String userType, String clusterID, int page, int rows)

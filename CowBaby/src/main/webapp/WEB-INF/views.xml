@@ -43,6 +43,20 @@
 		<property name="url" value="/pages/member/apple_seller_success.jsp"></property>
 	</bean>
 	
+	<!-- 商品分類新增 -->
+	<bean id="product_managment_insert" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/pages/common/add_prouduct_popup.jsp"></property>
+	</bean>
+	<!-- 客服申訴失敗 -->
+	<bean id="customer_service_error" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/pages/member/customer_service.jsp"></property>
+	</bean>
+	
+	<!-- 客服申訴成功 -->
+	<bean id="customer_service_success" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/pages/member/customer_service_success.jsp"></property>
+	</bean>
+	
 	<!-- 前台全部商品 -->
 	<bean id="all_product_list" class="org.springframework.web.servlet.view.InternalResourceView">
 		<property name="url" value="/pages/member/all_products.jsp"></property>

@@ -1,8 +1,12 @@
 package test.customerservice;
 
+import java.sql.Timestamp;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import model.bean.CustomerServiceBean;
 
 public class TestCustomerServiceAuditService {
 
@@ -25,6 +29,15 @@ public class TestCustomerServiceAuditService {
 			System.out.println(bean);
 		}
 		*/
+		
+	  //insert
+		CustomerServiceBean bean = new CustomerServiceBean();
+		bean.setProblemTypes(1);
+		bean.setEmail("s730530@gmail.com");
+		bean.setProblemDescription("安安");
+		bean.setServiceFeedback("你好");
+		bean.setProcessStatus(2);
+		System.out.println(service.insertStoreData(bean));
 		
 	  //find(int page, int rows)
 		/*

@@ -2,11 +2,13 @@ package test.customerservice;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import model.bean.ClassficationBean;
 import model.bean.CustomerServiceBean;
 import model.dao.CustomerServiceDao;
 
@@ -80,6 +82,13 @@ public class CustomerServiceAuditService {
 			return false;
 		}
 	}
+	
+	//新增玩家客訴資料
+	@Transactional
+	public CustomerServiceBean insertStoreData(CustomerServiceBean bean) {
+		return CustomerServiceAuditDao.insert(bean);
+	}
+
 	
 	// 將查詢條件塞進Map
 	private HashMap<String, String> createCondition(String problemTypes, String processStatus, String customerID) {

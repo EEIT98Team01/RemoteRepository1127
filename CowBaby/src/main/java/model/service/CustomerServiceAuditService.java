@@ -2,6 +2,7 @@ package model.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,6 +40,12 @@ public class CustomerServiceAuditService {
 	@Transactional(readOnly=true)
 	public List<CustomerServiceBean> find(int page, int rows, String sortCondition) {
 		return CustomerServiceDao.find(page, rows, sortCondition);
+	}
+	
+	//新增玩家客訴資料
+	@Transactional
+	public CustomerServiceBean insertStoreData(CustomerServiceBean bean) {
+		return CustomerServiceDao.insert(bean);
 	}
 	
 	// 回傳符合某條件的資料
@@ -114,4 +121,7 @@ public class CustomerServiceAuditService {
 		
 		return result;
 	}
+	
+	//新增特定客訴資料
+
 }

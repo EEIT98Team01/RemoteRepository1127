@@ -150,9 +150,10 @@ $(function(){
 		                    'user-id': '3'
 		                },
 		                action: function(){
+		                	console.log("AAA");
 		                	$("#qqq").submit();
 		                	
-		                    alert('Hi Orange!');
+		                   
 		                }
 		            },{
 		                label: '取消',
