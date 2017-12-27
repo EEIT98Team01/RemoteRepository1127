@@ -64,7 +64,8 @@
 							<table class="table table-striped table-bordered table_thead" id="customerList"> 
 								<thead>
 								  <tr>
-								    <th>序號</th>
+								    <th>
+</th>
 								    <th>帳號</th>
 									<th>姓名</th>
 								<%-- 	<th><a href="<c:url value="CustomerManagementList.controller?page=1&orderBy=email&account=${account}&userType=${userType}" />">帳號</a></th>
@@ -160,16 +161,13 @@ $(function(){
    	 var totalPage = 1; 
    	 // 預設每頁顯示筆數
    	 var visiblecount = 10; 
-	
-<<<<<<< HEAD
-=======
-  // 抓取表單欄位
-		formData = $(".memberFrom").serializeArray();
+
+	// 抓取表單欄位
+	formData = $(".memberFrom").serializeArray();
 		
-	    // 發 ajax 查詢表單資料
-		inqueryData(formData , pagenow);
-   	 
->>>>>>> branch 'master' of https://github.com/EEIT98Team01/RemoteRepository1127.git
+	// 發 ajax 查詢表單資料
+	inqueryData(formData , pagenow);
+
     // 查詢
     $(".inquire").click(function(){
     	console.log("AA");
