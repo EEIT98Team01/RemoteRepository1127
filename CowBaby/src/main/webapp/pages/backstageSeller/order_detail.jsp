@@ -51,7 +51,7 @@
 							      	</div>
 							      	<div class="col-md-6 pull-right text-right">
 							      		<i class="fa fa-calendar-minus-o" aria-hidden="true"></i>
-							      		下訂日期<!-- 2017-10-10          怎麼插阿 -->
+							      		下訂日期<span></span>
 							      	</div>
 						      	</div>
 						    </div>
@@ -73,11 +73,11 @@
 									<c:forEach var="orderDetail" items="${orderDetail_list}">
 									  	<tr>
 											<td>${orderDetail.title}</td>
-											<td><img src="${pageContext.request.contextPath}/images/01.jpg"></td>
+				<!-- 怎麼插另一個Table的圖片 -->	<td><img src="${pageContext.request.contextPath}/images/01.jpg"></td>
 											<td>${orderDetail.quantity}</td>
 											<td>有</td>
 											<td>${orderDetail.unitPrice}</td>
-											<td>240</td>		
+											<td>${orderDetail.unitPrice*quantity}</td>		
 									  	</tr>  
 									</c:forEach> 									 
 								</tbody>
