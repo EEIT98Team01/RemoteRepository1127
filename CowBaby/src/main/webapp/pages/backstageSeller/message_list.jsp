@@ -226,7 +226,7 @@ $(function(){
 							"<td>" + message.msgMarker + "</td>" +
 							"<td>" + message.msgSenderID + "</td>" +
 							"<td>" +
-								"<a href='<c:url value='/pages/backstageSeller/message_detail.jsp?messageId=" +
+								"<a href='<c:url value='/pages/backstageSeller/messageView?messageId=" +
 								message.msgID + "'/>' class='linklist'>" + message.msgContent + "</a>" +
 							"</td>" +
 							

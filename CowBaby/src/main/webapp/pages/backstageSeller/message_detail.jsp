@@ -30,44 +30,48 @@
 				<div class="container details-inbox">
 					<div class="row">
 						<div class="col-md-12">
-                  			<h4><span>主題:   </span>9大派圍攻光明頂!!快火速前來支援</h4>
-                  		</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
 							<i class="fa fa-user-circle-o" aria-hidden="true"></i>
-                  		  	<strong>FROM:</strong>	
-                          	<strong>金毛獅王謝遜</strong>
-                          	<span>[mosaddek73@gmail.com]</span>
+                  		  	<strong>FROM:</strong>
+                          	<strong>${customerName}</strong>
+                          	<span>[${messageData.msgSenderID}]</span>
                           	<span>-</span>
-                          	<span><i class="fa fa-clock-o" aria-hidden="true"></i>2017-10-10</span> 	
+                          	<span><i class="fa fa-clock-o" aria-hidden="true"></i>${messageTime}</span> 	
                   		</div>
 					</div>
 					<div class="row text">
 						<div class="col-md-12">
 							<p>
-							根據外媒報導，德國一名男子賀杰（Niels Hoegel）於1999至2005年間，在兩間醫院擔任護理師期間，都故意替病患注射過量心臟藥物，導致其死亡，事件曝光後，他終於在2005年間因兩起謀殺案遭到逮捕，並遭判無期徒刑。
-							根據外媒報導，德國一名男子賀杰（Niels Hoegel）於1999至2005年間，在兩間醫院擔任護理師期間，都故意替病患注射過量心臟藥物，導致其死亡，事件曝光後，他終於在2005年間因兩起謀殺案遭到逮捕，並遭判無期徒刑。</p>
-
-							<p>不過，恐怖的是檢方進一步調查發現，他狠心殺害的人數超過一百人，其他起訴案將於明年初開始審判。然而，究竟為何要故意殺害病患？賀杰受審時曾表示，因為自己很喜歡替病人急救，讓他們死而復生，而當他的行為導致病人死亡時，他都告訴自己絕不再犯，但最後總是忍不住。</p>
+								${messageData.msgContent}
+							</p>
                   		</div>
 					</div>
 					<div class="row">
 						<hr/>
 					</div>
 					<div class="row">
-						<div class="form-group col-md-12">
-					  		<label for="comment">回應內容</label>
-					  		<textarea class="form-control" rows="5" id="comment"></textarea>
-						</div>	
-						<!-- <a class="btn btn-sm btn-primary" href="mail_compose.html"><i class="fa fa-reply"></i> Reply</a> -->
-					</div>
-					<div class="row">
-						<div class="form-group col-md-12">
-							<a class="btn btn-sm btn-primary pull-right" href="mail_compose.html">
-							<i class="fa fa-reply"></i>
-							 Reply</a>
-						 </div>
+						<c:if test="${messageData.msgSenderID != '999@gmail.com'}">
+							<form class="form-inline msgFrom">
+								<div class="form-group col-md-12">
+						  			<label for="comment">回應內容</label>
+						  			<c:if test="${!empty messageData.msgResponse}" >
+						  				<textarea class="form-control" rows="5" id="msgResponse" name="msgResponse" readonly="readonly">${messageData.msgResponse}</textarea>
+									</c:if>
+									<c:if test="${empty messageData.msgResponse}" >
+						  				<textarea class="form-control" rows="5" id="msgResponse" name="msgResponse"></textarea>
+									</c:if>
+								</div>
+								<input type="button" id="beforePage" class="btn btn-primary pull-left" value="返回" />
+			            		<c:if test="${!empty messageData.msgResponse}" >
+						  			<input type="button" id="update" class="btn btn-primary pull-right" disabled="disabled" value="已回覆" />
+								</c:if>
+								<c:if test="${empty messageData.msgResponse}" >
+						  			<input type="button" id="update" class="btn btn-primary pull-right" value="回覆" />
+								</c:if>
+			            	</form>
+			            </c:if>
+			            <c:if test="${messageData.msgSenderID == '999@gmail.com'}">
+							<input type="button" id="beforePage" class="btn btn-primary pull-left" value="返回" />
+			            </c:if>
 					</div>
 				</div>	
 			</section>
@@ -94,6 +98,54 @@ $(function(){
 	// side_menu 帳戶總覽填充背景色
 	$("#nav-accordion").find('li a').eq(6).addClass('active');
 
+	$("#beforePage").on('click', function () {
+		window.location.assign('<c:url value="/pages/backstageSeller/message_list.jsp" />');
+	})
+	
+	$("#update").on('click', function () {
+		formData = $(".msgFrom").serializeArray();
+		console.log(formData);
+		
+		$.ajax({
+			type: 'POST',
+			url: "<c:url value='/message/replyMessage' />",
+			data: {
+				messageId:    "${messageData.msgID}",
+				msgResponse:  formData[0].value,
+			},
+			dataType:"json",
+			success: function(result){  //處理回傳成功事件，當請求成功後此事件會被呼叫
+				//通知儲存成功  ，call BootstrapDialog      		       
+				BootstrapDialog.show({
+					type: BootstrapDialog.TYPE_INFO,
+					title: "訊息",
+					message: '訊息回覆成功!!',
+					buttons: [{
+						label: 'Close',
+						action: function(dialogItself){
+							dialogItself.close();
+						}
+					}]
+				});
+			
+				$("#update").attr("disabled", "disabled");
+				$("#msgResponse").attr("readonly", "readonly");
+			},
+			error: function(result){   //處理回傳錯誤事件，當請求失敗後此事件會被呼叫
+				//your code here
+
+			},
+			complete: function(result) {
+
+			},
+			statusCode: {                     //狀態碼處理
+				404: function() {
+					alert("page not found");
+				}
+			}
+		});
+	}) 
+	
 })
 </script>
 
