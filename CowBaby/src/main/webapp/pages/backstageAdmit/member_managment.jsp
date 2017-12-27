@@ -161,6 +161,15 @@ $(function(){
    	 // 預設每頁顯示筆數
    	 var visiblecount = 10; 
 	
+<<<<<<< HEAD
+=======
+  // 抓取表單欄位
+		formData = $(".memberFrom").serializeArray();
+		
+	    // 發 ajax 查詢表單資料
+		inqueryData(formData , pagenow);
+   	 
+>>>>>>> branch 'master' of https://github.com/EEIT98Team01/RemoteRepository1127.git
     // 查詢
     $(".inquire").click(function(){
     	console.log("AA");

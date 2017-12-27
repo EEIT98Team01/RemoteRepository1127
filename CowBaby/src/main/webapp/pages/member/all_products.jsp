@@ -97,6 +97,7 @@
 				
 			</div>
 			<!--產品LIST-->
+<<<<<<< HEAD
 			<section class="proudectList">
 				<div class="item">
 					<img src=" <c:url value="/images/newArrived1.jpg"/>">
@@ -125,6 +126,20 @@
 					<div class="originalPrice">原價 NT 190</div>
 					<div class="specialPrice">特價 NT <span class="specialPriceNum">190</span></div>
 				</div>
+=======
+ 							
+			<section class="proudectList">
+				<c:forEach var="array" varStatus="st" items="${productList}">
+					<div class="item">
+						<a href="<c:url value="/pages/member/prouduct_item.jsp"/>?id=" + ${array[1]}">
+							<img src=" <c:url value="/images/newArrived1.jpg"/>">
+							<p class="stroe_name">${array[1]}</p>
+							<p class="title">${array[2]}</p>
+							<div class="specialPrice">特價 NT <span class="specialPriceNum">${array[4]}</span></div>
+						</a>
+					</div>
+				</c:forEach>
+>>>>>>> branch 'master' of https://github.com/EEIT98Team01/RemoteRepository1127.git
 
 			</section>
 		</div>

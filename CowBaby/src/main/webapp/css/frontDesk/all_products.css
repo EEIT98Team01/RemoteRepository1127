@@ -39,6 +39,7 @@
     margin-bottom: 30px;
 }
 
+<<<<<<< HEAD
 .all_products_page_container .proudectList .item:nth-child(4n+4){
    margin-right:0; 
 }
@@ -49,6 +50,30 @@
 
 .all_products_page_container .proudectList .item .title{
     padding: 10px 15px;
+=======
+
+.all_products_page_container .proudectList .item a{
+	color:#787878;
+}
+.all_products_page_container .proudectList .stroe_name{
+	color: #777a90;
+    font-size: 16px;
+    text-align: center;
+}
+
+
+
+.all_products_page_container .proudectList .item:nth-child(4n+4){
+   margin-right:0; 
+}
+
+.all_products_page_container .proudectList .item img{
+    width: 205px;
+}
+
+.all_products_page_container .proudectList .item .title{
+   padding: 8px 15px;
+>>>>>>> branch 'master' of https://github.com/EEIT98Team01/RemoteRepository1127.git
     font-size: 14px;
     font-weight: bold;
     line-height: 18px;

@@ -78,11 +78,11 @@ public class TestProductDaoImpl {
 		*/
 		
 	  //find()
-		/*
+		
 		for(ProductBean bean: dao.find()) {
 			System.out.println(bean);
 		}
-		*/
+		
 		
 	  //find(int page, int rows)
 		/*

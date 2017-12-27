@@ -1,4 +1,4 @@
-package test.message;
+package model.service;
 
 import java.util.HashMap;
 import java.util.List;
@@ -81,6 +81,8 @@ public class MessageService {
 	
 	// 發送訊息
 	public MessageBean sendMessage(String msgSenderAccount, String msgReceiverAccount, String msgContent) {
+		// 之後要加檢查帳號是否存在
+		
 		MessageBean message = new MessageBean();
 		message.setMsgSenderID(msgSenderAccount);
 		message.setMsgReceiverID(msgReceiverAccount);
