@@ -111,11 +111,7 @@
 	</section>
  <!--containe end--> 
  </section>
- 	 <!-- overlayPanel--->
-	 <div class="qqq">
-	  56+56+5
-	</div>
- 
+ 	
 	 <!-- 警告視窗--->
 	 <div class="modal fade">
 	  <div class="modal-dialog">
