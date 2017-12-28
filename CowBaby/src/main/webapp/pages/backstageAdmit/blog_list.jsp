@@ -224,8 +224,10 @@ $(function(){
 							"<td>"+blog.bloggerName+"</td>" +
 							"<td>"+blog.articleHeader+"</td>" +
  							"<td> <a href='' class='btn btn-success'> <i class='fa fa-eye'></i> </a> </td>" +
- 							"<td> <a href='' class='btn btn-primary'> <i class='fa fa-pencil'></i> </a> </td>" +
-							
+ 							"<td> <a href='<c:url value='blogDelete.controller'/>?id=" + blog.articleID + 
+ 							"' class='btn btn-primary'> <i class='fa fa-pencil'></i> </a> </td>" +
+// 						 								↑blogDelete.controller 識別字串，與Controller對應
+ 							
 						 "</tr>";				
 		    		$('tbody').append(html);
 	           }) 
@@ -243,7 +245,7 @@ $(function(){
 		                  
 		                  onPageClick: function (evt, page) { 
 							inqueryData(formData,page);
-			       	　　　　 }
+			       		}
 	                });
 				  
 					// 把頁數 ，筆數，開始筆數-結束筆數 塞回去

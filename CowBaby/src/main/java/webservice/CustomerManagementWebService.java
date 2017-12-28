@@ -231,6 +231,8 @@ public class CustomerManagementWebService {
 	public String cutomerDataUpdate(CustomerBean bean, BindingResult bindingResult) {
 		bean.setLoginPhoto( (customerManagementService.findById(bean.getCustomerID())).getLoginPhoto() );
 
+		System.out.println(bean);
+		
 		if(customerManagementService.updateCustomerData(bean)) {
 			return "{\"status\":\"updateOK\"}";
 		} else {
