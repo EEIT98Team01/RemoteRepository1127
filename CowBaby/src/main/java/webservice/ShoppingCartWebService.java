@@ -22,6 +22,25 @@ public class ShoppingCartWebService {
 	@Autowired
 	ShoppingCartService shoppingCartService;
 	
+	
+	@RequestMapping(
+			value="/getShoppingCart",
+			method={RequestMethod.GET},
+			produces={"application/json;charset=UTF-8"}
+	)
+	public String getShoppingCart(Model model, HttpSession session) {
+		// 獲取購物車物件，並判斷現在有無購物車，沒有則建立購物車
+		ShoppingCart shoppingCart = (ShoppingCart) session.getAttribute("shoppingCart");
+
+		if (shoppingCart == null) {
+			shoppingCart = new ShoppingCart();
+			session.setAttribute("shoppingCart", shoppingCart);
+		}
+
+		// 回傳購物車清單
+		return new JSONObject(session.getAttribute("shoppingCart")).toString();
+	}
+	
 	@RequestMapping(
 			value="/addShoppingCart",
 			method={RequestMethod.POST},
@@ -47,6 +66,7 @@ public class ShoppingCartWebService {
 			// 將該商品加入購物車中
 			shoppingCart.addProduct(store.getStoreID(), store.getStoreName(), product.getProductID(), product.getTitle(), 
 					                spec, product.getProductImage(), product.getUnitPrice(), productNum);
+			
 		}
 		
 		// 回傳購物車清單
@@ -73,5 +93,7 @@ public class ShoppingCartWebService {
 		// 回傳購物車清單
 		return new JSONObject(shoppingCart).toString();
 	}
+	
+	
 	
 }

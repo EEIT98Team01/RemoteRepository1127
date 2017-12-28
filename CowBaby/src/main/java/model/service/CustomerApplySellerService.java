@@ -39,7 +39,7 @@ public class CustomerApplySellerService {
 		return backstageDao.findByEmail(email);
 	}
 	
-	// 新增客訴資料
+	// 新增到賣家審核
 	public BackstageBean insertBackstageData(BackstageBean bean) {
 		BackstageBean result =  null;	
 		if(bean != null) {

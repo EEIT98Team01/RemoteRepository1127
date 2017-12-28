@@ -11,38 +11,17 @@
 			<li>
 				<a class="shopcart" href="#">
 					<i class="fa fa-cart-plus fa-2x" aria-hidden="true"></i>
-					<span class="shopcart-total-number">5</span>
+					<span class="shopcart-total-number">${shoppingCart.totalItems}</span>
 				</a>
 				<div class="currentShoppingCartList">
-					<ul>
-						<li>
-							<img src="<c:url value="/images/ad1.jpg"/>">
-							<div class="cartList">
-								<p>兔寶寶的店</p>
-								<p>DINDIN鞋<span> - M號</span></p>
-								<p>100元</p>
-								<p>數量-2</p>
-							</div>
-						</li>
-						<li>
-							<img src="<c:url value="/images/ad1.jpg"/>">
-							<div class="cartList">
-								<p>兔寶寶的店</p>
-								<p>DINDIN鞋<span> - M號</span></p>
-								<p>100元</p>
-								<p>數量-2</p>
-							</div>
-						</li>
-						<li>
-							<img src="<c:url value="/images/ad1.jpg"/>">
-							<div class="cartList">
-								<p>兔寶寶的店</p>
-								<p>DINDIN鞋<span> - M號</span></p>
-								<p>100元</p>
-								<p>數量-2</p>
-							</div>
-						</li>
-					</ul>
+					<c:if test="${empty shoppingCart}">
+						<p>購物車空空如也!!</p>
+					</c:if>
+					<ul></ul>
+					
+
+					<p>總價錢:${shoppingCart.totalAmount}</p>
+  		
 				</div>
 			</li>
 		
@@ -57,8 +36,9 @@
 				<li><img src="data:image/jpg;base64,${logingPhotoImg}"/>${user.customerName}
 					<div class="showMemberPannal">
 						<div><a href="#">我的賣場</a></div>
-						<div><a href="<c:url value="/pages/member/member_account_infor.jsp"/>">我的資訊</a></div>
-						<div><a href="#">安全登出</a></div>				
+						<div><a href="<c:url value="/pages/member/member_account_infor.jsp"/>">我的管理著後台</a></div>
+						<div><a href="<c:url value="/pages/backstageSeller/account_overview.jsp"/>">我的資訊</a></div>
+						<div><a href="#">安全登出</a></div>
 					</div>
 				</li>
 				
@@ -92,13 +72,8 @@
 
 	<section class="container-fliud">
 		<section class="container main-nav">
-<<<<<<< HEAD
-			<ul class="nav navbar-nav">
-				<li><a href="<c:url value="/pages/member/user_register.jsp"/>"><i class="fa fa-gift fa-2x" aria-hidden="true"></i>全部商品</a></li>
-=======
 			<ul class="nav navbar-nav"> 
 				<li><a href="<c:url value="/AllProductController"/>"><i class="fa fa-gift fa-2x" aria-hidden="true"></i>全部商品</a></li>
->>>>>>> branch 'master' of https://github.com/EEIT98Team01/RemoteRepository1127.git
 				<li><a href="<c:url value="/pages/member/all_products.jsp"/>"><i class="fa fa-diamond fa-2x" aria-hidden="true"></i>最新商品</a></li>
 				<li><a href="<c:url value="/pages/member/all_shops.jsp"/>"><i class="fa fa-heartbeat fa-2x" aria-hidden="true"></i>精選商家</a></li>
 				<li><a href="<c:url value="/pages/member/all_blog.jsp"/>"/><i class="fa fa-star-half-o fa-2x" aria-hidden="true"></i>媽咪推薦</a></li>
@@ -113,34 +88,87 @@
 <script type="text/javascript" src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 
-		$(".currentShoppingCartList").hide();
+$(function(){
+	
+	/* $(".currentShoppingCartList").hide(); */
 
-		$(".shopcart").hover(function(event) {
-		    $(".currentShoppingCartList").show();
-		});
-		
-		$(".currentShoppingCartList").hover(function(event) {
-		    $(".currentShoppingCartList").show();
-		});
-		
-		
-		$(".currentShoppingCartList").mouseleave( 'mouseleave', function() {
-		    $(".currentShoppingCartList").hide();
-		});
+	/* $(".shopcart").hover(function(event) {
+	    $(".currentShoppingCartList").show();
+	});
+	
+	$(".currentShoppingCartList").hover(function(event) {
+	    $(".currentShoppingCartList").show();
+	});
+	
+	
+	$(".currentShoppingCartList").mouseleave( 'mouseleave', function() {
+	    $(".currentShoppingCartList").hide();
+	}); */
 
-		/* $(".shopcart").hover(function() {
-		console.log("AA");
-			 $(".currentShoppingCartList").show();
-		}, function() {
-			 $(".currentShoppingCartList").hide();
+	/* $(".shopcart").hover(function() {
+	console.log("AA");
+		 $(".currentShoppingCartList").show();
+	}, function() {
+		 $(".currentShoppingCartList").hide();
+	}
+	); */
+
+	/* $(".shopcart").hover(function() {
+			console.log("AA");
+	   		 $(".currentShoppingCartList").show();
+	 	 }, function() {
+	 		 $(".currentShoppingCartList").hide();
+	  	}
+	); */
+	
+
+	$.ajax({
+		url: "http://localhost:8080/CowBaby/shopping/getShoppingCart",
+		type: "get",
+		data:{
+		  
+		},
+		dataType:"json",   
+		success: function(result){ 
+			console.log(result); 
+		    console.log(result.productInfo);
+		    
+		    var productInfor = result.productInfo;
+		    var totalAmount = result.totalAmount;
+		    var totalItems = result.totalItems;
+		    var item="";
+		    
+		    // 把每ㄧ筆店家所購買的物品列出來 (key = 商店名子,productInfor = 在該商店購買的物品 )
+		    for(var key in productInfor){
+		       for(var i =0 ; i<productInfor[key].length ; i++){
+		        	
+		       		item  = item +"<li>"+
+		        			"<img src='<c:url value='/images/ad1.jpg'/>'>"+
+							"<div class='cartList'>"+
+								"<p>"+ key +"</p>"+
+								"<p>"+ productInfor[key][i].productName + "<span>-"+ productInfor[key][i].productSpec+"</span></p>"+
+								"<p>"+ productInfor[key][i].unitPrice +"元 X"+ productInfor[key][i].quantity +"</p>"+
+							"</div>"+
+							"</li>" 
+		         } 
+
+		    }
+		    
+		  /*   "<p>數量-2</p>"+ */
+		    $(".currentShoppingCartList ul").empty();
+		    $(".currentShoppingCartList ul").append(item);
+
+		    
+
+		},
+		error: function(result){  
+		     //your code here
 		}
-		); */
+	})
 
-		/* $(".shopcart").hover(function() {
-				console.log("AA");
-		   		 $(".currentShoppingCartList").show();
-		 	 }, function() {
-		 		 $(".currentShoppingCartList").hide();
-		  	}
-		); */
+})
+		
+		
+		
+		
 </script>

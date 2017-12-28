@@ -35,7 +35,7 @@
 		<div class="main_container_col_1">
 			 申請會員開店!!!
 			<form action="<c:url value="/CustomerApplySellAudit.controller"/>" method="POST" enctype="multipart/form-data">
-
+				 <td><input  name="customerID" value="${user.customerID}"></td>
 				 <td><input  name="email" value="${user.email}"></td>
 				 <td><button id="submit" type="submit" class="btn btn-primary pull-right">申請開店</button></td>
 			</form>

@@ -98,14 +98,14 @@ public class TestMessageDaoImpl {
 		*/
 		
 	  //findByCondition(Map<String, String> condition, int page, int rows, String sortCondition)
-		
+		/*
 		HashMap<String, String> condition = new HashMap<String, String>();
 		condition.put("msgMarker", "= 0");
 		condition.put("msgSenderID", "= 1");  
 		for(MessageBean bean: dao.findByCondition(condition, 2, 2, "readStatus")) {
 			System.out.println(bean);
 		}
-		
+		*/
 
 	  //getQuantity()
 		/*
@@ -113,12 +113,11 @@ public class TestMessageDaoImpl {
 		*/
 		
 	  //getConditionQuantity(Map<String, String> condition)
-		/*
+		
 		HashMap<String, String> condition = new HashMap<String, String>();
-		condition.put("msgMarker", "= 0");
-		condition.put("msgSenderID", "= 1");  
+		condition.put("msgSenderID", "like '%999@gmail.com%'");  
 		System.out.println(dao.getConditionQuantity(condition));
-		*/
+		
 		
 	/*---------------------------------------------------------------------------------------------*/
 		session.getTransaction().commit();

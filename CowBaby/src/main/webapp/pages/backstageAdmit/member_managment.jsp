@@ -136,11 +136,6 @@
 
 <script>
 $(function(){
-
-	 /* $(".pp").click(function(){
-		BootstrapDialog.alert('Hi Apple!');
-	 }) */
-	
 	 // side_menu 帳戶總覽填充背景色
 	 $(".memberManagment a").addClass('active');
 	
@@ -170,11 +165,10 @@ $(function(){
 
     // 查詢
     $(".inquire").click(function(){
-    	console.log("AA");
-    	//擋掉超連結的預設值
+    	// 擋掉超連結的預設值
         event.preventDefault(); 
         
-      //分頁的插件，一定要加
+        // 分頁的插件，一定要加
         $('#myPagination').twbsPagination('destroy');
         
 		// 抓取表單欄位
@@ -186,9 +180,6 @@ $(function(){
     
     // 查詢表單資料
     function inqueryData(data,pageNum){
-    	
-    	console.log("data",data);
-    	console.log("pageNum",pageNum);	
       	// 將畫面清空
       	$('tbody').empty();
     
@@ -212,9 +203,6 @@ $(function(){
 			
 			// 成功要做的事
 	        success : function(response){   
-	        	//測試列出接收到的資料
-	        	console.log("response",response);
-	        		        	
 	           // response 回來的字串轉 json物件
 	           var obj = JSON.parse(response.list);
 	           
@@ -253,7 +241,7 @@ $(function(){
 		                  
 		                  onPageClick: function (evt, page) { 
 							inqueryData(formData,page);
-			       	　　　　 }
+			       	　　　　}
 	                });
  				  
 					// 把頁數 ，筆數，開始筆數-結束筆數 塞回去
