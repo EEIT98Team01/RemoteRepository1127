@@ -115,7 +115,7 @@
 <script src="<c:url value="/js/frontDesk/callshopingCartAPI.js"/>"></script>
 
 <script type="text/javascript">
-
+<!--123-->
 $(function(){
 	
 		/* new getShoppingCatAPI(); */
