@@ -95,5 +95,23 @@ public class ShoppingCartWebService {
 	}
 	
 	
+	// 紅利
+	@RequestMapping(
+			value="/useBonus",
+			method={RequestMethod.POST},
+			produces={"application/json;charset=UTF-8"}
+	)
+	public String useBonusMethod(Model model,String bonus) {
+		
+		System.out.println("哇哈哈");
+
+		
+		
+		return null;
+	/*	return new JSONObject(shoppingCart).toString();*/
+	}
+	
+	
+	
 	
 }

@@ -72,25 +72,27 @@
 		      	<div class="panel-body pannal_box">
 			      	<table>
 			      		<tr>
+			      			<td>ID</td>
+							<td><input type="text" name="customerID" value="${user.customerID}"></td>
+			      		</tr>
+			      		<tr>
 			      			<td>姓名</td>
-							<td><input type="text" name="" value=""></td>
+							<td><input type="text" name="customerName" value="${user.customerName}"></td>
 			      		</tr>
 						<tr>
 			      			<td>手機</td>
-							<td><input type="text" name="" value=""></td>
+							<td><input type="text" name="mobilePhone" value="${user.mobilePhone}"></td>
 			      		</tr>
 
 			      		<tr>
 			      			<td>地址</td>
-							<td><input type="text" name="" value=""></td>
+							<td><input type="text" name="address" value="${user.address}"></td>
 			      		</tr>
 			      		
-			      		<tr>
-			      			
+			      		<tr>			      			
 							<td>email</td>
-							<td><input type="text" name="" value=""></td>
+							<td><input type="text" name="email" value="${user.email}"></td>
 			      		</tr>
-
 			      	</table>
 				</div>
    			</div>
@@ -99,19 +101,24 @@
    			<div class="panel panel-info">
 		      	<div class="panel-heading title">收件人資訊</div>
 		      	<div class="panel-body pannal_box">
+		      		
 			      	<table>
 			      		<tr>
+			      			<td><input type="checkbox" id="check1"/></td>
+							<td style="padding: 10px;font-size: 15px;text-align:left;">跟寄件人一樣</td>
+			      		</tr>
+			      		<tr>
 			      			<td>姓名</td>
-							<td><input type="text" name="" value=""></td>
+							<td><input type="text" name="recipients" value=""></td>
 			      		</tr>
 						<tr>
 			      			<td>手機</td>
-							<td><input type="text" name="" value=""></td>
+							<td><input type="text" name="recipientsMobile" value=""></td>
 			      		</tr>
 
 			      		<tr>
 			      			<td>地址</td>
-							<td><input type="text" name="" value=""></td>
+							<td><input type="text" name="recipientsAdd" value=""></td>
 			      		</tr>
 			      	</table>
 				</div>
@@ -123,13 +130,7 @@
 			<a href="#" class="go_checkout_btn">下ㄧ步</a>
 		</div>		    
 	</section>
-	
-	
 
-	
-	
-	
-	
 	<!--引入 footer-->
 	<jsp:include page="/pages/common/footer.jsp"/>
 </body>
@@ -144,8 +145,32 @@
 <script src="<c:url value="/pluging/Bxsliders/jquery.bxslider.min.js"/>"></script>
 <script type="text/javascript">
 
-	$(function(){
+$(function(){
 
-
+	var isCheck=false;
+	
+	$("#check1").click(function(){
+		
+		if(!isCheck){
+			console.log("AA");
+			$("input[name='recipients']").val("${user.customerName}");
+			$("input[name='recipientsMobile']").val(${user.mobilePhone});
+			$("input[name='recipientsAdd']").val("${user.address}");
+			isCheck=true;
+			
+		}else{
+			console.log("BB");
+			$("input[name='recipients']").val("");
+			$("input[name='recipientsMobile']").val("");
+			$("input[name='recipientsAdd']").val("");
+			
+			isCheck=false;
+		}
+		
+		
 	})
+	
+
+
+})
 </script>

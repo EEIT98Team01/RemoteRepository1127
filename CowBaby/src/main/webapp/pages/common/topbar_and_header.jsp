@@ -11,22 +11,15 @@
 			<li>
 				<a class="shopcart" href="#">
 					<i class="fa fa-cart-plus fa-2x" aria-hidden="true"></i>
-					<span class="shopcart-total-number">${shoppingCart.totalItems}</span>
+					<span class="shopcart-total-number">0</span>
 				</a>
 				<div class="currentShoppingCartList">
-					<c:if test="${empty shoppingCart}">
-						<p>購物車空空如也!!</p>
-					</c:if>
-					<ul></ul>
-					
-
-					<p>總價錢:${shoppingCart.totalAmount}</p>
-  		
+					<ul>購物車空空的</ul>
+					<p class="calculate">總價錢:<span>0</span></p>
 				</div>
 			</li>
 		
-			<li><a href="<c:url value="/pages/member/shopping_cart_check.jsp"/>">結帳去</a></li>
-			
+			<li><a href="<c:url value="/ShoppingCartCheckController"/>">結帳去</a></li>	
 			<c:if test="${empty user}">
 				<li style="margin-top: 15px;"><a href="<c:url value="/pages/member/user_login.jsp"/>">登入</a></li>
 				<li style="margin: 15px 0 0 0;">/</li>
@@ -36,9 +29,9 @@
 				<li><img src="data:image/jpg;base64,${logingPhotoImg}"/>${user.customerName}
 					<div class="showMemberPannal">
 						<div><a href="#">我的賣場</a></div>
-						<div><a href="<c:url value="/pages/member/member_account_infor.jsp"/>">我的管理著後台</a></div>
-						<div><a href="<c:url value="/pages/backstageSeller/account_overview.jsp"/>">我的資訊</a></div>
-						<div><a href="#">安全登出</a></div>
+						<div><a href="<c:url value="/pages/backstageSeller/account_overview.jsp"/>">我的管理著後台</a></div>
+						<div><a href="<c:url value="/pages/member/member_account_infor.jsp"/>">我的資訊</a></div>
+						<div><a href="<c:url value="/LoingOutController"/>">安全登出</a></div>
 					</div>
 				</li>
 				
@@ -90,9 +83,10 @@
 
 $(function(){
 	
-	/* $(".currentShoppingCartList").hide(); */
-
-	/* $(".shopcart").hover(function(event) {
+	 $(".currentShoppingCartList").show();
+	
+/* 
+	$(".shopcart").hover(function(event) {
 	    $(".currentShoppingCartList").show();
 	});
 	
@@ -103,25 +97,11 @@ $(function(){
 	
 	$(".currentShoppingCartList").mouseleave( 'mouseleave', function() {
 	    $(".currentShoppingCartList").hide();
-	}); */
-
-	/* $(".shopcart").hover(function() {
-	console.log("AA");
-		 $(".currentShoppingCartList").show();
-	}, function() {
-		 $(".currentShoppingCartList").hide();
-	}
-	); */
-
-	/* $(".shopcart").hover(function() {
-			console.log("AA");
-	   		 $(".currentShoppingCartList").show();
-	 	 }, function() {
-	 		 $(".currentShoppingCartList").hide();
-	  	}
-	); */
-	
-
+	}); 
+ */
+ 	
+ 
+ 	// 發AJAX 先拿購物車清單
 	$.ajax({
 		url: "http://localhost:8080/CowBaby/shopping/getShoppingCart",
 		type: "get",
@@ -130,18 +110,18 @@ $(function(){
 		},
 		dataType:"json",   
 		success: function(result){ 
-			console.log(result); 
-		    console.log(result.productInfo);
-		    
+
 		    var productInfor = result.productInfo;
 		    var totalAmount = result.totalAmount;
 		    var totalItems = result.totalItems;
 		    var item="";
+		    var totalBuyNumber=0;
 		    
 		    // 把每ㄧ筆店家所購買的物品列出來 (key = 商店名子,productInfor = 在該商店購買的物品 )
 		    for(var key in productInfor){
 		       for(var i =0 ; i<productInfor[key].length ; i++){
-		        	
+		    	    // 全部購買總商品數量
+		    	    totalBuyNumber = totalBuyNumber + productInfor[key][i].quantity;
 		       		item  = item +"<li>"+
 		        			"<img src='<c:url value='/images/ad1.jpg'/>'>"+
 							"<div class='cartList'>"+
@@ -150,15 +130,22 @@ $(function(){
 								"<p>"+ productInfor[key][i].unitPrice +"元 X"+ productInfor[key][i].quantity +"</p>"+
 							"</div>"+
 							"</li>" 
-		         } 
+		       } 
 
 		    }
 		    
-		  /*   "<p>數量-2</p>"+ */
-		    $(".currentShoppingCartList ul").empty();
-		    $(".currentShoppingCartList ul").append(item);
-
-		    
+		    // 把資訊帶入購物車
+		    if(totalItems==0){
+		    	 $(".shopcart-total-number").text(0);
+		    	 $(".calculate span").text(totalAmount);
+		    	 $(".currentShoppingCartList ul").html("購物車空空的");
+		    	
+		    }else{
+		    	$(".shopcart-total-number").text(totalBuyNumber);
+		    	$(".currentShoppingCartList ul").html(item);
+			    $(".calculate span").text(totalAmount);
+		    }
+		  
 
 		},
 		error: function(result){  

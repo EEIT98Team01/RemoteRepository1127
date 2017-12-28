@@ -36,19 +36,19 @@ public class TestSellerBackstageManageDaoImpl {
 		*/
 
 	  //insert(SellerBackstageManageBean bean)
-		/*
+		
 		SellerBackstageManageBean bean = new SellerBackstageManageBean();
-		bean.setStoreName("我是測試唷");
-		bean.setCustomerID(4);
+		bean.setStoreName("小牛牛的SHOP");
+	
 		bean.setStoreStatus(true);
 		bean.setStorePhone("0987666444");
-		bean.setStoreDescription("測測的店唷");
+		bean.setStoreDescription("DINDIND的店唷");
 		bean.setStoreRating(0);
 		bean.setStoreBanner("789.jpg");
 		bean.setStoreLogo(null);
 		bean.setTotalPageView(111111);
 		System.out.println(dao.insert(bean));
-		*/
+		
 			
 	  //update(SellerBackstageManageBean bean)
 		/*
@@ -109,11 +109,11 @@ public class TestSellerBackstageManageDaoImpl {
 			
 	  //findByCondition(Map<String, String> condition, int page, int rows, String sortCondition)
 		
-		HashMap<String, String> condition = new HashMap<String, String>();
-		condition.put("storeName", "like '%的店%'");
-		for(SellerBackstageManageBean bean: dao.findByCondition(condition, 1, 999, "totalPageView desc")) {
-			System.out.println(bean);
-		}
+//		HashMap<String, String> condition = new HashMap<String, String>();
+//		condition.put("storeName", "like '%的店%'");
+//		for(SellerBackstageManageBean bean1: dao.findByCondition(condition, 1, 999, "totalPageView desc")) {
+//			System.out.println(bean1);
+//		}
 		
 
 	  //getQuantity()

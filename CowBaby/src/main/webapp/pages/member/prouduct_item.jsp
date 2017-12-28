@@ -112,19 +112,18 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/js/bootstrap-switch.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/js/bootstrap-dialog.min.js"></script>
 <script src="<c:url value="/pluging/Bxsliders/jquery.bxslider.min.js"/>"></script>
-<script src="<c:url value="/js/frontDesk/callshopingCartAPI.js"/>"></script>
+
 
 <script type="text/javascript">
-<!--123-->
+
 $(function(){
 	
-		/* new getShoppingCatAPI(); */
 		// 要傳給後端的資料
 		var quantity = 0; //數量
 		var productID = ${productData.productID}; // 產品ID
 		var productSpec = ""; // 產品規格
 
-	
+		
 		// 增加商品
 		$(".add_num").click(function(){
 			event.preventDefault();
@@ -174,8 +173,8 @@ $(function(){
 		$(".add_cart").on('click', function () {
 			
 			$.ajax({
-				url: url,
-				type: type,
+				url:"http://localhost:8080/CowBaby/shopping/addShoppingCart",
+				type: 'post',
 				data:{
 				    productID:productID,
 					spec:productSpec,
@@ -184,17 +183,18 @@ $(function(){
 				},
 				dataType:"json",   
 				success: function(result){ 
-					console.log(result); 
-				    console.log(result.productInfo);
 				    
 				    var productInfor = result.productInfo;
 				    var totalAmount = result.totalAmount;
 				    var totalItems = result.totalItems;
 				    var item="";
+				    var totalBuyNumber=0;
 				    
 				    // 把每ㄧ筆店家所購買的物品列出來 (key = 商店名子,productInfor = 在該商店購買的物品 )
 				    for(var key in productInfor){
 				       for(var i =0 ; i<productInfor[key].length ; i++){
+				    	    // 全部購買總商品數量
+				    	    totalBuyNumber = totalBuyNumber + productInfor[key][i].quantity;
 				        	
 				       		item  = item +"<li>"+
 				        			"<img src='<c:url value='/images/ad1.jpg'/>'>"+
@@ -208,8 +208,18 @@ $(function(){
 
 				    }
 				    
-				    $(".currentShoppingCartList ul").empty();
-				    $(".currentShoppingCartList ul").append(item);
+				    
+				    // 把資訊帶入購物車
+				    if(totalItems==0){
+				    	 $(".shopcart-total-number").text(0);
+				    	 $(".calculate span").text(totalAmount);
+				    	 $(".currentShoppingCartList ul").html("購物車空空的");
+				    	
+				    }else{
+				    	$(".shopcart-total-number").text(totalBuyNumber);
+				    	$(".currentShoppingCartList ul").html(item);
+					    $(".calculate span").text(totalAmount);
+				    }
 
 				},
 				error: function(result){  

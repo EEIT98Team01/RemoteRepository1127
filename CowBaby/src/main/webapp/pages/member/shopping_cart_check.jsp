@@ -37,7 +37,7 @@
 		<div class="line2"></div>
 		<ul>
 			<li><a class="step_link active" href="">Step1</a><small>確認購物明細</small></li>
-			<li><a class="step_link active" href="">Step2</a><small>選擇附款方式</small></li>
+			<li><a class="step_link" href="">Step2</a><small>選擇附款方式</small></li>
 			<li><a class="step_link" href="">Step3</a><small>確認結帳完成</small></li>
 		</ul>
 	</div>
@@ -47,125 +47,71 @@
 	<section class="page_container shopping_cart_check">
 		<!-- 主要內容-->
 		<div class="main_container_col_1">
-			<div class="myshopOrder">
-				<div class="shop_name">
-					<span><i class="fa fa-user-secret" aria-hidden="true"></i>這是兔兔商店</span>
-					<span>|</span>
-					<span>店家ID : 1</span>
-				</div>
-				<table>
-					<tr>
-						<th>商品名稱</th>
-						<th>圖片</th>
-						<th>單價</th>
-						<th>數量</th>
-						<th>小計</th>
-						<th>庫存</th>
-						<th>變更明細</th>
-					</tr>
-					<tr>
-						<td>做對選擇，讓生活變輕盈：別讓他人的要求支配你，找回自己的空間與自由</td>
-						<td><img src="img/newArrived2.jpg"></td>
-						<td>288</td>
-						<td>1</td>
-						<td>288</td>
-						<td>有</td>
-						<td><button type="button" class="btn btn-primary">刪除</button></td>
-					</tr>
-
-					<tr>
-						<td colspan="7" style="text-align: right;">
-							<div class="bonusbox">
-								<span>目前紅利金為<span class="totalbonus">500</span>點，我要折抵</span>
-								<span><input type="text" name="" value="0"></span>
-								<span>元</span>
-							</div>
-						</td>
+			<c:forEach var="objectArray" items="${shoppingCartInfo}">
+				<div class="myshopOrder">
+					<div class="shop_name">
+						<span><i class="fa fa-user-secret" aria-hidden="true"></i>${objectArray[0]}</span>
+						<span>|</span>
+						<span>店家ID : (這到底要部要寫進去?寫進去也只有1.2.3..)</span>
+					</div>
+					<table>
+						<tr>
+							<th>商品名稱</th>
+							<th>圖片</th>
+							<th>單價</th>
+							<th>產品規格</th>
+							<th>數量</th>
+							<th>小計</th>
+							<th>變更明細</th>
+						</tr>
+						<c:forEach var="var" items="${objectArray[3]}">
+						<tr>
+							<td>${var.productName}</td>
+						    <td><img src="${var.productImage}"></td>
+							<td>${var.unitPrice}</td>
+							<td>${var.productSpec}</td>
+							<td>${var.quantity}</td>
+							<td>${var.quantity*var.unitPrice}</td> 
+							<td><a class="btn btn-primary" href="<c:url value="/deleteProuductController"/>?productID=${var.productID}&spec=${var.productSpec}">刪除</a></td>
+						</tr> 
 						
-					</tr>
-					<tr>
-						<td colspan="7" style="text-align: right;">共
-							<span class="totalItem">3 </span>項商品，總金額NT$ 
-							<span class="totalPrice"> 702 </span>元
-						</td>
-					</tr>	
-				</table>
-			</div>
-
-
-			<div class="myshopOrder">
-				<div class="shop_name">
-					<span><i class="fa fa-user-secret" aria-hidden="true"></i>這是珠珠商店</span>
-					<span>|</span>
-					<span>店家ID : 2</span>
-				</div>
-				<table>
-					<tr>
-						<th>商品名稱</th>
-						<th>圖片</th>
-						<th>單價</th>
-						<th>數量</th>
-						<th>小計</th>
-						<th>庫存</th>
-						<th>變更明細</th>
-					</tr>
-					<tr>
-						<td>做對選擇，讓生活變輕盈：別讓他人的要求支配你，找回自己的空間與自由</td>
-						<td><img src="img/newArrived2.jpg"></td>
-						<td>288</td>
-						<td>1</td>
-						<td>288</td>
-						<td>有</td>
-						<td><button type="button" class="btn btn-primary">刪除</button></td>
-					</tr>
-					<tr>
-						<td>做對選擇，讓生活變輕盈：別讓他人的要求支配你，找回自己的空間與自由</td>
-						<td><img src="img/newArrived2.jpg"></td>
-						<td>288</td>
-						<td>1</td>
-						<td>288</td>
-						<td>有</td>
-						<td><button type="button" class="btn btn-primary">刪除</button></td>
-					</tr>
-					<tr>
+						</c:forEach>
+						<tr>
 						<td colspan="7" style="text-align: right;">
-							<div class="bonusbox">
-								<span>目前紅利金為<span class="totalbonus">500</span>點，我要折抵</span>
-								<span><input type="text" name="" value="0"></span>
-								<span>元</span>
-							</div>
-						</td>
-						
-					</tr>
-					<tr>
-						<td colspan="7" style="text-align: right;">共
-							<span class="totalItem">3 </span>項商品，總金額NT$ 
-							<span class="totalPrice"> 702 </span>元
-						</td>
-					</tr>	
-				</table>
-			</div>
+								<div class="bonusbox">
+									<span>目前紅利金為<span class="totalbonus">500</span>點，我要折抵</span>
+									<span><input class="useBonusbox" type="text" name="" value="0"></span>
+									<span>元</span>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="7" style="text-align: right;">共
+									<span class="totalItem">${objectArray[1]}</span>
+								項商品，總金額NT$ 
+								<span class="totalPrice">${objectArray[2]}</span>元
+							</td>
+						</tr>	
+					</table>
+				</div>
+			</c:forEach>
 
 			<div class="total_order">
 				<div class="total_order_my_prouduct">
-					<div>購買總金額 (<span class="all_prousuct">5</span> 個商品):
-						<span class="all_prousuct_price">$5,567</span>
+					<div>購買總金額 (<span class="all_prousuct">${shoppingCart.totalItems}</span> 個商品):
+						<span class="all_prousuct_price">$<span>${shoppingCart.totalAmount}</span></span>
 					</div>
 					<div class="this_order_bonus">此次紅利點數 : <span>123456</span>點</div>		
 				</div>
 				<div class="go_checkout">
-					<a href="#" class="go_checkout_btn">去結帳</a>
+					<%-- <a href="<c:url value="/pages/member/shopping_payment.jsp"/>" class="go_checkout_btn">下ㄧ步</a> --%>
+					<a href="#" class="go_checkout_btn">下ㄧ步</a> 
 				</div>
 			</div>
 		</div>	
 		    
 	</section>
-	
 
-	
-	
-	
-	
 	<!--引入 footer-->
 	<jsp:include page="/pages/common/footer.jsp"/>
 </body>
@@ -180,8 +126,58 @@
 <script src="<c:url value="/pluging/Bxsliders/jquery.bxslider.min.js"/>"></script>
 <script type="text/javascript">
 
-	$(function(){
+$(function(){
+	
+	$(".go_checkout_btn").click(function(){	
+		
+		var group_names = [];
+		var store="0";
+        $('.useBonusbox').each(function(index){
+        	  var i=0;
+        	  var obj={
+        			i:$(this).val()
+        	  };
+        	 /*  obj.store=$(this).val(); */
+        	  group_names.push(obj);
+        	  
+             /*  group_names.push($(this).val());  */
+     	});
+        
+        console.log("group_names",group_names);
+        
+        
+	   /*  $.ajax({
+        type:"GET",                   
+        url: "/CowBaby/shopping/useBonus",    
+        data: {
+        	bonus:
+        }, 
+         
+        dataType:"json",   
+        
+        // ajax載入前
+        beforeSend: function(){
+        	//顯示laoding 參考網址=>https://gasparesganga.com/labs/jquery-loading-overlay/#quick-demo
+        	$("#customerList").LoadingOverlay("show");
+		}, 
+		
+		// 成功要做的事
+        success : function(response){   
+           // response 回來的字串轉 json物件
+           var obj = JSON.parse(response.list);	
+           setTimeout(function(){
+        		$("#customerList").LoadingOverlay("hide");
+        	},300)
+        },
+		     
+		// 發ajax錯誤
+        error:function(xhr, ajaxOptions, thrownError){
+            alert(xhr.status+"\n"+thrownError);
+        }
+      }) */
 
+    })
+}) 
 
-	})
+	
 </script>
