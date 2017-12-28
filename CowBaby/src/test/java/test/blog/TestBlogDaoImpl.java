@@ -30,14 +30,14 @@ public class TestBlogDaoImpl {
 		*/
 
 	  //insert(BlogBean bean)
-		/*
+		
 		BlogBean bean = new BlogBean();
 		bean.setArticlePhoto(null);
 		bean.setBloggerName("幫寶弒");
 		bean.setArticleHeader("超推薦育兒聖經");
 		bean.setArticleContent("唐詩三百首");
 		System.out.println(dao.insert(bean));
-		*/
+		
 		
 	  //update(BlogBean bean)
 		/*
@@ -92,14 +92,14 @@ public class TestBlogDaoImpl {
 		*/
 		
 	  //findByCondition(Map<String, String> condition, int page, int rows, String sortCondition)
-		
+/*		
 		HashMap<String, String> condition = new HashMap<String, String>();
 		condition.put("bloggerName", "like '%幫寶%'");
 		condition.put("articleContent", "like '%寶寶%'");      
 		for(BlogBean bean: dao.findByCondition(condition, 1, 999, "articleContent")) {
 			System.out.println(bean);
 		}
-		
+*/		
 
 	  //getQuantity()
 		/*
