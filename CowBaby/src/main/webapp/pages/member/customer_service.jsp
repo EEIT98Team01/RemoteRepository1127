@@ -63,11 +63,11 @@
 						</select></td>
 
 					</tr>
-					<tr>
-						<td><label>檔案上傳</label></td>
-						<td><input name="myFile" type="file" name=""></td>
+<!-- 					<tr> -->
+<!-- 						<td><label>檔案上傳</label></td> -->
+<!-- 						<td><input name="myFile" type="file" name=""></td> -->
 
-					</tr>
+<!-- 					</tr> -->
 					<tr>
 						<td><label>問題描述</label></td>
 						<td><textarea id="comment" rows="50" cols="50"

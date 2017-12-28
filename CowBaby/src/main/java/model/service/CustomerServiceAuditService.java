@@ -50,8 +50,8 @@ public class CustomerServiceAuditService {
 	
 	// 回傳符合某條件的資料
 	@Transactional(readOnly=true)
-	public List<CustomerServiceBean> findByCondition(String problemTypes, String processStatus, String customerID) {
-		return CustomerServiceDao.findByCondition(this.createCondition(problemTypes, processStatus, customerID));
+	public List<CustomerServiceBean> findByCondition(String problemTypes, String processStatus, String email) {
+		return CustomerServiceDao.findByCondition(this.createCondition(problemTypes, processStatus, email));
 	}
 	
 	// 回傳符合某條件的N筆資料,若無資料,則回傳之List為空集合
@@ -76,6 +76,11 @@ public class CustomerServiceAuditService {
 	@Transactional(readOnly=true)
 	public int getConditionQuantity(String problemTypes, String processStatus, String customerID) {
 		return CustomerServiceDao.getConditionQuantity(this.createCondition(problemTypes, processStatus, customerID));
+	}
+	
+	@Transactional(readOnly = true)
+	public int getConditionreview(String problemTypes, String processStatus, String email) {
+		return CustomerServiceDao.getConditionQuantity(this.createCondition(problemTypes, processStatus, email));
 	}
 	
 	// 更新客訴資料

@@ -9,6 +9,6 @@
     	<div style="line-height: 18px;font-size: 13px;">印度長期存有重男輕女的觀念，加上男女輕女的觀念，加上男女輕女的觀念，加上男女輕女的觀念，加上男女輕女的觀念，加上男女輕女的觀念，加上男女輕女的觀念，加上男女比例嚴重失衡，女性在社會上的地位相當卑賤最小歲，令人震懾。</div>
     	<hr/>
 	    <label for="exampleFormControlTextarea1">客服回覆:</label>
-		<textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>        	
+		<textarea class="form-control"></textarea>        	
 	</div>
 </div>

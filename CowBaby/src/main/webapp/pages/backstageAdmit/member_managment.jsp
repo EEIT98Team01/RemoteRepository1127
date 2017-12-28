@@ -41,7 +41,7 @@
 							<form class="form-inline memberFrom" >
 								<div class="form-group">
 									<label for="exampleInputName2">會員帳號:</label>
-									<input type='text' name='account' id='account' class="form-control" value="${account}"/>
+									<input type='text' name='account' id='account' class="form-control" />
 								</div>
 								<div class="form-group">
 									<label for="exampleInputName2">會員身份:</label>
@@ -209,8 +209,8 @@ $(function(){
 	        	$("#customerList").LoadingOverlay("show");
 			}, 
 			
-			// 成功要做的事
-	        success : function(response){   
+				// 成功要做的事
+	        	success : function(response){   
 	        	//測試列出接收到的資料
 	        	console.log("response",response);
 	        		        	

@@ -68,7 +68,15 @@
 							<td>${st.count}</td>
 							<td>${Classfication.classficatoinName}</td>
 							<td>${Classfication.classificationDescription}</td>
-							<td>${Classfication.startStopStatus}</td>
+							<c:choose>
+								<c:when test="${Classfication.startStopStatus == true}">
+									<td>啟用</td>
+								</c:when>
+								<c:otherwise>
+									<td>不啟用</td>
+								</c:otherwise>
+							</c:choose>
+							
 							<!-- <td><span class="label label-success">啟用</span></td>
 							 -->
 							<td><a href="#" class='btn btn-primary'> 

@@ -1,4 +1,4 @@
-package test.customerservice;
+package test_CustomerReviewService;
 
 import java.sql.Timestamp;
 
@@ -8,19 +8,19 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import model.bean.CustomerServiceBean;
 
-public class TestCustomerServiceAuditService {
+public class TestCustomerReviewService {
 
 	public static void main(String[] args) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("beans.config.service.test.xml");
 	/*---------------------------------------------------------------------------------------------*/
 		
 	// 依照要測試的對象進行修改
-		CustomerServiceAuditService service = (CustomerServiceAuditService) context.getBean(CustomerServiceAuditService.class);
+		CustomerReviewService service = (CustomerReviewService) context.getBean(CustomerReviewService.class);
 		
 	// 測試內容
 	  //findById(int id)
 		/*
-		System.out.println(service.findById(8));
+		System.out.println(service.findById(6));
 		*/
 		
 	  //find()
@@ -82,9 +82,9 @@ public class TestCustomerServiceAuditService {
 		*/
 		
 	  //getConditionQuantity(String problemTypes, String processStatus, String customerID)
-		/*
+		
 		System.out.println(service.getConditionQuantity("1", null, null));
-		*/
+		
 		
 	/*---------------------------------------------------------------------------------------------*/
 		((ConfigurableApplicationContext) context).close();
