@@ -32,16 +32,16 @@ public class TestMessageService {
 		*/
 		
 	  // receiverMessage(String receiverAccount, String msgSenderID, String readStatus, String msgMarker, int page, int rows, String sortCondition)
-		
+		/*
 		for(MessageBean bean: service.receiverMessage("lihong@gmail.com", "", "", "1", 1, 999, "MsgSenderID")) {
 			System.out.println(bean);
 		}
-		
+		*/
 		
 	  // getQuantity(String receiverAccount, String msgSenderID, String readStatus, String msgMarker)
-		/*
-		System.out.println(service.getQuantity("888@gmail.com", "999", null, null));
-		*/
+		
+		System.out.println(service.getQuantity(null, "999@gmail.com", null, null));
+		
 		
 	  // changeMessageStatus(int messageId, String readStatus, String msgMarker)
 		/*

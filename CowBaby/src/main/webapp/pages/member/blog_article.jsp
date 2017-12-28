@@ -15,10 +15,9 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/css/bootstrap3/bootstrap-switch.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/css/bootstrap-dialog.min.css">
 
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/> 
 <link rel="stylesheet" href="<c:url value="/pluging/Bxsliders/jquery.bxslider.min.css"/>"> 
 <link rel="stylesheet" href="<c:url value="/css/frontDesk/basic.css"/>">
-<link rel="stylesheet" href="<c:url value="/css/frontDesk/user_register.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/frontDesk/blog_article.css"/>">
 
 
 <!--body-->
@@ -26,21 +25,55 @@
 	<!--引入 topbar 跟  header-->
 	<jsp:include page="/pages/common/topbar_and_header.jsp"/>
 	
-	<!-- 這邊 開始寫內容-->
-	<!--每頁 page_container-->
-	
-	<section class="page_container member_register_container">
-		<!-- 主要內容-->
-		
-		<div class="main_container_col_1">
-			 申請會員開店!!!
-			<form action="<c:url value="/CustomerApplySellAudit.controller"/>" method="POST" enctype="multipart/form-data">
-				 <td><input  name="customerID" value="${user.customerID}"></td>
-				 <td><input  name="email" value="${user.email}"></td>
-				 <td><button id="submit" type="submit" class="btn btn-primary pull-right">申請開店</button></td>
-			</form>
-		</div>	
+		<!--每頁Banner-->
+	<section class="page_banner">
+		<img src="<c:url value="/images/searchbox1.jpg"/>">
 	</section>
+
+	<section class="page_container blog_article_page">
+		<div class="side_bar">
+
+			<div class="article_classify">
+				<div class="classify_title">最新文章</div>
+				<ul>
+					<li><a href="#">這是文章1</a></li>
+					<li><a href="#">這是文章1</a></li>
+					<li><a href="#">這是文章1</a></li>
+					<li><a href="#">這是文章1</a></li>
+					<li><a href="#">這是文章1</a></li>
+				</ul>
+				
+			</div>
+
+			<div class="article_classify">
+				<div class="classify_title">最新文章</div>
+				<ul>
+					<li><a href="#">這是文章1</a></li>
+					<li><a href="#">這是文章1</a></li>
+					<li><a href="#">這是文章1</a></li>
+					<li><a href="#">這是文章1</a></li>
+					<li><a href="#">這是文章1</a></li>
+				</ul>
+				
+			</div>
+		</div>
+
+
+		<!-- 全部文章-->
+		<div class="main_container_col_2 blog_article_content">
+			<div class="blog_introduction">
+				<div class="blog_article_name">兔兔媽咪</div>
+				<div class="blog_article_title">肚子好餓好保保</div>
+			</div>
+
+			<!--CK EDITOR 內容-->
+			<section>
+				CK EDITOR
+				CK EDITOR
+			</section>
+		</div>
+	</section>
+	
 	
 	<!--引入 footer-->
 	<jsp:include page="/pages/common/footer.jsp"/>
@@ -54,11 +87,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/js/bootstrap-switch.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/js/bootstrap-dialog.min.js"></script>
 <script src="<c:url value="/pluging/Bxsliders/jquery.bxslider.min.js"/>"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
 
 
 <script type="text/javascript">
 
-	
+	$(function(){
+
+
+	})
 </script>

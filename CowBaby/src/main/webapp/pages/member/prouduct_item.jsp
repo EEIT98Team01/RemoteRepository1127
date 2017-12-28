@@ -69,30 +69,28 @@
 				</div>
 
 				<div class="product_infor">
-					<div class="product_title">英國Blade ＆ Rose 仙人掌內搭褲</div>
-					<div class="product_desc">小寶貝秋冬個性搶眼內搭褲,彈性極佳、保暖度夠居家褲、睡褲或外出當內搭褲皆適宜</div>
-					<div class="product_price">NT.1000</div>
+					<div class="product_title">${productData.title}</div>
+					<div class="product_desc">${productData.productDescription}</div>
+					<div class="product_price">NT.${productData.unitPrice}</div>
 
 					<div class="product_size">
 						<p><i class="fa fa-gift" aria-hidden="true"></i>產品規格</p>
 						<ul>
-							<li><a href="#">紅色T</a></li>
-							<li><a href="#">黑色T</a></li>
-							<li><a href="#">白色T</a></li>
-							<li><a href="#">藍色T</a></li>
-							<li><a href="#">橘色T</a></li>
-							<li><a href="#">深藍藍色T</a></li>
+						<c:forEach var="item" varStatus="st" items="${productSize}">
+							<li><a href="#" class="productSpec"><span>${item.productSpec}</span>(${item.specStock})</a></li>
+						</c:forEach>	
 						</ul>
 					</div>
 					
 					<div class="product_number">
 						<a href="#" class="add_num">+</a>
-						<input type="text" value="1">
+						<input type="text" value="0" id="quantity">
 						<a href="#" class="reduce_num">-</a>
+						
 					</div>
 
 					<div class="checkout">
-						<a class="add_cart" href="#">加入購物車</a>
+						<a class="add_cart"  href="#">加入購物車</a>
 						<a class="add_cart" href="#">去結帳</a>				
 					</div>
 				</div>
@@ -115,53 +113,121 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/js/bootstrap-dialog.min.js"></script>
 <script src="<c:url value="/pluging/Bxsliders/jquery.bxslider.min.js"/>"></script>
 
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.12/jquery.bxslider.js"></script> -->
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.12/jquery.bxslider.css">  -->
- 
 
 <script type="text/javascript">
 
-	$(function(){
+$(function(){
+	
+		// 要傳給後端的資料
+		var quantity = 0; //數量
+		var productID = ${productData.productID}; // 產品ID
+		var productSpec = ""; // 產品規格
+
 		
-		 // 加入購物車
-		 $("#qq").on('click', function () {
+		// 增加商品
+		$(".add_num").click(function(){
+			event.preventDefault();
+			var num_add = parseInt($("#quantity").val())+1;
+		  	if($("#quantity").val()==""){
+		    	num_add = 1;
+		  	}
+		  	$("#quantity").val(num_add);
+		  	
+		  	quantity = $("#quantity").val();
+		  	
+		});
 			
-			 $.ajax({
-			    url: "http://localhost:8080/CowBaby/service/qoo",
-			    type: 'post',
-			    cache: false,
-			    data: new FormData($('#shopSetForm')[0]),
-			    processData: false,
-			    contentType: false,
-			    
-			 	success: function(result){  //處理回傳成功事件，當請求成功後此事件會被呼叫
-			       console.log(result);
-			     
-			       //通知儲存成功  ，call BootstrapDialog      		       
-			       BootstrapDialog.show({
-		                type: BootstrapDialog.TYPE_INFO,
-		                title: "訊息",
-		                message: '儲存成功!!',
-		                buttons: [{
-		                	label: 'Close',
-		                    action: function(dialogItself){
-		                        dialogItself.close();
-		                    }
-		                }]
-		            });     
-			       
-			 	},
+		// 減少商品
+		$(".reduce_num").click(function(){
+			event.preventDefault();
+			var num_dec = parseInt($("#quantity").val())-1;
+			if(num_dec<0){
+				$("#quantity").val(0);
+				quantity = $("#quantity").val();
+			}else{
+				$("#quantity").val(num_dec);
+				quantity = $("#quantity").val();
+			}
+		});
+				
+		// input輸入商品數量
+		$("#quantity").keyup(function(){
+		    if(isNaN($(this).val())||parseInt($(this).val())<1){
+		      $(this).val("1");
+		      quantity = $("#quantity").val(); 
+		    }
+		})
+		
+		// 選擇產品類型
+		$(".productSpec").click(function(){
+			event.preventDefault();
+			$(".productSpec").removeClass('select');
+			$(this).addClass('select');
+			
+			// 使用著選取的size
+			productSpec = $(this).find('span').text();
+		})
+		
+
+		// 加入購物車
+		$(".add_cart").on('click', function () {
+			
+			$.ajax({
+				url:"http://localhost:8080/CowBaby/shopping/addShoppingCart",
+				type: 'post',
+				data:{
+				    productID:productID,
+					spec:productSpec,
+					productNum:quantity
+
+				},
+				dataType:"json",   
+				success: function(result){ 
+				    
+				    var productInfor = result.productInfo;
+				    var totalAmount = result.totalAmount;
+				    var totalItems = result.totalItems;
+				    var item="";
+				    var totalBuyNumber=0;
+				    
+				    // 把每ㄧ筆店家所購買的物品列出來 (key = 商店名子,productInfor = 在該商店購買的物品 )
+				    for(var key in productInfor){
+				       for(var i =0 ; i<productInfor[key].length ; i++){
+				    	    // 全部購買總商品數量
+				    	    totalBuyNumber = totalBuyNumber + productInfor[key][i].quantity;
+				        	
+				       		item  = item +"<li>"+
+				        			"<img src='<c:url value='/images/ad1.jpg'/>'>"+
+									"<div class='cartList'>"+
+										"<p>"+ key +"</p>"+
+										"<p>"+ productInfor[key][i].productName + "<span>-"+ productInfor[key][i].productSpec+"</span></p>"+
+										"<p>"+ productInfor[key][i].unitPrice +"元 X"+ productInfor[key][i].quantity +"</p>"+
+									"</div>"+
+									"</li>" 
+				         } 
+
+				    }
+				    
+				    
+				    // 把資訊帶入購物車
+				    if(totalItems==0){
+				    	 $(".shopcart-total-number").text(0);
+				    	 $(".calculate span").text(totalAmount);
+				    	 $(".currentShoppingCartList ul").html("購物車空空的");
+				    	
+				    }else{
+				    	$(".shopcart-total-number").text(totalBuyNumber);
+				    	$(".currentShoppingCartList ul").html(item);
+					    $(".calculate span").text(totalAmount);
+				    }
+
+				},
 				error: function(result){  
 				     //your code here
-				},
-				
-				statusCode: {               
-				     404: function() {
-				        alert("page not found");
-				     }
 				}
-			});
-		 }) 
 
-	})
+			}) 
+
+		})
+})
 </script>

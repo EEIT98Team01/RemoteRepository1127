@@ -360,13 +360,20 @@ a, a:hover, a:focus {
     z-index:999;
     background:#fff;
     overflow: auto;
+    display:none;
 }
 
+.currentShoppingCartList p.calculate{
+	clear:both;
+	font-size:14px;
+	text-align: center;
+}
 .top-bar .top-bar-menu li:nth-child(2) .currentShoppingCartList li{
 		max-width: 300px;
 		padding-bottom: 10px;
 	    border-right: none;
 	    border-bottom: 1px dashed #ccc;
+	    color:#685e5e;
 }
 
 .top-bar .top-bar-menu li:nth-child(2) .currentShoppingCartList img{

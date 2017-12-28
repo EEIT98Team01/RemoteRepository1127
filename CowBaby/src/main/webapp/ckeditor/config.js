@@ -5,7 +5,7 @@
 
 CKEDITOR.editorConfig = function( config ) {
 	config.image_previewText=' ';
-	config.filebrowserImageUploadUrl = "imageUpload.forum";
+	config.filebrowserImageUploadUrl = "upload.image";    // <--路徑要跟Controller相同
 	config.enterMode = CKEDITOR.ENTER_BR;
 	config.shiftEnterMode = CKEDITOR.ENTER_P;
 	// Define changes to default configuration here.

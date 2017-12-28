@@ -1,5 +1,6 @@
 package webservice;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -50,15 +51,60 @@ public class MessageWebService {
 			method={RequestMethod.GET},
 			produces={"application/json;charset=UTF-8"}
 	)
-	public String getMessageList(String receiverAccount, String msgSenderID, String readStatus, String msgMarker, int pageNumber, int pageSize, String sortCondition) {
+	public String getMessageList(String receiverAccount, String msgSenderID, String userType, String readStatus, String msgMarker, int pageNumber, int pageSize, String sortCondition) {
 		JSONObject jsonObj = new JSONObject();	// json物件,儲存欲回傳資料
 		JSONArray array;						// 儲存List<MessageBean>的json物件
-		int quantity;							// 回傳的資料筆數
 		int pageQuantity;						// 總頁數
+		int quantity = 0; 						// 取得符合所有條件的筆數
+		List<MessageBean> messageList = null;
 		
-		// 取得資料及總筆數
-		array = new JSONArray(messageService.receiverMessage(receiverAccount, msgSenderID, readStatus, msgMarker, pageNumber, pageSize, sortCondition));
-		quantity = messageService.getQuantity(receiverAccount, msgSenderID, readStatus, msgMarker);
+		if( (msgSenderID != null  && !"".equals(msgSenderID.trim())) || "全部".equals(userType) ) {
+			// 有指定寄件人或不選擇寄件者身份
+			messageList = messageService.receiverMessage(receiverAccount, msgSenderID, readStatus, msgMarker, pageNumber, pageSize, sortCondition);
+			quantity = messageService.getQuantity(receiverAccount, msgSenderID, readStatus, msgMarker);
+			array = new JSONArray(messageList);
+		} else {
+			// 沒有指定寄件人,且指定寄件者身份
+			List<MessageBean> resultMessageList = null;
+			
+			if("系統訊息".equals(userType)) {
+				// 只看系統訊息
+				resultMessageList = messageService.receiverMessage(receiverAccount, "999@gmail.com", readStatus, msgMarker, pageNumber, pageSize, sortCondition);
+				quantity = messageService.getQuantity(receiverAccount, "999@gmail.com", readStatus, msgMarker);
+				array = new JSONArray(messageList);
+			} else if("一般會員".equals(userType)) {
+				// 只看一般會員訊息
+				
+				// 取得所有訊息
+				quantity = messageService.getQuantity(receiverAccount, msgSenderID, readStatus, msgMarker);
+				messageList = messageService.receiverMessage(receiverAccount, msgSenderID, readStatus, msgMarker, 1, quantity, sortCondition);
+
+				// 取得所有一般會員訊息
+				quantity = 0;
+				List<MessageBean> tempMessageList = new LinkedList<MessageBean>();
+				for(int i = 0; i < messageList.size(); i++) {
+					// 取得訊息發送者資訊
+					CustomerBean customer = customerManagementService.findByCondition(messageList.get(i).getMsgSenderID(), null, null).get(0);
+					
+					if(customer.getCustomerID() != 1) {
+						// ID不為1表示為其餘會員
+						tempMessageList.add(messageList.get(i));
+						quantity++;
+					}
+				}
+				
+				// 取得某區段一般會員訊息
+				resultMessageList = this.subList(tempMessageList, (pageNumber - 1) * pageSize, pageSize);
+			} else if("自己".equals(userType)){
+				// 只看自己的訊息
+				resultMessageList = messageService.receiverMyselfMessage(receiverAccount, pageNumber, pageSize, sortCondition);
+				quantity = messageService.getQuantity(null, receiverAccount, null, null);
+				System.out.println("quantity:" + quantity);
+			}
+			
+			array = new JSONArray(resultMessageList);
+		}
+
 		
 		// 計算總頁數
 		if((quantity%pageSize) == 0) {
@@ -213,4 +259,15 @@ public class MessageWebService {
 		return jsonObj.toString();
 	}
 	
+	private List<MessageBean> subList(List<MessageBean> list, int start, int end) {
+		List<MessageBean> result = new LinkedList<MessageBean>();
+		
+		int i = 0;
+		while( ((start+i) < list.size()) && (i < end) ) {
+			result.add(list.get(start+i));
+			i++;
+		}
+		
+		return result;
+	}
 }

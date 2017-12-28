@@ -3,7 +3,6 @@ package webservice;
 import java.io.File;
 import java.io.FileInputStream;
 import java.text.SimpleDateFormat;
-import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,41 +21,32 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.alibaba.fastjson.JSONObject;
 
-import model.bean.CustomerBean;
-import model.bean.SellerBackstageManageBean;
-import model.service.CustomerManagementService;
-import model.service.SellerBackstageManageService;
+import model.bean.BlogBean;
+import model.service.BlogService;
 import model.utils.PrimitiveNumberEditor;  
 
 @RestController
-@RequestMapping("/service")
-public class CustomerManagementWebService {
+@RequestMapping("/Blog")
+public class BlogListWebService {
 	@Autowired
-	CustomerManagementService customerManagementService;
-	@Autowired
-	SellerBackstageManageService sellerBackstageManageService;
+	BlogService blogService;
 	
-
 	@RequestMapping(
-			value="/qoo",
+			value="/addBlogData",    /*"/qoo"*/ 
 			method={RequestMethod.POST},
 			produces={"application/json;charset=UTF-8"}
 	)
-	public String qoogood(MultipartFile storeLogo, MultipartFile storeBanner, String storeName, String storePhone,
-			Boolean storeStatus, String storeDescription, HttpServletRequest request,HttpServletResponse response, Model model) throws Exception {
+	public String qoogood(MultipartFile articlePhoto, String bloggerName, String articleHeader, String articleContent,
+			HttpServletRequest request,HttpServletResponse response, Model model) throws Exception {
 		
-		System.out.println("storeLogo==>"+storeLogo.getOriginalFilename());
-		System.out.println("storeBanner==>"+storeBanner);
-		System.out.println("storeName==>"+storeName);
-		System.out.println("storePhone==>"+storePhone);
-		System.out.println("storeStatus==>"+storeStatus);
-		System.out.println("storeDescription==>"+storeDescription);
-		
+		System.out.println("articlePhoto==>"+articlePhoto.getOriginalFilename());
+		System.out.println("bloggerName==>"+bloggerName);
+		System.out.println("articleHeader==>"+articleHeader);
+		System.out.println("articleContent==>"+articleContent);
 		
 		// 存放回傳給AJAX 的 response jsonObj
 		   JSONObject jsonObj = new JSONObject();
-		   byte[] storeLogoImg = null;
-		   String storeBannerImg = null;
+		   byte[] articlePhotoImg = null;
 		  
 		// 表單檢查
 //		// 1. 驗證 storeName長度
@@ -80,20 +70,20 @@ public class CustomerManagementWebService {
 		// 4. storeLogo檔案圖片檢查   
 		   // 把 storeBanner 類型轉為  File 類型  
 		  
-		   if(storeLogo.getOriginalFilename() != null || storeLogo.getOriginalFilename() !=""){
+		   if(articlePhoto.getOriginalFilename() != null || articlePhoto.getOriginalFilename() !=""){
 			   System.out.println("COME1");
-			   File convFile = new File( storeLogo.getOriginalFilename());
-			   storeLogo.transferTo(convFile);
+			   File convFile = new File( articlePhoto.getOriginalFilename());
+			   articlePhoto.transferTo(convFile);
 			    // 把 storeBanner 類型轉為 BYTE[] 類型
-			    byte[] storeLogoImgByte = new byte[(int) convFile.length()];
+			    byte[] articlePhotoImgByte = new byte[(int) convFile.length()];
 			    FileInputStream fis = new FileInputStream(convFile);
 				
-			    fis.read(storeLogoImgByte);
+			    fis.read(articlePhotoImgByte);
 			    fis.close();		    
-			    storeLogoImg = storeLogoImgByte;  		
+			    articlePhotoImg = articlePhotoImgByte;  		
 			}
 		   
-		
+/*		
 		// 5. storeBanner檔案圖片檢查	   
 		
 		 if(storeBanner.getOriginalFilename() != null || storeBanner.getOriginalFilename() != "" ){
@@ -136,34 +126,34 @@ public class CustomerManagementWebService {
 	        // storeBanner 完整路徑
 	        storeBannerImg = pathRoot+storeBannerPath;
 		 }
-		 	
+*/		 	
        
         try {
 			 // 把資料寫入 SellerBackstageManageBean
-			 SellerBackstageManageBean bean = new SellerBackstageManageBean();
+			 BlogBean bean = new BlogBean();
 			 // 如果 storeLogoImg 圖片不是空的才寫入資料庫
-			 if(storeLogoImg!=null){
-				 bean.setStoreLogo(new javax.sql.rowset.serial.SerialBlob(storeLogoImg));   
+			 if(articlePhotoImg!=null){
+				 bean.setArticlePhoto(new javax.sql.rowset.serial.SerialBlob(articlePhotoImg));   
 			 } else{
-				 bean.setStoreLogo(null);   
+				 bean.setArticlePhoto(null);   
 			 }  
-	         bean.setEmail("999@gmail.com");
-			 bean.setStoreDescription(storeDescription); 
-			 bean.setStoreName(storeName);
-			 bean.setStorePhone(storePhone);
-			 bean.setStoreStatus(storeStatus);
+			 
+	         bean.setBloggerName(bloggerName);
+			 bean.setArticleHeader(articleHeader); 
+			 bean.setArticleContent(articleContent);
+	/*		 
 			 // 如果 storeLogoImg 圖片不是空的才寫入資料庫
 			 if(storeLogoImg!=null){
 				 bean.setStoreBanner(storeBannerImg);
 			 }else{
 				 bean.setStoreBanner(null);
 			 }
-			 
+	*/		 
 			 System.out.println("===========================");
 			 System.out.println(bean);
 			 
 			 // 新增儲存資料
-			 sellerBackstageManageService.insertStoreData(bean);
+			 blogService.insert(bean);
 			 jsonObj.put("msg_success", "success"); 
 					 
 		} catch (IllegalStateException e) {
@@ -173,8 +163,10 @@ public class CustomerManagementWebService {
       
 		return jsonObj.toJSONString();
 	}
-
-	// FormBean客製化
+	
+/* ==================================以上為blog_add=================================================*/
+	
+	// FormBean客製化， 
 	@InitBinder
 	public void initialize(WebDataBinder webDataBinder) {
 		webDataBinder.registerCustomEditor(java.util.Date.class,
@@ -184,32 +176,32 @@ public class CustomerManagementWebService {
 				new PrimitiveNumberEditor(java.lang.Integer.class, true));
 	}
 	
-	// 取得會員資料
+	// 取得Blog資料
 	@RequestMapping(
-			value="/getCustomerData",
+			value="/getBlogData",
 			method={RequestMethod.GET},
 			produces={"application/json;charset=UTF-8"}
 	)
-	public String getCustomerData(String customerAccount, String pageSize, String customerStatue, String pageNumber) {
+	public String getBlogData(String author, String pageSize, String article, String pageNumber) {
 		JSONObject jsonObj = new JSONObject();	// json物件,儲存欲回傳資料
 		JSONArray array;						// 儲存List<CustomerBean>的json物件
 		int quantity;							// 回傳的資料筆數
 		int pageQuantity;						// 總頁數
 		
 		// 檢查使用者輸入條件之情形，呼叫相對應方法
-		if( (customerAccount == null || "".equals(customerAccount.trim())) && (customerStatue == null || "".equals(customerStatue.trim()))) {
-			array = new JSONArray(customerManagementService.find(Integer.parseInt(pageNumber), Integer.parseInt(pageSize)));
-			quantity = customerManagementService.getQuantity();
+		if( (author == null || "".equals(author.trim())) && (article == null || "".equals(article.trim()))) {
+			array = new JSONArray(blogService.find(Integer.parseInt(pageNumber), Integer.parseInt(pageSize), "ArticleID desc"));
+			quantity = blogService.getQuantity();
 		} else {
-			array = new JSONArray(customerManagementService.findByCondition(customerAccount, customerStatue, null, Integer.parseInt(pageNumber), Integer.parseInt(pageSize)));
-			quantity = customerManagementService.getConditionQuantity(customerAccount, customerStatue, null);
+			array = new JSONArray(blogService.findByCondition(author, article, Integer.parseInt(pageNumber), Integer.parseInt(pageSize), "ArticleID desc"));
+			quantity = blogService.getConditionQuantity(author, article);
 		}
 		
 		// 計算總頁數
-		if((quantity%10) == 0) {
-			pageQuantity = quantity/10;
+		if((quantity%Integer.parseInt(pageSize)) == 0) {
+			pageQuantity = quantity/Integer.parseInt(pageSize);
 		} else {
-			pageQuantity = quantity/10+1;
+			pageQuantity = quantity/Integer.parseInt(pageSize)+1;
 		}
 
 		// 將回傳資料塞入json物件
@@ -224,16 +216,20 @@ public class CustomerManagementWebService {
 	
 	// 更新會員資料
 	@RequestMapping(
-			value="/cutomerDataUpdate",
+			value="/blogDataUpdate",
 			method={RequestMethod.POST},
 			produces={"application/json;charset=UTF-8"}
 	)
-	public String cutomerDataUpdate(CustomerBean bean, BindingResult bindingResult) {
-		bean.setLoginPhoto( (customerManagementService.findById(bean.getCustomerID())).getLoginPhoto() );
+	public String blogDataUpdate(BlogBean bean, BindingResult bindingResult) {
+		System.out.println(bean.getArticleContent());
+		System.out.println(bean.getArticleHeader());
+		System.out.println(bean.getArticleID());
+		System.out.println(bean.getBloggerName());
+		System.out.println(bean.getArticlePhoto());
 
-		System.out.println(bean);
-		
-		if(customerManagementService.updateCustomerData(bean)) {
+		bean.setArticlePhoto(((BlogBean) blogService.findById(bean.getArticleID())).getArticlePhoto() );
+
+		if(blogService.updateBlogData(bean)) {
 			return "{\"status\":\"updateOK\"}";
 		} else {
 			return "{\"status\":\"updateError\"}";

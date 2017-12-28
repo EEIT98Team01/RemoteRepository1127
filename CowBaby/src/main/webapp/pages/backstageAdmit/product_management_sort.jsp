@@ -145,7 +145,7 @@ $(function(){
 	//增加商品彈跳框
 	$(".add_sort").click(function(){
 		event.preventDefault();
-	console.log("AAA");
+		console.log("AAA");
 		BootstrapDialog.show({
 			 message: $('<div></div>').load('<c:url value="/pages/common/add_prouduct_popup.jsp"/>'),
             title:"新增商品分類",
@@ -172,131 +172,6 @@ $(function(){
 	     });
 	})
 	
-
-	 // 抓取表單欄位
-	 var formData ="";
-  	 // 預設當前頁
-  	 var pagenow = 1; 
-  	 // 預設總頁數
-  	 var totalPage = 1; 
-  	 // 預設每頁顯示筆數
-  	 var visiblecount = 10; 
-	
-   // 查詢
-   $(".inquire").click(function(){
-	   //擋掉超連結的預設值
-       event.preventDefault(); 
-       
-       //分頁的插件，一定要加
-       $('#myPagination').twbsPagination('destroy');
-       
-		// 抓取表單欄位
-		formData = $(".memberFrom").serializeArray();
-	    // 發 ajax 查詢表單資料
-		inqueryData(formData , pagenow);
-   });
-   
-   // 查詢表單資料
-   function inqueryData(data,pageNum){
-   	
-   	console.log("data",data);
-   	console.log("pageNum",pageNum);	
-     	// 將畫面清空
-     	$('tbody').empty();
-   
-   	$.ajax({
-	        type:"GET",                   
-	        url: "http://localhost:8080/CowBaby/getClassficationData",    
-	        data: {
-		       	 customerAccount:formData[0].value,
-		       	 pageSize:visiblecount,
-		       	 customerStatue:formData[1].value,
-	       		 pageNumber:pageNum	 
-	        }, 
-	         
-	        dataType:"json",   
-	        
-	        // ajax載入前
-	        beforeSend: function(){
-	        	//顯示laoding 參考網址=>https://gasparesganga.com/labs/jquery-loading-overlay/#quick-demo
-	        	$("#customerList").LoadingOverlay("show");
-			}, 
-			
-			// 成功要做的事
-	        success : function(response){              
-	           // response 回來的字串轉 json物件
-	           var obj = JSON.parse(response.list);
-	           // 組出 列表塞回 table
-	           
-	           //讀取物件中的資料
-	           $.each(obj, function (index, customer) {
-	        	   console.log("customer",customer);
-	           	    var html="";
-	 		    	html="<tr>"+
-							"<td>"+(index+1+ (response.pageSize*(response.pageNumber-1)))+"</td>" +
-							"<td>"+customer.classficatoinName+"</td>" +
-							"<td>"+customer.classificationDescription+"</td>" +
-							"<td>"+customer.startStopStatus+"</td>" +
-							"<td>"+customer.gender+"</td>" +
-							"<td>"+customer.userID+"</td>" +
-							"<td>"+customer.consumerSegmentation+"</td>" +
-							"<td>"+customer.totalAmoutOfConsumption+"</td>" +
-							"<td> <a href='<c:url value='CustomerManagementView.controller'/>?id=" + customer.customerID + 
-							"' class='btn btn-success'> <i class='fa fa-eye'></i> </a> </td>" +
-							"<td> <a href='<c:url value='CustomerManagementEdit.controller'/>?id=" + customer.customerID + 
-							"' class='btn btn-primary'> <i class='fa fa-pencil'></i> </a> </td>" +
-						 "</tr>";				
-		    		$('tbody').append(html);
-	           }) 
-	           
-	          	    
-        		// 自動產生分頁
-	         	var totalPages = response.tatalPage;
-	            var pageSize  = response.pageSize;
-
-				if(!totalPages==0){
-				// 如果查詢有資料
-				   $('#myPagination').twbsPagination({
-		                  totalPages: totalPages,
-		                  visiblePages: pageSize,
-		                  
-		                  onPageClick: function (evt, page) { 
-							inqueryData(formData,page);
-			       	　　　　 }
-	                });
-				  
-					// 把頁數 ，筆數，開始筆數-結束筆數 塞回去
-		            $(".pageNum").html(response.pageNumber);
-		            $(".firstNum").html( ((response.pageNumber-1)*response.pageSize) +1);
-		            $(".endNum").html(response.pageNumber*response.pageSize);
-		            $(".totalNum").html(response.tatal);
-				  
-				}else{
-			 	// 如果查詢無資料	
-					$(".pageNum").html(0);
-		            $(".firstNum").html(0);
-		            $(".endNum").html(0);
-		            $(".totalNum").html(0);
-		            $('tbody').html('<tr><td colspan="10">目前無任何資料</td></tr>');	
-				}
- 
-	        },
-
-	        // ajax完成~隱藏loading
-	        complete: function(){
-	        	setTimeout(function(){
-	        		$("#customerList").LoadingOverlay("hide");
-	        	},300)	
-			},
-			     
-			// 發ajax錯誤
-	        error:function(xhr, ajaxOptions, thrownError){
-	            alert(xhr.status+"\n"+thrownError);
-	        }
-
-   		});
-   	 }
-
 })
 </script>
 

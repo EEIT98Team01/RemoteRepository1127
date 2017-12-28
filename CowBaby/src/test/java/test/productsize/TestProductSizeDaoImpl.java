@@ -30,13 +30,13 @@ public class TestProductSizeDaoImpl {
 		*/
 	
 	  //insert(ProductSizeBean bean)
-		/*
+		
 		ProductSizeBean bean = new ProductSizeBean();
-		bean.setProductID(3);
-		bean.setProductSpec("平裝");
+		bean.setProductID(6);
+		bean.setProductSpec("qq糖大");
 		bean.setSpecStock(11);
 		System.out.println(dao.insert(bean));
-		*/
+		
 		
 	  //update(ProductSizeBean bean)
 		/*
@@ -91,12 +91,12 @@ public class TestProductSizeDaoImpl {
 		
 	  //findByCondition(Map<String, String> condition, int page, int rows, String sortCondition)
 		
-		HashMap<String, String> condition = new HashMap<String, String>();
-		condition.put("specStock", "< 50");
-		//condition.put("productSpec", "like '22黑'");     
-		for(ProductSizeBean bean: dao.findByCondition(condition, 1, 2, "specStock")) {
-			System.out.println(bean);
-		}
+//		HashMap<String, String> condition = new HashMap<String, String>();
+//		condition.put("specStock", "< 50");
+//		//condition.put("productSpec", "like '22黑'");     
+//		for(ProductSizeBean bean: dao.findByCondition(condition, 1, 2, "specStock")) {
+//			System.out.println(bean);
+//		}
 		
 
 	  //getQuantity()

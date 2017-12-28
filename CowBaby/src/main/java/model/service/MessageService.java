@@ -50,39 +50,43 @@ public class MessageService {
 		}
 	}
 	
+	// 接收自己的Message資料
+	public List<MessageBean> receiverMyselfMessage(String msgSenderID, int page, int rows, String sortCondition) {
+
+		Map<String, String> condition = new HashMap<String, String>();
+	
+		if(msgSenderID != null && !"".equals(msgSenderID.trim())) {
+			condition.put("msgSenderID", "like '%" + msgSenderID + "%'");
+		}
+				
+		return messageDao.findByCondition(condition, page, rows, sortCondition);
+	}
+	
 	// 取得符合條件Message資料數量
 	public int getQuantity(String receiverAccount, String msgSenderID, String readStatus, String msgMarker) {
-
+		Map<String, String> condition = new HashMap<String, String>();
+		
 		if(receiverAccount != null && !"".equals(receiverAccount.trim())) {
-			// 有輸入收件者帳號才做後續處理
-			Map<String, String> condition = new HashMap<String, String>();
-			
 			condition.put("MsgReceiverID", "like '" + receiverAccount + "'");
-			
-			if(msgSenderID != null && !"".equals(msgSenderID.trim())) {
-				condition.put("msgSenderID", "like '%" + msgSenderID + "%'");
-			}
-			
-			if(readStatus != null && !"".equals(readStatus.trim())) {
-				condition.put("readStatus", "= " + readStatus);
-			}
-				
-			if(msgMarker != null && !"".equals(msgMarker.trim())) {
-				condition.put("msgMarker", "= " + msgMarker);
-			}
-				
-			return messageDao.getConditionQuantity(condition);
-		} else {
-			// 沒有收件者帳號,直接回傳0
-			return 0;
 		}
-
+			
+		if(msgSenderID != null && !"".equals(msgSenderID.trim())) {
+			condition.put("msgSenderID", "like '%" + msgSenderID + "%'");
+		}
+			
+		if(readStatus != null && !"".equals(readStatus.trim())) {
+			condition.put("readStatus", "= " + readStatus);
+		}
+				
+		if(msgMarker != null && !"".equals(msgMarker.trim())) {
+			condition.put("msgMarker", "= " + msgMarker);
+		}
+				
+		return messageDao.getConditionQuantity(condition);
 	}
 	
 	// 發送訊息
 	public MessageBean sendMessage(String msgSenderAccount, String msgReceiverAccount, String msgContent) {
-		// 之後要加檢查帳號是否存在
-		
 		MessageBean message = new MessageBean();
 		message.setMsgSenderID(msgSenderAccount);
 		message.setMsgReceiverID(msgReceiverAccount);

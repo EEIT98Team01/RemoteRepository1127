@@ -43,11 +43,11 @@ public class TestProductDaoImpl {
 //		private String productImage;
 		
 	  //insert(ProductBean bean)
-		/*
+		
 		ProductBean bean = new ProductBean();
-		bean.setStoreID(1);
-		bean.setTitle("唐詩三百首");
-		bean.setSummary("驅魔人必備");
+		bean.setStoreID(2);
+		bean.setTitle("牛牛娃娃");
+		bean.setSummary("牛牛娃娃寶寶1");
 		bean.setUnitPrice(66);
 		bean.setProductDescription("噹噹噹");
 		bean.setProductStatus(true);
@@ -57,7 +57,9 @@ public class TestProductDaoImpl {
 		bean.setDisplayTime(new java.sql.Timestamp(new java.util.Date("2017/11/11 08:11:31").getTime()));
 		bean.setProductImage("123.jpg");
 		System.out.println(dao.insert(bean));
-		*/
+		
+		
+		
 		
 	  //update(ProductBean bean)
 		/*
@@ -79,9 +81,9 @@ public class TestProductDaoImpl {
 		
 	  //find()
 		
-		for(ProductBean bean: dao.find()) {
-			System.out.println(bean);
-		}
+//		for(ProductBean bean: dao.find()) {
+//			System.out.println(bean);
+//		}
 		
 		
 	  //find(int page, int rows)
@@ -120,12 +122,12 @@ public class TestProductDaoImpl {
 		
 	  //findByCondition(Map<String, String> condition, int page, int rows, String sortCondition)
 		
-		HashMap<String, String> condition = new HashMap<String, String>();
-		condition.put("unitPrice", "< 10001");
-		//condition.put("title", "like '%百首%'"); 
-		for(ProductBean bean: dao.findByCondition(condition, 1, 999, "classficationID")) {
-			System.out.println(bean);
-		}
+//		HashMap<String, String> condition = new HashMap<String, String>();
+//		condition.put("unitPrice", "< 10001");
+//		//condition.put("title", "like '%百首%'"); 
+//		for(ProductBean bean: dao.findByCondition(condition, 1, 999, "classficationID")) {
+//			System.out.println(bean);
+//		}
 		
 
 	  //getQuantity()
