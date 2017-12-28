@@ -59,11 +59,6 @@
 						<div class="panel panel-addpadding">
 							<form class="form-inline messageFrom">
 								<div class="form-group">
-									<label for="exampleInputName2">會員帳號:</label>
-									<input type='text' name='account' id='account' class="form-control" value="${account}"/>
-								</div>
-							
-								<div class="form-group">
 									<label for="exampleInputName2">信件狀態</label>
 									<select class="form-control" name="readStatus">
 										<option value="">全部</option>
@@ -74,15 +69,13 @@
 
 								<div class="form-group">
 									<label for="exampleInputName2">寄件者</label>
-									<select class="form-control" name="userType">
-										<option value="自己">全部</option>
+									<select class="form-control" name="userType" id="userType">
+										<option value="自己">自己</option>
 										<option value="系統訊息">系統訊息</option>
-										<option value="一般會員">一般會員</option>
-										<option value="平台賣家">平台賣家</option>
 									</select>
 								</div>
 
-								<button type="submit" class="btn btn-primary inquire">查詢</button>
+								<button type="button" class="btn btn-primary inquire">查詢</button>
 							</form>
 						</div>
 					</div>
@@ -92,14 +85,7 @@
 					<div class="col-md-12">    
 		                <table class="table table-bordered" style="background-color: #fff;" id="messageList">                  
                         	<thead>
-							  	<tr>
-									<th>刪除</th>
-									<th>標記</th>
-									<th>寄件人</th>
-									<th>敘述</th>
-									<th>時間</th>
-									<th>狀態</th>
-								</tr>
+
 							</thead>
 							<tbody>
 								<td colspan="10">目前無任何資料</td>
@@ -180,112 +166,230 @@ $(function(){
 		formData = $(".messageFrom").serializeArray();
 		
 	    // 發 ajax 查詢表單資料
-		inqueryData(formData , pagenow);
+		inqueryData(formData , pagenow)
    });
    
    // 查詢表單資料
    function inqueryData(data,pageNum){
-   	
-   	console.log("data",data);
-   	console.log("pageNum",pageNum);	
      	// 將畫面清空
+     	$('thead').empty();
      	$('tbody').empty();
-   
-   	$.ajax({
-	        type:"GET",                   
-	        url: "/CowBaby/message/getMessageList",    
-	        data: {
-	        	receiverAccount:"${user.email}",
-	        	msgSenderID:formData[0].value,
-	        	readStatus:formData[1].value,
-	        	userType:formData[2].value,
-	        	msgMarker:"",
-		       	pageSize:visiblecount,
-	       		pageNumber:pageNum,
-	       		sortCondition:"MsgMarker desc, MsgTime desc"
-	        }, 
-	         
-	        dataType:"json",   
-	        
-	        // ajax載入前
-	        beforeSend: function(){
-	        	//顯示laoding 參考網址=>https://gasparesganga.com/labs/jquery-loading-overlay/#quick-demo
-	        	$("#messageList").LoadingOverlay("show");
-			}, 
-			
-			// 成功要做的事
-	        success : function(response){   
-	        	//測試列出接收到的資料
-	        	console.log("response",response);
-	        		        	
-	           // response 回來的字串轉 json物件
-	           var obj = JSON.parse(response.list);
-	           
-	           // 組出 列表塞回 table  
-	           // 讀取物件中的資料$.each(object,function(name,value){});
-	           $.each(obj, function (index, message) {
-	           	    var html="";
-	 		    	html="<tr>"+
-							"<td>" + "<input type='checkbox' class='mail-checkbox'>" + "</td>" +
-							"<td>" + message.msgMarker + "</td>" +
-							"<td>" + message.msgSenderID + "</td>" +
-							"<td>" +
-								"<a href='<c:url value='/pages/backstageSeller/messageView?messageId=" +
-								message.msgID + "'/>' class='linklist'>" + message.msgContent + "</a>" +
-							"</td>" +
+     	
+     	if($('#userType').val() == '自己') {
+     		html = "";
+     		html = "<tr>" +
+					"<th>收件人</th>" +
+					"<th>時間</th>" +
+					"<th>敘述</th>" +
+					"<th>回覆</th>" +
+					"<th>刪除</th>" +
+			   	"</tr>"
+			$('thead').append(html);
+			   	
+     		$.ajax({
+		    	type:"GET",                   
+		        url: "/CowBaby/message/getMessageList",    
+		        data: {
+		        	receiverAccount:"555@gmail.com",
+		        	msgSenderID:"",
+		        	readStatus:formData[0].value,
+		        	userType:formData[1].value,
+		        	msgMarker:"",
+			       	pageSize:visiblecount,
+		       		pageNumber:pageNum,
+		       		sortCondition:"MsgTime desc"
+		        }, 
+		         
+		        dataType:"json",   
+		        
+		        // ajax載入前
+		        beforeSend: function(){
+		        	//顯示laoding 參考網址=>https://gasparesganga.com/labs/jquery-loading-overlay/#quick-demo
+		        	$("#messageList").LoadingOverlay("show");
+				}, 
+				
+				// 成功要做的事
+		        success : function(response){   
+		        	//測試列出接收到的資料
+		        	console.log("response",response);
+		        		        	
+		           // response 回來的字串轉 json物件
+		           var obj = JSON.parse(response.list);
+		           
+		           // 組出 列表塞回 table  
+		           // 讀取物件中的資料$.each(object,function(name,value){});
+		           $.each(obj, function (index, message) {
+		           	    var html="";
+
+		 		    	html="<tr>"+
+								"<td>" + message.msgReceiverID + "</td>" +
+								"<td>" + message.msgTime.substr(0,19) + "</td>" +
+								"<td>" +
+									"<a href='<c:url value='/pages/member/messageView?messageId=" +
+									message.msgID + "'/>' class='linklist'>" + message.msgContent + "</a>" +
+								"</td>" +
 							
-							"<td>" + message.msgTime.substr(0,19) + "</td>" +
-							"<td>" + message.readStatus + "</td>" +
-						 "</tr>";				
-		    		$('tbody').append(html);
-	           }) 
-	           
-	          	    
-        		// 自動產生分頁
-	         	var totalPages = response.tatalPage;
-	            var pageSize  = response.pageSize;
-
-				if(!totalPages==0){
-				// 如果查詢有資料
-				   $('#myPagination').twbsPagination({
-		                  totalPages: totalPages,
-		                  visiblePages: pageSize,
-		                  
-		                  onPageClick: function (evt, page) { 
-							inqueryData(formData,page);
-			       	　　　　 }
-	                });
-				  
-					// 把頁數 ，筆數，開始筆數-結束筆數 塞回去
-		            $(".pageNum").html(response.pageNumber);
-		            $(".firstNum").html( ((response.pageNumber-1)*response.pageSize) +1);
-		            $(".endNum").html(response.pageNumber*response.pageSize);
-		            $(".totalNum").html(response.tatal);
-				  
-				}else{
-			 	// 如果查詢無資料	
-					$(".pageNum").html(0);
-		            $(".firstNum").html(0);
-		            $(".endNum").html(0);
-		            $(".totalNum").html(0);
-		            $('tbody').html('<tr><td colspan="10">目前無任何資料</td></tr>');	
-				}
- 
-	        },
-
-	        // ajax完成~隱藏loading
-	        complete: function(){
-	        	setTimeout(function(){
-	        		$("#messageList").LoadingOverlay("hide");
-	        	},300)	
-			},
-			     
-			// 發ajax錯誤
-	        error:function(xhr, ajaxOptions, thrownError){
-	            alert(xhr.status+"\n"+thrownError);
-	        }
-
-   	});
+								"<td>" + message.msgResponse + "</td>" +
+								"<td> <a href='<c:url value='/pages/member/messageDelete?messageId=" +
+								message.msgID + "'/>' class='btn btn-primary'> <i class='fa fa-trash-o'></i> </a> </td>" +
+							 "</tr>";				
+			    		$('tbody').append(html);
+		           }) 
+		           
+		          	    
+	        		// 自動產生分頁
+		         	var totalPages = response.tatalPage;
+		            var pageSize  = response.pageSize;
+	
+					if(!totalPages==0){
+					// 如果查詢有資料
+					   $('#myPagination').twbsPagination({
+			                  totalPages: totalPages,
+			                  visiblePages: pageSize,
+			                  
+			                  onPageClick: function (evt, page) { 
+								inqueryData(formData,page);
+				       	　　　　 }
+		                });
+					  
+						// 把頁數 ，筆數，開始筆數-結束筆數 塞回去
+			            $(".pageNum").html(response.pageNumber);
+			            $(".firstNum").html( ((response.pageNumber-1)*response.pageSize) +1);
+			            $(".endNum").html(response.pageNumber*response.pageSize);
+			            $(".totalNum").html(response.tatal);
+					  
+					}else{
+				 	// 如果查詢無資料	
+						$(".pageNum").html(0);
+			            $(".firstNum").html(0);
+			            $(".endNum").html(0);
+			            $(".totalNum").html(0);
+			            $('tbody').html('<tr><td colspan="10">目前無任何資料</td></tr>');	
+					}
+	 
+		        },
+	
+		        // ajax完成~隱藏loading
+		        complete: function(){
+		        	setTimeout(function(){
+		        		$("#messageList").LoadingOverlay("hide");
+		        	},300)	
+				},
+				     
+				// 發ajax錯誤
+		        error:function(xhr, ajaxOptions, thrownError){
+		            alert(xhr.status+"\n"+thrownError);
+		        }
+	
+	   		});
+     	} else {
+     		html = "";
+     		html = "<tr>" +
+					"<th>標記</th>" +
+					"<th>寄件人</th>" +
+					"<th>敘述</th>" +
+					"<th>時間</th>" +
+					"<th>狀態</th>" +
+					"<th>刪除</th>" +
+			   	"</tr>"
+			$('thead').append(html);
+			   	
+		    $.ajax({
+		    	type:"GET",                   
+		        url: "/CowBaby/message/getMessageList",    
+		        data: {
+		        	receiverAccount:"555@gmail.com",
+		        	msgSenderID:"",
+		        	readStatus:formData[0].value,
+		        	userType:formData[1].value,
+		        	msgMarker:"",
+			       	pageSize:visiblecount,
+		       		pageNumber:pageNum,
+		       		sortCondition:"MsgMarker desc, MsgTime desc"
+		        }, 
+		         
+		        dataType:"json",   
+		        
+		        // ajax載入前
+		        beforeSend: function(){
+		        	//顯示laoding 參考網址=>https://gasparesganga.com/labs/jquery-loading-overlay/#quick-demo
+		        	$("#messageList").LoadingOverlay("show");
+				}, 
+				
+				// 成功要做的事
+		        success : function(response){   
+		        	//測試列出接收到的資料
+		        	console.log("response",response);
+		        		        	
+		           // response 回來的字串轉 json物件
+		           var obj = JSON.parse(response.list);
+		           
+		           // 組出 列表塞回 table  
+		           // 讀取物件中的資料$.each(object,function(name,value){});
+		           $.each(obj, function (index, message) {
+		           	    var html="";
+		 		    	html="<tr>"+
+								"<td>" + message.msgMarker + "</td>" +
+								"<td>" + message.msgSenderID + "</td>" +
+								"<td>" +
+									"<a href='<c:url value='/pages/member/messageView?messageId=" +
+									message.msgID + "'/>' class='linklist'>" + message.msgContent + "</a>" +
+								"</td>" +
+								"<td>" + message.msgTime.substr(0,19) + "</td>" +
+								"<td>" + message.readStatus + "</td>" +
+								"<td> <a href='<c:url value='/pages/member/messageDelete?messageId=" +
+								message.msgID + "'/>' class='btn btn-primary'> <i class='fa fa-trash-o'></i> </a> </td>" +
+							 "</tr>";				
+			    		$('tbody').append(html);
+		           }) 
+		           
+		          	    
+	        		// 自動產生分頁
+		         	var totalPages = response.tatalPage;
+		            var pageSize  = response.pageSize;
+	
+					if(!totalPages==0){
+					// 如果查詢有資料
+					   $('#myPagination').twbsPagination({
+			                  totalPages: totalPages,
+			                  visiblePages: pageSize,
+			                  
+			                  onPageClick: function (evt, page) { 
+								inqueryData(formData,page);
+				       	　　　　 }
+		                });
+					  
+						// 把頁數 ，筆數，開始筆數-結束筆數 塞回去
+			            $(".pageNum").html(response.pageNumber);
+			            $(".firstNum").html( ((response.pageNumber-1)*response.pageSize) +1);
+			            $(".endNum").html(response.pageNumber*response.pageSize);
+			            $(".totalNum").html(response.tatal);
+					  
+					}else{
+				 	// 如果查詢無資料	
+						$(".pageNum").html(0);
+			            $(".firstNum").html(0);
+			            $(".endNum").html(0);
+			            $(".totalNum").html(0);
+			            $('tbody').html('<tr><td colspan="10">目前無任何資料</td></tr>');	
+					}
+	 
+		        },
+	
+		        // ajax完成~隱藏loading
+		        complete: function(){
+		        	setTimeout(function(){
+		        		$("#messageList").LoadingOverlay("hide");
+		        	},300)	
+				},
+				     
+				// 發ajax錯誤
+		        error:function(xhr, ajaxOptions, thrownError){
+		            alert(xhr.status+"\n"+thrownError);
+		        }
+	
+	   		});
+		}
    }
 })
 </script>

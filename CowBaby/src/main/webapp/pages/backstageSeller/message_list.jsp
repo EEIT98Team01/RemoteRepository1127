@@ -59,7 +59,6 @@
 										<option value="全部">全部</option>
 										<option value="系統訊息">系統訊息</option>
 										<option value="一般會員">一般會員</option>
-										<option value="平台賣家">平台賣家</option>
 									</select>
 								</div>
 
@@ -74,12 +73,12 @@
 		                <table class="table table-bordered" style="background-color: #fff;" id="messageList">                  
                         	<thead>
 							  	<tr>
-									<th>刪除</th>
 									<th>標記</th>
 									<th>寄件人</th>
 									<th>敘述</th>
 									<th>時間</th>
 									<th>狀態</th>
+									<th>刪除</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -191,7 +190,8 @@ $(function(){
 	        type:"GET",                   
 	        url: "/CowBaby/message/getMessageList",    
 	        data: {
-	        	receiverAccount:"${user.email}",
+// 	        	receiverAccount:"${user.email}",
+				receiverAccount:"555@gmail.com",
 	        	msgSenderID:formData[0].value,
 	        	readStatus:formData[1].value,
 	        	userType:formData[2].value,
@@ -222,7 +222,6 @@ $(function(){
 	           $.each(obj, function (index, message) {
 	           	    var html="";
 	 		    	html="<tr>"+
-							"<td>" + "<input type='checkbox' class='mail-checkbox'>" + "</td>" +
 							"<td>" + message.msgMarker + "</td>" +
 							"<td>" + message.msgSenderID + "</td>" +
 							"<td>" +
@@ -232,6 +231,8 @@ $(function(){
 							
 							"<td>" + message.msgTime.substr(0,19) + "</td>" +
 							"<td>" + message.readStatus + "</td>" +
+							"<td> <a href='<c:url value='/pages/backstageSeller/messageDelete?messageId=" +
+							message.msgID + "'/>' class='btn btn-primary'> <i class='fa fa-trash-o'></i> </a> </td>" +
 						 "</tr>";				
 		    		$('tbody').append(html);
 	           }) 

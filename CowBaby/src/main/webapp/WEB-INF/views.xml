@@ -66,6 +66,20 @@
 	<bean id="message_detail" class="org.springframework.web.servlet.view.InternalResourceView">
 		<property name="url" value="/pages/backstageSeller/message_detail.jsp"></property>
 	</bean>
+	
+	<bean id="message_list" class="org.springframework.web.servlet.view.RedirectView">
+		<property name="contextRelative" value="true"></property>
+		<property name="url" value="/pages/backstageSeller/message_list.jsp"></property>
+	</bean>
+	
+	<bean id="message_detail_member" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/pages/member/member_account_msg_detail.jsp"></property>
+	</bean>
+	
+	<bean id="message_list_member" class="org.springframework.web.servlet.view.RedirectView">
+		<property name="contextRelative" value="true"></property>
+		<property name="url" value="/pages/member/member_account_msg.jsp"></property>
+	</bean>
 
 	<!-- 丁測試用不要刪 -->
 	<!--
