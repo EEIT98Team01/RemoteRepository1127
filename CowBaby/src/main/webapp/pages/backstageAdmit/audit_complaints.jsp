@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -87,17 +88,29 @@
 							<tr>
 								<td>${st.count}</td>
 								<td>${CustomerReview.email}</td>
-								<td>${CustomerReview.reportTime}</td>
+								<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${CustomerReview.reportTime}"/></td>
 								<td>${CustomerReview.problemTypes}</td>
-								<td>${CustomerReview.processStatus}</td>
+<%-- 								<td>${CustomerReview.processStatus}</td> --%>
+								<c:choose>
+								<c:when test="${CustomerReview.processStatus == 1}">
+									<td>處理中</td>
+								</c:when>
+								<c:when test="${CustomerReview.processStatus == 2}">
+									<td>已處理</td>
+								</c:when>
+								<c:otherwise>
+									<td>未處理</td>
+								</c:otherwise>
+							    </c:choose>
 								
 								<%-- <td>${CustomerReview.problemDescription}</td> --%>
 					
 								<td><a href="#" class='btn btn-info audit_detail_btn'> <i
 									class="fa fa-commenting" aria-hidden="true"></i>
 								</a></td>
-								<td><a href="#" class='btn btn-primary audit_popupbox_btn'> <i
-										class='fa fa-pencil'></i>
+								<td><a href="#" class='btn btn-primary audit_popupbox_btn' >
+									<span style="display: none;">${CustomerReview.reportID}</span>
+								<i class='fa fa-pencil'></i> 
 									</a>
 								</td>
 							</tr>
@@ -205,35 +218,39 @@
 			size : "10%"
 		});
 
-
-		// 申訴審核彈出框
-		$(".audit_popupbox_btn").click(
-				function() {
-					BootstrapDialog.show({
-						message : $('<div></div>').load('<c:url value="/pages/common/audit_complaints_popup.jsp"/>'),
-						title : "申請審核",
-						buttons : [ {
-							label : '確定',
-							// no title as it is optional
-							cssClass : 'btn-primary',
-							data : {
-								js : 'btn-confirm',
-								'user-id' : '3'
-							},
-							action : function() {
-								alert('Hi Orange!');
-							}
-						}, {
-							label : '取消',
-							action : function(dialogItself) {
-								dialogItself.close();
-							}
-						} ]
-					});
-				})
+ 		// 申訴審核彈出框
+		$(".audit_popupbox_btn").click(function(){
+			console.log("AAA");
+			var sss = $(this).find('span').text();
+			console.log(sss)
+			
+				BootstrapDialog.show({
+					message : $('<div></div>').load('/CowBaby/pages/common/audit_complaints_popup.jsp?sss='+sss),
+					title : "申請審核",
+					buttons : [ {
+						label : '確定',
+						// no title as it is optional
+						cssClass : 'btn-primary',
+						data : {
+							js : 'btn-confirm',
+							'user-id' : '3'
+						},
+						action : function() {
+							console.log("AAA");
+		                	$("#qqq").submit();
+						}
+					}, {
+						label : '取消',
+						action : function(dialogItself) {
+							dialogItself.close();
+						}
+					} ]
+				});
+			})
+				
 
 		// 申訴內容細節和回覆彈出框
-		$(".audit_detail_btn").click(function() {
+		$(".audit_detail_btn").click(function(){
 			console.log("AA") 
 			BootstrapDialog.show({               
 				message : $('<div></div>').load('<c:url value="/pages/common/audit_context.jsp"/>'),
@@ -256,8 +273,7 @@
 					}
 				} ]
 			});
-		})
-
+		}) 
 	})
 </script>
 

@@ -48,6 +48,31 @@ public class CustomerServiceAuditService {
 		return CustomerServiceDao.insert(bean);
 	}
 	
+	// 查詢該客訴玩家設置資料
+	@Transactional(readOnly = true)
+	public CustomerServiceBean getReprotData(int reportID) {
+		return CustomerServiceDao.findById(reportID);
+	}
+	
+	@Transactional(readOnly = true)
+	public List<CustomerServiceBean> findByReview(String email, String processStatus, String problemTypes) {
+		if((email == null) && (email == processStatus) && (problemTypes == null)){
+			return CustomerServiceDao.find();//未使用任何條件
+		}else{
+			Map<String,String> condition = new HashMap<String,String>();
+			if(email != null){
+				condition.put("email", "=" + "'" + email + "'");
+			}
+			if(processStatus != null){
+				condition.put("processStatus", "=" + processStatus);
+			}
+			if(processStatus != null){
+				condition.put("problemTypes", "=" + problemTypes);
+			}
+			return CustomerServiceDao.findByCondition(condition);
+		}
+	}
+	
 	// 回傳符合某條件的資料
 	@Transactional(readOnly=true)
 	public List<CustomerServiceBean> findByCondition(String problemTypes, String processStatus, String email) {

@@ -42,15 +42,15 @@
 	<!--從這邊開始寫-->
 	<section class="page_container customer_service"> <!-- 主要內容-->
 	<div class="main_container_col_1">
-		<form
-			action="${pageContext.servletContext.contextPath}/CustomerServiceAuditList.controller"
-			method="POST">
+		<form action="${pageContext.servletContext.contextPath}/CustomerServiceAuditList.controller"
+			  method="POST">
 			<div>
 
 				<table>
 					<tr>
 						<td><label>申訴人</label></td>
 						<td><input type="text" name="email"></td>
+						<p style="color: #e21124;">${errors.email}</p>
 
 					</tr>
 					<tr>

@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import model.bean.ClassficationBean;
 import model.bean.CustomerServiceBean;
+import model.bean.SellerBackstageManageBean;
 import model.dao.CustomerServiceDao;
 
 @Service
@@ -43,16 +45,14 @@ public class CustomerServiceAuditService {
 
 	// 回傳符合某條件的資料
 	@Transactional(readOnly = true)
-	public List<CustomerServiceBean> findByCondition(String problemTypes, String processStatus, String customerID) {
+	public List<CustomerServiceBean> findByReview1(String problemTypes, String processStatus, String customerID) {
 		return CustomerServiceAuditDao.findByCondition(this.createCondition(problemTypes, processStatus, customerID));
 	}
 
 	// 回傳符合某條件的N筆資料,若無資料,則回傳之List為空集合
 	@Transactional(readOnly = true)
-	public List<CustomerServiceBean> findByCondition(String problemTypes, String processStatus, String customerID,
-			int page, int rows) {
-		return CustomerServiceAuditDao.findByCondition(this.createCondition(problemTypes, processStatus, customerID),
-				page, rows);
+	public List<CustomerServiceBean> findByReview(String problemTypes, String processStatus, String email) {
+		return CustomerServiceAuditDao.findByCondition(this.getReview(email, processStatus, problemTypes));
 	}
 
 	// 先依某條件進行排序,回傳符合某某條件的N筆資料
@@ -69,16 +69,23 @@ public class CustomerServiceAuditService {
 		return CustomerServiceAuditDao.getQuantity();
 	}
 
+	// 查詢該客訴玩家設置資料
+	@Transactional(readOnly = true)
+	public CustomerServiceBean getReprotData(int reportID) {
+		return CustomerServiceAuditDao.findById(reportID);
+	}
+
 	// 回傳符合條件之資料筆數
 	@Transactional(readOnly = true)
-	public int getConditionreview(String problemTypes, String processStatus, String email) {
-		return CustomerServiceAuditDao.getConditionQuantity(this.createCondition(problemTypes, processStatus, email));
+	public int getConditionReview(String problemTypes, String processStatus, String email) {
+		return CustomerServiceAuditDao.getConditionQuantity(this.getReview(email, processStatus, problemTypes));
 	}
 
 	// 回傳符合條件之資料筆數
 	@Transactional(readOnly = true)
 	public int getConditionQuantity(String problemTypes, String processStatus, String customerID) {
-		return CustomerServiceAuditDao.getConditionQuantity(this.createCondition(problemTypes, processStatus, customerID));
+		return CustomerServiceAuditDao
+				.getConditionQuantity(this.createCondition(problemTypes, processStatus, customerID));
 	}
 
 	// 更新客訴資料
@@ -96,6 +103,43 @@ public class CustomerServiceAuditService {
 	@Transactional
 	public CustomerServiceBean insertStoreData(CustomerServiceBean bean) {
 		return CustomerServiceAuditDao.insert(bean);
+	}
+
+	@Transactional(readOnly = true)
+	public List<CustomerServiceBean> findByCondition(String email, String processStatus, String problemTypes) {
+		if ((email == null) && (email == processStatus) && (problemTypes == null)) {
+			return CustomerServiceAuditDao.find();// 未使用任何條件
+		} else {
+			Map<String, String> condition = new HashMap<String, String>();
+			if (email != null) {
+				condition.put("email", "=" + email);
+			}
+			if (processStatus != null) {
+				condition.put("processStatus", "=" + processStatus);
+			}
+			if (processStatus != null) {
+				condition.put("problemTypes", "=" + problemTypes);
+			}
+			return CustomerServiceAuditDao.findByCondition(condition);
+		}
+	}
+
+	// 將查詢條件塞進Map
+	private HashMap<String, String> getReview(String email, String processStatus, String problemTypes) {
+		HashMap<String, String> condition = new HashMap<String, String>();
+
+		if (email != null && email.trim().length() != 0) {
+			condition.put("email", "like '%" + email + "%'");
+		}
+
+		if (processStatus != null && processStatus.trim().length() != 0) {
+			condition.put("processStatus", "= " + processStatus);
+		}
+
+		if (problemTypes != null && problemTypes.trim().length() != 0) {
+			condition.put("problemTypes", "= " + problemTypes);
+		}
+		return condition;
 	}
 
 	// 將查詢條件塞進Map
