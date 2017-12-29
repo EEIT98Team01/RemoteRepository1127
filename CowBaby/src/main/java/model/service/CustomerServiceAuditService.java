@@ -2,6 +2,7 @@ package model.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,10 +42,41 @@ public class CustomerServiceAuditService {
 		return CustomerServiceDao.find(page, rows, sortCondition);
 	}
 	
+	//新增玩家客訴資料
+	@Transactional
+	public CustomerServiceBean insertStoreData(CustomerServiceBean bean) {
+		return CustomerServiceDao.insert(bean);
+	}
+	
+	// 查詢該客訴玩家設置資料
+	@Transactional(readOnly = true)
+	public CustomerServiceBean getReprotData(int reportID) {
+		return CustomerServiceDao.findById(reportID);
+	}
+	
+	@Transactional(readOnly = true)
+	public List<CustomerServiceBean> findByReview(String email, String processStatus, String problemTypes) {
+		if((email == null) && (email == processStatus) && (problemTypes == null)){
+			return CustomerServiceDao.find();//未使用任何條件
+		}else{
+			Map<String,String> condition = new HashMap<String,String>();
+			if(email != null){
+				condition.put("email", "=" + "'" + email + "'");
+			}
+			if(processStatus != null){
+				condition.put("processStatus", "=" + processStatus);
+			}
+			if(processStatus != null){
+				condition.put("problemTypes", "=" + problemTypes);
+			}
+			return CustomerServiceDao.findByCondition(condition);
+		}
+	}
+	
 	// 回傳符合某條件的資料
 	@Transactional(readOnly=true)
-	public List<CustomerServiceBean> findByCondition(String problemTypes, String processStatus, String customerID) {
-		return CustomerServiceDao.findByCondition(this.createCondition(problemTypes, processStatus, customerID));
+	public List<CustomerServiceBean> findByCondition(String problemTypes, String processStatus, String email) {
+		return CustomerServiceDao.findByCondition(this.createCondition(problemTypes, processStatus, email));
 	}
 	
 	// 回傳符合某條件的N筆資料,若無資料,則回傳之List為空集合
@@ -69,6 +101,11 @@ public class CustomerServiceAuditService {
 	@Transactional(readOnly=true)
 	public int getConditionQuantity(String problemTypes, String processStatus, String customerID) {
 		return CustomerServiceDao.getConditionQuantity(this.createCondition(problemTypes, processStatus, customerID));
+	}
+	
+	@Transactional(readOnly = true)
+	public int getConditionreview(String problemTypes, String processStatus, String email) {
+		return CustomerServiceDao.getConditionQuantity(this.createCondition(problemTypes, processStatus, email));
 	}
 	
 	// 更新客訴資料
@@ -114,4 +151,7 @@ public class CustomerServiceAuditService {
 		
 		return result;
 	}
+	
+	//新增特定客訴資料
+
 }

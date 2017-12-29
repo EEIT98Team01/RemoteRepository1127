@@ -4,6 +4,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import model.bean.CustomerBean;
+
 public class TestCustomerManagementService {
 
 	public static void main(String[] args) {
@@ -18,6 +20,9 @@ public class TestCustomerManagementService {
 		/*
 		System.out.println(service.findById(1));
 		*/
+		
+		//Update
+//		System.out.println(service.updateCustomerData(bean));
 		
 	  //find()
 		/*
@@ -68,7 +73,7 @@ public class TestCustomerManagementService {
 		
 	  //getConditionQuantity(String account, String userType, String clusterID)
 		
-		System.out.println(service.getConditionQuantity("Allen", "1", null));
+//		System.out.println(service.getConditionQuantity("Allen", "1", null));
 		
 		
 		

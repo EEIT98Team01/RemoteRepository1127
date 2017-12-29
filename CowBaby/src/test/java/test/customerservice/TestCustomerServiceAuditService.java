@@ -1,8 +1,12 @@
 package test.customerservice;
 
+import java.sql.Timestamp;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import model.bean.CustomerServiceBean;
 
 public class TestCustomerServiceAuditService {
 
@@ -16,7 +20,7 @@ public class TestCustomerServiceAuditService {
 	// 測試內容
 	  //findById(int id)
 		/*
-		System.out.println(service.findById(6));
+		System.out.println(service.findById(8));
 		*/
 		
 	  //find()
@@ -25,6 +29,22 @@ public class TestCustomerServiceAuditService {
 			System.out.println(bean);
 		}
 		*/
+		
+	  //insert
+		/*
+		CustomerServiceBean bean = new CustomerServiceBean();
+		bean.setProblemTypes(1);
+		bean.setEmail("s730530@gmail.com");
+		bean.setProblemDescription("安安");
+		bean.setServiceFeedback("你好");
+		bean.setProcessStatus(2);
+		System.out.println(service.insertStoreData(bean));
+		*/
+		
+	  //Update
+		CustomerServiceBean update = service.getReprotData(2);
+		update.setProblemDescription("3317868367723873");
+		service.updateCustomerData(update);
 		
 	  //find(int page, int rows)
 		/*
@@ -42,7 +62,7 @@ public class TestCustomerServiceAuditService {
 		
 	  //findByCondition(String problemTypes, String processStatus, String customerID)
 		/*
-		for(CustomerServiceBean bean: service.findByCondition(null, null, "33")) {
+		for(CustomerServiceBean bean: service.findByCondition("s730530@gmail.com", "2", null)) {
 			System.out.println(bean);
 		}
 		*/
@@ -67,9 +87,9 @@ public class TestCustomerServiceAuditService {
 		*/
 		
 	  //getConditionQuantity(String problemTypes, String processStatus, String customerID)
-		
-		System.out.println(service.getConditionQuantity("1", null, null));
-		
+		/*
+		System.out.println(service.getReview(1, 2, "s730530@gmail.com"));
+		*/
 		
 	/*---------------------------------------------------------------------------------------------*/
 		((ConfigurableApplicationContext) context).close();

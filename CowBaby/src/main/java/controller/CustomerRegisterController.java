@@ -116,7 +116,7 @@ public class CustomerRegisterController {
 		 customerManagementService.inSert(myCustomerBean);
 		 System.out.println("成功!!");
 
-	 return "register_success";
+		 return "register_success";
 	}
 	
 

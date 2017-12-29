@@ -40,21 +40,30 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="panel panel-addpadding">
-							<form class="form-inline">
+							<form class="form-inline" action="${pageContext.servletContext.contextPath}/pages/backstageSeller/ProductList" method="post">
 								<div class="form-group">
-									<label for="exampleInputName2">商品編號:</label>
-									<input type='text' class="form-control"/>
+									<label>商品名稱:</label>
+									<input type='text' class="form-control" name="productName"/>
 								</div>
 								<div class="form-group">
-									<label for="exampleInputName2">商品分類:</label>
-									<select class="form-control">
-										<option>全部</option>
-										<option>玩具</option>
-										<option>圖書</option>
-										<option>日用品</option>
-										<option>衣服</option>		
+									<label>商品分類:</label>
+									<select class="form-control" name="productClassfication">
+										<option value="">全部</option>
+										<option value="1">玩具</option>
+										<option value="2">圖書</option>
+										<option value="3">衣服</option>
+										<option value="4">鞋子</option>
+										<option value="5">日用品</option>
 									</select>
-								</div>	
+								</div>
+								<div class="form-group">
+									<label>商品狀態:</label>
+									<select class="form-control" name="productStatus">
+										<option value="">全部</option>
+										<option value="">上架</option>
+										<option value="">下架</option>
+									</select>
+								</div>
 								<button type="submit" class="btn btn-primary">查詢</button>
 							</form>
 						</div>
@@ -81,37 +90,15 @@
 								  </tr>
 								</thead>
 								<tbody>
-								  	<tr>
-								  		<td>1</td>
-										<td>a123456</td>
-										<td>教你作出好吃膠柄人之愛莉絲夢遊仙境</td>
-										<td><img src="${pageContext.request.contextPath}/images/01.jpg"></td>
-										<td>書籍</td>
-										<td>100</td>
-										<td>$500</td>
-										<td>$50</td>
-										<td>
-											<input type="checkbox" name="my-checkbox" checked  data-size="mini">
-										</td>
-										<td>
-											<button class="btn btn-primary">
-												<i class="fa fa-pencil"></i>
-											</button>
-										</td>
-										<td>
-											<button class="btn btn-danger">
-												<i class="fa fa-trash-o "></i>
-											</button>
-										</td>
-									  	</tr>
-									  	  	<tr>
-									  		<td>1</td>
-											<td>a123456</td>
-											<td>教你作出好吃膠柄人之愛莉絲夢遊仙境</td>
+									<c:forEach var="product" varStatus="st" items="${productList}">
+								  		<tr>
+								  			<td>${st.count + (pageSize*(pageNumber-1))}</td>
+											<td>${product.productID}</td>
+											<td>${product.title}</td>
 											<td><img src="${pageContext.request.contextPath}/images/01.jpg"></td>
-											<td>書籍</td>
+											<td>${product.classficationID}</td>
 											<td>100</td>
-											<td>$500</td>
+											<td>${product.unitPrice}</td>
 											<td>$50</td>
 											<td>
 												<input type="checkbox" name="my-checkbox" checked  data-size="mini">
@@ -126,7 +113,12 @@
 													<i class="fa fa-trash-o "></i>
 												</button>
 											</td>
-									  	</tr>								
+									 	</tr>
+									</c:forEach>
+									
+									<c:if test="${totalPage == 0 || empty totalPage}" >
+										<tr><td colspan="10">目前無任何資料</td></tr>
+									</c:if>
 								</tbody>
 							</table>
 						</div>
@@ -134,27 +126,21 @@
 				</div>
 				<div class="row">
 					<div class="col-md-3 record-number">
-						<span>第2頁</span>
-						<span>第10 - 20 筆</span>
-						<span>共150筆</span>
+						<c:if test="${totalPage == 0 || empty totalPage}" >
+							<span>第 <span class="pageNum">0</span>頁</span>|
+							<span>第 <span class="firstNum">0</span> - <span class="endNum">0</span>筆</span>|
+							<span>共 <span class="totalNum">0</span>筆</span>
+						</c:if>
+						
+						<c:if test="${totalPage != 0 && !empty totalPage}" >
+							<span>第 <span class="pageNum">${pageNumber}</span>頁</span>|
+							<span>第 <span class="firstNum">${((pageNumber-1)*pageSize)+1}</span> - <span class="endNum">${pageNumber*pageSize}</span>筆</span>|
+							<span>共 <span class="totalNum">${tatal}</span>筆</span>
+						</c:if>
+
 					</div>
-					<ul class="pagination">
-						<li>
-					      <a href="#" aria-label="Previous">
-					        <span aria-hidden="true">&laquo;</span>
-					      </a>
-					    </li>
-					    <li><a href="#">1</a></li>
-					    <li><a href="#">2</a></li>
-					    <li><a href="#">3</a></li>
-					    <li><a href="#">4</a></li>
-					    <li><a href="#">5</a></li>
-					    <li>
-					    <a href="#" aria-label="Next">
-					        <span aria-hidden="true">&raquo;</span>
-					    </a>
-					    </li>
-					</ul>
+					<!--分頁 -->
+					<ul class="pagination"  id="myPagination"></ul>
 				</div>
 				<!--內容結束  -->
 			</section>
@@ -172,8 +158,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/js/bootstrap-switch.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/js/bootstrap-dialog.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
-<script src="<c:url value="/pluging/Bootsrap/bootstrap-datetimepicker.min.js"/>"></script>
-
+<script src="<c:url value='/pluging/Bootsrap/bootstrap-datetimepicker.min.js'/>"></script>
+<script src="<c:url value="/pluging/Bootsrap/jquery.twbsPagination.js"/>"></script>
 
 <script>
 $(function(){
@@ -184,6 +170,40 @@ $(function(){
 	$("#nav-accordion li ul").find('a').eq(0).css({'color':'yellow'});
 	$("#nav-accordion li").eq(3).css({'background':'#3a4152'});
 	
+  	// 預設當前頁
+  	var pagenow = 1;
+  	// 預設總頁數
+  	var totalPage = 1;
+  	// 預設每頁顯示筆數
+  	var visiblecount = 10;
+  	// 分頁的插件，一定要加
+    $('#myPagination').twbsPagination('destroy');
+
+ 	// 自動產生分頁
+ 	var totalPages = ${totalPage};
+    var pageSize  = ${pageSize};
+    
+	if(!totalPages==0) {
+		// 如果查詢有資料
+		$('#myPagination').twbsPagination({
+			startPage: ${pageNumber},
+			totalPages: totalPages,
+			visiblePages: pageSize,
+			initiateStartPageClick: false,
+            
+			onPageClick: function (evt, page) { 
+				var url = "";
+				url = url + 
+				      "${pageContext.servletContext.contextPath}/pages/backstageSeller/ProductList?" +
+				      "productName=${productName}&" +
+				      "productClassfication=${productClassfication}&" +
+				      "productStatus=${productStatus}&" +
+				      "pageNumber=" + page + "&" +
+				      "pageSize=${pageSize}"				
+				window.location.replace(url);
+			}
+		});
+	}
 })
 </script>
 

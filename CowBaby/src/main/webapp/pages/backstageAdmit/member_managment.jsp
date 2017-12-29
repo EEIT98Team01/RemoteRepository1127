@@ -41,7 +41,7 @@
 							<form class="form-inline memberFrom" >
 								<div class="form-group">
 									<label for="exampleInputName2">會員帳號:</label>
-									<input type='text' name='account' id='account' class="form-control" value="${account}"/>
+									<input type='text' name='account' id='account' class="form-control" />
 								</div>
 								<div class="form-group">
 									<label for="exampleInputName2">會員身份:</label>
@@ -206,6 +206,7 @@ $(function(){
 			
 			// 成功要做的事
 	        success : function(response){   
+
 	           // response 回來的字串轉 json物件
 	           var obj = JSON.parse(response.list);
 	           

@@ -30,8 +30,8 @@
 				<div class="breadcrumb-row">
 					<h3>修改文章</h3>
 					<ol class="breadcrumb">
-					  	<li><a href="#">媽咪推薦</a></li>
-					  	<li><a href="#">修改文章</a></li>
+						<li><a href="<c:url value='/pages/backstageAdmit/blog_list.jsp'/>">回文章列表</a></li>
+					</ol>					  	<li><a href="#">修改文章</a></li>
 					</ol>
 				</div>
 				<div class="row">
