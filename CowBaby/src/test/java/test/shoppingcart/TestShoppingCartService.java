@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.sql.rowset.serial.SerialException;
 
+import org.json.JSONObject;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -43,12 +44,21 @@ public class TestShoppingCartService {
 			}
 		}
 		
-		service.checkout(shoppingCart.getProductInfo().get("1-瑑瑑的店"), 1, "999@gmail.com", "功德院", "123@gmail.com", "0987654321", 1, 
-				         "", 50);
+//		service.checkout(shoppingCart.getProductInfo().get("1-瑑瑑的店"), 1, "999@gmail.com", "功德院", "123@gmail.com", "0987654321", 1, 
+//				         "", 50);
+//		
+//		service.checkout(shoppingCart.getProductInfo().get("2-第二間店"), 1, "999@gmail.com", "功德院", "123@gmail.com", "0987654321", 1, 
+//		         "", 100);
 		
-		service.checkout(shoppingCart.getProductInfo().get("2-第二間店"), 1, "999@gmail.com", "功德院", "123@gmail.com", "0987654321", 1, 
-		         "", 100);
+		JSONObject json = new JSONObject();
+		json.put("1-瑑瑑的店", "20");
+		json.put("2-第二間店", "10");
+
+		JSONObject result = new JSONObject(json.toString());
 		
+		for(String key: shoppingCart.getProductInfo().keySet()) {
+			System.out.println(result.getString(key));
+		}
 		
 	/*---------------------------------------------------------------------------------------------*/
 		((ConfigurableApplicationContext) context).close();
