@@ -45,6 +45,14 @@ public class CustomerServiceAuditController {
 		} else if ("其他".equals(problemTypes)) {
 			problemTypes = 4;
 		}
+		
+		if("".equals(email)) {
+			email = null;
+		}
+		
+		if("".equals(problemDescription)) {
+			problemDescription = null;
+		}
 
 		if (email == null || ("".equals(email.trim())) && 
 			((problemDescription == null) && "".equals(problemDescription.trim()) ))
@@ -53,6 +61,7 @@ public class CustomerServiceAuditController {
 		} else {
 			CustomerServiceBean bean = new CustomerServiceBean();
 			bean.setEmail(email);
+			bean.setProblemTypes(problemTypes);
 			bean.setProblemDescription(problemDescription);
 			bean.setReportTime(new java.util.Date());
 			customerServiceAuditService.insertStoreData(bean);
@@ -91,15 +100,15 @@ public class CustomerServiceAuditController {
 		return "customer_service_success";
 	}
 
-	@RequestMapping(value = ("CustomerServiceAuditView.controller"), method = { RequestMethod.GET, RequestMethod.POST })
-	public String view(Model model, String id) {
-
-		return "";
-	}
-
-	@RequestMapping(value = ("CustomerServiceAuditEdit.controller"), method = { RequestMethod.GET, RequestMethod.POST })
-	public String edit(Model model, String id) {
-
-		return "";
-	}
+//	@RequestMapping(value = ("CustomerServiceAuditView.controller"), method = { RequestMethod.GET, RequestMethod.POST })
+//	public String view(Model model, String id) {
+//
+//		return "";
+//	}
+//
+//	@RequestMapping(value = ("CustomerServiceAuditEdit.controller"), method = { RequestMethod.GET, RequestMethod.POST })
+//	public String edit(Model model, String id) {
+//
+//		return "";
+//	}
 }

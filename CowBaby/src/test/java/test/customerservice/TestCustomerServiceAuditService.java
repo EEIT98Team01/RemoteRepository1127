@@ -24,11 +24,11 @@ public class TestCustomerServiceAuditService {
 		*/
 		
 	  //find()
-		
+		/*
 		for(CustomerServiceBean bean: service.find()) {
 			System.out.println(bean);
 		}
-		
+		*/
 		
 	  //insert
 		/*
@@ -40,6 +40,11 @@ public class TestCustomerServiceAuditService {
 		bean.setProcessStatus(2);
 		System.out.println(service.insertStoreData(bean));
 		*/
+		
+	  //Update
+		CustomerServiceBean update = service.getReprotData(2);
+		update.setProblemDescription("3317868367723873");
+		service.updateCustomerData(update);
 		
 	  //find(int page, int rows)
 		/*
@@ -57,7 +62,7 @@ public class TestCustomerServiceAuditService {
 		
 	  //findByCondition(String problemTypes, String processStatus, String customerID)
 		/*
-		for(CustomerServiceBean bean: service.findByCondition(null, null, "33")) {
+		for(CustomerServiceBean bean: service.findByCondition("s730530@gmail.com", "2", null)) {
 			System.out.println(bean);
 		}
 		*/
@@ -83,7 +88,7 @@ public class TestCustomerServiceAuditService {
 		
 	  //getConditionQuantity(String problemTypes, String processStatus, String customerID)
 		/*
-		System.out.println(service.getConditionQuantity("1", null, null));
+		System.out.println(service.getReview(1, 2, "s730530@gmail.com"));
 		*/
 		
 	/*---------------------------------------------------------------------------------------------*/

@@ -49,8 +49,19 @@
 			</ul>
 			<div class="welcome_text">
 				<p>HI! 
-					<span>雄大</span>~歡迎來到CowBaby~<span class="user_stauts">ㄧ般會員</span> 
-					<a class="open_shop">我要開店</a>
+					<span>${user.customerName}</span>~歡迎來到CowBaby~
+					<span class="user_stauts">
+						<c:if test="${user.userID==1}">
+						   <c:out value="一般會員"/>
+						</c:if>
+						<c:if test="${user.userID==2}">
+						   <c:out value="平台賣家"/>
+						</c:if>	
+						<c:if test="${user.userID==3}">
+						   <c:out value="黑名單"/>
+						</c:if>				
+					</span> 
+					<a class="open_shop" href="<c:url value="/pages/member/member_apply_shop.jsp"/>">我要開店</a>
 				</p>
 			</div>
 			<div class="review_member_infor">
@@ -60,15 +71,15 @@
 						<table>
 							<tr>
 								<td>帳號E-mail</td>
-								<td>jessicadin8@gmail.com</td>
+								<td>${user.email}</td>
 								<td>會員註冊日</td>
-								<td>2017-10-22 07:57</td>
+								<td>${user.createTime}</td>
 							</tr>
 							<tr>
 								<td>累積消費金額</td>
-								<td>$ 100</td>
+								<td>${user.totalAmoutOfConsumption}</td>
 								<td>消費紅利</td>
-								<td>0</td>
+								<td>${user.bonus}</td>
 							</tr>
 							<tr>
 								<td>修改密碼</td>
@@ -83,15 +94,15 @@
 						<table>
 							<tr>
 								<td>您的大名 * :</td>
-								<td>王雄大</td>
+								<td>${user.customerName}</td>
 								<td>您的性別 * :</td>
-								<td>男</td>
+								<td>${user.gender}</td>
 							</tr>
 							<tr>
 								<td>您的生日 * :</td>
-								<td>1980-10-10</td>
+								<td>${user.birthday}</td>
 								<td>婚姻狀況 * :</td>
-								<td>未婚</td>
+								<td>${user.marriage}</td>
 							</tr>
 							<tr>
 								<td>您的電話 *:</td>
