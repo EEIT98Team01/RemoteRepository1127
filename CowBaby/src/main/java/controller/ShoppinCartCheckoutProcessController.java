@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -67,12 +68,6 @@ public class ShoppinCartCheckoutProcessController {
 	public String removeShoppingCartItem(int productID, String spec, Model model, HttpSession session) {
 		// 獲取購物車物件，並判斷現在有無購物車，沒有則建立購物車
 		ShoppingCart shoppingCart = (ShoppingCart) session.getAttribute("shoppingCart");
-
-		
-		System.out.println("productID"+productID);
-		System.out.println("spec"+spec);
-		
-	
 		
 		if (shoppingCart == null) {
 			shoppingCart = new ShoppingCart();
@@ -80,33 +75,29 @@ public class ShoppinCartCheckoutProcessController {
 		}
 		
 		// 將該商品從購物車移除
-		System.out.println("ININNI");
+		
 		shoppingCart.removeProduct(productID, spec);
 		
-		System.out.println("****shoppingCart***"+shoppingCart);
 		// 回傳購物車清單
 		return "shopping_cart_check";
 	}
 	
 	
+	// 獲取商店名稱
+	@RequestMapping(value = ("getmarketDataController"), method = { RequestMethod.GET, RequestMethod.POST })
+	public String getmarketData(String order_id, String st_code,  String st_addr, String st_tel,String sn_id) throws UnsupportedEncodingException {
+		System.out.println("近來了");
+		System.out.println("producprocessID=>"+order_id);
+		System.out.println("st_code=>"+st_code);
+		System.out.println("st_tel=>"+st_tel);
+		System.out.println("sn_id=>"+sn_id);
+		String utf8String = new String(st_addr.getBytes("big5"), "UTF-8"); 
+		System.out.println("utf8String=>"+utf8String);
+		
+		return "null";
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	/*
 	// 購物車結帳-step2.付款方式和寄件人確認
 	@RequestMapping(value = ("AllProductController"), method = { RequestMethod.GET, RequestMethod.POST })

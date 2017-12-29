@@ -62,7 +62,9 @@
 	   			<div class="panel panel-info">
 	   				<form method="post" name="simulation_from" action="https://www.ezship.com.tw/emap/rv_request_web.jsp">
 			      		<div class="panel-heading title">請選擇7-11</div>
-				      	 <input name="Submit2" type="submit" value="選擇門市"></center>
+			      	</form>
+			      	<div class="panel-body pannal_box">
+				      	 <center><input name="Submit2" type="submit" value="選擇門市"></center>
 				      	 <input type="hidden" name="rv_name" value="謝無忌"> <!-- 取件人姓名 -->
 								    <input type="hidden" name="rv_email" value="simulate_receiver@ezship.com.tw"> <!-- 取件人email -->
 								    <input type="hidden" name="rv_mobil" value="0967123456"> <!-- 取件人行動電話 -->
@@ -70,12 +72,8 @@
 								    <input type="hidden" name="su_id"  value="buyer@myweb.com.tw"> <!-- 業主在 ezShip 使用的帳號 -->
 								    <input type="hidden" name="rv_amount" value="0"><!-- 金額 -->
 								    <input type="hidden" name="webtemp" value="simulationpage"><!-- 網站所需額外判別資料。ezShip 將原值回傳，供網站判別用 -->
-								    <input type="hidden" name="rturl"  value="http://localhost:8080/CowBaby/pages/member/shopping_payment2.jsp"><!-- 回傳路徑及程式名稱 -->
+								    <input type="hidden" name="rturl"  value="http://www.ezship.com.tw/emap/ezship_simulation_receive.jsp"><!-- 回傳路徑及程式名稱 -->
 						</div>
-						</form>
-
-	
-	
 	   			<div class="panel panel-info">
 			      	<div class="panel-heading title">訂購人資訊</div>
 			      	<div class="panel-body pannal_box">

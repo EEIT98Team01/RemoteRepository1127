@@ -180,6 +180,9 @@ $(function(){
     
     // 查詢表單資料
     function inqueryData(data,pageNum){
+    	
+    	
+    
       	// 將畫面清空
       	$('tbody').empty();
     
@@ -238,12 +241,12 @@ $(function(){
 				   $('#myPagination').twbsPagination({
 		                  totalPages: totalPages,
 		                  visiblePages: pageSize,
-		                  
+		                  initiateStartPageClick: false,
 		                  onPageClick: function (evt, page) { 
 							inqueryData(formData,page);
 			       	　　　　}
 	                });
- 				  
+
 					// 把頁數 ，筆數，開始筆數-結束筆數 塞回去
 		            $(".pageNum").html(response.pageNumber);
 		            $(".firstNum").html( ((response.pageNumber-1)*response.pageSize) +1);
