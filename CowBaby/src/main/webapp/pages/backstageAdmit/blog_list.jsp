@@ -223,9 +223,10 @@ $(function(){
 							"<td>"+blog.articleID+"</td>" +
 							"<td>"+blog.bloggerName+"</td>" +
 							"<td>"+blog.articleHeader+"</td>" +
- 							"<td> <a href='' class='btn btn-success'> <i class='fa fa-eye'></i> </a> </td>" +
+ 							"<td> <a href='<c:url value='blogView.controller'/>?id=" + blog.articleID   +
+ 								"' class='btn btn-success'> <i class='fa fa-eye'></i> </a> </td>" +
  							"<td> <a href='<c:url value='blogDelete.controller'/>?id=" + blog.articleID + 
- 							"' class='btn btn-primary'> <i class='fa fa-pencil'></i> </a> </td>" +
+ 								"' class='btn btn-primary'> <i class='fa fa-pencil'></i> </a> </td>" +
 // 						 								↑blogDelete.controller 識別字串，與Controller對應
  							
 						 "</tr>";				

@@ -6,6 +6,9 @@ import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
@@ -29,21 +32,19 @@ public class BlogListController {
 	@Autowired
 	private ServletContext application;
 	
-/*
-	// 會員管理/會員檢視使用
-	@RequestMapping(value = ("/pages/backstageAdmit/CustomerManagementView"), method = { RequestMethod.GET,
+
+	// 後台Blog檢視使用
+	@RequestMapping(value = ("/pages/backstageAdmit/blogView"), method = { RequestMethod.GET,
 			RequestMethod.POST })
 	public String view(Model model, String id) {
 		if (id != null && !"".equals(id.trim())) {
-			model.addAttribute("customerData", customerManagementService.findById(Integer.parseInt(id)));
-		}
+			model.addAttribute("blogData", blogService.findById(Integer.parseInt(id)));
+		}						//↑識別字串
 
-		return "member_managment_view";
-	}
-*/
+		return "blog_view"; //← 要放view用
+	}					
 	
-	
-	// Blog編輯使用									//識別字串，與JSP對應
+	// 後台Blog編輯使用									//識別字串，與JSP對應
 	@RequestMapping(value = ("/pages/backstageAdmit/blogDelete"), method = { RequestMethod.GET,
 			RequestMethod.POST })
 	public String edit(Model model, String id) {
@@ -53,7 +54,35 @@ public class BlogListController {
 
 		return "blog_edit";
 	}
+		
+	
+	// 前台Blog頁面			   ↓JSP對應AllProductController
+	@RequestMapping(value = ("AllBlogController"), method = { RequestMethod.GET, RequestMethod.POST })
+	public String allBlog(Model model) {
+		System.out.println("AA");
+		
+		List<Object[]> list = blogService.findObject();
+		model.addAttribute("blogList", list);
+		                  //↑JSP對productList
+		return "all_blog_list";  // view對應all_blog_list
+	}
+	
+	// 前台Blog資訊
+	@RequestMapping(     //↓跟JSP ProductItemOfShop對應
+			value=("BlogItemOfArticle"),
+			method={RequestMethod.GET, RequestMethod.POST}
+	)
+	public String blogItem(Model model, String articleID) {
+		//查詢該商品的全部資訊
+		model.addAttribute("blogData", blogService.findById(Integer.parseInt(articleID)));
+		return "blog_item";
+	}
+	
 
+	
+
+
+	
 	//CKeditor 文字+圖片上傳
 	@RequestMapping("/pages/backstageAdmit/upload.image")  //<--路徑跟ckeditor的config.js對應 
 	public String imageUpload(MultipartFile upload, String CKEditorFuncNum, HttpServletResponse response)

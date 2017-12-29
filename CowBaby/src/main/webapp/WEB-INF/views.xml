@@ -81,9 +81,23 @@
 	<bean id="orderDetail_list" class="org.springframework.web.servlet.view.InternalResourceView">
 		<property name="url" value="/pages/backstageSeller/order_detail.jsp"></property>
 	</bean>
-
+	<!-- Blog 編輯 -->
 	<bean id="blog_edit" class="org.springframework.web.servlet.view.InternalResourceView">
 		<property name="url" value="/pages/backstageAdmit/blog_delete.jsp"></property>
+	</bean>
+	<!-- Blog 預覽 -->
+	<bean id="blog_view" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/pages/backstageAdmit/blog_view.jsp"></property>
+	</bean>
+	
+		<!-- 前台全部Blog -->
+	<bean id="all_blog_list" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/pages/member/all_blog.jsp"></property>
+	</bean>
+	
+		<!-- 前台每篇Blog -->
+	<bean id="blog_item" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/pages/member/blog_article.jsp"></property>
 	</bean>
 
 	<bean id="message_detail" class="org.springframework.web.servlet.view.InternalResourceView">

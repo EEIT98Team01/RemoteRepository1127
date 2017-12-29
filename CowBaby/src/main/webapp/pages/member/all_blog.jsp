@@ -71,44 +71,17 @@
 			</div>
 
 			<!--blogList-->
-			<section class="blogList">
-				<div class="item">
-					<img src="<c:url value="/images/newArrived1.jpg"/>">
-					<div class="blogName">兔兔媽咪</div>
-					<div class="blogtitle">肚子好餓榜榜時霧</div>
-					<div class="description">
-						秋冬新款全面鋪貨中 每一款都是精心挑選出來了 這裏有最好的質量歡迎來諮詢 ！！
+			<section class="blogList">		
+				<c:forEach var="array" varStatus="st" items="${blogList}">
+					<div class="item"> 
+						<a href="<c:url value="BlogItemOfArticle"/>?articleID=${array[0]}" >
+							<img width="284" height="177"   src="data:image/jpeg;base64,${array[1]}">
+							<p class="articlHeader">${array[2]}</p>
+							<p class="bloggerName">${array[3]}</p>
+						</a>
 					</div>
-				</div>
-
-				<div class="item">
-					<img src="<c:url value="/images/newArrived1.jpg"/>">
-					<div class="blogName">兔兔媽咪</div>
-					<div class="blogtitle">肚子好餓榜榜時霧</div>
-					<div class="description">
-						秋冬新款全面鋪貨中 每一款都是精心挑選出來了 這裏有最好的質量歡迎來諮詢 ！！
-					</div>
-				</div>
-
-				<div class="item">
-					<img src="<c:url value="/images/newArrived1.jpg"/>">
-					<div class="blogName">兔兔媽咪</div>
-					<div class="blogtitle">肚子好餓榜榜時霧</div>
-					<div class="description">
-						秋冬新款全面鋪貨中 每一款都是精心挑選出來了 這裏有最好的質量歡迎來諮詢 ！！
-					</div>
-				</div>
-
-				<div class="item">
-					<img src="<c:url value="/images/newArrived1.jpg"/>">
-					<div class="blogName">兔兔媽咪</div>
-					<div class="blogtitle">肚子好餓榜榜時霧</div>
-					<div class="description">
-						秋冬新款全面鋪貨中 每一款都是精心挑選出來了 這裏有最好的質量歡迎來諮詢 ！！
-					</div>
-				</div>
-
-				
+				</c:forEach>
+			
 			</section>
 		</div>
 	</section>

@@ -62,17 +62,53 @@
 		<!-- 全部文章-->
 		<div class="main_container_col_2 blog_article_content">
 			<div class="blog_introduction">
-				<div class="blog_article_name">兔兔媽咪</div>
-				<div class="blog_article_title">肚子好餓好保保</div>
+				<div class="blog_article_name">媽咪${blogData.bloggerName}</div>
 			</div>
 
 			<!--CK EDITOR 內容-->
-			<section>
-				CK EDITOR
-				CK EDITOR
-			</section>
-		</div>
+				<!--這邊開始寫內容-->
+				
+				<div class="container">
+					<div class="row">
+						<section class="panel">
+							<header class="panel-heading product-add-heading" style="background:#93bad1;color: #fff; ">精選部落格文章:${blogData.articleHeader}</header>
+	                        <div class="panel-body">
+								<div class="row">
+							<!-- 	
+									<div class="form-group col-md-12">
+										<label class="col-md-2 control-label">文章ID</label>
+										<label class="col-md-2 control-label" style="text-align:left; width:auto;">${blogData.articleID}</label>
+									</div>
+							 -->		
+									<!-- 到底要怎麼插小圖阿 -->
+							<!-- 		<div class="form-group col-md-12" style="padding-top: 30px">
+										<label class="col-md-2 control-label">部落格小圖</label>
+										<label class="col-md-2 control-label" style="text-align:left; width:auto;">${blogData.articlePhoto}</label>
+									</div>
+							 -->																	
+									
+									<div class="dash-line col-md-12"/></div>
+									
+									<div class="form-group col-md-12" style="padding-top: 30px">
+										<label class="col-md-2 control-label">文章內容</label>
+										<label class="col-md-2 control-label" style="text-align:left; width:auto;">${blogData.articleContent}</label>
+									</div>
+									
+									
+
+								<input type="button" id="beforePage" class="btn btn-primary pull-left" value="返回查詢頁面" />
+							  </div>
+	                      	</section>
+	                      	
+						</div>
+					</div>	
+				</div>	
+ 
+			<!-- wrapper end -->
+      	</section>
+      	<!-- main-content end -->
 	</section>
+	<!-- container end -->
 	
 	
 	<!--引入 footer-->
@@ -93,6 +129,14 @@
 
 	$(function(){
 
+		 // 返回所有部落格頁面
+		 $("#beforePage").on('click', function () {
+			window.location.assign('<c:url value="/pages/member/all_blog.jsp" />');
+		 })
+		
+		 // side_menu 帳戶總覽填充背景色
+		 $(".memberManagment a").addClass('active');
+		
 
 	})
 </script>
