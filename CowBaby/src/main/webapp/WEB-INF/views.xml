@@ -114,6 +114,9 @@
 		<property name="url" value="/pages/member/shopping_cart_check.jsp"></property>
 	</bean>
 
+	<bean id="product_list" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/pages/backstageSeller/product_list.jsp"></property>
+	</bean>
 
 
 	<!-- 丁測試用不要刪 -->
