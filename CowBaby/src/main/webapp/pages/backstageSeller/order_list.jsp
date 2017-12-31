@@ -243,13 +243,12 @@
 	 							"<td>"+order.totalItems+"</td>" +
 	 							"<td>"+order.email+"</td>" +
 	 							"<td>"+order.totalAmount+"</td>" +
-	 							"<td> <a href='<c:url value='orderDetailView.controller'/>?id=" + order.orderID   + 
+	 							"<td> <a href='<c:url value='orderView.controller'/>?id=" + order.orderID   + 
 	 							"' class='btn btn-success'> <i class='fa fa-eye'></i> </a> </td>" +
 	 							"<td> <a href='' class='btn btn-primary'> <i class='fa fa-pencil'></i> </a> </td>" +
 							 "</tr>";				
 	 		    		$('tbody').append(html);
 		           }) 
-		           
 		          	    
 	         		// 自動產生分頁
 		         	var totalPages = response.tatalPage;
