@@ -124,7 +124,9 @@ public class ShoppingCartService {
 		Map<String, String> condition = new HashMap<String, String>();
 		condition.put("email", "like '"+ account + "'");
 		CustomerBean customer = CustomerDao.findByCondition(condition).get(0);
-		customer.setBonus(customer.getBonus() - usebonus);
+		customer.setBonus(customer.getBonus() - usebonus + ((totalAmount-usebonus)/100));
+		customer.setTotalAmoutOfConsumption(customer.getTotalAmoutOfConsumption() + totalAmount - usebonus);
+		customer.setConsumptionTimes(customer.getConsumptionTimes() + 1);
 
 		return true;
 	}

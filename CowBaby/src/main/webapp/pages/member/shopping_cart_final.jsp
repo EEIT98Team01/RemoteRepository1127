@@ -50,15 +50,20 @@
 			<div class="main_container_col_1 step1">
 			
 				<!--------送給後端資料全部隱藏---------->
-				<%-- <form action="<c:url value="/goCheckout"/>" method="post" >
-					<input name="productList" value="${shoppingCartInfo.productInfo}">
-				</form> --%>
+				<form id="finalOrder" action="<c:url value="/goCheckout"/>" method="post" >
+					<input name="receiverName" value="${infor.getRecipients}">
+					<input name="receiverEmail" value="${infor.recipientsEmail}">
+					<input name="receiverPhone" value="${infor.getRecipientsMobile}">
+					<input name="paymentMethod" value="1">
+					<input name="pickUpStore" value="${infor.convenienceStoreName}">
+					<textarea name="usebonus">${infor.getBonus}</textarea>
+					
+				</form>
+		
 			
-			
-			
+				<!--------訂購物品明細---------->
 				<h2>訂購資料</h2>
 				<p>${map.getBonus}<p>
-				<!--------訂購物品明細---------->
 				<c:forEach var="objectArray" items="${shoppingCartInfo}">
 					<div class="myshopOrder">
 						<div class="shop_name">
@@ -148,13 +153,13 @@
 				<div class="total_order">
 					<div class="total_order_my_prouduct">
 						<div>購買總金額 (<span class="all_prousuct">${shoppingCart.totalItems}</span> 個商品):
-							<span class="all_prousuct_price">$<span>${shoppingCart.totalAmount}</span></span>
+							<span class="all_prousuct_price">$<span>${shoppingCart.totalAmount-bounsSun}</span></span>
 						</div>
-						<div class="this_order_bonus">此次紅利點數 : <span>123456</span>點</div>		
+						<div class="this_order_bonus">此次紅利點數 : <span>${(shoppingCart.totalAmount-bounsSun)/100}</span>點</div>		
 					</div>
 					<div class="go_checkout">
 						<!-- <a href="#" class="go_checkout_btn">確認結帳</a>  -->
-					 <button style="padding:15px 75px;background: #f27373;font-size: 16px; border: none;" type="submit go_checkout_btn" class="btn btn-primary pull-right">確認結帳</button>
+					 <button style="padding:15px 75px;background: #f27373;font-size: 16px; border: none;" type="submit" class="btn btn-primary pull-right go_checkout_btn">確認結帳</button>
 					</div>
 				</div>
 		</div>
@@ -173,6 +178,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/js/bootstrap-dialog.min.js"></script>
 <script src="<c:url value="/pluging/Bxsliders/jquery.bxslider.min.js"/>"></script>
 <script type="text/javascript">
-  
-   	
+$(function(){
+		// 點確認送出。則送出表單
+	  $(".go_checkout_btn").click(function(){
+		  $("#finalOrder").submit();
+	  })
+})
+
+ 
 </script>
