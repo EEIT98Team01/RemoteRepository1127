@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="member_managment_list" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/pages/backstageAdmit/member_managment.jsp"></property>
+	</bean>
+	
+	<bean id="member_managment_view" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/pages/backstageAdmit/member_managment_view.jsp"></property>
+	</bean>
+	
+	<bean id="member_managment_edit" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/pages/backstageAdmit/member_managment_edit.jsp"></property>
+	</bean>
+	
+	<bean id="login_success" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/index.jsp"></property>
+	</bean>
+	
+	<bean id="login_error" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/pages/member/user_login.jsp"></property>
+	</bean>
+	
+	<bean id="register_success" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/pages/member/user_register_success.jsp"></property>
+	</bean>
+	
+	<bean id="user_register" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/pages/member/user_register.jsp"></property>
+	</bean>
+	
+	<bean id="product_managment_view" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/pages/backstageAdmit/product_management_sort.jsp"></property>
+	</bean>
+	
+	<bean id="product_managment_list" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/pages/backstageAdmit/product_management_list.jsp"></property>
+	</bean>
+	
+	<bean id="apple_seller_success" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/pages/member/apple_seller_success.jsp"></property>
+	</bean>
+	
+	<!-- 商品分類新增 -->
+	<bean id="product_managment_insert" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/pages/backstageAdmit/product_management_sort.jsp"></property>
+	</bean>
+	<!-- 客服申訴失敗 -->
+	<bean id="customer_service_error" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/pages/member/customer_service.jsp"></property>
+	</bean>
+	
+	<!-- 客服申訴成功 -->
+	<bean id="customer_service_success" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/pages/member/customer_service_success.jsp"></property>
+	</bean>
+	
+	<!-- 審核功能頁面 -->
+	<bean id="customer_review_success" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/pages/backstageAdmit/audit_complaints.jsp"></property>
+	</bean>
+	
+		<!-- 審核功能處理狀況頁面 -->
+	<bean id="customer_review_Update" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/pages/common/audit_complaints_popup.jsp"></property>
+	</bean>
+	
+	<!-- 前台全部商品 -->
+	<bean id="all_product_list" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/pages/member/all_products.jsp"></property>
+	</bean>
+	
+	<!-- 前台每件單品 -->
+	<bean id="prouduct_item" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/pages/member/prouduct_item.jsp"></property>
+	</bean>
+	
+	<!-- order01List  -->
+	<bean id="order01_list" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/pages/backstageSeller/order_list.jsp"></property>
+	</bean>
+
+	<!-- orderDetail -->
+	<bean id="order_view" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/pages/backstageSeller/order_detail.jsp"></property>
+	</bean>
+	
+	<!-- Blog 編輯 -->
+	<bean id="blog_edit" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/pages/backstageAdmit/blog_delete.jsp"></property>
+	</bean>
+	<!-- Blog 預覽 -->
+	<bean id="blog_view" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/pages/backstageAdmit/blog_view.jsp"></property>
+	</bean>
+	
+		<!-- 前台全部Blog -->
+	<bean id="all_blog_list" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/pages/member/all_blog.jsp"></property>
+	</bean>
+	
+		<!-- 前台每篇Blog -->
+	<bean id="blog_item" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/pages/member/blog_article.jsp"></property>
+	</bean>
+
+	<bean id="message_detail" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/pages/backstageSeller/message_detail.jsp"></property>
+	</bean>
+	
+		<bean id="message_list" class="org.springframework.web.servlet.view.RedirectView">
+		<property name="contextRelative" value="true"></property>
+		<property name="url" value="/pages/backstageSeller/message_list.jsp"></property>
+	</bean>
+	
+	<bean id="message_detail_member" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/pages/member/member_account_msg_detail.jsp"></property>
+	</bean>
+	
+	<bean id="message_list_member" class="org.springframework.web.servlet.view.RedirectView">
+		<property name="contextRelative" value="true"></property>
+		<property name="url" value="/pages/member/member_account_msg.jsp"></property>
+	</bean>
+	
+	<!-- 登出 -->
+	<bean id="logout_success" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/index.jsp"></property>
+	</bean>
+	
+	<!--購物車畫面 -->
+	<bean id="shopping_cart_check" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/pages/member/shopping_cart_check.jsp"></property>
+	</bean>
+
+	<bean id="product_list" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/pages/backstageSeller/product_list.jsp"></property>
+	</bean>
+	
+	<bean id="product_add" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/pages/backstageSeller/product_add.jsp"></property>
+	</bean>
+	
+	<!--進入填寫付款方式 -->
+	<bean id="shopping_payment" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/pages/member/shopping_payment.jsp"></property>
+	</bean>
+	
+	<!--付款最後確認 -->
+	<bean id="shopping_cart_final" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/pages/member/shopping_cart_final.jsp"></property>
+	</bean>
+	
+
+
+	<!-- 丁測試用不要刪 -->
+	<!--
+	<bean id="sellerShop" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="sellerShop.jsp"></property>
+	</bean>-->
+	
+	
+	
+	
+<!-- 	<bean id="login.success" class="org.springframework.web.servlet.view.RedirectView"> -->
+<!-- 		<property name="contextRelative" value="true"></property> -->
+<!-- 		<property name="url" value="/pages/backstageAdmit/member_managment.jsp"></property> -->
+<!-- 	</bean> -->
+
+</beans>

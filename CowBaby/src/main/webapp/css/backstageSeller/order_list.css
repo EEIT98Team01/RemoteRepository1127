@@ -1,0 +1,19 @@
+
+/***********order list*************
+*************訂單查詢**************/
+
+#order_list table{
+      font-size: 14px;
+}
+
+#order_list table thead{
+    font-size: 15px;
+    text-align: center;   
+    background: #5da9ba;
+    color: #fff;
+}
+
+
+#order_list a.linklist{
+    text-decoration: underline;
+}
