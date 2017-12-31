@@ -1,0 +1,41 @@
+
+
+.shopping_cart_container .shopping_order{
+    margin-top: 30px;
+}
+
+.shopping_cart_container .shopping_order table{
+    width: 100%;
+    border: 1px solid #cccc;
+    margin-bottom: 40px;
+}
+.shopping_cart_container .shopping_order table tr td,
+.shopping_cart_container .shopping_order table tr th{
+    padding: 10px;
+    border-right: 1px solid #d6d6d6;
+}
+
+.shopping_cart_container  .shopping_order table tr th{
+   background: #80c5cd;
+   color:#FFF; 
+   border-right: 1px solid #dbe8ea;;
+}
+
+.shopping_cart_container  .shopping_order table tr td{
+    border-bottom: 1px solid #ccc;
+}
+
+.shopping_cart_container  .shopping_order table tr:last-child td{
+    background: #def4f6;
+    font-weight: bolder;
+}
+
+.price{
+    font-size: 16px;
+    color: #d15179;
+}
+
+.bonus{
+    font-size: 14px;
+    color: #d15179;
+}

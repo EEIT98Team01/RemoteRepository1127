@@ -1,0 +1,111 @@
+/***********buy advertising*************
+*************購買廣告**************/
+
+/****price-box****/
+
+#buy_advertising .panel-body .price-box {
+    float: left;
+    margin: 20px 15px;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAIklEQVQIW2NkQAIfP378zwjjgzj8/PyMYAEYB8RmROaABAAVMg/XkcvroQAAAABJRU5ErkJggg==) repeat;
+    -moz-box-shadow: 0 2px 5px 0 rgba(0,0,0,.2);
+    -webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,.2);
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.2);
+}
+
+#buy_advertising .panel-body .price-box.oneday{
+    border: 1px solid #14937a;
+    border-bottom: 10px solid #14937a;
+}
+
+#buy_advertising .panel-body .price-box.threeday{
+    border: 1px solid #cd8109;
+    border-bottom: 10px solid #cd8109;
+}
+
+#buy_advertising .panel-body .price-box.sevenday{
+    border: 1px solid #c0392b;
+    border-bottom: 10px solid #a12f23;
+}
+
+#buy_advertising .panel-body .price-box.tow-week{
+    border: 1px solid #1d6391;
+    border-bottom: 10px solid #1d6391;
+
+}
+
+   
+
+/****price-table-header****/
+
+#buy_advertising .panel-body .price-table-header{
+    padding: 5px 0 5px 0;
+    font-weight: 700;
+    color: #FFF;
+    text-align: center;
+}
+
+#buy_advertising .panel-body .price-table-header.oneday-header{
+    background: #16a085;
+    border-bottom: 10px solid #14937a;
+}
+
+
+#buy_advertising .panel-body .price-table-header.threeday-header{
+    background: #f39c12;
+    border-bottom: 10px solid #cd8109;
+}
+
+#buy_advertising .panel-body .price-table-header.sevenday-header{
+    background: #c0392b;
+    border-bottom: 10px solid #a12f23;
+}
+
+#buy_advertising .panel-body .price-table-header.tow-week-header{
+    background: #2980b9;
+    border-bottom: 10px solid #1d6391;
+
+}
+
+
+/****price table features****/
+
+#buy_advertising .price-table-features {
+    margin: 15px 10px 0 10px;
+    // padding: 0 10px 15px 10px;
+    border-bottom: 1px dashed #888;
+    text-align: center;
+    line-height: 20px;
+    font-size: 14px;
+    color: #888;
+}
+
+
+/****price table button****/
+
+#buy_advertising .price-table-buy a{
+    display: inline-block; 
+    width: 50%;
+    line-height: 50px;
+    color: #fff;
+    text-transform: uppercase;
+    display: block;
+    text-align: center;
+    margin: 20px auto;
+}
+
+#buy_advertising .oneday .price-table-buy a {
+    background: #16a085;
+}
+
+#buy_advertising .threeday .price-table-buy a {
+   background: #f39c12;
+}
+#buy_advertising .sevenday .price-table-buy a {
+   background: #c0392b;
+}
+
+#buy_advertising .tow-week .price-table-buy a {
+   background: #2980b9;
+}
+
+

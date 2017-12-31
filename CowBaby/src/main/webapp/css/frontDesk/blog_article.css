@@ -1,0 +1,46 @@
+
+/*****personal shop sidebar*****/
+
+.blog_article_page .article_classify{
+
+    width: 100%;
+    text-align: center;
+    font-size: 15px;
+    padding-bottom: 20px;
+}
+
+.blog_article_page .article_classify .classify_title{
+    text-align: center;
+    font-size: 16px;
+    padding: 10px;
+    background: #9ad8df;
+    color: #fff;
+}
+
+.blog_article_page .article_classify li{
+    margin: 10px 0;
+}
+
+
+
+
+/*****personal shop introduction*****/
+
+.blog_article_page .blog_introduction{
+    padding: 20px;
+    border-top: 1px solid #8bd1d9;
+}
+
+.blog_article_page .blog_introduction .blog_article_name{
+    text-align: center;
+    font-size: 18px;
+    letter-spacing: 1px;
+    font-weight: bolder;
+}
+
+.blog_article_page .blog_introduction .blog_article_title{
+    padding:20px 0;
+    line-height: 20px;
+    font-size: 14px;
+}
+
