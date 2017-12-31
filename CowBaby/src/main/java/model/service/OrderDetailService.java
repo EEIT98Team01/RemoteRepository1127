@@ -10,7 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import model.bean.Order01Bean;
 import model.bean.OrderDetailBean;
+import model.bean.ProductBean;
 import model.dao.OrderDetailDao;
+import model.dao.ProductDao;
 
 @Service
 @Transactional
@@ -18,11 +20,15 @@ public class OrderDetailService {
 
 	@Autowired
 	private OrderDetailDao orderDetailDao;
-
+	@Autowired
+	private ProductDao productDao;
+	
+	// 回傳訂單明細資料,若資料不存在,則回傳null
 	@Transactional
 	public OrderDetailBean findById(int id) {
 		return orderDetailDao.findById(id);
 	}
+	
 
 	//因為條件只有要依orderID查詢訂單 所有參數代int orderID
 	@Transactional   //用集合方式
