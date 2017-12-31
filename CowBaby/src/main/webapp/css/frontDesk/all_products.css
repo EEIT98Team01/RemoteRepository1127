@@ -1,0 +1,208 @@
+
+/****全部商品 side_bar****/
+
+.all_products_page_container .side_bar ul{
+    padding: 15px;
+    border-bottom: 1px dashed #ccc;
+}
+
+.all_products_page_container .side_bar ul li.sort-title{
+    font-size: 15px;
+    padding:0 0 10px 0;
+    font-weight: bolder;
+    color: #4d4c4c;
+   
+}
+
+.all_products_page_container .side_bar ul li a{
+    display: block;
+    padding: 3px 0;
+    font-size: 13px;
+    color: #6f6f6f;
+}
+
+.all_products_page_container .side_bar ul li a:hover{
+    color: #000;
+}
+
+/****全部商品 main_container****/
+
+.all_products_page_container .proudectList {
+    margin-top: 25px;
+}
+
+.all_products_page_container .proudectList .item{
+    width: 207px;
+    float: left;
+    border:1px solid #e6e6e6;
+    margin-right: 24px;
+    margin-bottom: 30px;
+}
+
+
+.all_products_page_container .proudectList .item a{
+	color:#787878;
+}
+.all_products_page_container .proudectList .stroe_name{
+	color: #777a90;
+    font-size: 16px;
+    text-align: center;
+}
+
+
+
+.all_products_page_container .proudectList .item:nth-child(4n+4){
+   margin-right:0; 
+}
+
+.all_products_page_container .proudectList .item img{
+    width: 205px;
+}
+
+.all_products_page_container .proudectList .item .title{
+   padding: 8px 15px;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 18px;
+}
+
+.all_products_page_container .proudectList .item .originalPrice,
+.all_products_page_container .proudectList .item .specialPrice{
+    text-align: center;
+}
+
+.all_products_page_container .proudectList .item .originalPrice{
+    font-size: 13px;
+    padding-bottom: 5px;
+    text-decoration: line-through;
+}
+
+.all_products_page_container .proudectList .item .specialPrice{
+    font-size: 13px;
+    text-align: center;
+    padding: 0px 0 12px 0;
+}
+
+
+.all_products_page_container .proudectList .item .specialPrice .specialPriceNum {
+    font-size: 16px;
+    color: #e64242;
+}
+
+
+/*****proudect_detail****/
+
+.all_products_page_container .proudect_detail{
+   margin: 0 20px;
+}
+
+.all_products_page_container .proudect_detail .showPic{
+    width:480px;
+    float: left;
+}
+
+.all_products_page_container .proudect_detail .showPic img{
+    width: 450px;
+}
+
+.all_products_page_container .proudect_detail .product_infor{
+    width: 360px;
+    float: left;
+    margin-left: 20px;
+}
+
+
+.all_products_page_container .proudect_detail .product_infor .product_title{
+    line-height:26px; 
+    font-size: 21px;
+    font-weight: bolder;
+    margin-bottom: 15px;
+}
+
+.all_products_page_container .proudect_detail .product_infor .product_desc{
+    line-height:21px; 
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.all_products_page_container .proudect_detail .product_infor .product_price{
+     font-weight: bolder;
+     font-size: 20px;
+     color: #f22a65;
+     margin-bottom: 20px;
+
+}
+
+.all_products_page_container .proudect_detail .product_infor .product_size{
+    padding: 10px 0;
+    border-top: 1px dashed #ccc;
+    overflow: hidden;
+}
+
+.all_products_page_container .proudect_detail .product_infor .product_size li{
+    float: left;
+    margin: 0 9px 15px 0;
+}
+
+.all_products_page_container .proudect_detail .product_infor .product_size a{
+    display: block;
+    padding:10px;
+    border: 1px solid #ccc;
+}
+
+
+
+.all_products_page_container .proudect_detail .product_infor .product_size p{
+    font-size: 14px;
+}
+
+.all_products_page_container .proudect_detail .product_infor .product_size p i{
+    font-size: 16px;
+    padding-right:5px;
+}
+
+.all_products_page_container .proudect_detail .product_infor .product_number{
+    clear: both;
+    overflow: hidden;
+
+}
+
+
+.all_products_page_container .proudect_detail .product_infor .product_number .add_num,
+.all_products_page_container .proudect_detail .product_infor .product_number .reduce_num{
+    display: block;
+    background: #ccc;
+    padding: 5px 15px;
+    border: 1px #ccc solid;
+    text-align: center;
+    font-family: fantasy;
+    font-size: 21px;
+    float: left;
+
+    border: 1px solid #ccc;
+}
+
+.all_products_page_container .proudect_detail .product_infor .product_number input{
+    float: left;
+    height: 33px;
+    text-align: center;
+    width: 100px
+}
+.all_products_page_container .proudect_detail .product_infor .checkout{
+    margin-top:15px; 
+    clear: both;
+    overflow: hidden;
+}
+
+.all_products_page_container .proudect_detail .product_infor .checkout .add_cart{
+    display: block;
+    float: left;
+    padding: 15px;
+    background: #f8cccc;
+    margin: 10px;
+}
+
+
+.all_products_page_container .proudect_detail .product_infor .product_size .productSpec.select{
+	background:#beeadc;
+}

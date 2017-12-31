@@ -1,0 +1,33 @@
+/**********message detail*********
+*************訊息詳情***************/
+
+#message-details .details-inbox{
+   
+    background: #fff;
+    padding: 5px 25px;
+    margin-top: 15px;
+
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+#message-details .details-inbox h4 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #444;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-top: 20px;
+}
+
+#message-details .details-inbox i{
+    padding-right: 10px;
+}
+
+#message-details .details-inbox .text{
+    padding: 20px 0 20px 0;
+   font-size: 15px;
+    letter-spacing: 1px;
+    line-height: 24px;
+    color: #444;
+}
