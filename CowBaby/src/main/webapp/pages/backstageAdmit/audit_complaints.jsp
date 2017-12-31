@@ -80,6 +80,8 @@
 							<th>案件類型</th>
 							<th>審核狀態</th>
 							<th>申訴內容</th>
+							<th>申訴回覆內容</th>
+							<th>申訴回覆內容編輯</th>
 							<th>申訴處理</th>
 						</tr>
 					</thead>
@@ -89,11 +91,25 @@
 								<td>${st.count}</td>
 								<td>${CustomerReview.email}</td>
 								<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${CustomerReview.reportTime}"/></td>
-								<td>${CustomerReview.problemTypes}</td>
+<%-- 								<td>${CustomerReview.problemTypes}</td> --%>
+								<c:choose>
+								<c:when test="${CustomerReview.problemTypes == 1}">
+									<td>帳號問題</td>
+								</c:when>
+								<c:when test="${CustomerReview.problemTypes == 2}">
+									<td>BUG問題</td>
+								</c:when>
+								<c:when test="${CustomerReview.problemTypes == 3}">
+									<td>黑名單檢舉</td>
+								</c:when>
+								<c:when test="${CustomerReview.problemTypes == 4}">
+									<td>其他</td>
+								</c:when>								
+							    </c:choose>
 <%-- 								<td>${CustomerReview.processStatus}</td> --%>
 								<c:choose>
 								<c:when test="${CustomerReview.processStatus == 1}">
-									<td>處理中</td>
+									<td><span class="label label-danger">處理中</span></td>
 								</c:when>
 								<c:when test="${CustomerReview.processStatus == 2}">
 									<td>已處理</td>
@@ -102,11 +118,11 @@
 									<td>未處理</td>
 								</c:otherwise>
 							    </c:choose>
-								
-								<%-- <td>${CustomerReview.problemDescription}</td> --%>
-					
-								<td><a href="#" class='btn btn-info audit_detail_btn'> <i
-									class="fa fa-commenting" aria-hidden="true"></i>
+								<td>${CustomerReview.problemDescription}</td>
+								<td>${CustomerReview.serviceFeedback}</td>
+								<td><a href="#" class='btn btn-info audit_detail_btn'> 
+									<span style="display: none;">${CustomerReview.reportID}</span>
+								<i class="fa fa-commenting" aria-hidden="true"></i>
 								</a></td>
 								<td><a href="#" class='btn btn-primary audit_popupbox_btn' >
 									<span style="display: none;">${CustomerReview.reportID}</span>
@@ -251,10 +267,12 @@
 
 		// 申訴內容細節和回覆彈出框
 		$(".audit_detail_btn").click(function(){
-			console.log("AA") 
+			console.log("AA")
+			var aaa = $(this).find('span').text();
+			                                    
 			BootstrapDialog.show({               
-				message : $('<div></div>').load('<c:url value="/pages/common/audit_context.jsp"/>'),
-				title : "申訴內容",
+				message : $('<div></div>').load('/CowBaby/pages/common/audit_context.jsp?aaa='+aaa),
+				title : "客服編輯使用",
 				buttons : [ {
 					label : '確定',
 					// no title as it is optional
@@ -264,7 +282,8 @@
 						'user-id' : '3'
 					},
 					action : function() {
-						alert('Hi Orange!');
+						console.log("AAA");
+	                	$("#qqq").submit();
 					}
 				}, {
 					label : '取消',

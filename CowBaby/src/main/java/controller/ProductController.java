@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import model.bean.ClassficationBean;
 import model.bean.ProductBean;
 import model.service.ProductService;
 import model.service.ProductSizeService;
@@ -22,6 +23,7 @@ public class ProductController {
 	@Autowired
 	ProductSizeService productSizeService;
 	
+	//後台商品列表頁
 	@RequestMapping(value = ("ProductController"), method = { RequestMethod.GET, RequestMethod.POST })
 	public String view(Model model, String classficationID,String productStatus) {
 		System.out.println(classficationID);
@@ -49,6 +51,24 @@ public class ProductController {
 		}
 		return "product_managment_list";
 	}
+	
+	    // 後台商品列表編輯
+		@RequestMapping(value = ("productupdate.controller"), method = { RequestMethod.GET, RequestMethod.POST })
+		public String productupdate(Model model, int productID, String title,String summary,int unitPrice,
+				String productDescription,boolean productStatus,int classficationID,int suitableAges,String genderPreference) {
+			System.out.println(productID);
+			System.out.println(title);
+			System.out.println(summary);
+			System.out.println(unitPrice);
+			System.out.println(productDescription);
+			System.out.println(productStatus);
+			System.out.println(classficationID);
+			System.out.println(suitableAges);
+			System.out.println(genderPreference);
+
+			
+			return "product_managment_list";
+		}
 	
 	// 前台商品頁面
 	@RequestMapping(value = ("AllProductController"), method = { RequestMethod.GET, RequestMethod.POST })
