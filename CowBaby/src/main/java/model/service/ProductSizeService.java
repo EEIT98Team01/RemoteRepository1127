@@ -30,4 +30,8 @@ public class ProductSizeService {
 		public List<ProductSizeBean> findByCondition(Map<String, String> condition){
 			return productSizeDao.findByCondition(condition);	
 		}
+		
+		public ProductSizeBean insert(ProductSizeBean bean) {
+			return productSizeDao.insert(bean);
+		}
 }

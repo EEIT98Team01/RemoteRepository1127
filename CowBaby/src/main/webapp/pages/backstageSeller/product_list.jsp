@@ -49,19 +49,17 @@
 									<label>商品分類:</label>
 									<select class="form-control" name="productClassfication">
 										<option value="">全部</option>
-										<option value="1">玩具</option>
-										<option value="2">圖書</option>
-										<option value="3">衣服</option>
-										<option value="4">鞋子</option>
-										<option value="5">日用品</option>
+										<c:forEach var="classfication" items="${classficationList}">
+											<option value="${classfication.classficationID}">${classfication.classficatoinName}</option>
+										</c:forEach>
 									</select>
 								</div>
 								<div class="form-group">
 									<label>商品狀態:</label>
 									<select class="form-control" name="productStatus">
 										<option value="">全部</option>
-										<option value="">上架</option>
-										<option value="">下架</option>
+										<option value="1">上架</option>
+										<option value="0">下架</option>
 									</select>
 								</div>
 								<button type="submit" class="btn btn-primary">查詢</button>
@@ -77,41 +75,29 @@
 								<thead>
 								  <tr>
 								    <th>序號</th>
-									<th>商品編號</th>
 									<th>商品名稱</th>
 									<th>圖片</th>
 									<th>分類</th>
-									<th>庫存</th>
-									<th>原價</th>
-									<th>特價</th>
-									<th>上架操作</th>
-									<th>編輯</th>
-									<th>刪除</th>								
+									<th>單價</th>
+									<th>商品狀態</th>
+									<th>檢視</th>
+									<th>編輯</th>		
 								  </tr>
 								</thead>
 								<tbody>
 									<c:forEach var="product" varStatus="st" items="${productList}">
 								  		<tr>
 								  			<td>${st.count + (pageSize*(pageNumber-1))}</td>
-											<td>${product.productID}</td>
-											<td>${product.title}</td>
-											<td><img src="${pageContext.request.contextPath}/images/01.jpg"></td>
-											<td>${product.classficationID}</td>
-											<td>100</td>
-											<td>${product.unitPrice}</td>
-											<td>$50</td>
+											<td>${product[0]}</td>
+											<td><img src="${product[1]}"></td>
+											<td>${product[2]}</td>
+											<td>${product[3]}</td>
+											<td>${product[4]}</td>
 											<td>
-												<input type="checkbox" name="my-checkbox" checked  data-size="mini">
+												<a href='<c:url value='/ProductItemOfShop?storeID=&productID=${product[5]}'/>' target="_blank" class='btn btn-success'> <i class='fa fa-eye'></i> </a> </td>
 											</td>
 											<td>
-												<button class="btn btn-primary">
-													<i class="fa fa-pencil"></i>
-												</button>
-											</td>
-											<td>
-												<button class="btn btn-danger">
-													<i class="fa fa-trash-o "></i>
-												</button>
+												<a href='<c:url value='/ProductUpdate?productID=${product[5]}'/>' class='btn btn-primary'> <i class='fa fa-pencil'></i> </a> </td>
 											</td>
 									 	</tr>
 									</c:forEach>

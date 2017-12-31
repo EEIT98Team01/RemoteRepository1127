@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import model.bean.ClassficationBean;
 import model.bean.ProductBean;
+import model.dao.ClassficationDao;
 import model.dao.ProductDao;
 
 @Service
@@ -16,6 +18,8 @@ import model.dao.ProductDao;
 public class ProductManagmentService {
 	@Autowired
 	ProductDao productDao;
+	@Autowired
+	ClassficationDao classficationDao;
 	
 	// 取得特定product資料
 	public ProductBean findById(int id) {
@@ -116,6 +120,13 @@ public class ProductManagmentService {
 				
 			return productDao.getConditionQuantity(condition);
 		}
+	}
+	
+	// 取得啟用的商品分類
+	public List<ClassficationBean> findClassfication() {
+		Map<String,String> condition = new HashMap<String,String>();
+		condition.put("startStopStatus", "= 1");
+		return classficationDao.findByCondition(condition);
 	}
 	
 }
