@@ -28,17 +28,7 @@ public class ProductController {
 	public String view(Model model, String classficationID,String productStatus) {
 		System.out.println(classficationID);
 		System.out.println(productStatus);
-		
-		if("全部".equals(productStatus)) {
-			productStatus = null;
-		} else if("一般會員".equals(productStatus)) {
-			productStatus = "1";
-		} else if("平台賣家".equals(productStatus)) {
-			productStatus = "2";
-		} else if("黑名單".equals(productStatus)) {
-			productStatus = "3";
-		}
-		
+			
 		if("".equals(classficationID)){
 			classficationID = null;
 		}
@@ -54,18 +44,20 @@ public class ProductController {
 	
 	    // 後台商品列表編輯
 		@RequestMapping(value = ("productupdate.controller"), method = { RequestMethod.GET, RequestMethod.POST })
-		public String productupdate(Model model, int productID, String title,String summary,int unitPrice,
-				String productDescription,boolean productStatus,int classficationID,int suitableAges,String genderPreference) {
-			System.out.println(productID);
-			System.out.println(title);
-			System.out.println(summary);
-			System.out.println(unitPrice);
-			System.out.println(productDescription);
+		public String productupdate(Model model, int productID, String productStatus) {
 			System.out.println(productStatus);
-			System.out.println(classficationID);
-			System.out.println(suitableAges);
-			System.out.println(genderPreference);
-
+			
+			ProductBean bean = productService.getStoreData(productID);
+			
+			if ((productStatus == null)) {
+				;
+			} else {
+				if ("true".equals(productStatus)) {
+					bean.setProductStatus(true);
+				} else {
+					bean.setProductStatus(false);
+				}
+			}
 			
 			return "product_managment_list";
 		}
