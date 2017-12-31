@@ -90,6 +90,7 @@ public class ShoppingCartWebService {
 		// 將該商品從購物車移除
 		shoppingCart.removeProduct(productID, spec);
 		
+
 		// 回傳購物車清單
 		return new JSONObject(shoppingCart).toString();
 	}
@@ -101,14 +102,13 @@ public class ShoppingCartWebService {
 			method={RequestMethod.POST},
 			produces={"application/json;charset=UTF-8"}
 	)
-	public String useBonusMethod(Model model,String bonus) {
+	public String useBonusMethod(Model model,String bonus,HttpSession session) {
 		
 		System.out.println("哇哈哈");
+		System.out.println(bonus);
 
-		
-		
-		return null;
-	/*	return new JSONObject(shoppingCart).toString();*/
+		session.setAttribute("bonus", bonus);
+	   return bonus;
 	}
 	
 	

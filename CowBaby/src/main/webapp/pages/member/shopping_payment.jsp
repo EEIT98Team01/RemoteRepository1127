@@ -31,7 +31,7 @@
 		<h3>我的購物車 My ShoppingCart</h3>
 		<h5>親愛的XXX你好，以下是你的購物車清單<h5>
 	</div>
-
+	
 	<div class="shopping_step">
 		<div class="line1 lineActive"></div>
 		<div class="line2"></div>
@@ -44,90 +44,128 @@
 	
 	<!--每頁主要內容-->
 	<section class="page_container shopping_payment">
-
+		<P>我的bouns==>${bonus}</P>
+		<P>我選的便利商電==>${convenienceStore.convenienceStoreName}</P>
+		
 		<!-- 主要內容-->
 		<div class="main_container_col_1">
-
 			<div class="panel panel-info">
 		      	<div class="panel-heading title">請選擇付款方式</div>
 		      	<div class="panel-body pannal_box">
 			      	<ul>
 						<li><label><input type="radio" name="payment">超商取貨</label></li>
 						<li><label><input type="radio" name="payment">歐付寶付款</label></li>	
-						<li><label><input type="radio" name="payment">轉帳="=</label></li>			
 					</ul>
 				</div>
+				
    			</div>
-
+   			
    			<div class="panel panel-info">
-		      	<div class="panel-heading title">請選擇7-11</div>
-		      	<div class="panel-body pannal_box">
-			      	
-				</div>
-   			</div>
-
-
-   			<div class="panel panel-info">
-		      	<div class="panel-heading title">訂購人資訊</div>
-		      	<div class="panel-body pannal_box">
-			      	<table>
-			      		<tr>
-			      			<td>ID</td>
-							<td><input type="text" name="customerID" value="${user.customerID}"></td>
-			      		</tr>
-			      		<tr>
-			      			<td>姓名</td>
-							<td><input type="text" name="customerName" value="${user.customerName}"></td>
-			      		</tr>
-						<tr>
-			      			<td>手機</td>
-							<td><input type="text" name="mobilePhone" value="${user.mobilePhone}"></td>
-			      		</tr>
-
-			      		<tr>
-			      			<td>地址</td>
-							<td><input type="text" name="address" value="${user.address}"></td>
-			      		</tr>
-			      		
-			      		<tr>			      			
-							<td>email</td>
-							<td><input type="text" name="email" value="${user.email}"></td>
-			      		</tr>
-			      	</table>
-				</div>
-   			</div>
-
-
-   			<div class="panel panel-info">
-		      	<div class="panel-heading title">收件人資訊</div>
-		      	<div class="panel-body pannal_box">
-		      		
-			      	<table>
-			      		<tr>
-			      			<td><input type="checkbox" id="check1"/></td>
-							<td style="padding: 10px;font-size: 15px;text-align:left;">跟寄件人一樣</td>
-			      		</tr>
-			      		<tr>
-			      			<td>姓名</td>
-							<td><input type="text" name="recipients" value=""></td>
-			      		</tr>
-						<tr>
-			      			<td>手機</td>
-							<td><input type="text" name="recipientsMobile" value=""></td>
-			      		</tr>
-
-			      		<tr>
-			      			<td>地址</td>
-							<td><input type="text" name="recipientsAdd" value=""></td>
-			      		</tr>
-			      	</table>
-				</div>
-   			</div>
-
+	   			<!-- 為了使用電子地圖不得以用才這樣 -->
+	  			<form id="map" method="post" name="simulation_from" action="https://www.ezship.com.tw/emap/rv_request_web.jsp">
+		      		<div class="panel-heading title">請選擇7-11</div>
+					      	<input name="Submit2" type="submit" value="選擇門市" id="pp"></center>
+					      	<input type="hidden" name="rv_name" value="謝無忌"> <!-- 取件人姓名 -->
+						    <input type="hidden" name="rv_email" value="simulate_receiver@ezship.com.tw"> <!-- 取件人email -->
+						    <input type="hidden" name="rv_mobil" value="0967123456"> <!-- 取件人行動電話 -->
+						    <input type="hidden" name="order_id" value="${bonus}"> <!-- 購物網站自行產生之訂單編號 -->
+						    <input type="hidden" name="su_id"  value="buyer@myweb.com.tw"> <!-- 業主在 ezShip 使用的帳號 -->
+						    <input type="hidden" name="rv_amount" value="0"><!-- 金額 -->
+						    <input type="hidden" name="webtemp" value="simulationpage"><!-- 網站所需額外判別資料。ezShip 將原值回傳，供網站判別用 -->
+						    <input type="hidden" name="rturl"  value="http://localhost:8080/CowBaby/getmarketDataController"><!-- 回傳路徑及程式名稱 -->
+					</div>
+				</form>	
+				
+				
+			</div>
 			
-			<div class="docline"></div>
+	   		<form id ="test1" action="<c:url value="/getReceiveData"/>">
+	   			<div class="panel panel-info">
+			      	<div class="panel-heading title">訂購人資訊</div>
+			      	<div class="panel-body pannal_box">
+				      	<table>
+				      		<tr>
+				      			<td>ID</td>
+								<td><input type="text" name="customerID" value="${user.customerID}"></td>
+				      		</tr>
+				      		<tr>
+				      			<td>姓名</td>
+								<td><input type="text" name="customerName" value="${user.customerName}"></td>
+				      		</tr>
+							<tr>
+				      			<td>手機</td>
+								<td><input type="text" name="mobilePhone" value="${user.mobilePhone}"></td>
+				      		</tr>
+	
+				      		<tr>
+				      			<td>地址</td>
+								<td><input type="text" name="address" value="${user.address}"></td>
+				      		</tr>
 
-			<a href="#" class="go_checkout_btn">下ㄧ步</a>
+				      		<tr>			      			
+								<td>email</td>
+								<td><input type="text" name="email" value="${user.email}"></td>
+				      		</tr>
+				      	</table>
+					</div>
+	   			</div>
+	
+	
+	   			<div class="panel panel-info">
+			      	<div class="panel-heading title">收件人資訊</div>
+			      	<div class="panel-body pannal_box">
+			      		
+				      	<table>
+				      		<tr>
+				      			<td><input type="checkbox" id="check1"/></td>
+								<td style="padding: 10px;font-size: 15px;text-align:left;">跟寄件人一樣</td>
+				      		</tr>
+				      		<tr>
+				      			<td>姓名</td>
+								<td><input type="text" name="recipients" value=""></td>
+				      		</tr>
+							<tr>
+				      			<td>手機</td>
+								<td><input type="text" name="recipientsMobile" value=""></td>
+				      		</tr>
+	
+				      		<tr>
+				      			<td>地址</td>
+								<td><input type="text" name="recipientsAdd" value=""></td>
+				      		</tr>
+				      		
+				      		<tr>
+				      			<td>email</td>
+								<td><input type="text" name="recipientsEmail" value=""></td>
+				      		</tr>
+
+				      	</table>
+				      	<!-- 把紅利 跟 便利商電地址 帶過去 -->
+						<table>
+				      		<tr>
+				      			<td>便利商店名子</textarea>
+								<td><input type="text" name="convenienceStoreName" value="${convenienceStorData.convenienceStoreName}"></td>
+				      		</tr>
+				      		<tr>
+				      			<td>便利商店地址</textarea>
+								<td><input type="text" name="convenienceStoreAdd" value="${convenienceStorData.convenienceStoreAdd}"></td>
+				      		</tr>
+				      		<tr>
+				      			<td>便利商店電話</textarea>
+								<td><input type="text" name="convenienceStoreTel" value="${convenienceStorData.convenienceStoreTel}"></td>
+				      		</tr>
+				      		<tr>
+				      			<td>我的紅利</td>
+								<td><textarea  style="width: 100%;" name="recipientbonus">${bonus}</textarea>
+				      		</tr>
+			      		</table>
+					</div>
+	   			</div>
+
+				<div class="docline"></div>
+				
+				<a href="#" class="go_checkout_btn">下ㄧ步</a>
+		   </form>
 		</div>		    
 	</section>
 
@@ -148,29 +186,37 @@
 $(function(){
 
 	var isCheck=false;
-	
 	$("#check1").click(function(){
 		
 		if(!isCheck){
 			console.log("AA");
 			$("input[name='recipients']").val("${user.customerName}");
-			$("input[name='recipientsMobile']").val(${user.mobilePhone});
+			$("input[name='recipientsMobile']").val("${user.mobilePhone}");
 			$("input[name='recipientsAdd']").val("${user.address}");
+			$("input[name='recipientsEmail']").val("${user.email}");
 			isCheck=true;
-			
 		}else{
 			console.log("BB");
 			$("input[name='recipients']").val("");
 			$("input[name='recipientsMobile']").val("");
 			$("input[name='recipientsAdd']").val("");
-			
+			$("input[name='recipientsEmail']").val("");
 			isCheck=false;
 		}
-		
-		
-	})
-	
 
+	});
+	
+	$(".go_checkout_btn").click(function(){
+		$("#test1").submit();
+		
+	});
+	
+	$("#pp").click(function(){
+		$("#map").submit();
+		
+	});
+	
+	
 
 })
 </script>
