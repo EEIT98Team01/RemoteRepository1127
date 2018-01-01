@@ -97,15 +97,16 @@ public class ClassficationService {
 	
 	// 先依某條件勾選查詢,回傳符合某某條件的N筆資料
 	@Transactional(readOnly = true)
-	public List<ClassficationBean> findByCondition(String[] classfication, int page, int rows) {
+	public List<ClassficationBean> createCondition1(String[] classfication, int page, int rows) {
 		
 		Map<String,String> condition = new HashMap<String,String>();
-		
+
 		for(String n:classfication){
 			System.out.println("n"+Integer.parseInt(n));
+			condition.put("ProductID", "= " + classfication[Integer.parseInt(n)]);
 		}
 	
-		return classficationDao.findByCondition(condition,page,rows);
+		return classficationDao.findByCondition1(condition,page,rows);
 
 	}
 

@@ -8,10 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import model.bean.BlogBean;
 import model.bean.ClassficationBean;
+import model.bean.OrderDetailBean;
 import model.bean.ProductBean;
 import model.dao.ClassficationDao;
+import model.dao.OrderDetailDao;
 import model.dao.ProductDao;
 
 @Service
@@ -21,6 +22,8 @@ public class ProductManagmentService {
 	ProductDao productDao;
 	@Autowired
 	ClassficationDao classficationDao;
+	@Autowired
+	OrderDetailDao orderDetailDao;
 	
 	// 取得特定product資料
 	public ProductBean findById(int id) {
@@ -128,6 +131,25 @@ public class ProductManagmentService {
 		Map<String,String> condition = new HashMap<String,String>();
 		condition.put("startStopStatus", "= 1");
 		return classficationDao.findByCondition(condition);
+	}
+	
+	// 取得熱門商品
+	public List<ProductBean> hotProductList(int quantity) {
+		List<OrderDetailBean> orderDetailList = orderDetailDao.find();
+		Map<String, Integer> temp = new HashMap<String, Integer>();
+		
+		for(OrderDetailBean bean: orderDetailList) {
+			int productID = bean.getProductID();
+			
+			if(temp.get(productID) == null) {
+				temp.put(productID + "", 1);
+			} else {
+				int sum = temp.get(productID);
+				temp.put(productID + "", sum+1);
+			}
+		}
+		
+		return null;
 	}
 	
 	// 先依某條件進行排序,回傳符合某某條件的N筆資料  全域搜尋
