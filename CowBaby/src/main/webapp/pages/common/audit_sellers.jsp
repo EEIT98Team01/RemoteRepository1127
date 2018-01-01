@@ -5,13 +5,13 @@
 
 <p>請選則要處理的狀態</p>
 <form class="seller_audit_popupForm">
-	<input class="c-choice__input" name="applicationState" type="radio" value="2" checked="checked">
+	<input class="c-choice__input" name="applicationState" type="radio" value="1" checked="checked">
 	<label class="c-choice__label" >審核中</label>
 
-	<input class="c-choice__input" name="applicationState" type="radio" value="3">
+	<input class="c-choice__input" name="applicationState" type="radio" value="2">
 	<label class="c-choice__label" >審核通過</label>
 	
-	<input class="c-choice__input" name="applicationState" type="radio" value="4">
+	<input class="c-choice__input" name="applicationState" type="radio" value="3">
 	<label class="c-choice__label">審核通不通過</label>
 	
 	<hr/>

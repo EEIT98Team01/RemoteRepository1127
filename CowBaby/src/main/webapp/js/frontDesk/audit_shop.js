@@ -75,23 +75,30 @@ $(function(){
 	        	    // 狀態轉換
 	        	    var state="";
 	        	    if(item.applicationState==1){
-	        	    	state = "<span class='label label-danger'>未審核</span>"
+	        	    	state = "<span class='label label-info'>審核中</span>"
 					}else if(item.applicationState==2){
-						state = "<span class='label label-info'>審核中</span>"
-					}else if(item.applicationState==3){
 						state = "<span class='label label-success'>審核通過</span>"
-					}else if(item.applicationState==4){
+					}else if(item.applicationState==3){
 						state = "<span class='label label-warning'>審核不通過</span>"
 					}
 	        	    
 	        	    // 是可否編輯
 	        	    var isEditor="";
-	        	    if(item.applicationState==3 || item.applicationState==4){
+	        	    if(item.applicationState==2 || item.applicationState==3){
 	        	    	
 	        	    	isEditor = "<button type='button' class='btn disabled'><i class='fa fa-pencil'></i></button>"
 	        	    }else{
-	        	    	isEditor = "<a href='#' class='btn btn-primary audit_popupbox_btn'><i class='fa fa-pencil'></i></a>"
+	        	    	isEditor = "<a href='#' class='btn btn-primary audit_popupbox_btn'><i class='fa fa-pencil'></i></a>"	    	
+	        	    }
+	        	 
+	        	    
+	        	    // 是否有備註
+	        	    var isNote="";
+	        	    if(item.applicationDescription=="undefined" || item.applicationDescription==undefined){
 	        	    	
+	        	    	isNote = ""
+	        	    }else{
+	        	    	isNote = item.applicationDescription
 	        	    }
 	        	    
 	        	    // 組HTML塞回TABLE
@@ -103,7 +110,7 @@ $(function(){
  							"<td>"+item.applicationDate+"</td>"+
  							"<td>"+ state +"</td>"+
  							"<td>"+ isEditor +"</td>"+	
- 							"<td>"+ item.applicationDescription +"</td>"+
+ 							"<td>"+ isNote +"</td>"+
  							"<td style='display:none;'>"+item.applicationID+"</td>"+
 						 "</tr>";
 	 
@@ -202,7 +209,6 @@ $(function(){
 	        dataType:"json",          
 			// 成功要做的事
 	        success : function(response){
-	        	console.log("更改成功!!")
 	        	var myformData = $(".audit_shop_form").serializeArray();
 	        	inqueryData(myformData,1);
 
@@ -210,30 +216,5 @@ $(function(){
  		})         
  	} 
 
- 	// 申訴內容細節和回覆彈出框
- 	/* $(".audit_detail_btn").click(function(){
- 		console.log("AA")
- 		BootstrapDialog.show({
- 			 message: $('<div></div>').load('../common/audit_context.jsp'),
-             title:"申訴內容",
-             buttons: [{
- 		                label: '確定',
- 		                // no title as it is optional
- 		                cssClass: 'btn-primary',
- 		                data: {
- 		                    js: 'btn-confirm',
- 		                    'user-id': '3'
- 		                },
- 		                action: function(){
- 		                    alert('Hi Orange!');
- 		                }
- 		            },{
- 		                label: '取消',
- 		                action: function(dialogItself){
- 		                    dialogItself.close();
- 		               }
- 		            }]
- 	     });
- 	}) */
-	
+
 })

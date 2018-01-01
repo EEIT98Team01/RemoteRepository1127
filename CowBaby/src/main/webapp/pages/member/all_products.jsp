@@ -44,16 +44,17 @@
 
 			<ul>
 				<li class="sort-title">年齡分類</li>
-				<li><label><input type="checkbox" value=""> <span>0-6 歲</span> <span>(4890)</span></label> </li>
-				<li><label><input type="checkbox" value=""> <span>0-3 Months</span> <span>(4890)</span></label> </li>
-				<li><label><input type="checkbox" value=""> <span>0-3 Months</span> <span>(4890)</span></label> </li>	
+				<li><label><input type="checkbox" value=""> <span>0-3 歲</span> <span>(4890)</span></label> </li>
+				<li><label><input type="checkbox" value=""> <span>3-6 歲</span> <span>(4890)</span></label> </li>
+				<li><label><input type="checkbox" value=""> <span>6-12 歲</span> <span>(4890)</span></label> </li>
+				<li><label><input type="checkbox" value=""> <span>12 歲以上</span> <span>(4890)</span></label> </li>	
 			</ul>
 
 			<ul>
 				<li class="sort-title">性別分類</li>
-				<li><label><input type="checkbox" value=""> <span>0-3 Months</span> <span>(4890)</span></label> </li>
-				<li><label><input type="checkbox" value=""> <span>0-3 Months</span> <span>(4890)</span></label> </li>
-				<li><label><input type="checkbox" value=""> <span>0-3 Months</span> <span>(4890)</span></label> </li>	
+				<li><label><input type="checkbox" value="ALL"> <span>全部</span> <span>(4890)</span></label> </li>
+				<li><label><input type="checkbox" value="M"> <span>男</span> <span>(4890)</span></label> </li>
+				<li><label><input type="checkbox" value="F"> <span>女</span> <span>(4890)</span></label> </li>	
 			</ul>
 		</div>
 

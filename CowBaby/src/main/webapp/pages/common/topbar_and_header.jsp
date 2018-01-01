@@ -28,8 +28,10 @@
 			<c:if test="${not empty user}">
 				<li><img src="data:image/jpg;base64,${logingPhotoImg}"/>${user.customerName}
 					<div class="showMemberPannal">
+						<c:if test="${user.userID==2}">
 						<div><a href="#">我的賣場</a></div>
-						<div><a href="<c:url value="/pages/backstageSeller/account_overview.jsp"/>">我的管理著後台</a></div>
+						<div><a href="<c:url value="/SellerBackstagePageController.controller"/>">我的管理著後台</a></div>
+						</c:if>
 						<div><a href="<c:url value="/pages/member/member_account_infor.jsp"/>">我的資訊</a></div>
 						<div><a href="<c:url value="/LoingOutController"/>">安全登出</a></div>
 					</div>
@@ -65,7 +67,7 @@
 
 	<section class="container-fliud">
 		<section class="container main-nav">
-			<ul class="nav navbar-nav"> 
+			<ul class="nav navbar-nav">
 				<li><a href="<c:url value="/AllProductController"/>"><i class="fa fa-gift fa-2x" aria-hidden="true"></i>全部商品</a></li>
 				<li><a href="<c:url value="/pages/member/all_products.jsp"/>"><i class="fa fa-diamond fa-2x" aria-hidden="true"></i>最新商品</a></li>
 				<li><a href="<c:url value="/pages/member/all_shops.jsp"/>"><i class="fa fa-heartbeat fa-2x" aria-hidden="true"></i>精選商家</a></li>

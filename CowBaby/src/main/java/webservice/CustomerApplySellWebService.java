@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.alibaba.fastjson.JSONObject;
 
 import model.bean.BackstageBean;
+import model.bean.CustomerBean;
 import model.dao.BackstageDao;
 import model.service.CustomerApplySellerService;
 import model.service.CustomerManagementService;
@@ -25,6 +26,9 @@ public class CustomerApplySellWebService {
 	
 	@Autowired
 	CustomerApplySellerService customerApplySellerService;
+	
+	@Autowired
+	CustomerManagementService customerManagementService;
 
 	// 取得申請筆數
 	@RequestMapping(
@@ -93,13 +97,20 @@ public class CustomerApplySellWebService {
 		System.out.println("applicationDescription-->"+applicationDescription);
 		System.out.println("processStatus-->"+processStatus);
 		
+		CustomerBean customerBean = customerManagementService.findByCondition(email, null, null).get(0);
+		System.out.println("customerBean===>"+customerBean);
+		
+		System.out.println("=============");
 		BackstageBean bean = customerApplySellerService.findById(applicationID);
-		System.out.println("bean-->"+bean.toString());
 
 		if(bean.getApplicationState() != processStatus){
 			 bean.setApplicationState(processStatus);
 			 bean.setApplicationDescription(applicationDescription);
-		     customerApplySellerService.update(bean);    
+		     customerApplySellerService.update(bean);
+
+		     customerBean.setUserID(processStatus);
+		     customerManagementService.updateCustomerData(customerBean);
+		     
 		}
 
 		// 將回傳資料塞入json物件

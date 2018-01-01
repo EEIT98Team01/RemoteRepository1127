@@ -23,6 +23,7 @@ public class CustomerManagementService {
 		return customerDao.findById(id);
 	}
 	
+	
 	// 回傳所有會員資料,若無資料,則回傳之List為空集合
 	@Transactional(readOnly=true)
 	public List<CustomerBean> find() {
