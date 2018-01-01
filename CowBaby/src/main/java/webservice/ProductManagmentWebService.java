@@ -37,9 +37,9 @@ public class ProductManagmentWebService {
 			produces={"application/json;charset=UTF-8"}
 	)
 	public String addProduct(MultipartFile productImage, String productName, String productSummary, String productClassfication,
-			                 String productUnitPrice, String productStatus, String suitableAges, String genderPreference,
-			                 String productContents, String productSpec, String productStock, 
-			                 HttpServletRequest request,HttpServletResponse response, Model model) throws Exception {
+            String productUnitPrice, String productStatus, String suitableAges, String genderPreference,
+            String productContents, String productSpec, String productStock, 
+            HttpServletRequest request,HttpServletResponse response, Model model) throws Exception {
 		
 		System.out.println("productImage==>"+productImage.getOriginalFilename());
 		System.out.println("productName==>"+productName);
