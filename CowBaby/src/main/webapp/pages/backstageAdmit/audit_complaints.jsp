@@ -242,7 +242,7 @@
 			
 				BootstrapDialog.show({
 					message : $('<div></div>').load('/CowBaby/pages/common/audit_complaints_popup.jsp?sss='+sss),
-					title : "申請審核",
+					title : "申訴處理",
 					buttons : [ {
 						label : '確定',
 						// no title as it is optional

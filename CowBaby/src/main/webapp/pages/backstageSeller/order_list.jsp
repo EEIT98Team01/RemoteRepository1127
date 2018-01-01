@@ -90,7 +90,7 @@
 							<th>數量</th>
 							<th>訂購人</th>
 							<th>總金額</th>
-							<th>處理狀態</th>
+							<th>訂單明細</th>
 							<th>訂單處理</th>
 						</tr>
 					</thead>
@@ -152,8 +152,6 @@
 <script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@1.5.4/extras/loadingoverlay_progress/loadingoverlay_progress.min.js"></script>
 
 <script>
-
-
 	$(function() {
 		// side_menu 商店設置填充背景色
 		$("#nav-accordion").find('li a').eq(2).addClass('active');
@@ -166,6 +164,7 @@
 			    minSize         : "20px",
 			    resizeInterval  : 0, */
 			    size            : "10%"
+			   
 		 });
 		 
 	 	 // 抓取表單欄位
@@ -184,6 +183,7 @@
 		// 發 ajax 查詢表單資料
 		inqueryData(formData , pagenow);
 
+		
 	    // 查詢
 	    $(".inquire").click(function(){
 	    	// 擋掉超連結的預設值
@@ -245,10 +245,19 @@
 	 							"<td>"+order.totalAmount+"</td>" +
 	 							"<td> <a href='<c:url value='orderView.controller'/>?id=" + order.orderID   + 
 	 							"' class='btn btn-success'> <i class='fa fa-eye'></i> </a> </td>" +
-	 							"<td> <a href='' class='btn btn-primary'> <i class='fa fa-pencil'></i> </a> </td>" +
+	 							"<td> <a href='#' class='btn btn-primary audit_popupbox_btn'>" +
+	 							"<span style='display: none;'>" + order.orderID + "</span>" +
+	 							"<i class='fa fa-pencil'></i> </a> </td>" +
 							 "</tr>";				
 	 		    		$('tbody').append(html);
 		           }) 
+		           
+// 		           				<td>
+// 		           					<a href="#" class='btn btn-primary audit_popupbox_btn' >
+// 									<span style="display: none;">${CustomerReview.reportID}</span>
+// 									<i class='fa fa-pencil'></i> 
+// 									</a>
+// 								</td>
 		          	    
 	         		// 自動產生分頁
 		         	var totalPages = response.tatalPage;
@@ -293,9 +302,14 @@
 		        error:function(xhr, ajaxOptions, thrownError){
 		            alert(xhr.status+"\n"+thrownError);
 		        }
+				
+				
+				
 
 	    	});
 	    }
+	    
+	 
 	})
 	
 </script>
