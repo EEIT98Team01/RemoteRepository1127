@@ -54,7 +54,7 @@
 
 			<form class="col-md-5 pull-right searchProduct" role="search">
 			    <div class="input-group add-on">
-			      	<input class="form-control" style="border: 2px solid #9ee2ea;" placeholder="Search" name="srch-term" id="srch-term" type="text">
+			      	<input class="form-control" style="border: 2px solid #9ee2ea;" placeholder="Search" name="srch-term" id="title" value="${title}"type="text">
 			      	<div class="input-group-btn">
 			        	<button class="btn btn-default searchStyle" type="submit"><i class="glyphicon glyphicon-search"></i></button>
 			      	</div>

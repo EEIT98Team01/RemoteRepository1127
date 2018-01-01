@@ -129,7 +129,7 @@ public class ProductManagmentWebService {
 		return jsonObj.toJSONString();
 	}	
 	
-/*	
+/*
 	public String searchProductData(String title, String pageSize, String pageNumber) {
 		JSONObject jsonObj = new JSONObject();	// json物件,儲存欲回傳資料
 		JSONArray array;						// 儲存List<CustomerBean>的json物件
@@ -138,10 +138,10 @@ public class ProductManagmentWebService {
 		
 		// 檢查使用者輸入條件之情形，呼叫相對應方法
 		if( (title == null || "".equals(title.trim()))) {
-			array = new JSONArray(productManagmentService.find(Integer.parseInt(pageNumber), Integer.parseInt(pageSize), "ArticleID desc"));
+			array = new JSONArray(productManagmentService.find(Integer.parseInt(pageNumber), Integer.parseInt(pageSize)));
 			quantity = productManagmentService.getQuantity();
 		} else {
-			array = new JSONArray(productManagmentService.findByCondition(title, Integer.parseInt(pageNumber), Integer.parseInt(pageSize), "ArticleID desc"));
+			array = new JSONArray(productManagmentService.findByCondition(title, Integer.parseInt(pageNumber), Integer.parseInt(pageSize)));
 			quantity = productManagmentService.getConditionQuantity(title);
 		}
 		

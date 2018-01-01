@@ -63,21 +63,21 @@
 										<th>商品名稱</th>
 										<th>商品圖片</th>
 										<th>數量</th>
-										<th>庫存</th>
+										<th>規格</th>
 										<th>價錢</th>
-										<th>總計</th>
 								  	</tr>
 								</thead>
 								
 								<tbody>
-									  	<tr>
-											<td>${orderData.email}</td>
-			<!-- 怎麼插另一個Table的圖片 -->  <td><img src="${pageContext.request.contextPath}/images/01.jpg"></td>
-											<td>${orderData.totalItems}</td>
-											<td>有</td>
-											<td></td>
-											<td>${orderData.totalAmount}</td>		
-									  	</tr>  									 		  	
+									<c:forEach var="orderDetail" varStatus="st" items="${orderDetail_list}">
+										<tr>
+											<td>${orderDetail[0]}</td>
+<!-- 怎麼插另一個Table的圖片 -->				<td><img src="${orderDetail[1]}"></td>
+											<td>${orderDetail[2]}</td>
+											<td>${orderDetail[3]}</td>
+											<td>${orderDetail[4]}</td>	
+									  	</tr>  
+									</c:forEach>
 								</tbody>
 							</table> 	
 						</div>
