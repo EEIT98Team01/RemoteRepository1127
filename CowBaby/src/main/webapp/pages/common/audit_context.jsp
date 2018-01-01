@@ -8,7 +8,7 @@
 	method="POST">
 	<div>
 		<label for="exampleFormControlTextarea1">客服回覆內容:</label>	
-		<textarea class="form-control" name="serviceFeedback"></textarea> 
+		<textarea class="form-control" name="serviceFeedback" cols="50" rows="5"></textarea> 
 	</div>
 <input type="hidden" value="${param.aaa}" name="reportid">
 </form>
