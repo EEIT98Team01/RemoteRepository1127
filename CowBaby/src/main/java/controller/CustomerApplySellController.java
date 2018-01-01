@@ -43,14 +43,12 @@ public class CustomerApplySellController {
 	public String method(String email,int customerID){
 		
 		CustomerBean customerBean = customerManagementService.findById(customerID);
-		customerBean.setUserID(1);
-		
 		BackstageBean backstageBean = new BackstageBean();
 		
 		 // 設定目前時間
 	    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 	    backstageBean.setApplicationDate(timestamp);
-	    backstageBean.setApplicationState(2);
+	    backstageBean.setApplicationState(1);
 	    backstageBean.setEmail(email);
 		
 		customerApplySellerService.insertBackstageData(backstageBean);

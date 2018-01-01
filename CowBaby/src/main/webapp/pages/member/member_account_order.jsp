@@ -49,8 +49,21 @@
 			</ul>
 			<div class="welcome_text">
 				<p>HI! 
-					<span>雄大</span>~歡迎來到CowBaby~<span class="user_stauts">ㄧ般會員</span> 
-					<a class="open_shop">我要開店</a>
+					<span style="color: #f1648f;font-size: 15px;">${user.customerName}</span>~歡迎來到CowBaby~
+					<span class="user_stauts">
+						<c:if test="${user.userID==1}">
+						   <c:out value="一般會員"/>
+						</c:if>
+						<c:if test="${user.userID==2}">
+						   <c:out value="平台賣家"/>
+						</c:if>	
+						<c:if test="${user.userID==3}">
+						   <c:out value="黑名單"/>
+						</c:if>				
+					</span> 
+					<c:if test="${user.userID==1}">
+					<a class="open_shop" href="<c:url value="/pages/member/member_apply_shop.jsp"/>">我要開店</a>
+					</c:if>
 				</p>
 			</div>
 			<div class="order_detail">
