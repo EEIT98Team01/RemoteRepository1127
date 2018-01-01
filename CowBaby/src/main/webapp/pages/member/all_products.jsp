@@ -36,11 +36,10 @@
 		<div class="side_bar">
 			<ul>
 				<li class="sort-title">商品分類</li>
-				<li><a href="#">全部同裝商品</a></li>
-				<li><a href="#">精選商品A</a></li>
-				<li><a href="#">人氣商品C</a></li>
-				<li><a href="#">特價商品</a></li>
-				<li><a href="#">出清商品</a></li>
+				<c:forEach var="item" items="${classficationList}">
+					<li><label><input type="checkbox" name ="classfication" value="${item.classficationID}" > <span>${item.classficatoinName} </span><span>(4890)</span></label> </li>
+				</c:forEach>
+				
 			</ul>
 
 			<ul>
@@ -138,7 +137,64 @@
 <script type="text/javascript">
 
 	$(function(){
-		// 一進來先獲取購物車內的內容
-		/* new ShoppingCatAPI("","",""); */
+		
+		$('input[name="classfication"]').click(function(){
+			
+			// 目前該選項是否選取
+			var isChecked = $(this).prop("checked");
+			// 目前選取的分類ID
+			var checkedList = $('input:checkbox:checked[name="classfication"]').map(function() {
+				return $(this).val(); 
+			}).get();
+			 
+			console.log(checkedList); 
+			console.log(JSON.stringify(checkedList))
+			queryData(checkedList,1,1)
+		})
+		
+		// 查詢過濾勾選的商品
+		function queryData(checkedList,pageSize,pageNumber){
+		    
+	    	$.ajax({
+		        type:"GET",                   
+		        url: "/CowBaby/prouducts/inquire",    
+		        data: {
+		        	 classfication:JSON.stringify(checkedList),
+			       	 pageSize:1,
+		       		 pageNumber:pageNumber
+		        }, 
+		         
+		        dataType:"json",   
+		        
+		        // ajax載入前
+		       /*  beforeSend: function(){
+		        	//顯示laoding 參考網址=>https://gasparesganga.com/labs/jquery-loading-overlay/#quick-demo
+		        	$("#customerList").LoadingOverlay("show");
+				},  */
+				
+				// 成功要做的事
+		        success : function(response){   
+
+		          
+		        },
+
+		        // ajax完成~隱藏loading
+		       /*  complete: function(){
+		        	setTimeout(function(){
+		        		$("#customerList").LoadingOverlay("hide");
+		        	},300)	
+				}, */
+				     
+				// 發ajax錯誤
+		        error:function(xhr, ajaxOptions, thrownError){
+		            /* alert(xhr.status+"\n"+thrownError); */
+		        }
+
+	    	});
+		}
+		
+	
+		
+		
 	})
 </script>

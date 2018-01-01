@@ -90,8 +90,7 @@ public class CustomerRegisterController {
 		/*************** 把欄位資料塞回customerBean ******************/
 
 		 CustomerBean myCustomerBean =new CustomerBean();
-		 
-//		 myCustomerBean.setCustomerID(0);
+			 
 		 myCustomerBean.setCustomerName(customerBean.getCustomerName());
 		 myCustomerBean.setEmail(customerBean.getEmail());
 		 myCustomerBean.setPassword(customerBean.getPassword());
@@ -104,6 +103,13 @@ public class CustomerRegisterController {
 		 myCustomerBean.setMarriage(customerBean.isMarriage());
 		 myCustomerBean.setSubscription(customerBean.isSubscription());
 		 myCustomerBean.setLoginPhoto(customerBean.getLoginPhoto());
+		 myCustomerBean.setConsumptionTimes(0);
+		 myCustomerBean.setTotalAmoutOfConsumption(0);
+		 myCustomerBean.setUserID(1);
+		 myCustomerBean.setBonus(0);
+		 myCustomerBean.setConsumerSegmentation(Byte.parseByte("0"));
+		 
+		 
 		
 		 // 設定目前時間
 	     Timestamp timestamp = new Timestamp(System.currentTimeMillis());

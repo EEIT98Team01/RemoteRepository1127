@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import model.bean.ClassficationBean;
 import model.bean.ProductBean;
+import model.service.ClassficationService;
 import model.service.ProductService;
 import model.service.ProductSizeService;
 
@@ -22,6 +23,9 @@ public class ProductController {
 	
 	@Autowired
 	ProductSizeService productSizeService;
+	
+	@Autowired
+	ClassficationService classficationService;
 	
 	//後台商品列表頁
 	@RequestMapping(value = ("ProductController"), method = { RequestMethod.GET, RequestMethod.POST })
@@ -66,9 +70,19 @@ public class ProductController {
 	@RequestMapping(value = ("AllProductController"), method = { RequestMethod.GET, RequestMethod.POST })
 	public String allProduct(Model model) {
 		
+		// 顯示全部商品
 		List<Object[]> list = productService.findObject();
 		model.addAttribute("productList", list);
 		
+		// 顯示商品分類
+		List<ClassficationBean> classficationList = classficationService.find();
+		model.addAttribute("classficationList", classficationList);
+		// 顯示商品分類的數量
+		int quantity = classficationService.getQuantity();
+		model.addAttribute("quantity", quantity);
+		
+		
+		System.out.println(classficationList);
 		return "all_product_list";
 	}
 	
