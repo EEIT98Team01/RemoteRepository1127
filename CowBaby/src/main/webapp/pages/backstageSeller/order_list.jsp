@@ -90,6 +90,7 @@
 							<th>數量</th>
 							<th>訂購人</th>
 							<th>總金額</th>
+							<th>訂單狀態</th>
 							<th>訂單明細</th>
 							<th>訂單處理</th>
 						</tr>
@@ -153,6 +154,8 @@
 
 <script>
 	$(function() {
+		
+		
 		// side_menu 商店設置填充背景色
 		$("#nav-accordion").find('li a').eq(2).addClass('active');
 		$("#startTime").datepicker();
@@ -242,13 +245,25 @@
 	 							"<td>"+order.orderDate+"</td>" +
 	 							"<td>"+order.totalItems+"</td>" +
 	 							"<td>"+order.email+"</td>" +
-	 							"<td>"+order.totalAmount+"</td>" +
+	 							"<td>"+order.totalAmount+"</td>";
+	 							
+	 							if(order.status == 1) {
+	 								html = html + "<td>未處理</td>";
+	 							} else if(order.status == 2) {
+	 								html = html + "<td>檢貨中</td>";
+	 							} else if(order.status == 3) {
+	 								html = html + "<td>送貨中</td>";
+	 							} else if(order.status == 4) {
+	 								html = html + "<td>已完成</td>";
+	 							}
+	 							
+	 					html=html+		
 	 							"<td> <a href='<c:url value='orderView.controller'/>?id=" + order.orderID   + 
 	 							"' class='btn btn-success'> <i class='fa fa-eye'></i> </a> </td>" +
 	 							"<td> <a href='#' class='btn btn-primary audit_popupbox_btn'>" +
 	 							"<span style='display: none;'>" + order.orderID + "</span>" +
 	 							"<i class='fa fa-pencil'></i> </a> </td>" +
-							 "</tr>";				
+							 "</tr>";
 	 		    		$('tbody').append(html);
 		           }) 
 		           
@@ -309,7 +324,38 @@
 	    	});
 	    }
 	    
-	 
+	    //~~~~~~~~~
+		 // 申訴內容細節和回覆彈出框
+		 $('body').on("click", '.audit_popupbox_btn', function () {
+				console.log("AA")
+				var aaa = $(this).find('span').text();
+				                                    
+				BootstrapDialog.show({               
+					message : $('<div></div>').load('/CowBaby/pages/common/order_complaints_popup.jsp?aaa='+aaa),
+					title : "訂單狀態編輯",
+					buttons : [ {
+						label : '確定',
+						// no title as it is optional
+						cssClass : 'btn-primary',
+						data : {
+							js : 'btn-confirm',
+							'user-id' : '3'
+						},
+						action : function() {
+							console.log("AAA");
+		                	$("#qqq").submit();
+						}
+					}, {
+						label : '取消',
+						action : function(dialogItself) {
+							dialogItself.close();
+						}
+					} ]
+				});
+		})
+
+		
+		
 	})
 	
 </script>
