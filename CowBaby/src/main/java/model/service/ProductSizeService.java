@@ -34,4 +34,8 @@ public class ProductSizeService {
 		public ProductSizeBean insert(ProductSizeBean bean) {
 			return productSizeDao.insert(bean);
 		}
+		
+		public ProductSizeBean update(ProductSizeBean bean) {
+			return productSizeDao.update(bean);
+		}
 }
