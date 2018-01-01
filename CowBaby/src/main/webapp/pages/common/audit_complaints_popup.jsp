@@ -13,6 +13,6 @@
 <label class="c-choice__label" for="radio1">處理中</label>
 
 <input class="c-choice__input" id="radio1" name="processStatus" type="radio" value="已完成">
-<label class="c-choice__label" for="radio1">已完成</label>
+<label class="c-choice__label" for="radio1">已處理</label>
 <input type="hidden" value="${param.sss}" name="reportid">
 </form>

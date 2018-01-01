@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
@@ -47,22 +48,29 @@ public class AllProuductSelectWebService {
 			method={RequestMethod.GET},
 			produces={"application/json;charset=UTF-8"}
 	)
-	public String allProuductsSelect( String[] classfication, int pageNumber, int pageSize) {
-
-		System.out.println("classfication=>"+classfication.toString());
+	public String allProuductsSelect(String[] classfication, int pageNumber, int pageSize) {
+		List<Integer> classficationList = new LinkedList<Integer>();
+		
+		if(classfication[0].length() > 2) {
+			String temp = classfication[0].replaceAll("\"", "");
+			temp = temp.substring(1, temp.length()-1);
+			for(String str: temp.split(",")) {
+				classficationList.add(new Integer(str));
+			}
+		}
+		
+		
+		System.out.println("classfication=>"+classficationList);
 		System.out.println("page=>"+pageNumber);
 		System.out.println("rows=>"+pageSize);
 		System.out.println("-----------------------");
 		
-	
-		for(int i=0;i<classfication.length;i++){
-			
-		}
+
 		
-		List<ClassficationBean> list = classficationService.findByCondition(1, pageNumber, pageSize);
+		//List<ClassficationBean> list = classficationService.findByCondition(classfication, pageNumber, pageSize);
 		
 		
-		System.out.println("list=>"+list);
+		//System.out.println("list=>"+list);
 		
 		
 	/*	

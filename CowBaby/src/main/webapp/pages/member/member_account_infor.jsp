@@ -49,7 +49,7 @@
 			</ul>
 			<div class="welcome_text">
 				<p>HI! 
-					<span>${user.customerName}</span>~歡迎來到CowBaby~
+					<span style="color: #f1648f;font-size: 15px;">${user.customerName}</span>~歡迎來到CowBaby~
 					<span class="user_stauts">
 						<c:if test="${user.userID==1}">
 						   <c:out value="一般會員"/>
@@ -61,7 +61,9 @@
 						   <c:out value="黑名單"/>
 						</c:if>				
 					</span> 
+					<c:if test="${user.userID==1}">
 					<a class="open_shop" href="<c:url value="/pages/member/member_apply_shop.jsp"/>">我要開店</a>
+					</c:if>
 				</p>
 			</div>
 			<div class="review_member_infor">
@@ -81,12 +83,12 @@
 								<td>消費紅利</td>
 								<td>${user.bonus}</td>
 							</tr>
-							<tr>
+							<!-- <tr>
 								<td>修改密碼</td>
 								<td>123456</td>
 								<td>確認密碼</td>
 								<td>123456</td>
-							</tr>
+							</tr> -->
 						</table>
 					</div>
 
@@ -103,7 +105,13 @@
 								<td>您的生日 * :</td>
 								<td>${user.birthday}</td>
 								<td>婚姻狀況 * :</td>
-								<td>${user.marriage}</td>
+								<c:if test="${user.marriage==false}">
+									<td colspan="3">未婚</td>
+								</c:if>
+								<c:if test="${user.marriage==true}">
+									<td colspan="3">已婚</td>
+								</c:if>
+								
 							</tr>
 							<tr>
 								<td>您的電話 *:</td>
@@ -121,7 +129,12 @@
 								
 							<tr>
 								<td>是否定閱電子報 :</td>
-								<td colspan="3">${user.subscription}</td>
+								<c:if test="${user.subscription==true}">
+									<td colspan="3">是</td>
+								</c:if>
+								<c:if test="${user.subscription==false}">
+									<td colspan="3">否</td>
+								</c:if>
 							</tr>
 
 						</table>	

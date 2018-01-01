@@ -35,7 +35,7 @@
 				<div class="row">
 					<div class="clear-both"></div>
 				</div>
-								<!--這邊開始寫內容-->
+				<!--這邊開始寫內容-->
 				<div class="row">
 					<div class="col-md-12">
 						<div class="panel panel-addpadding">
@@ -48,10 +48,10 @@
 									<label for="exampleInputName2">審核狀態:</label>
 									<select class="form-control" name="applicationState">
 										<option value="">全部</option>
-										<option value="1">未審核</option>
-										<option value="2">審核中</option>
-										<option value="3">審核通過</option>
-										<option value="4">未通過審核</option>		
+										<!-- <option value="1">未審核</option> -->
+										<option value="1">審核中</option>
+										<option value="2">審核通過</option>
+										<option value="3">審核不通過</option>		
 									</select>
 								</div>
 								<button type="submit" class="btn btn-primary inquire">查詢</button>

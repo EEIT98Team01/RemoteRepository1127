@@ -96,22 +96,18 @@ public class ClassficationService {
 	
 	
 	// 先依某條件勾選查詢,回傳符合某某條件的N筆資料
-		@Transactional(readOnly = true)
-		public List<ClassficationBean> findByCondition(int classficationID, int page, int rows) {
-			
-			if((classficationID == 0)){
-				return classficationDao.find();//未使用任何條件
-			}else{
-				Map<String,String> condition = new HashMap<String,String>();
-				if(classficationID != 0){
-					condition.put("classficationID", "= " + classficationID);
-				}
-				return classficationDao.findByCondition(condition,page,rows);
-			}
-			
-//			return classficationDao.findByCondition(this.createCondition(classficationID), page, rows);
+	@Transactional(readOnly = true)
+	public List<ClassficationBean> findByCondition(String[] classfication, int page, int rows) {
+		
+		Map<String,String> condition = new HashMap<String,String>();
+		
+		for(String n:classfication){
+			System.out.println("n"+Integer.parseInt(n));
 		}
 	
+		return classficationDao.findByCondition(condition,page,rows);
+
+	}
 
 	// 將查詢條件塞進Map
 	private HashMap<String, String> createCondition(String account, String userType, String clusterID) {
