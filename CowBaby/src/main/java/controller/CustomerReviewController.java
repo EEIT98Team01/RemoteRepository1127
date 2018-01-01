@@ -11,12 +11,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import model.bean.CustomerServiceBean;
 import model.service.CustomerServiceAuditService;
+import model.service.MessageService;
 
 @Controller
 public class CustomerReviewController {
 
 	@Autowired
 	CustomerServiceAuditService customerServiceAuditService;
+	
+	@Autowired
+	MessageService messageService;
 
 	@RequestMapping(value = ("CustomerReview.controller"), method = { RequestMethod.GET, RequestMethod.POST })
 	public String review(Model model, String email, String processStatus, String problemTypes) {
@@ -97,6 +101,7 @@ public class CustomerReviewController {
 			bean.setServiceFeedback(serviceFeedback);
 			
 			customerServiceAuditService.updateCustomerData(bean);
+			messageService.sendMessage("999@gmail.com", bean.getEmail(), "親愛的會員您好");
 			
 //			CustomerServiceBean bean = new CustomerServiceBean();
 //			bean.setServiceFeedback(serviceFeedback);

@@ -109,13 +109,13 @@
 <%-- 								<td>${CustomerReview.processStatus}</td> --%>
 								<c:choose>
 								<c:when test="${CustomerReview.processStatus == 1}">
-									<td><span class="label label-danger">處理中</span></td>
+									<td><span class="label label-info">處理中</span></td>
 								</c:when>
 								<c:when test="${CustomerReview.processStatus == 2}">
-									<td>已處理</td>
+									<td><span class="label label-primary">已處理</span></td>
 								</c:when>
 								<c:otherwise>
-									<td>未處理</td>
+									<td><span class="label label-danger">未處理</span></td>
 								</c:otherwise>
 							    </c:choose>
 								<td>${CustomerReview.problemDescription}</td>

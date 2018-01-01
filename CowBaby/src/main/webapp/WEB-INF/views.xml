@@ -142,6 +142,10 @@
 		<property name="url" value="/pages/backstageSeller/product_add.jsp"></property>
 	</bean>
 	
+	<bean id="product_edit" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/pages/backstageSeller/product_edit.jsp"></property>
+	</bean>
+	
 	<!--進入填寫付款方式 -->
 	<bean id="shopping_payment" class="org.springframework.web.servlet.view.InternalResourceView">
 		<property name="url" value="/pages/member/shopping_payment.jsp"></property>
@@ -150,6 +154,11 @@
 	<!--付款最後確認 -->
 	<bean id="shopping_cart_final" class="org.springframework.web.servlet.view.InternalResourceView">
 		<property name="url" value="/pages/member/shopping_cart_final.jsp"></property>
+	</bean>
+	
+	<!--付款最後確認 -->
+	<bean id="order_success" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/pages/member/order_success.jsp"></property>
 	</bean>
 	
 

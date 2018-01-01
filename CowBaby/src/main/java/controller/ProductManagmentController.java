@@ -6,8 +6,10 @@ import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
@@ -20,15 +22,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
 import model.bean.ProductBean;
+import model.bean.ProductSizeBean;
 import model.service.ClassficationService;
 import model.service.ProductManagmentService;
+import model.service.ProductSizeService;
 
 @Controller
 public class ProductManagmentController {
 	@Autowired
-	ProductManagmentService productManagmentService;
+	private ProductManagmentService productManagmentService;
 	@Autowired
-	ClassficationService classficationService;
+	private ClassficationService classficationService;
+	@Autowired
+	private ProductSizeService productSizeService;
 	@Autowired
 	private ServletContext application;
 	
@@ -98,17 +104,39 @@ public class ProductManagmentController {
 		return "product_list";
 	}
 	
-	// 商品管理/商品列表使用
+	// 商品管理/新增商品使用
 	@RequestMapping(
 			value=("/pages/backstageSeller/ProductAdd"),
 			method={RequestMethod.GET, RequestMethod.POST}
 	)
-	public String productList(Model model) {
+	public String productAdd(Model model) {
 		// 取得所有啟用分類
 		model.addAttribute("classficationList", productManagmentService.findClassfication());
 
 		return "product_add";
 	}
+	
+	// 商品管理/編輯商品使用
+	@RequestMapping(
+			value=("/pages/backstageSeller/ProductEdit"),
+			method={RequestMethod.GET, RequestMethod.POST}
+	)
+	public String productEdit(Model model, int productID) {
+		// 取得當前要編輯的prodcut資料及所有啟用分類
+		model.addAttribute("product", productManagmentService.findById(productID));
+		model.addAttribute("classficationList", productManagmentService.findClassfication());
+		
+		// 回填商品規格
+		Map<String,String> condition = new HashMap<String,String>();
+		condition.put("productID","= " + productID);
+		List<ProductSizeBean> productSizeList = productSizeService.findByCondition(condition);
+		for(int i = 0; i < productSizeList.size(); i++) {
+			model.addAttribute("productSize" + (i+1), productSizeList.get(i));
+		}
+
+		return "product_edit";
+	}
+	
 	
 	//CKeditor 文字+圖片上傳
 	@RequestMapping("/pages/backstageSeller/upload.image")  //<--路徑跟ckeditor的config.js對應 

@@ -17,11 +17,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import model.bean.CustomerBean;
 import model.bean.Order01Bean;
 import model.bean.ProductBean;
 import model.bean.ShoppingCart;
 import model.service.ProductService;
 import model.service.ProductSizeService;
+import model.service.ShoppingCartService;
 
 @Controller
 public class ShoppinCartCheckoutProcessController {
@@ -30,6 +32,9 @@ public class ShoppinCartCheckoutProcessController {
 
 	@Autowired
 	ProductSizeService productSizeService;
+
+	@Autowired
+	ShoppingCartService shoppingCartService;
 
 	// 購物車結帳-step1.確認購物明細
 	@RequestMapping(value = ("ShoppingCartCheckController"), method = { RequestMethod.GET, RequestMethod.POST })
@@ -107,7 +112,7 @@ public class ShoppinCartCheckoutProcessController {
 	@RequestMapping(value = ("getReceiveData"), method = { RequestMethod.GET, RequestMethod.POST })
 	public String getReceiveData(Model model, String recipients, String recipientsMobile, String recipientsAdd,
 			String recipientbonus, String recipientsEmail, String convenienceStoreName, String convenienceStoreTel,
-			String convenienceStoreAdd,HttpSession session) {
+			String convenienceStoreAdd, HttpSession session) {
 
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("convenienceStoreName", convenienceStoreName);
@@ -124,75 +129,84 @@ public class ShoppinCartCheckoutProcessController {
 
 		// 把購物車資訊塞回去
 		ShoppingCart shoppingCart = (ShoppingCart) session.getAttribute("shoppingCart");
+		// 總共用掉多少紅利
+		int bounsSun = 0;
 		System.out.println("shoppingCart=======>" + shoppingCart);
 
-		
 		JSONObject bonusJSON = new JSONObject(recipientbonus);
-		
-		Object[][] result = new Object[shoppingCart.getStoreNumber()][6];
+
+		Object[][] result = new Object[shoppingCart.getStoreNumber()][5];
 
 		int i = 0;
 		for (String key : shoppingCart.getProductInfo().keySet()) {
 			List<ShoppingCart.Product> list = shoppingCart.getProductInfo().get(key);
-			
-			int bounsSun = 0;	
-			int bouns = Integer.parseInt(bonusJSON.getString(key));	
+			int bouns = Integer.parseInt(bonusJSON.getString(key));
 			int items = list.size();
 			int amount = 0;
 
-			//總共用掉多少紅利
-			bounsSun = bounsSun+bouns;
-			
+			// 總共用掉多少紅利
+			bounsSun = bounsSun + bouns;
+
 			for (ShoppingCart.Product product : list) {
 				amount = amount + (product.getQuantity() * product.getUnitPrice());
 			}
-			
+
 			result[i][0] = key;
 			result[i][1] = items;
 			result[i][2] = amount - bouns;
 			result[i][3] = list;
 			result[i][4] = bouns;
-			result[i][5] = bounsSun;
 
 			i++;
 		}
 
+		shoppingCart.setTotalAmount(shoppingCart.getTotalAmount());
 		model.addAttribute("shoppingCartInfo", result);
-
+		model.addAttribute("bounsSun", bounsSun);
 		return "shopping_cart_final";
 	}
 
 	// 購物車結帳-step3
 	@RequestMapping(value = ("goCheckout"), method = { RequestMethod.GET, RequestMethod.POST })
-	public boolean checkout(String receiverName,
-			String receiverEmail, String receiverPhone, int paymentMethod, String pickUpStore, String usebonus) {
-		System.out.println("inin");
+	public String checkout(String receiverName, String receiverEmail, String receiverPhone, int paymentMethod,
+			String pickUpStore, String usebonus,HttpSession session) {
+		System.out.println("準備結帳");
+		System.out.println("receiverName==>"+receiverName);
+		System.out.println("receiverEmail==>"+receiverEmail);
+		System.out.println("receiverPhone==>"+receiverPhone);
+		System.out.println("paymentMethod==>"+paymentMethod);
+		System.out.println("pickUpStore==>"+pickUpStore);
+		System.out.println("usebonus==>"+usebonus);
+		
+		/******************************************************/
 
-		/*
-		 * for(String key: shoppingCart.getProductInfo().keySet()) {
-		 * List<ShoppingCart.Product> list =
-		 * shoppingCart.getProductInfo().get(key); System.out.println(key +
-		 * ":"); for(ShoppingCart.Product product: list) {
-		 * System.out.println(product); } }
-		 * 
-		 * Order01Bean bean = new Order01Bean(); bean.setCustomerID(2);
-		 * bean.setOrderDate(new java.sql.Timestamp(new
-		 * java.util.Date("2017/12/13 15:22:33").getTime()));
-		 * bean.setAcceptDate(new java.sql.Timestamp(new
-		 * java.util.Date("2017/12/14 18:22:33").getTime()));
-		 * bean.setBuyerRequestCancel(null); bean.setShippedDate(new
-		 * java.sql.Timestamp(new
-		 * java.util.Date("2017/12/15 18:22:33").getTime()));
-		 * bean.setTransactionComplete(null); bean.setOrderCancellation(null);
-		 * bean.setPickUpStore("台雞店"); bean.setTotalAmount(3000);
-		 * bean.setTotalItems(3); bean.setReceiverName("陳宸晨");
-		 * bean.setReceiverEmail("ekdsf@gmail.com");
-		 * bean.setReceiverPhone("0998-555-676"); bean.setUsebonus(0);
-		 * bean.setStoreID(1); bean.setStatus(3); bean.setPaymentMethod(1);
-		 * System.out.println(dao.insert(bean));
-		 */
+		
+		ShoppingCart shoppingCart = (ShoppingCart) session.getAttribute("shoppingCart");
+		CustomerBean user = (CustomerBean)session.getAttribute("user");
+		JSONObject bonusJSON = new JSONObject(usebonus);
+		String account = user.getEmail();
+		
+		//獲取每家商店購買的商品清單
+		for (String key : shoppingCart.getProductInfo().keySet()) {
+			List<ShoppingCart.Product> productList = shoppingCart.getProductInfo().get(key);
+			
+			String[] tokens = key.split("-");
+			
+			int bouns = Integer.parseInt(bonusJSON.getString(key));
+			
+			boolean isCheck =shoppingCartService.checkout(productList, Integer.parseInt(tokens[0]), account, receiverName,receiverEmail,
+					receiverPhone, 1, pickUpStore, bouns);
+			
+			if(isCheck) {
+				shoppingCart.getProductInfo().remove(key);
+			}
+		}
+		shoppingCart.setStoreNumber(0);
+		shoppingCart.setTotalAmount(0);
+		shoppingCart.setTotalItems(0);
+		
 
-		return true;
+		return "order_success";
 	}
 
 }

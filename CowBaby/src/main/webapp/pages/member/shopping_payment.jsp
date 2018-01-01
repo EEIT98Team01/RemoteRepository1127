@@ -156,7 +156,7 @@
 				      		</tr>
 				      		<tr>
 				      			<td>我的紅利</td>
-								<td><textarea  style="width: 100%;" name="recipientbonus">${bonus}</textarea>
+								<td><textarea  style="width: 100%;" name="recipientbonus">${bonus}</textarea></td>
 				      		</tr>
 			      		</table>
 					</div>
