@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import model.bean.ClassficationBean;
 import model.bean.CustomerBean;
 import model.dao.CustomerDao;
 import utils.EmailUtil;
@@ -22,6 +23,12 @@ public class CustomerManagementService {
 	public CustomerBean findById(int id){
 		return customerDao.findById(id);
 	}
+	
+	// 查詢商品分類單一設置資料
+		@Transactional(readOnly = true)
+		public CustomerBean getStoreData(int customerID) {
+			return customerDao.findById(customerID);
+		}
 	
 	// 回傳所有會員資料,若無資料,則回傳之List為空集合
 	@Transactional(readOnly=true)
