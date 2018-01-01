@@ -48,6 +48,7 @@ public class CustomerUserLoginController {
 			return "login_error";
 		}
 		
+	
 		//進行商業服務	
 		CustomerBean bean = customerUserLoginService.findByCondition(useremail, password);
 		
