@@ -7,6 +7,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -74,39 +75,39 @@ public class ProductManagmentWebService {
 		product.setDisplayTime(new java.util.Date());
 		
 		// 處理商品圖示,將檔案存到images資料夾,並將路徑寫到資料庫
-		if(productImage.getOriginalFilename() != null || productImage.getOriginalFilename() != "" ){
-	        // 建立一個存放圖片資料夾，資料匣名稱為images
-			File uploadPath = new File(request.getServletContext().getRealPath("images"));  
-	        // 如果資料匣不存在  
-	        if (!uploadPath.exists()) {  
-	            //创建資料夾
-	            uploadPath.mkdir();  
-	        }
+		if(productImage != null) {
+			String name = productImage.getOriginalFilename();	// 取得來源端檔案名稱
+			String mimeType = application.getMimeType(name);	// 取得副檔名
 			
-	        // 獲取webapp所在路径  
-	        String pathRoot = request.getSession().getServletContext().getRealPath("");
+			// 由副檔名檢查使用者上傳檔案是否為圖檔
+			String expandedName = "";
+			if (mimeType.equals("image/jpeg")) {
+				expandedName = ".jpg";
+			} else if (mimeType.equals("image/png")) {
+				expandedName = ".png";
+			} else if (mimeType.equals("image/gif")) {
+				expandedName = ".gif";
+			} else if (mimeType.equals("image/bmp")) {
+				expandedName = ".bmp";
+			} else {
+				jsonObj.put("message", "");
+				jsonObj.put("error", "文件格式不正確)必須為.jpg/.gif/.bmp/.png文件)");
+				return jsonObj.toJSONString();
+			}
 			
-			// 設定productImage要儲存在哪的路徑
-			String productImagePath="";  
+			// 取得UUID字串,並加上副檔名,做為檔案名稱
+			name = UUID.randomUUID().toString().replaceAll("-","") + expandedName;
 			
-			// 抓取原始文件名
-		    String productImage_name = productImage.getOriginalFilename();
-		    
-		    // 獲取文件類型（可以判断如果不是图片，禁止上传）
-		    String productImage_contentType = productImage.getContentType(); 
-		    
-		    // 設定 uuid作为文件的新檔名
-		    String productImage_uuid = UUID.randomUUID().toString().replaceAll("-",""); 
-		    
-		    // 獲取文件附檔名
-	        String imageName = productImage_contentType.substring(productImage_contentType.indexOf("/")+1);
-	        productImagePath = "/images/" + productImage_uuid + "." + imageName; 
-	        
-	        // 轉存檔案在upload資料夾下面
-	        productImage.transferTo(new File(pathRoot + productImagePath));
-	        
-	        // 設定圖檔完整路徑
-	        product.setProductImage(pathRoot + productImagePath);
+			// 將使用者上傳之檔案,儲存至/images底下
+			try {
+				File file = new File(application.getRealPath("/images"), name);
+				productImage.transferTo(file);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			// 將路徑設定給ProdcutBean
+			product.setProductImage(application.getContextPath() + "/images/" + name);
 		}
 		
 		ProductBean insert = productManagmentService.insertProduct(product);
@@ -127,4 +128,39 @@ public class ProductManagmentWebService {
 		
 		return jsonObj.toJSONString();
 	}	
+	
+/*	
+	public String searchProductData(String title, String pageSize, String pageNumber) {
+		JSONObject jsonObj = new JSONObject();	// json物件,儲存欲回傳資料
+		JSONArray array;						// 儲存List<CustomerBean>的json物件
+		int quantity;							// 回傳的資料筆數
+		int pageQuantity;						// 總頁數
+		
+		// 檢查使用者輸入條件之情形，呼叫相對應方法
+		if( (title == null || "".equals(title.trim()))) {
+			array = new JSONArray(productManagmentService.find(Integer.parseInt(pageNumber), Integer.parseInt(pageSize), "ArticleID desc"));
+			quantity = productManagmentService.getQuantity();
+		} else {
+			array = new JSONArray(productManagmentService.findByCondition(title, Integer.parseInt(pageNumber), Integer.parseInt(pageSize), "ArticleID desc"));
+			quantity = productManagmentService.getConditionQuantity(title);
+		}
+		
+		// 計算總頁數
+		if((quantity%Integer.parseInt(pageSize)) == 0) {
+			pageQuantity = quantity/Integer.parseInt(pageSize);
+		} else {
+			pageQuantity = quantity/Integer.parseInt(pageSize)+1;
+		}
+
+		// 將回傳資料塞入json物件
+		jsonObj.put("tatal", quantity); 
+		jsonObj.put("tatalPage", pageQuantity); 
+		jsonObj.put("pageNumber", pageNumber);
+		jsonObj.put("pageSize", pageSize); 
+		jsonObj.put("list", array.toString()); 
+
+		return jsonObj.toString();
+	}
+*/
+	
 }

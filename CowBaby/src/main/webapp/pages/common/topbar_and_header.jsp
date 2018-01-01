@@ -22,7 +22,7 @@
 			<li><a href="<c:url value="/ShoppingCartCheckController"/>">結帳去</a></li>	
 			<c:if test="${empty user}">
 				<li style="margin-top: 15px;"><a href="<c:url value="/pages/member/user_login.jsp"/>">登入</a></li>
-				<li style="margin: 15px 0 0 0;">/</li>
+				<li style="margin: 15px 0 0 0;color: #3a939e;">/</li>
 				<li style="margin-top: 15px;"><a href="<c:url value="/pages/member/user_register.jsp"/>">註冊</a></li>
 			</c:if>
 			<c:if test="${not empty user}">
