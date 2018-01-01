@@ -68,21 +68,23 @@
 										<th>總計</th>
 								  	</tr>
 								</thead>
+								
 								<tbody>
 									  	<tr>
-											<td>${orderData.title}</td>
+											<td>${orderData.email}</td>
 			<!-- 怎麼插另一個Table的圖片 -->  <td><img src="${pageContext.request.contextPath}/images/01.jpg"></td>
-											<td>${orderData.quantity}</td>
+											<td>${orderData.totalItems}</td>
 											<td>有</td>
-											<td>${orderData.unitPrice}</td>
-											<td>${orderData.unitPrice*quantity}</td>		
-									  	</tr>  
+											<td></td>
+											<td>${orderData.totalAmount}</td>		
+									  	</tr>  									 		  	
 								</tbody>
 							</table> 	
-							<input type="button" id="beforePage" class="btn btn-primary pull-left" value="返回查詢頁面" />								 							
 						</div>
 					</div>
 				</div>
+				<input type="button" id="beforePage" class="btn btn-primary pull-left" value="返回查詢頁面" />								 							
+				
 			</section>
 			<!-- wrapper end -->
       	</section>
