@@ -22,7 +22,7 @@
 			<li><a href="<c:url value="/ShoppingCartCheckController"/>">結帳去</a></li>	
 			<c:if test="${empty user}">
 				<li style="margin-top: 15px;"><a href="<c:url value="/pages/member/user_login.jsp"/>">登入</a></li>
-				<li style="margin: 15px 0 0 0;">/</li>
+				<li style="margin: 15px 0 0 0;color: #3a939e;">/</li>
 				<li style="margin-top: 15px;"><a href="<c:url value="/pages/member/user_register.jsp"/>">註冊</a></li>
 			</c:if>
 			<c:if test="${not empty user}">
@@ -54,7 +54,7 @@
 
 			<form class="col-md-5 pull-right searchProduct" role="search">
 			    <div class="input-group add-on">
-			      	<input class="form-control" style="border: 2px solid #9ee2ea;" placeholder="Search" name="srch-term" id="srch-term" type="text">
+			      	<input class="form-control" style="border: 2px solid #9ee2ea;" placeholder="Search" name="srch-term" id="title" value="${title}"type="text">
 			      	<div class="input-group-btn">
 			        	<button class="btn btn-default searchStyle" type="submit"><i class="glyphicon glyphicon-search"></i></button>
 			      	</div>

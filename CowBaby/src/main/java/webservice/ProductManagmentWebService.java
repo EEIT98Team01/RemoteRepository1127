@@ -4,8 +4,6 @@ import java.io.File;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -221,5 +219,40 @@ public class ProductManagmentWebService {
 		
 		return jsonObj.toJSONString();
 	}
+
+	
+/*
+	public String searchProductData(String title, String pageSize, String pageNumber) {
+		JSONObject jsonObj = new JSONObject();	// json物件,儲存欲回傳資料
+		JSONArray array;						// 儲存List<CustomerBean>的json物件
+		int quantity;							// 回傳的資料筆數
+		int pageQuantity;						// 總頁數
+		
+		// 檢查使用者輸入條件之情形，呼叫相對應方法
+		if( (title == null || "".equals(title.trim()))) {
+			array = new JSONArray(productManagmentService.find(Integer.parseInt(pageNumber), Integer.parseInt(pageSize)));
+			quantity = productManagmentService.getQuantity();
+		} else {
+			array = new JSONArray(productManagmentService.findByCondition(title, Integer.parseInt(pageNumber), Integer.parseInt(pageSize)));
+			quantity = productManagmentService.getConditionQuantity(title);
+		}
+		
+		// 計算總頁數
+		if((quantity%Integer.parseInt(pageSize)) == 0) {
+			pageQuantity = quantity/Integer.parseInt(pageSize);
+		} else {
+			pageQuantity = quantity/Integer.parseInt(pageSize)+1;
+		}
+
+		// 將回傳資料塞入json物件
+		jsonObj.put("tatal", quantity); 
+		jsonObj.put("tatalPage", pageQuantity); 
+		jsonObj.put("pageNumber", pageNumber);
+		jsonObj.put("pageSize", pageSize); 
+		jsonObj.put("list", array.toString()); 
+
+		return jsonObj.toString();
+	}
+*/
 	
 }

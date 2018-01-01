@@ -40,8 +40,10 @@
 	</bean>
 	
 	<bean id="apple_seller_success" class="org.springframework.web.servlet.view.InternalResourceView">
-		<property name="url" value="/pages/member/apple_seller_success.jsp"></property>
+		<property name="url" value="/pages/member/member_account_infor.jsp"></property>
 	</bean>
+	
+	
 	
 	<!-- 商品分類新增 -->
 	<bean id="product_managment_insert" class="org.springframework.web.servlet.view.InternalResourceView">
@@ -50,6 +52,11 @@
 	<!-- 客服申訴失敗 -->
 	<bean id="customer_service_error" class="org.springframework.web.servlet.view.InternalResourceView">
 		<property name="url" value="/pages/member/customer_service.jsp"></property>
+	</bean>
+	
+		<!-- 客服更新資料 -->
+	<bean id="customer_Update" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/pages/member/member_account_update_infor.jsp"></property>
 	</bean>
 	
 	<!-- 客服申訴成功 -->
@@ -81,11 +88,16 @@
 	<bean id="order01_list" class="org.springframework.web.servlet.view.InternalResourceView">
 		<property name="url" value="/pages/backstageSeller/order_list.jsp"></property>
 	</bean>
-
+	
 	<!-- orderDetail -->
 	<bean id="order_view" class="org.springframework.web.servlet.view.InternalResourceView">
 		<property name="url" value="/pages/backstageSeller/order_detail.jsp"></property>
 	</bean>
+		<!-- orderDetail_View -->
+	<bean id="orderDetail_list" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/pages/backstageSeller/order_detail.jsp"></property>
+	</bean>
+	
 	
 	<!-- Blog 編輯 -->
 	<bean id="blog_edit" class="org.springframework.web.servlet.view.InternalResourceView">

@@ -36,23 +36,11 @@
 			<div class="article_classify">
 				<div class="classify_title">最新文章</div>
 				<ul>
-					<li><a href="#">這是文章1</a></li>
-					<li><a href="#">這是文章1</a></li>
-					<li><a href="#">這是文章1</a></li>
-					<li><a href="#">這是文章1</a></li>
-					<li><a href="#">這是文章1</a></li>
-				</ul>
-				
-			</div>
-
-			<div class="article_classify">
-				<div class="classify_title">最新文章</div>
-				<ul>
-					<li><a href="#">這是文章1</a></li>
-					<li><a href="#">這是文章1</a></li>
-					<li><a href="#">這是文章1</a></li>
-					<li><a href="#">這是文章1</a></li>
-					<li><a href="#">這是文章1</a></li>
+					<li><a href="http://localhost:8080/CowBaby/BlogItemOfArticle?articleID=10">小魚兒屁屁褲</a></li>
+					<li><a href="http://localhost:8080/CowBaby/BlogItemOfArticle?articleID=9">如何生出白人寶寶</a></li>
+					<li><a href="http://localhost:8080/CowBaby/BlogItemOfArticle?articleID=8">如何生出黑人寶寶</a></li>
+					<li><a href="http://localhost:8080/CowBaby/BlogItemOfArticle?articleID=7">如何生出漂亮寶寶</a></li>
+					<li><a href="http://localhost:8080/CowBaby/BlogItemOfArticle?articleID=6">DinDin鞋</a></li>
 				</ul>
 				
 			</div>
@@ -96,9 +84,10 @@
 									
 									
 
-								<input type="button" id="beforePage" class="btn btn-primary pull-left" value="返回查詢頁面" />
 							  </div>
+							  
 	                      	</section>
+                	 		<input type="button" id="beforePage" class="btn btn-primary pull-left" value="返回查詢頁面" />
 	                      	
 						</div>
 					</div>	
@@ -131,7 +120,7 @@
 
 		 // 返回所有部落格頁面
 		 $("#beforePage").on('click', function () {
-			window.location.assign('<c:url value="/pages/member/all_blog.jsp" />');
+			window.location.assign('<c:url value="http://localhost:8080/CowBaby/AllBlogController" />');
 		 })
 		
 		 // side_menu 帳戶總覽填充背景色

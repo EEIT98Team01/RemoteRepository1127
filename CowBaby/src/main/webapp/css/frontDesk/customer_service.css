@@ -2,7 +2,7 @@
 /***會員注冊頁面***/
 
 input[type='text'],input[type='password'],select,textarea{
-    width: 90%;
+    width: 100%;
     display: block;
     height: 34px;
     padding: 6px 12px;

@@ -49,9 +49,9 @@
 				<table>
 					<tr>
 						<td><label>申訴人</label></td>
+						
 						<td><input type="text" name="email"></td>
-						<p style="color: #e21124;">${errors.email}</p>
-
+						<td style="text-align:left;color: red;">${errors.email}</td>
 					</tr>
 					<tr>
 						<td><label>問題種類</label></td>
@@ -70,8 +70,10 @@
 <!-- 					</tr> -->
 					<tr>
 						<td><label>問題描述</label></td>
+						
 						<td><textarea id="comment" rows="50" cols="50"
 								name="problemDescription"></textarea></td>
+						<td style="text-align:left;color: red;">${errors.problemDescription}</td>					
 					</tr>
 					<tr>
 				</table>

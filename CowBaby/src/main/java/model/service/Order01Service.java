@@ -11,7 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 import model.bean.BlogBean;
 import model.bean.CustomerBean;
 import model.bean.Order01Bean;
+import model.bean.OrderDetailBean;
 import model.dao.Order01Dao;
+import model.dao.OrderDetailDao;
 import utils.EmailUtil;
 
 @Service
@@ -20,7 +22,11 @@ public class Order01Service {
 
 	@Autowired
 	private Order01Dao order01Dao;
+	@Autowired
+	private OrderDetailDao orderDetailDao;
+	
 
+	
 	//1 回傳訂單資料,若資料不存在,則回傳null
 	@Transactional(readOnly = true)
 	public Order01Bean findById(int id) {
