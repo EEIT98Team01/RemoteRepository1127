@@ -3,6 +3,7 @@ package webservice;
 import java.io.File;
 import java.io.FileInputStream;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -49,6 +50,7 @@ public class AllProuductSelectWebService {
 			produces={"application/json;charset=UTF-8"}
 	)
 	public String allProuductsSelect(String[] classfication, int pageNumber, int pageSize) {
+
 		List<Integer> classficationList = new LinkedList<Integer>();
 		
 		if(classfication[0].length() > 2) {
@@ -58,7 +60,7 @@ public class AllProuductSelectWebService {
 				classficationList.add(new Integer(str));
 			}
 		}
-		
+
 		
 		System.out.println("classfication=>"+classficationList);
 		System.out.println("page=>"+pageNumber);
@@ -67,7 +69,7 @@ public class AllProuductSelectWebService {
 		
 
 		
-		//List<ClassficationBean> list = classficationService.findByCondition(classfication, pageNumber, pageSize);
+		//List<ClassficationBean> list = classficationService.findByCondition1(classfication, pageNumber, pageSize);
 		
 		
 		//System.out.println("list=>"+list);
