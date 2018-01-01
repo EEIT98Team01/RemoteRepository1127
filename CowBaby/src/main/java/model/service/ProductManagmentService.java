@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import model.bean.BlogBean;
 import model.bean.ClassficationBean;
 import model.bean.ProductBean;
 import model.dao.ClassficationDao;
@@ -127,6 +128,23 @@ public class ProductManagmentService {
 		Map<String,String> condition = new HashMap<String,String>();
 		condition.put("startStopStatus", "= 1");
 		return classficationDao.findByCondition(condition);
+	}
+	
+	// 先依某條件進行排序,回傳符合某某條件的N筆資料  全域搜尋
+	@Transactional(readOnly = true)
+	public List<ProductBean> findByCondition(String title, int page, int rows, String sortCondition) {
+		return productDao.findByCondition(this.createCondition(title), page, rows, sortCondition);
+	}
+
+	// 將查詢條件塞進Map
+	private HashMap<String, String> createCondition(String title) {
+		HashMap<String, String> condition = new HashMap<String, String>();
+
+		// title對應到資料庫中的title,若為null或"",表不設定該條件
+		if (title != null && title.trim().length() != 0) {
+			condition.put("title", "like '%" + title + "%'");
+		}
+		return condition;
 	}
 	
 }

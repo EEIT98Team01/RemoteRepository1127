@@ -115,6 +115,7 @@
 
 						<div class="dash-line col-md-12" /></div>
 
+						<input type="text" name="productSizeID" class="form-control" style="display:none" value="${productSize1.productSizeID}">
 						<div class="form-group col-md-12" style="padding-top: 30px;">
 							<label class="col-md-2 control-label">商品規格1</label>
 							<div class="col-md-6">
@@ -129,6 +130,7 @@
 							<span class="col-md-4 not">個</span>
 						</div>
 						
+						<input type="text" name="productSizeID" class="form-control" style="display:none" value="${productSize2.productSizeID}">
 						<div class="form-group col-md-12" style="padding-top: 30px;">
 							<label class="col-md-2 control-label">商品規格2</label>
 							<div class="col-md-6">
@@ -143,6 +145,7 @@
 							<span class="col-md-4 not">個</span>
 						</div>
 						
+						<input type="text" name="productSizeID" class="form-control" style="display:none" value="${productSize3.productSizeID}">
 						<div class="form-group col-md-12" style="padding-top: 30px;">
 							<label class="col-md-2 control-label">商品規格3</label>
 							<div class="col-md-6">

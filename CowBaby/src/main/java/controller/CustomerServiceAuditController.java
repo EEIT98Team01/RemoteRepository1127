@@ -54,61 +54,27 @@ public class CustomerServiceAuditController {
 			problemDescription = null;
 		}
 
-		if (email == null || ("".equals(email.trim())) && 
-			((problemDescription == null) && "".equals(problemDescription.trim()) ))
-		   {
-			return null;
-		} else {
+			Map<String, String> errors = new HashMap<>();
+			model.addAttribute("errors", errors);
+			
+			if (email == null || email.trim().length() == 0) {
+				errors.put("email", "請輸入帳號");
+			}
+			if (problemDescription == null || problemDescription.trim().length() == 0) {
+				errors.put("problemDescription", "請輸入內容");
+			}
+
+			if (errors != null && !errors.isEmpty()) {
+				return "customer_service_error";
+			}
+		
 			CustomerServiceBean bean = new CustomerServiceBean();
 			bean.setEmail(email);
 			bean.setProblemTypes(problemTypes);
 			bean.setProblemDescription(problemDescription);
 			bean.setReportTime(new java.util.Date());
 			customerServiceAuditService.insertStoreData(bean);
-		}
-		// /*************** loginPhoto 存【圖片】到資料庫 ******************/
-		// 如果有圖片
-		// if(customerservicePhoto.getOriginalFilename() !=null &&
-		// customerservicePhoto.getOriginalFilename() !=""){
-		// // 把 loginPhoto 類型轉為 File 類型
-		// File convFile = new File(
-		// customerservicePhoto.getOriginalFilename());
-		// customerservicePhoto.transferTo(convFile);
-		//
-		// // 把 loginPhoto 類型轉為 BYTE[] 類型
-		// byte[] loginPhotoImgByte = new byte[(int) convFile.length()];
-		// FileInputStream fis = new FileInputStream(convFile);
-		//
-		// fis.read(loginPhotoImgByte);
-		// fis.close();
-		//
-		// customerBean.setLoginPhoto(new
-		// javax.sql.rowset.serial.SerialBlob(loginPhotoImgByte));
-		// }else{
-		// // 如果沒有上傳圖片
-		// customerBean.setLoginPhoto(null);
-		// }
-
-		// 錯誤訊息
-		Map<String, String> errors = new HashMap<>();
-		model.addAttribute("errors", errors);
-
-		if (errors != null && !errors.isEmpty()) {
-			return "customer_service_error";
-		}
-
-		return "customer_service_success";
+			
+			return "customer_service_success";
 	}
-
-//	@RequestMapping(value = ("CustomerServiceAuditView.controller"), method = { RequestMethod.GET, RequestMethod.POST })
-//	public String view(Model model, String id) {
-//
-//		return "";
-//	}
-//
-//	@RequestMapping(value = ("CustomerServiceAuditEdit.controller"), method = { RequestMethod.GET, RequestMethod.POST })
-//	public String edit(Model model, String id) {
-//
-//		return "";
-//	}
 }
