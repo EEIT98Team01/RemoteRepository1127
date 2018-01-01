@@ -52,7 +52,7 @@ public class ClassficationController {
 	// 商品分類編輯
 	@RequestMapping(value = ("ficationupdate.controller"), method = { RequestMethod.GET, RequestMethod.POST })
 	public String ficationunameupdate(Model model, int classficationID, String classficatoinName,
-			String classificationDescription,String startStopStatus) {
+			String classificationDescription, String startStopStatus) {
 		System.out.println(classficationID);
 		System.out.println(classficatoinName);
 		System.out.println(classificationDescription);
@@ -71,44 +71,34 @@ public class ClassficationController {
 			status = 5;
 		}
 
-		if ((classficatoinName == null) || (classficatoinName.trim().length() == 0)) {
-			return "product_managment_view";
-		} else {
-			Map<String, String> condition = new HashMap<String, String>();
-			if (status != -1) {
-				ClassficationBean bean = classficationService.getStoreData(classficationID);
-				bean.setClassficatoinName(classficatoinName);
+		ClassficationBean bean = classficationService.getStoreData(classficationID);
 
-				classficationService.updateStoreData(bean);
+		if ((classficatoinName == null) || (classficatoinName.trim().length() == 0)) {
+			;
+		} else {
+			if (status != -1) {
+				bean.setClassficatoinName(classficatoinName);
 			}
 		}
 
 		if ((classificationDescription == null) || (classificationDescription.trim().length() == 0)) {
-			return "product_managment_view";
+			;
 		} else {
-
-			ClassficationBean bean = classficationService.getStoreData(classficationID);
 			bean.setClassificationDescription(classificationDescription);
+		}
 
-			classficationService.updateStoreData(bean);
-		}
-		
-		if ("啟用".equals(startStopStatus)) {
-			startStopStatus = "啟用";
-		} else if ("停用".equals(startStopStatus)) {
-			startStopStatus = "停用";
-		}
-		
-		if ((startStopStatus == null)) {		
-			return "product_managment_view";
+		if ((startStopStatus == null)) {
+			;
 		} else {
-
-			ClassficationBean bean = classficationService.getStoreData(classficationID);
-//			boolean bean2 = bean.toString(startStopStatus);
-//			bean.setStartStopStatus(startStopStatus);
-
-			classficationService.updateStoreData(bean);
+			if ("true".equals(startStopStatus)) {
+				bean.setStartStopStatus(true);
+			} else {
+				bean.setStartStopStatus(false);
+			}
 		}
+
+		classficationService.updateStoreData(bean);
+
 		return "product_managment_view";
 	}
 }

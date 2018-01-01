@@ -68,6 +68,8 @@ public class ClassficationService {
 		return classficationDao.findByCondition(this.createCondition(account, userType, clusterID), page, rows);
 	}
 
+	
+	
 	// 先依某條件進行排序,回傳符合某某條件的N筆資料
 	@Transactional(readOnly = true)
 	public List<ClassficationBean> findByCondition(String account, String userType, String clusterID, int page, int rows,
@@ -75,7 +77,7 @@ public class ClassficationService {
 		return classficationDao.findByCondition(this.createCondition(account, userType, clusterID), page, rows,
 				sortCondition);
 	}
-
+	
 	// 儲存商品分類設置資料
 	@Transactional
 	public ClassficationBean insertStoreData(ClassficationBean bean) {
@@ -91,6 +93,25 @@ public class ClassficationService {
 		}
 		return result;
 	}
+	
+	
+	// 先依某條件勾選查詢,回傳符合某某條件的N筆資料
+		@Transactional(readOnly = true)
+		public List<ClassficationBean> findByCondition(int classficationID, int page, int rows) {
+			
+			if((classficationID == 0)){
+				return classficationDao.find();//未使用任何條件
+			}else{
+				Map<String,String> condition = new HashMap<String,String>();
+				if(classficationID != 0){
+					condition.put("classficationID", "= " + classficationID);
+				}
+				return classficationDao.findByCondition(condition,page,rows);
+			}
+			
+//			return classficationDao.findByCondition(this.createCondition(classficationID), page, rows);
+		}
+	
 
 	// 將查詢條件塞進Map
 	private HashMap<String, String> createCondition(String account, String userType, String clusterID) {
@@ -113,4 +134,5 @@ public class ClassficationService {
 
 		return condition;
 	}
+	
 }

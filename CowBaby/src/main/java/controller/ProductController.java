@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import model.bean.ClassficationBean;
 import model.bean.ProductBean;
+import model.service.ClassficationService;
 import model.service.ProductService;
 import model.service.ProductSizeService;
 
@@ -23,22 +24,15 @@ public class ProductController {
 	@Autowired
 	ProductSizeService productSizeService;
 	
+	@Autowired
+	ClassficationService classficationService;
+	
 	//後台商品列表頁
 	@RequestMapping(value = ("ProductController"), method = { RequestMethod.GET, RequestMethod.POST })
 	public String view(Model model, String classficationID,String productStatus) {
 		System.out.println(classficationID);
 		System.out.println(productStatus);
-		
-		if("全部".equals(productStatus)) {
-			productStatus = null;
-		} else if("一般會員".equals(productStatus)) {
-			productStatus = "1";
-		} else if("平台賣家".equals(productStatus)) {
-			productStatus = "2";
-		} else if("黑名單".equals(productStatus)) {
-			productStatus = "3";
-		}
-		
+			
 		if("".equals(classficationID)){
 			classficationID = null;
 		}
@@ -54,18 +48,20 @@ public class ProductController {
 	
 	    // 後台商品列表編輯
 		@RequestMapping(value = ("productupdate.controller"), method = { RequestMethod.GET, RequestMethod.POST })
-		public String productupdate(Model model, int productID, String title,String summary,int unitPrice,
-				String productDescription,boolean productStatus,int classficationID,int suitableAges,String genderPreference) {
-			System.out.println(productID);
-			System.out.println(title);
-			System.out.println(summary);
-			System.out.println(unitPrice);
-			System.out.println(productDescription);
+		public String productupdate(Model model, int productID, String productStatus) {
 			System.out.println(productStatus);
-			System.out.println(classficationID);
-			System.out.println(suitableAges);
-			System.out.println(genderPreference);
-
+			
+			ProductBean bean = productService.getStoreData(productID);
+			
+			if ((productStatus == null)) {
+				;
+			} else {
+				if ("true".equals(productStatus)) {
+					bean.setProductStatus(true);
+				} else {
+					bean.setProductStatus(false);
+				}
+			}
 			
 			return "product_managment_list";
 		}
@@ -74,9 +70,19 @@ public class ProductController {
 	@RequestMapping(value = ("AllProductController"), method = { RequestMethod.GET, RequestMethod.POST })
 	public String allProduct(Model model) {
 		
+		// 顯示全部商品
 		List<Object[]> list = productService.findObject();
 		model.addAttribute("productList", list);
 		
+		// 顯示商品分類
+		List<ClassficationBean> classficationList = classficationService.find();
+		model.addAttribute("classficationList", classficationList);
+		// 顯示商品分類的數量
+		int quantity = classficationService.getQuantity();
+		model.addAttribute("quantity", quantity);
+		
+		
+		System.out.println(classficationList);
 		return "all_product_list";
 	}
 	

@@ -75,39 +75,39 @@ public class ProductManagmentWebService {
 		product.setDisplayTime(new java.util.Date());
 		
 		// 處理商品圖示,將檔案存到images資料夾,並將路徑寫到資料庫
-		if(productImage.getOriginalFilename() != null || productImage.getOriginalFilename() != "" ){
-	        // 建立一個存放圖片資料夾，資料匣名稱為images
-			File uploadPath = new File(request.getServletContext().getRealPath("images"));  
-	        // 如果資料匣不存在  
-	        if (!uploadPath.exists()) {  
-	            //创建資料夾
-	            uploadPath.mkdir();  
-	        }
+		if(productImage != null) {
+			String name = productImage.getOriginalFilename();	// 取得來源端檔案名稱
+			String mimeType = application.getMimeType(name);	// 取得副檔名
 			
-	        // 獲取webapp所在路径  
-	        String pathRoot = request.getSession().getServletContext().getRealPath("");
+			// 由副檔名檢查使用者上傳檔案是否為圖檔
+			String expandedName = "";
+			if (mimeType.equals("image/jpeg")) {
+				expandedName = ".jpg";
+			} else if (mimeType.equals("image/png")) {
+				expandedName = ".png";
+			} else if (mimeType.equals("image/gif")) {
+				expandedName = ".gif";
+			} else if (mimeType.equals("image/bmp")) {
+				expandedName = ".bmp";
+			} else {
+				jsonObj.put("message", "");
+				jsonObj.put("error", "文件格式不正確)必須為.jpg/.gif/.bmp/.png文件)");
+				return jsonObj.toJSONString();
+			}
 			
-			// 設定productImage要儲存在哪的路徑
-			String productImagePath="";  
+			// 取得UUID字串,並加上副檔名,做為檔案名稱
+			name = UUID.randomUUID().toString().replaceAll("-","") + expandedName;
 			
-			// 抓取原始文件名
-		    String productImage_name = productImage.getOriginalFilename();
-		    
-		    // 獲取文件類型（可以判断如果不是图片，禁止上传）
-		    String productImage_contentType = productImage.getContentType(); 
-		    
-		    // 設定 uuid作为文件的新檔名
-		    String productImage_uuid = UUID.randomUUID().toString().replaceAll("-",""); 
-		    
-		    // 獲取文件附檔名
-	        String imageName = productImage_contentType.substring(productImage_contentType.indexOf("/")+1);
-	        productImagePath = "/images/" + productImage_uuid + "." + imageName; 
-	        
-	        // 轉存檔案在upload資料夾下面
-	        productImage.transferTo(new File(pathRoot + productImagePath));
-	        
-	        // 設定圖檔完整路徑
-	        product.setProductImage(pathRoot + productImagePath);
+			// 將使用者上傳之檔案,儲存至/images底下
+			try {
+				File file = new File(application.getRealPath("/images"), name);
+				productImage.transferTo(file);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			// 將路徑設定給ProdcutBean
+			product.setProductImage(application.getContextPath() + "/images/" + name);
 		}
 		
 		ProductBean insert = productManagmentService.insertProduct(product);

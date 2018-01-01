@@ -77,8 +77,13 @@ a, a:hover, a:focus {
 
 .top-bar .top-bar-menu li {
     float: left;
-
     margin:10px 12px 0 10px;
+}
+
+.top-bar .top-bar-menu li a{
+	color: #378f9a;
+    font-size: 15px;
+    font-weight: bolder;
 }
 
 .top-bar .top-bar-menu li:nth-child(2){
@@ -108,6 +113,22 @@ a, a:hover, a:focus {
     color:#fff;
     border: 1px solid #707bba; 
     border-radius: 5px;
+}
+.top-bar .top-bar-menu li:nth-child(3){
+ 	padding-top:2px; 
+}
+.top-bar .top-bar-menu li:nth-child(3) a{
+  	background: #cdf3f7;
+    padding: 4px 8px;
+    border-radius: 5px;
+    color: #3a939e;
+    font-size:14px;
+    border: 1px solid #74c1ca;
+}
+
+.top-bar .top-bar-menu li:nth-child(3) a:hover{
+  	background: #3a939e;
+    color: #fff; 
 }
 
 .top-bar .top-bar-menu li a.shopcart{
@@ -353,13 +374,14 @@ a, a:hover, a:focus {
 .currentShoppingCartList{
 	position: absolute;
     width: 250px;
-    border: 1px solid;
+    border: 2px solid #8bd1d9;
     height: 200px;
     left: -75px;
-    top:50px;
-    z-index:999;
-    background:#fff;
+    top: 50px;
+    z-index: 999;
+    background: #fff;
     overflow: auto;
+    border-radius: 5px;
     display:none;
 }
 

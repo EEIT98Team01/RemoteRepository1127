@@ -97,7 +97,7 @@
 												<a href='<c:url value='/ProductItemOfShop?storeID=&productID=${product[5]}'/>' target="_blank" class='btn btn-success'> <i class='fa fa-eye'></i> </a> </td>
 											</td>
 											<td>
-												<a href='<c:url value='/ProductUpdate?productID=${product[5]}'/>' class='btn btn-primary'> <i class='fa fa-pencil'></i> </a> </td>
+												<a href='<c:url value='/pages/backstageSeller/ProductEdit?productID=${product[5]}'/>' class='btn btn-primary'> <i class='fa fa-pencil'></i> </a> </td>
 											</td>
 									 	</tr>
 									</c:forEach>

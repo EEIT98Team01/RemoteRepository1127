@@ -7,68 +7,16 @@
 <form class="form-horizontal" role="form" id="qqq" 
 		action="${pageContext.servletContext.contextPath}/productupdate.controller" method="POST">
 <div>
-<input class="c-choice__input" id="radio1" name="title" type="text" >
-<label class="c-choice__label" for="radio1">商品名稱</label>
-</div>
-<hr />
-<div>
-<input class="c-choice__input" id="radio1" name="summary" type="text" >
-<label class="c-choice__label" for="radio1">摘要</label>
-</div>
-<hr />
-<div>
-<input class="c-choice__input" id="radio1" name="unitPrice" type="text" >
-<label class="c-choice__label" for="radio1">單價</label>
-</div>
-<hr />
-<div>
-		<label for="exampleFormControlTextarea1">商品內容描述描述</label>	
-		<textarea class="form-control" name="productDescription"></textarea> 
-</div>
-<hr />
-<div>
-		<input class="c-choice__input" id="radio1" name="productStatus" type="radio" value="上架">
+		<input class="c-choice__input" id="radio1" name="productStatus" type="radio" value="true">
 		<label class="c-choice__label" for="radio1">上架</label>
 		
-		<input class="c-choice__input" id="radio1" name="productStatus" type="radio" value="下架">
+		<input class="c-choice__input" id="radio1" name="productStatus" type="radio" value="false">
 		<label class="c-choice__label" for="radio1">下架</label>
 </div>
-<hr />
-<div>
-<input class="c-choice__input" id="radio1" name="classficationID" type="radio" value="玩具">
-<label class="c-choice__label" for="radio1">玩具</label>
 
-<input class="c-choice__input" id="radio1" name="classficationID" type="radio" value="圖書">
-<label class="c-choice__label" for="radio1">圖書</label>
-
-<input class="c-choice__input" id="radio1" name="classficationID" type="radio" value="衣服">
-<label class="c-choice__label" for="radio1">衣服</label>
-
-<input class="c-choice__input" id="radio1" name="classficationID" type="radio" value="鞋子">
-<label class="c-choice__label" for="radio1">鞋子</label>
-
-<input class="c-choice__input" id="radio1" name="classficationID" type="radio" value="日用品">
-<label class="c-choice__label" for="radio1">日用品</label>
-</div>
-<hr />
-<div>
-		<input class="c-choice__input" id="radio1" name="suitableAges" type="radio" value="0-3歲">
-		<label class="c-choice__label" for="radio1">0-3歲</label>
-		
-		<input class="c-choice__input" id="radio1" name="suitableAges" type="radio" value="3-6歲">
-		<label class="c-choice__label" for="radio1">3-6歲</label>
-		
-		<input class="c-choice__input" id="radio1" name="suitableAges" type="radio" value="6-12歲">
-		<label class="c-choice__label" for="radio1">6-12歲</label>
-</div>
-<hr />
-<div>
-		<input class="c-choice__input" id="radio1" name="genderPreference" type="radio" value="男">
-		<label class="c-choice__label" for="radio1">男</label>
-		
-		<input class="c-choice__input" id="radio1" name="genderPreference" type="radio" value="女">
-		<label class="c-choice__label" for="radio1">女</label>
-</div>
-<hr />
+<!-- <div> -->
+<!-- 		<label for="exampleFormControlTextarea1">上架或下架原因</label>	 -->
+<!-- 		<textarea class="form-control" name="productDescription"></textarea>  -->
+<!-- </div> -->
 <input type="hidden" value="${param.sss}" name="productID">
 </form>

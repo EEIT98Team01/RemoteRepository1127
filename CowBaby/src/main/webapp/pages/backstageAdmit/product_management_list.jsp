@@ -38,25 +38,8 @@
 					action="${pageContext.servletContext.contextPath}/ProductController"
 					method="POST">
 					<div class="form-group">
-						<label for="exampleInputName2">會員帳號:</label> 
+						<label for="exampleInputName2">商品名稱:</label> 
 						<input type='text' name='classficationID' class="form-control" value="" />
-					</div>
-					<div class="form-group">
-						<label for="exampleInputName2">會員身份:</label> 
-						<select class="form-control" name="productStatus">
-							<option>
-								<c:if test="${productStatus==''}">selected="true"</c:if>全部 
-							</option>
-							<option>
-								<c:if test="${productStatus=='1'}">selected="true"</c:if>一般會員
-							</option>
-							<option>
-								<c:if test="${productStatus=='2'}">selected="true"</c:if>平台賣家
-							</option>
-							<option>
-								<c:if test="${productStatus=='3'}">selected="true"</c:if>黑名單
-							</option>
-						</select>
 					</div>
 
 					<button type="submit" class="btn btn-primary inquire">查詢</button>
