@@ -5,14 +5,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import javax.xml.bind.helpers.ParseConversionEventImpl;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import model.bean.ProductBean;
-import model.bean.ProductSizeBean;
 import model.dao.ProductDao;
 import model.dao.ProductSizeDao;
 import model.dao.SellerBackstageManageDao;
@@ -128,8 +125,8 @@ public class ProductService {
 	}
 	
 	// 回傳有商店名稱的商品
-	public List<Object[]> findObject() {
-		List<ProductBean> list = this.find();
+	public List<Object[]> findObject(int page, int rows, String sortCondition) {
+		List<ProductBean> list = productDao.find(page, rows, sortCondition);
 		List<Object[]> objList = new LinkedList<Object[]>();
 		// 自己組要的資料塞回頁面
 		for(ProductBean bean: list) {
