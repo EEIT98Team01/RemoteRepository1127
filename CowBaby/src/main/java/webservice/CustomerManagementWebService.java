@@ -3,11 +3,13 @@ package webservice;
 import java.io.File;
 import java.io.FileInputStream;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +40,8 @@ public class CustomerManagementWebService {
 	private SellerBackstageManageService sellerBackstageManageService;
 	@Autowired
 	private ServletContext application;
+	@Autowired
+	private HttpSession session;
 	
 
 	@RequestMapping(
@@ -131,48 +135,7 @@ public class CustomerManagementWebService {
 		        // storeBanner 完整路徑
 		        storeBannerImg = application.getContextPath() + "/images/" + name;
 		   }
-//		 if(storeBanner.getOriginalFilename() != null || storeBanner.getOriginalFilename() != "" ){
-//			 System.out.println("COME2");
-//			 
-//			//storeBanner 存【路徑】到資料庫
-//	        // 建立一個存放圖片資料夾，資料匣名稱為upload
-//	        File uploadPath = new File(request.getServletContext().getRealPath("upload"));  
-//	        System.out.println("uploadPath=====" + uploadPath);  
-//	        // 如果資料匣不存在  
-//	        if (!uploadPath.exists()) {  
-//	            //创建資料夾
-//	            uploadPath.mkdir();  
-//	        }    
-//			
-//	        // 獲取webapp所在路径  
-//	        String pathRoot = request.getSession().getServletContext().getRealPath("");
-//			
-//			// 設定storeBanner要儲存在哪的路徑
-//			String storeBannerPath="";  
-//			
-//			// 抓取原始文件名
-//		    String storeBanner_name = storeBanner.getOriginalFilename();
-//		    System.out.println("storeBanner_name=>"+storeBanner_name);
-//		    
-//		    // 獲取文件類型（可以判断如果不是图片，禁止上传）
-//		    String storeBanner_contentType=storeBanner.getContentType(); 
-//		    System.out.println("storeBanner_contentType=>"+storeBanner_contentType);
-//		    
-//		    // 設定 uuid作为文件的新檔名
-//		    String storeBanner_uuid = UUID.randomUUID().toString().replaceAll("-",""); 
-//		    
-//		    // 獲取文件附檔名
-//	        String imageName=storeBanner_contentType.substring(storeBanner_contentType.indexOf("/")+1);
-//	        storeBannerPath="/upload/"+storeBanner_uuid+"." +imageName; 
-//	        
-//	        // 轉存檔案在upload資料夾下面
-//	        storeBanner.transferTo(new File(pathRoot+storeBannerPath));
-//	        
-//	        // storeBanner 完整路徑
-//	        storeBannerImg = pathRoot+storeBannerPath;
-//		 }
-		 	
-       
+
         try {
 			 // 把資料寫入 SellerBackstageManageBean
 			 SellerBackstageManageBean bean = new SellerBackstageManageBean();
@@ -182,7 +145,13 @@ public class CustomerManagementWebService {
 			 } else{
 				 bean.setStoreLogo(null);   
 			 }  
-	         bean.setEmail("999@gmail.com");
+			 
+			 // 取得當前使用者帳號及商店資料
+			 CustomerBean user = (CustomerBean)session.getAttribute("user");
+			 List<SellerBackstageManageBean> temp = sellerBackstageManageService.findStore(user.getEmail(), 1, 999, "storeID");
+			 
+			 
+			 bean.setEmail(user.getEmail());
 			 bean.setStoreDescription(storeDescription); 
 			 bean.setStoreName(storeName);
 			 bean.setStorePhone(storePhone);
@@ -193,12 +162,19 @@ public class CustomerManagementWebService {
 			 }else{
 				 bean.setStoreBanner(null);
 			 }
-			 
 			 System.out.println("===========================");
 			 System.out.println(bean);
 			 
-			 // 新增儲存資料
-			 sellerBackstageManageService.insertStoreData(bean);
+			 if(temp.size() == 0) {
+				 // 資料庫內沒有當初會員的商店資料,故新增
+				 sellerBackstageManageService.insertStoreData(bean);
+			 } else {
+				 bean.setStoreID(temp.get(0).getStoreID());
+				 bean.setStoreRating(temp.get(0).getStoreRating());
+				 bean.setTotalPageView(temp.get(0).getTotalPageView());
+				 sellerBackstageManageService.updateStoreData(bean);
+			 }
+			 
 			 jsonObj.put("msg_success", "success"); 
 					 
 		} catch (IllegalStateException e) {

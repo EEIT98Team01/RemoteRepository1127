@@ -13,21 +13,21 @@
 			</div>
 				  	
 			<li>
-				<a href="account_overview.jsp">
+				<a href="${pageContext.servletContext.contextPath}/pages/backstageSeller/account_overview.jsp">
 			    	<i class="fa fa-dashboard"></i>
 			        <span>帳戶總覽</span>
 			    </a>
 			</li>
 		     
 		    <li>
-		         <a href="store_setting.jsp" >
+		         <a href="${pageContext.servletContext.contextPath}/pages/backstageSeller/store_setting.jsp" >
 		             <i class="fa fa-cog" aria-hidden="true"></i>
 		             <span>商店設置</span> 
 		         </a>
 		    </li>
 		     
 		    <li>
-		         <a href="order_list.jsp" >
+		         <a href="${pageContext.servletContext.contextPath}/pages/backstageSeller/order_list.jsp" >
 		             <i class="fa fa-file-text" aria-hidden="true"></i>
 		             <span>訂單查詢</span> 
 		         </a>
@@ -53,7 +53,7 @@
 		     </li>
 		
 		     <li class="sub-menu">
-		          <a href="advertisement_buy.jsp">
+		          <a href="${pageContext.servletContext.contextPath}/pages/backstageSeller/advertisement_buy.jsp">
 		          	 <i class="fa fa-th"></i>
 		             <span>購買廣告</span>
 		         </a>

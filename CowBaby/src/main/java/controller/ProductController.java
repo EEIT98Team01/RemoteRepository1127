@@ -54,6 +54,7 @@ public class ProductController {
 	// 後台商品列表編輯
 	@RequestMapping(value = ("productupdate.controller"), method = { RequestMethod.GET, RequestMethod.POST })
 	public String productupdate(Model model, int productID, String productStatus) {
+		System.out.println(productID);
 		System.out.println(productStatus);
 
 		ProductBean bean = productService.getStoreData(productID);
@@ -63,11 +64,13 @@ public class ProductController {
 		} else {
 			if ("true".equals(productStatus)) {
 				bean.setProductStatus(true);
+				
 			} else {
 				bean.setProductStatus(false);
 			}
 		}
-
+		productService.updateStoreData(bean);
+		
 		return "product_managment_list";
 	}
 	

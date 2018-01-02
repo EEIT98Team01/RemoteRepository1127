@@ -66,6 +66,11 @@ public class ProductManagmentController {
 		
 		// 由登入的顧客資料取得商店ID
 		CustomerBean user = (CustomerBean)session.getAttribute("user");
+		
+		if(user == null) {
+			return "product_list";
+		}
+		
 		int storeID = sellerBackstageManageService.findStore(user.getEmail(), 1, 999, "storeID").get(0).getStoreID();
 		
 		// 暫時寫死為第一間商店

@@ -30,7 +30,7 @@
 					<div class="showMemberPannal">
 						<c:if test="${user.userID==2}">
 						<div><a href="#">我的賣場</a></div>
-						<div><a href="<c:url value="/SellerBackstagePageController.controller"/>">我的管理著後台</a></div>
+						<div><a href="<c:url value="/pages/backstageSeller/SellerBackstagePageController.controller"/>">我的管理著後台</a></div>
 						</c:if>
 						<div><a href="<c:url value="/pages/member/member_account_infor.jsp"/>">我的資訊</a></div>
 						<div><a href="<c:url value="/LoingOutController"/>">安全登出</a></div>
@@ -47,7 +47,7 @@
 	<section class="container">
 		<row>
 			<div class="col-md-2 logo">
-				<a href="<c:url value="index"/>"><img src="<c:url value="/images/logo.jpg"/>"></a>
+				<a href="<c:url value="/index"/>"><img src="<c:url value="/images/logo.jpg"/>"></a>
 			</div>
 			<div class="col-md-2 slogan" >
 				<span>開心玩樂開心學習~</span>

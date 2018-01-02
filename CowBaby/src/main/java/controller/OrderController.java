@@ -57,7 +57,7 @@ public class OrderController {
 	}
 	
 	//order編輯
-	@RequestMapping(value = ("OrderUpdate.controller"), method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = ("/pages/backstageSeller/OrderUpdate.controller"), method = { RequestMethod.GET, RequestMethod.POST })
 	public String orderupdate(Model model, int orderID, String status) {
 		System.out.println(status);
 

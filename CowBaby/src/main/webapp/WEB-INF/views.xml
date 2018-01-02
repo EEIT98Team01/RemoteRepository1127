@@ -15,8 +15,7 @@
 		<property name="url" value="/pages/backstageAdmit/member_managment_edit.jsp"></property>
 	</bean>
 	
-	<bean id="login_success" class="org.springframework.web.servlet.view.RedirectView">
-		<property name="contextRelative" value="true"></property>
+	<bean id="login_success" class="org.springframework.web.servlet.view.InternalResourceView">
 		<property name="url" value="/index"></property>
 	</bean>
 	

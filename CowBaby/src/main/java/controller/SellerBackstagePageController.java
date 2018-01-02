@@ -28,7 +28,7 @@ import model.bean.ShoppingCart;
 import model.service.SellerBackstageManageService;
 
 @Controller
-@RequestMapping("SellerBackstagePageController.controller")
+@RequestMapping("/pages/backstageSeller/SellerBackstagePageController.controller")
 public class SellerBackstagePageController {
 
 	@Autowired
