@@ -61,7 +61,22 @@
 		                                    <div class="col-md-6 add-prouduct-list-description">
 		                                        <input type="text" name="articleHeader" class="form-control" value="${blogData.articleHeader}">
 		                                    </div>
-		                                </div>									
+		                                </div>	
+		                                
+		                                <div class="dash-line col-md-12" /></div>
+										<!-- 編輯部落格小圖用 -->
+										<div class="form-group col-md-12" style="padding-top: 30px;">
+											<label class="col-md-2 control-label">新增文章小圖</label>
+											<div class="col-md-2 add-prouduct-list-description">
+												<img style="width: 150px; height: 110px" src="data:image/jpg;base64,${logingPhotoImg}" class="previewArticlePhoto">
+											</div>											
+											<div class="col-md-3" style="padding-top: 35px;">
+												<input type="file" name="articlePhoto" value="" class="logoUpl" style="margin-bottom: 10px;">
+												<span class="pictip">(長寬為1024*768，大小不得超過1M)</span>
+											</div>
+										</div>	
+		                             	<!-- 以上編輯部落格小圖用 -->
+		                                								
 										<div class="form-group col-md-12" style="padding-top: 30px;">
 												<label class="col-md-2 control-label">商品詳細說明</label>
 												<div class="col-md-10">
@@ -76,7 +91,7 @@
 											</div>
 										</div>
                                      <input type="button" id="beforePage" class="btn btn-primary pull-left" value="返回查詢頁面" />
-		                             <input type="button" id="update" class="btn btn-primary pull-right" value="儲存部落格資料" />
+		                             <input type="button" id="update" class="btn btn-primary pull-right" value="儲存修改" />
 	                              </form>
 	                          </div>
 	                      	</section>
@@ -114,6 +129,21 @@ $(function(){
 	$("#beforePage").on('click', function () {
 		window.location.assign('<c:url value="/pages/backstageAdmit/blog_list.jsp" />');
 	})
+	
+	// 圖片預覽功能
+		$("body").on("change", ".logoUpl", function (){
+			preview(this);
+		})
+	     
+		function preview(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+				reader.onload = function (e) {
+					$(input).parent().siblings().eq(1).find('img').attr('src', e.target.result);
+				}
+				reader.readAsDataURL(input.files[0]);
+			}
+		}
 	
 	//註1 對應， ckeditor按更新儲存編輯，ID為contentsaa 參考網址https://dotblogs.com.tw/bowwowxx/2010/04/01/14349
 	$("#update").on('click', function () {

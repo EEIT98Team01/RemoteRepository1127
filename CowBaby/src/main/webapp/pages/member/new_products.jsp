@@ -61,7 +61,7 @@
 		<div class="main_container_col_2">
 			<div class="container_pagination">
 				
-					<div class="container_pagination_title col-md-2">全部商品</div>
+					<div class="container_pagination_title col-md-2">最新商品</div>
 					<div class="pull-right">
 						<ul class="pagination" id="myPagination"></ul>
 					</div>
@@ -83,7 +83,15 @@
 			<!--產品LIST-->
 	
 			<section class="proudectList">
-
+				<c:forEach var="array" varStatus="st" items="${productList}">
+					<div class="item"> 
+						<a href="<c:url value="ProductItemOfShop"/>?storeID=${array[0]}&productID=${array[6]}" >
+							<img src="${array[1]}">
+							<p class='stroe_name'>${array[3]}</p>
+							<div class="specialPrice">售價NT <span class="specialPriceNum">${array[5]}</span></div>
+						</a>
+					</div>
+				</c:forEach>
 			</section>
 		</div>
 	</section>
@@ -190,7 +198,7 @@
 			
 	    	$.ajax({
 		        type:"GET",                   
-		        url: "/CowBaby/prouducts/inquire",    
+		        url: "/CowBaby/prouducts/inquireNew",    
 		        data: {
 		        	 keyWord:"${keyWord}",
 		        	 productClassfication:classfication,

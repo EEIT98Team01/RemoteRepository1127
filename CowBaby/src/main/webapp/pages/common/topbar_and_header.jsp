@@ -47,16 +47,16 @@
 	<section class="container">
 		<row>
 			<div class="col-md-2 logo">
-				<a href="<c:url value="/index.jsp"/>"><img src="<c:url value="/images/logo.jpg"/>"></a>
+				<a href="<c:url value="index"/>"><img src="<c:url value="/images/logo.jpg"/>"></a>
 			</div>
 			<div class="col-md-2 slogan" >
 				<span>開心玩樂開心學習~</span>
 				<span>給孩子最好的就在牛寶貝!!</span>
 			</div>
 
-			<form class="col-md-5 pull-right searchProduct" role="search">
+			<form class="col-md-5 pull-right searchProduct" role="search" action="<c:url value='AllProductController'/>" method="post">
 			    <div class="input-group add-on">
-			      	<input class="form-control" style="border: 2px solid #9ee2ea;" placeholder="Search" name="srch-term" id="title" value="${title}"type="text">
+			      	<input class="form-control" style="border: 2px solid #9ee2ea;" placeholder="Search" name="keyWord" id="title" value="${keyWord}" type="text">
 			      	<div class="input-group-btn">
 			        	<button class="btn btn-default searchStyle" type="submit"><i class="glyphicon glyphicon-search"></i></button>
 			      	</div>
