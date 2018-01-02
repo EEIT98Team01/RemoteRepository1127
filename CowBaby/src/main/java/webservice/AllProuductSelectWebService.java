@@ -1,89 +1,63 @@
 package webservice;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.UUID;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.alibaba.fastjson.JSONObject;
 
-import model.bean.ClassficationBean;
-import model.bean.CustomerBean;
-import model.bean.CustomerServiceBean;
-import model.bean.SellerBackstageManageBean;
+import model.bean.ProductBean;
 import model.service.ClassficationService;
-import model.service.CustomerManagementService;
-import model.service.CustomerServiceAuditService;
-import model.service.SellerBackstageManageService;
-import model.utils.PrimitiveNumberEditor;  
+import model.service.ProductManagmentService;
 
 @RestController
 @RequestMapping("/prouducts")
 public class AllProuductSelectWebService {
 	@Autowired
 	ClassficationService classficationService;
-	
-	
+
+	@Autowired
+	ProductManagmentService productManagmentService;
+
 	// 查詢目前以勾選條件
-	@RequestMapping(
-			value="/inquire",
-			method={RequestMethod.GET},
-			produces={"application/json;charset=UTF-8"}
-	)
-	public String allProuductsSelect(String[] classfication, int pageNumber, int pageSize) {
-
-		List<Integer> classficationList = new LinkedList<Integer>();
+	@RequestMapping(value = "/inquire", method = { RequestMethod.GET }, produces = { "application/json;charset=UTF-8" })
+	public String allProuductsSelect(String productClassfication, String suitableAges, String genderPreference,
+			int pageNumber, int pageSize) {
+		System.out.println("=============================");
+		System.out.println("productClassfication==>"+productClassfication);
+		System.out.println("suitableAges==>"+suitableAges);
+		System.out.println("genderPreference==>"+genderPreference);
+		System.out.println("pageNumber==>"+pageNumber);
+		System.out.println("pageSize==>"+pageSize);
 		
-		if(classfication[0].length() > 2) {
-			String temp = classfication[0].replaceAll("\"", "");
-			temp = temp.substring(1, temp.length()-1);
-			for(String str: temp.split(",")) {
-				classficationList.add(new Integer(str));
-			}
-		}
-
-		
-		System.out.println("classfication=>"+classficationList);
-		System.out.println("page=>"+pageNumber);
-		System.out.println("rows=>"+pageSize);
-		System.out.println("-----------------------");
-		
-
-		
-		//List<ClassficationBean> list = classficationService.findByCondition1(classfication, pageNumber, pageSize);
-		
-		
-		//System.out.println("list=>"+list);
-		
-		
-	/*	
-		
+		System.out.println("=============================");
 		
 		JSONObject jsonObj = new JSONObject();	// json物件,儲存欲回傳資料
-		JSONArray array;						// 儲存List<CustomerServiceBean>的json物件
+		JSONArray array;						// 儲存List<ProductBean>的json物件
 		int quantity;							// 回傳的資料筆數
 		int pageQuantity;						// 總頁數
+
+		
+		List<ProductBean> productList = productManagmentService.findProduct(productClassfication,
+				suitableAges, genderPreference, pageNumber, pageSize);
+		
+		System.out.println("***productList==>***"+productList);
 		
 		
+		// 檢查使用者輸入條件之情形，呼叫相對應方法
+		// 甚麼都沒填查全部
+		if( (productClassfication == null || "".equals(productClassfication.trim())) && (suitableAges == null || "".equals(suitableAges.trim())) && (genderPreference == null || "".equals(genderPreference.trim()))) {
+			array = new JSONArray(productManagmentService.findProduct(null, null, null, pageNumber, pageSize));
+			quantity = productManagmentService.getQuantity(null, null, null, null, null, null);
+		} else {
+			array = new JSONArray(productManagmentService.findProduct(productClassfication,
+					suitableAges, genderPreference, pageNumber, pageSize));
+			quantity = productManagmentService.getQuantity(null, null, productClassfication, suitableAges, genderPreference, "1");
+		}
 		
 		// 計算總頁數
 		if((quantity%10) == 0) {
@@ -100,8 +74,5 @@ public class AllProuductSelectWebService {
 		jsonObj.put("list", array.toString()); 
 
 		return jsonObj.toString();
-		*/
-		return null;
-
 	}
 }

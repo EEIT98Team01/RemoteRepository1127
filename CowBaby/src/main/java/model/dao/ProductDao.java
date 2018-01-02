@@ -38,4 +38,7 @@ public interface ProductDao {
 			
 	// 取得符合某條件之 Product 數量
 	public int getConditionQuantity(Map<String, String> condition);
+	
+	//子嘉哥支援
+	public Integer selectCountByClassficationId(Integer classficationID);
 }

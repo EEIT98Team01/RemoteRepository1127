@@ -147,6 +147,11 @@ public class ProductService {
 		return objList;
 	}
 	
+	// 子嘉支援
+	public int ClassficationNumber(Integer classficationID){
+		return productDao.selectCountByClassficationId(classficationID);
+	};
+	
 
 	
 }

@@ -1,6 +1,8 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import model.bean.ClassficationBean;
 import model.bean.ProductBean;
 import model.service.ClassficationService;
+import model.service.ProductManagmentService;
 import model.service.ProductService;
 import model.service.ProductSizeService;
 
@@ -20,95 +23,115 @@ import model.service.ProductSizeService;
 public class ProductController {
 	@Autowired
 	ProductService productService;
-	
+
 	@Autowired
 	ProductSizeService productSizeService;
-	
+
 	@Autowired
 	ClassficationService classficationService;
-	
-	//後台商品列表頁
+
+	@Autowired
+	ProductManagmentService productManagmentService;
+
+	// 後台商品列表頁
 	@RequestMapping(value = ("ProductController"), method = { RequestMethod.GET, RequestMethod.POST })
-	public String view(Model model, String classficationID,String productStatus) {
+	public String view(Model model, String classficationID, String productStatus) {
 		System.out.println(classficationID);
 		System.out.println(productStatus);
-			
-		if("".equals(classficationID)){
+
+		if ("".equals(classficationID)) {
 			classficationID = null;
 		}
 
 		if (classficationID == null || "".equals(classficationID.trim()) && (productStatus == null)) {
 			model.addAttribute("classficationIDList", productService.find());
 		} else {
-			model.addAttribute("productStatusList",
-					productService.findByCondition(classficationID,productStatus));
+			model.addAttribute("productStatusList", productService.findByCondition(classficationID, productStatus));
 		}
 		return "product_managment_list";
 	}
-	
-	    // 後台商品列表編輯
-		@RequestMapping(value = ("productupdate.controller"), method = { RequestMethod.GET, RequestMethod.POST })
-		public String productupdate(Model model, int productID, String productStatus) {
-			System.out.println(productStatus);
-			
-			ProductBean bean = productService.getStoreData(productID);
-			
-			if ((productStatus == null)) {
-				;
+
+	// 後台商品列表編輯
+	@RequestMapping(value = ("productupdate.controller"), method = { RequestMethod.GET, RequestMethod.POST })
+	public String productupdate(Model model, int productID, String productStatus) {
+		System.out.println(productStatus);
+
+		ProductBean bean = productService.getStoreData(productID);
+
+		if ((productStatus == null)) {
+			;
+		} else {
+			if ("true".equals(productStatus)) {
+				bean.setProductStatus(true);
 			} else {
-				if ("true".equals(productStatus)) {
-					bean.setProductStatus(true);
-				} else {
-					bean.setProductStatus(false);
-				}
+				bean.setProductStatus(false);
 			}
-			
-			return "product_managment_list";
 		}
-	
+
+		return "product_managment_list";
+	}
+
 	// 前台商品頁面
 	@RequestMapping(value = ("AllProductController"), method = { RequestMethod.GET, RequestMethod.POST })
 	public String allProduct(Model model) {
-		
+
 		// 顯示全部商品
 		List<Object[]> list = productService.findObject();
 		model.addAttribute("productList", list);
-		
-		// 顯示商品分類
-		List<ClassficationBean> classficationList = classficationService.find();
-		model.addAttribute("classficationList", classficationList);
+
 		// 顯示商品分類的數量
-		int quantity = classficationService.getQuantity();
-		model.addAttribute("quantity", quantity);
-		
-		
+		List<Object[]> classficationList = new ArrayList<>();
+		for (ClassficationBean bean : classficationService.find()) {
+			Object[] objarr = new Object[] { bean, productService.ClassficationNumber(bean.getClassficationID()) };
+			classficationList.add(objarr);
+		}
+		model.addAttribute("classficationList", classficationList);
+
+
 		System.out.println(classficationList);
 		return "all_product_list";
 	}
-	
-	
+
 	// 前台單品資訊
-	@RequestMapping(
-			value=("ProductItemOfShop"),
-			method={RequestMethod.GET, RequestMethod.POST}
-	)
-	public String productItem(Model model, String storeID,String productID) {
-		
-		if(storeID != null && !"".equals(storeID.trim()) || productID != null && !"".equals(productID.trim())) {
-			//查詢該商品的全部資訊
+	@RequestMapping(value = ("ProductItemOfShop"), method = { RequestMethod.GET, RequestMethod.POST })
+	public String productItem(Model model, String storeID, String productID) {
+
+		if (storeID != null && !"".equals(storeID.trim()) || productID != null && !"".equals(productID.trim())) {
+			// 查詢該商品的全部資訊
 			model.addAttribute("productData", productService.getStoreData(Integer.parseInt(productID)));
-			
-			//查詢該商品的size
-			Map<String,String> condition = new HashMap<String,String>();
-			condition.put("productID","= " + productID);
+
+			// 查詢該商品的size
+			Map<String, String> condition = new HashMap<String, String>();
+			condition.put("productID", "= " + productID);
 			model.addAttribute("productSize", productSizeService.findByCondition(condition));
 		}
-	
-		
+
 		return "prouduct_item";
 	}
-	
-	
-	
-}
 
+	// 前台最新商品頁面
+	@RequestMapping(value = ("NewArrivalController"), method = { RequestMethod.GET, RequestMethod.POST })
+	public String newArrivalController(Model model) {
+
+		// 依據最新上架時間顯示全部商品
+		List<Object[]> list = productManagmentService.findObject(null, null, null, null, null, null, 1, 10,
+				"displayTime");
+		model.addAttribute("productList", list);
+
+		// 顯示商品分類
+		List<Object[]> classficationList = new ArrayList<>();
+		for (ClassficationBean bean : classficationService.find()) {
+			Object[] objarr = new Object[] { bean, productService.ClassficationNumber(bean.getClassficationID()) };
+			classficationList.add(objarr);
+		}
+		model.addAttribute("classficationList", classficationList);
+
+		// 顯示商品分類的數量
+		int quantity = classficationService.getQuantity();
+		model.addAttribute("quantity", quantity);
+
+		System.out.println(classficationList);
+		return "all_product_list";
+	}
+
+}

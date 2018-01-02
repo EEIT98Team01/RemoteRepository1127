@@ -15,6 +15,7 @@ import model.bean.ProductBean;
 import model.dao.ClassficationDao;
 import model.dao.OrderDetailDao;
 import model.dao.ProductDao;
+import model.dao.SellerBackstageManageDao;
 import model.dao.impl.MyDaoImpl;
 
 @Service
@@ -28,6 +29,8 @@ public class ProductManagmentService {
 	private OrderDetailDao orderDetailDao;
 	@Autowired
 	private MyDaoImpl myDaoImpl;
+	@Autowired
+	private SellerBackstageManageDao sellerBackstageManageDao;
 	
 	// 取得特定product資料
 	public ProductBean findById(int id) {
@@ -159,6 +162,37 @@ public class ProductManagmentService {
 		return result;
 	}
 	
+	// 取得符合特定條件的product資料(DIN***)
+	public List<ProductBean> findProduct(String productClassfication, String suitableAges, String genderPreference, int page, int rows) {
+		
+		if( (productClassfication == null || "".equals(productClassfication.trim())) &&
+		    (suitableAges == null || "".equals(suitableAges.trim())) &&
+		    (genderPreference == null || "".equals(genderPreference.trim()))
+		  ) {
+			// 沒有下任何條件,取得所有商品
+			return productDao.find(page, rows);
+		} else {
+			// 有下條件,逐項檢查
+			Map<String, String> condition = new HashMap<String, String>();
+						
+			if(productClassfication != null && !"".equals(productClassfication.trim())) {
+				System.out.println("QQ");
+				condition.put("classficationID", "= " + productClassfication);
+			}
+			
+			if(suitableAges != null && !"".equals(suitableAges.trim())) {
+				condition.put("suitableAges", "= " + suitableAges);
+			}
+			
+			if(genderPreference != null && !"".equals(genderPreference.trim())) {
+				condition.put("genderPreference", "like '" + genderPreference + "'");
+			}
+		
+			
+			return productDao.findByCondition(condition, page, rows);
+		}
+	}
+	
 	// 先依某條件進行排序,回傳符合某某條件的N筆資料  全域搜尋
 	@Transactional(readOnly = true)
 	public List<ProductBean> findByCondition(String title, int page, int rows, String sortCondition) {
@@ -175,5 +209,27 @@ public class ProductManagmentService {
 		}
 		return condition;
 	}
+	
+	
+	// 回傳有商店名稱的商品  
+	public List<Object[]> findObject(String storeId, String productName, String productClassfication, String suitableAges, String genderPreference, String productStatus, int page, int rows, String sortCondition) {
+		List<ProductBean> list = this.findProduct(null, null, null, null, null, null, page, rows, sortCondition);
+		List<Object[]> objList = new LinkedList<Object[]>();
+		// 自己組要的資料塞回頁面
+		for(ProductBean bean: list) {
+			Object[] obj = new Object[7];
+			obj[0] = bean.getStoreID();
+			obj[1] = bean.getProductImage();
+			obj[2] = sellerBackstageManageDao.findById(bean.getStoreID()).getStoreName();
+			obj[3] = bean.getTitle();
+			obj[4] = bean.getProductDescription();
+			obj[5] = bean.getUnitPrice();
+			obj[6] = bean.getProductID();
+			objList.add(obj);
+		}
+		
+		return objList;
+	}
+		
 	
 }
