@@ -250,7 +250,11 @@
 	 							if(order.status == 1) {
 	 								html = html + "<td>未處理</td>";
 	 							} else if(order.status == 2) {
+<<<<<<< HEAD
 	 								html = html + "<td>撿貨中</td>";
+=======
+	 								html = html + "<td>檢貨中</td>";
+>>>>>>> branch 'master' of https://github.com/EEIT98Team01/RemoteRepository1127.git
 	 							} else if(order.status == 3) {
 	 								html = html + "<td>送貨中</td>";
 	 							} else if(order.status == 4) {

@@ -197,13 +197,14 @@ public class ShoppinCartCheckoutProcessController {
 			boolean isCheck =shoppingCartService.checkout(productList, Integer.parseInt(tokens[0]), account, receiverName,receiverEmail,
 					receiverPhone, 1, pickUpStore, bouns);
 			
-			if(isCheck) {
-				shoppingCart.getProductInfo().remove(key);
-			}
+//			if(isCheck) {
+//				shoppingCart.getProductInfo().remove(key);
+//			}
 		}
 		shoppingCart.setStoreNumber(0);
 		shoppingCart.setTotalAmount(0);
 		shoppingCart.setTotalItems(0);
+		shoppingCart.setProductInfo(new HashMap<String, List<ShoppingCart.Product>>());
 		
 
 		return "order_success";

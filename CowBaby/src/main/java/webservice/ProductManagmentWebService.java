@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -14,10 +15,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.alibaba.fastjson.JSONObject;
 
+import model.bean.CustomerBean;
 import model.bean.ProductBean;
 import model.bean.ProductSizeBean;
 import model.service.ProductManagmentService;
 import model.service.ProductSizeService;
+import model.service.SellerBackstageManageService;
 
 @RestController
 @RequestMapping("/product")
@@ -27,7 +30,12 @@ public class ProductManagmentWebService {
 	@Autowired
 	ProductSizeService productSizeService;
 	@Autowired
+	private SellerBackstageManageService sellerBackstageManageService;
+	
+	@Autowired
 	private ServletContext application;
+	@Autowired
+	private HttpSession session;
 	
 	@RequestMapping(
 			value="/addProduct",
@@ -53,9 +61,13 @@ public class ProductManagmentWebService {
 		// 存放回傳給AJAX 的 response jsonObj
 		JSONObject jsonObj = new JSONObject();
 
+		// 由登入的顧客資料取得商店ID
+		CustomerBean user = (CustomerBean)session.getAttribute("user");
+		int storeID = sellerBackstageManageService.findStore(user.getEmail(), 1, 999, "storeID").get(0).getStoreID();
+		
 		// 設定商品各項資料
 		ProductBean product = new ProductBean();
-		product.setStoreID(1); // 暫時寫死為1,之後要拿到顧客資料,再拿他的商店ID
+		product.setStoreID(storeID); // 暫時寫死為1,之後要拿到顧客資料,再拿他的商店ID
 		product.setTitle(productName);
 		product.setSummary(productSummary);
 		product.setUnitPrice(Integer.parseInt(productUnitPrice));

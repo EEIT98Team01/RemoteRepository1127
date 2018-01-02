@@ -13,6 +13,7 @@ import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,11 +22,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
+import model.bean.CustomerBean;
 import model.bean.ProductBean;
 import model.bean.ProductSizeBean;
 import model.service.ClassficationService;
 import model.service.ProductManagmentService;
 import model.service.ProductSizeService;
+import model.service.SellerBackstageManageService;
 
 @Controller
 public class ProductManagmentController {
@@ -36,7 +39,12 @@ public class ProductManagmentController {
 	@Autowired
 	private ProductSizeService productSizeService;
 	@Autowired
+	private SellerBackstageManageService sellerBackstageManageService;
+	
+	@Autowired
 	private ServletContext application;
+	@Autowired
+	private HttpSession session;
 	
 	// 商品管理/商品列表使用
 	@RequestMapping(
@@ -57,10 +65,12 @@ public class ProductManagmentController {
 		}
 		
 		// 由登入的顧客資料取得商店ID
+		CustomerBean user = (CustomerBean)session.getAttribute("user");
+		int storeID = sellerBackstageManageService.findStore(user.getEmail(), 1, 999, "storeID").get(0).getStoreID();
 		
 		// 暫時寫死為第一間商店
-		List<ProductBean> result = productManagmentService.findProduct("1", productName, productClassfication, null, null, productStatus,    Integer.parseInt(pageNumber), Integer.parseInt(pageSize), "DisplayTime desc");
-		quantity = productManagmentService.getQuantity("1", productName, productClassfication, null, null, productStatus);
+		List<ProductBean> result = productManagmentService.findProduct(storeID+"", productName, productClassfication, null, null, productStatus,    Integer.parseInt(pageNumber), Integer.parseInt(pageSize), "DisplayTime desc");
+		quantity = productManagmentService.getQuantity(storeID+"", productName, productClassfication, null, null, productStatus);
 		
 		// 計算總頁數
 		if((quantity%Integer.parseInt(pageSize)) == 0) {

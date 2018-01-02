@@ -190,8 +190,8 @@ $(function(){
 	        type:"GET",                   
 	        url: "/CowBaby/message/getMessageList",    
 	        data: {
-// 	        	receiverAccount:"${user.email}",
-				receiverAccount:"555@gmail.com",
+	        	receiverAccount:"${user.email}",
+// 				receiverAccount:"555@gmail.com",
 	        	msgSenderID:formData[0].value,
 	        	readStatus:formData[1].value,
 	        	userType:formData[2].value,

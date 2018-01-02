@@ -62,7 +62,7 @@
 		<div class="main_container_col_2">
 		
 			<!--產品明細-->
-			<section class="proudect_detail">
+			<section class="proudect_detail" style="overflow: auto;">
 
 				<div class="showPic">
 					<img src="<c:url value="/images/prouduct_item1.jpg"/>">
@@ -70,7 +70,7 @@
 
 				<div class="product_infor">
 					<div class="product_title">${productData.title}</div>
-					<div class="product_desc">${productData.productDescription}</div>
+					<div class="product_desc">${productData.summary}</div>
 					<div class="product_price">NT.${productData.unitPrice}</div>
 
 					<div class="product_size">
@@ -94,7 +94,11 @@
 						<a class="add_cart" href="#">去結帳</a>				
 					</div>
 				</div>
-				
+			</section>
+			
+			<section class="proudect_ckeditor" style="padding-top: 30px;clear: both;">
+				CKEDITOR
+				${productData.productDescription}
 			</section>
 		</div>
 	</section>

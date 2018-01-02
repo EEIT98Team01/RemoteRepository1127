@@ -94,7 +94,6 @@ public class BlogService {
 	// 回傳有商店名稱的商品
 	public List<Object[]> findObject() {
 		List<BlogBean> list = this.find(1, this.getQuantity(), "ArticleID desc");
-		//List<BlogBean> list = this.find();
 		List<String> base64Strings = new ArrayList<>();
 		for (BlogBean bb : list) {
 			Blob blob = bb.getArticlePhoto();
