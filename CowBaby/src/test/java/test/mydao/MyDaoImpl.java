@@ -3,6 +3,7 @@ package test.mydao;
 import java.lang.reflect.Parameter;
 import java.math.BigInteger;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -22,17 +23,11 @@ public class MyDaoImpl {
 		return sessionFactory.getCurrentSession();
 	}
 	
-	public List getHotProduct() {
-		Query query = this.getSession().createQuery("SELECT productID, count(*) as sum from OrderDetailBean group by productID order by count(*) desc");
-		List result = query.getResultList();
-		
-		for(int i = 0; i <result.size(); i++) {
-			Object[] object = (Object[])result.get(i); 
-			int productID = (int) object[0]; 
-			Long count = (Long) object[1];
-			
-			System.out.println(productID + "-" + count);
-		}
-		return null;
+	@SuppressWarnings("unchecked")
+	public List<Object[]> getHotProduct() {
+		Query<Object[]> query = this.getSession().createQuery("SELECT productID, count(*) as sum from OrderDetailBean group by productID order by count(*) desc");
+		List<Object[]> result = query.getResultList();
+
+		return result;
 	}
 }

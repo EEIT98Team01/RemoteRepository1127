@@ -124,88 +124,18 @@
 		<!--slidershow-->
 		<section class="slidershow">
 			<div class="slidershow-Wrapper2">
+				<c:forEach var="hotproduct" varStatus="st" items="${hotProductList}">
+					<a href='<c:url value='/ProductItemOfShop?storeID=&productID=${hotproduct.productID}'/>'>
+						<div class="item">
+							<div class="topIcon">${st.count}</div>
+							<img src="${hotproduct.productImage}">
+							<p class="title">${hotproduct.title}</p>
+							<div class="specialPrice">${hotproduct.summary}</div>
+							<div class="specialPrice">NT ${hotproduct.unitPrice} 元</div>
+						</div>
+					</a>
+				</c:forEach>
 				
-				<div class="item">
-					<div class="topIcon">1</div>
-					<img src="<c:url value="/images/newArrived1.jpg"/>">
-					<p class="title">英國Blade ＆ Rose 聖誕款內搭褲</p>
-					<div class="originalPrice">原價 NT 190</div>
-					<div class="specialPrice">特價 NT <span class="specialPriceNum">190</span></div>
-				</div>
-				
-
-				<div class="item">
-					<div class="topIcon">2</div>
-					<img src="<c:url value="/images/newArrived2.jpg"/>">
-					<p class="title">英國Blade ＆ Rose 聖誕款內搭褲</p>
-					<div class="originalPrice">原價 NT 190</div>
-					<div class="specialPrice">特價 NT <span class="specialPriceNum">190</span></div>
-				</div>
-
-				<div class="item">
-					<div class="topIcon">3</div>
-					<img src="<c:url value="/images/newArrived3.jpg"/>">
-					<p class="title">英國Blade ＆ Rose 聖誕款內搭褲</p>
-					<div class="originalPrice">原價 NT 190</div>
-					<div class="specialPrice">特價 NT <span class="specialPriceNum">190</span></div>
-				</div>
-
-				<div class="item">
-					<div class="topIcon">4</div>
-					<img src="<c:url value="/images/newArrived4.jpg"/>">
-					<p class="title">英國Blade ＆ Rose 聖誕款內搭褲</p>
-					<div class="originalPrice">原價 NT 190</div>
-					<div class="specialPrice">特價 NT <span class="specialPriceNum">190</span></div>
-				</div>
-
-				<div class="item">
-					<div class="topIcon">5</div>
-					<img src="<c:url value="/images/newArrived1.jpg"/>">
-					<p class="title">英國Blade ＆ Rose 聖誕款內搭褲</p>
-					<div class="originalPrice">原價 NT 190</div>
-					<div class="specialPrice">特價 NT <span class="specialPriceNum">190</span></div>
-				</div>
-
-				<div class="item">
-					<div class="topIcon">6</div>
-					<img src="<c:url value="/images/newArrived1.jpg"/>">
-					<p class="title">英國Blade ＆ Rose 聖誕款內搭褲</p>
-					<div class="originalPrice">原價 NT 190</div>
-					<div class="specialPrice">特價 NT <span class="specialPriceNum">190</span></div>
-				</div>
-
-				<div class="item">
-					<div class="topIcon">7</div>
-					<img src="<c:url value="/images/newArrived1.jpg"/>">
-					<p class="title">英國Blade ＆ Rose 聖誕款內搭褲</p>
-					<div class="originalPrice">原價 NT 190</div>
-					<div class="specialPrice">特價 NT <span class="specialPriceNum">190</span></div>
-				</div>
-
-				<div class="item">
-					<div class="topIcon">8</div>
-					<img src="<c:url value="/images/newArrived1.jpg"/>">
-					<p class="title">英國Blade ＆ Rose 聖誕款內搭褲</p>
-					<div class="originalPrice">原價 NT 190</div>
-					<div class="specialPrice">特價 NT <span class="specialPriceNum">190</span></div>
-				</div>
-
-				<div class="item">
-					<div class="topIcon">9</div>
-					<img src="<c:url value="/images/newArrived1.jpg"/>">
-					<p class="title">英國Blade ＆ Rose 聖誕款內搭褲</p>
-					<div class="originalPrice">原價 NT 190</div>
-					<div class="specialPrice">特價 NT <span class="specialPriceNum">190</span></div>
-				</div>
-
-				<div class="item">
-					<div class="topIcon">10</div>
-					<img src="<c:url value="/images/newArrived1.jpg"/>">
-					<p class="title">英國Blade ＆ Rose 聖誕款內搭褲</p>
-					<div class="originalPrice">原價 NT 190</div>
-					<div class="specialPrice">特價 NT <span class="specialPriceNum">190</span></div>
-				</div>
-	
 			</div>
 		</section>
 	</section>

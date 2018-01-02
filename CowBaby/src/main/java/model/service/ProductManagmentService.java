@@ -1,6 +1,7 @@
 package model.service;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -14,16 +15,19 @@ import model.bean.ProductBean;
 import model.dao.ClassficationDao;
 import model.dao.OrderDetailDao;
 import model.dao.ProductDao;
+import model.dao.impl.MyDaoImpl;
 
 @Service
 @Transactional
 public class ProductManagmentService {
 	@Autowired
-	ProductDao productDao;
+	private ProductDao productDao;
 	@Autowired
-	ClassficationDao classficationDao;
+	private ClassficationDao classficationDao;
 	@Autowired
-	OrderDetailDao orderDetailDao;
+	private OrderDetailDao orderDetailDao;
+	@Autowired
+	private MyDaoImpl myDaoImpl;
 	
 	// 取得特定product資料
 	public ProductBean findById(int id) {
@@ -135,21 +139,24 @@ public class ProductManagmentService {
 	
 	// 取得熱門商品
 	public List<ProductBean> hotProductList(int quantity) {
-		List<OrderDetailBean> orderDetailList = orderDetailDao.find();
-		Map<String, Integer> temp = new HashMap<String, Integer>();
+		List<ProductBean> result = new LinkedList<ProductBean>();
+		List<Object[]> hotProductList = myDaoImpl.getHotProduct();
 		
-		for(OrderDetailBean bean: orderDetailList) {
-			int productID = bean.getProductID();
+		int count = 0;
+		for(Object[] obj: hotProductList) {
+			ProductBean product = productDao.findById((int) obj[0]);
 			
-			if(temp.get(productID) == null) {
-				temp.put(productID + "", 1);
-			} else {
-				int sum = temp.get(productID);
-				temp.put(productID + "", sum+1);
+			if(product.isProductStatus()) {
+				result.add(product);
+				count++;
+			}
+			
+			if(count >= quantity) {
+				break;
 			}
 		}
 		
-		return null;
+		return result;
 	}
 	
 	// 先依某條件進行排序,回傳符合某某條件的N筆資料  全域搜尋

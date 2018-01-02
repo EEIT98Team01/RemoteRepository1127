@@ -72,14 +72,14 @@
 							<i class="fa fa-user-circle-o" aria-hidden="true"></i>
   
   							<!-- 收系統訊息 -->
-                       		<c:if test="${messageData.msgSenderID == '999@gmail.com'}">
+                       		<c:if test="${messageData.msgSenderID == 'Din@gmail.com'}">
 								<strong>FROM:</strong>
                           		<strong>${senderName}</strong>
                           		<span>[${messageData.msgSenderID}]</span>
 			           		</c:if>
 			           		
 			           		<!-- 看自己發的訊息 -->
-			            	<c:if test="${messageData.msgSenderID == '555@gmail.com'}">
+			            	<c:if test="${messageData.msgSenderID == user.email}">
                           		<strong>SEND:</strong>
                           		<strong>${receiverName}</strong>
                           		<span>[${messageData.msgReceiverID}]</span>
@@ -102,12 +102,12 @@
 					</div>
 					<div class="row">
 						<!-- 系統訊息,只能返回 -->
-			            <c:if test="${messageData.msgSenderID == '999@gmail.com'}">
+			            <c:if test="${messageData.msgSenderID == 'Din@gmail.com'}">
 							<input type="button" id="beforePage" class="btn btn-primary pull-left" value="返回" />
 			            </c:if>
 			            
 			            <!-- 自己發的訊息,只能看到對方回覆的內容,無法修改 -->
-			            <c:if test="${messageData.msgSenderID == '555@gmail.com'}">
+			            <c:if test="${messageData.msgSenderID == user.email}">
 							<form class="form-inline msgFrom">
 								<div class="form-group col-md-12">
 						  			<label for="comment">對方回覆：</label>
