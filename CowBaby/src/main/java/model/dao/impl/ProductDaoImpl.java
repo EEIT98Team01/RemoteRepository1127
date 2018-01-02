@@ -18,12 +18,10 @@ import model.dao.ProductDao;
 public class ProductDaoImpl implements ProductDao {
 	@Autowired
 	private SessionFactory sessionFactory;
-	
+
 	private Session getSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
-	// 由articleID取得相對應資料
 	public ProductBean findById(int id) {
 		return this.getSession().get(ProductBean.class, id);
 	}
@@ -32,13 +30,13 @@ public class ProductDaoImpl implements ProductDao {
 	public ProductBean insert(ProductBean bean) {
 		if (bean != null) {
 			ProductBean temp = this.findById(bean.getProductID());
-			
+
 			if (temp == null) {
 				getSession().save(bean);
 				return bean;
 			}
 		}
-		
+
 		return null;
 	}
 
@@ -46,7 +44,7 @@ public class ProductDaoImpl implements ProductDao {
 	public ProductBean update(ProductBean bean) {
 		ProductBean select = this.findById(bean.getProductID());
 
-		if(select != null) {
+		if (select != null) {
 			select.setStoreID(bean.getStoreID());
 			select.setTitle(bean.getTitle());
 			select.setSummary(bean.getSummary());
@@ -77,13 +75,14 @@ public class ProductDaoImpl implements ProductDao {
 
 	// 取得所有 Product 資料中某頁的n筆資料,供分頁功能使用,Product資料會先依某條件進行排序
 	public List<ProductBean> find(int page, int rows, String sortCondition) {
-		Query<ProductBean> query = this.getSession().createQuery("FROM ProductBean ORDER BY " + sortCondition, ProductBean.class);
+		Query<ProductBean> query = this.getSession().createQuery("FROM ProductBean ORDER BY " + sortCondition,
+				ProductBean.class);
 		return this.subList(query.getResultList(), (page - 1) * rows, rows);
 	}
 
 	// 取得符合某條件之 Product 資料(K為欄位名稱, V為條件)
 	public List<ProductBean> findByCondition(Map<String, String> condition) {
-		if(condition != null) {
+		if (condition != null) {
 			// 組合hql查詢字串
 			String hql = this.hqlAddCondition("FROM ProductBean WHERE ", condition);
 
@@ -91,7 +90,7 @@ public class ProductDaoImpl implements ProductDao {
 			Query<ProductBean> query = this.getSession().createQuery(hql, ProductBean.class);
 			return query.getResultList();
 		}
-		
+
 		return null;
 	}
 
@@ -99,16 +98,16 @@ public class ProductDaoImpl implements ProductDao {
 	public List<ProductBean> findByCondition(Map<String, String> condition, int page, int rows) {
 		List<ProductBean> temp = this.findByCondition(condition);
 
-		if(temp != null) {			
+		if (temp != null) {
 			return this.subList(temp, (page - 1) * rows, rows);
 		}
-		
+
 		return null;
 	}
 
 	// 取得符合某條件之 Product 資料(K為欄位名稱, V為條件)中某頁的n筆資料,供分頁功能使用,符合條件之資料會先依某條件進行排序
 	public List<ProductBean> findByCondition(Map<String, String> condition, int page, int rows, String sortCondition) {
-		if(condition != null) {
+		if (condition != null) {
 			// 組合hql查詢字串
 			String hql = this.hqlAddCondition("FROM ProductBean WHERE ", condition);
 			hql = hql + " ORDER BY " + sortCondition;
@@ -133,30 +132,39 @@ public class ProductDaoImpl implements ProductDao {
 
 	private List<ProductBean> subList(List<ProductBean> list, int start, int end) {
 		List<ProductBean> result = new LinkedList<ProductBean>();
-		
+
 		int i = 0;
-		while( ((start+i) < list.size()) && (i < end) ) {
-			result.add(list.get(start+i));
+		while (((start + i) < list.size()) && (i < end)) {
+			result.add(list.get(start + i));
 			i++;
 		}
-		
+
 		return result;
 	}
-	
+
 	private String hqlAddCondition(String hql, Map<String, String> condition) {
 		Set<String> fieldNameSet = condition.keySet();
-		
+
 		int count = 0;
-		for(String fieldName: fieldNameSet) {
-			if(count == 0) {
+		for (String fieldName : fieldNameSet) {
+			if (count == 0) {
 				hql = hql + fieldName + " " + condition.get(fieldName);
 				count++;
 			} else {
 				hql = hql + " AND " + fieldName + " " + condition.get(fieldName);
 			}
 		}
-		
+
 		return hql;
 	}
-	
+
+	// 子家哥支援
+	public Integer selectCountByClassficationId(Integer classficationID) {
+		Number num = (Number) getSession()
+				.createNativeQuery(
+						"select sum(SpecStock) from ProductSize where ProductID in (select ProductID from Product where classficationID = :classficationID)")
+				.setParameter("classficationID", classficationID).getSingleResult();
+		return num.intValue();
+	}
+
 }

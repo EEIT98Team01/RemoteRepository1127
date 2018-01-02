@@ -20,7 +20,11 @@ public class TestMyDaoImpl {
 		
 	// 測試內容
 		
-		System.out.println(dao.getHotProduct());
+		//System.out.println(dao.getHotProduct());
+		
+		for(Object[] obj: dao.getHotProduct()) {
+			System.out.println( (int)obj[0] + "-" + (Long)obj[1]);
+		}
 		
 	/*---------------------------------------------------------------------------------------------*/
 		session.getTransaction().commit();
