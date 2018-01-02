@@ -158,5 +158,11 @@ public class ProductDaoImpl implements ProductDao {
 		
 		return hql;
 	}
+
+	@Override
+	public Integer selectCountByClassficationId(Integer classficationID) {
+		
+		return null;
+	}
 	
 }
