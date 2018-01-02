@@ -73,13 +73,14 @@
 									<td>啟用</td>
 								</c:when>
 								<c:otherwise>
-									<td>不啟用</td>
+									<td>停用</td>
 								</c:otherwise>
 							</c:choose>
 							
 							<!-- <td><span class="label label-success">啟用</span></td>
 							 -->
-							<td><a href="#" class='btn btn-primary'> 
+							<td><a href="#" class='btn btn-primary product_popupbox_btn'>
+								<span style="display: none;">${Classfication.classficationID}</span>
 							<i class='fa fa-pencil'></i>
 							</a></td>
 						</tr>
@@ -171,6 +172,36 @@ $(function(){
 		            }]
 	     });
 	})
+	
+	// 商品分類編輯彈出框
+		$(".product_popupbox_btn").click(function(){
+			console.log("AAA");
+			var sss = $(this).find('span').text();
+			console.log(sss)
+
+				BootstrapDialog.show({
+					message : $('<div></div>').load('/CowBaby/pages/common/produt_complaints_popup.jsp?sss='+sss),
+					title : "分類設定",
+					buttons : [ {
+						label : '確定',
+						// no title as it is optional
+						cssClass : 'btn-primary',
+						data : {
+							js : 'btn-confirm',
+							'user-id' : '3'
+						},
+						action : function() {
+							console.log("AAA");
+		                	$("#qqq").submit();
+						}
+					}, {
+						label : '取消',
+						action : function(dialogItself) {
+							dialogItself.close();
+						}
+					} ]
+				});
+			})
 	
 })
 </script>

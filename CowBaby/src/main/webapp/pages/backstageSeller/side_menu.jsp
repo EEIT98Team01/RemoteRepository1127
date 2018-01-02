@@ -34,14 +34,14 @@
 		     </li>
 		
 		     <li class="sub-menu">
-		         <a href="product_list.jsp" >
+		         <a href="${pageContext.servletContext.contextPath}/pages/backstageSeller/ProductList" >
 		             <i class="fa fa-gift" aria-hidden="true"></i>
 		             <span>商品管理</span>
 		             <i class="fa fa-chevron-down" aria-hidden="true"></i>
 		         </a>
 		         <ul class="sub">
-		             <li><a href="product_list.jsp">全部商品列表</a></li>
-		             <li><a href="product_add.jsp">新增商品</a></li>
+		             <li><a href="${pageContext.servletContext.contextPath}/pages/backstageSeller/ProductList">全部商品列表</a></li>
+		             <li><a href="${pageContext.servletContext.contextPath}/pages/backstageSeller/ProductAdd">新增商品</a></li>
 		         </ul>
 		     </li>
 		     

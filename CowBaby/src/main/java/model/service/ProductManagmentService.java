@@ -8,7 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import model.bean.ClassficationBean;
+import model.bean.OrderDetailBean;
 import model.bean.ProductBean;
+import model.dao.ClassficationDao;
+import model.dao.OrderDetailDao;
 import model.dao.ProductDao;
 
 @Service
@@ -16,6 +20,10 @@ import model.dao.ProductDao;
 public class ProductManagmentService {
 	@Autowired
 	ProductDao productDao;
+	@Autowired
+	ClassficationDao classficationDao;
+	@Autowired
+	OrderDetailDao orderDetailDao;
 	
 	// 取得特定product資料
 	public ProductBean findById(int id) {
@@ -116,6 +124,49 @@ public class ProductManagmentService {
 				
 			return productDao.getConditionQuantity(condition);
 		}
+	}
+	
+	// 取得啟用的商品分類
+	public List<ClassficationBean> findClassfication() {
+		Map<String,String> condition = new HashMap<String,String>();
+		condition.put("startStopStatus", "= 1");
+		return classficationDao.findByCondition(condition);
+	}
+	
+	// 取得熱門商品
+	public List<ProductBean> hotProductList(int quantity) {
+		List<OrderDetailBean> orderDetailList = orderDetailDao.find();
+		Map<String, Integer> temp = new HashMap<String, Integer>();
+		
+		for(OrderDetailBean bean: orderDetailList) {
+			int productID = bean.getProductID();
+			
+			if(temp.get(productID) == null) {
+				temp.put(productID + "", 1);
+			} else {
+				int sum = temp.get(productID);
+				temp.put(productID + "", sum+1);
+			}
+		}
+		
+		return null;
+	}
+	
+	// 先依某條件進行排序,回傳符合某某條件的N筆資料  全域搜尋
+	@Transactional(readOnly = true)
+	public List<ProductBean> findByCondition(String title, int page, int rows, String sortCondition) {
+		return productDao.findByCondition(this.createCondition(title), page, rows, sortCondition);
+	}
+
+	// 將查詢條件塞進Map
+	private HashMap<String, String> createCondition(String title) {
+		HashMap<String, String> condition = new HashMap<String, String>();
+
+		// title對應到資料庫中的title,若為null或"",表不設定該條件
+		if (title != null && title.trim().length() != 0) {
+			condition.put("title", "like '%" + title + "%'");
+		}
+		return condition;
 	}
 	
 }

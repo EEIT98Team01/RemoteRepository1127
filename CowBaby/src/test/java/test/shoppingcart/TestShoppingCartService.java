@@ -56,6 +56,7 @@ public class TestShoppingCartService {
 
 		JSONObject result = new JSONObject(json.toString());
 		
+		
 		for(String key: shoppingCart.getProductInfo().keySet()) {
 			System.out.println(result.getString(key));
 		}

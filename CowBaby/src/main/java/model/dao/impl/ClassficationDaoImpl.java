@@ -162,4 +162,32 @@ public class ClassficationDaoImpl implements ClassficationDao {
 		return hql;
 	}
 	
+	// 多選查詢用
+	private String hqlAddCondition1(String hql, Map<String, String> condition) {
+		Set<String> fieldNameSet = condition.keySet();
+	       
+		int count = 0;
+		for(String fieldName: fieldNameSet) {
+			if(count == 0) {
+				hql = hql + fieldName + " " + condition.get(fieldName);
+				count++;
+			} else {
+			
+				hql = hql + " OR " + fieldName + " " + condition.get(fieldName);
+				
+	 /*from Product where (SuitableAges = 1 OR SuitableAges = 2) AND (GenderPreference = 'F') AND (ClassficationID = 1 OR ClassficationID = 2);      */
+			}
+		}
+		
+		return hql;
+	}
+
+	@Override
+	public List<ClassficationBean> findByCondition1(Map<String, String> condition, int page, int rows) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+	
 }

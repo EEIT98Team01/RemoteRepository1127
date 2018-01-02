@@ -150,5 +150,11 @@ public class ClassficationDaoImpl implements ClassficationDao {
 		
 		return hql;
 	}
+
+	@Override
+	public List<ClassficationBean> findByCondition1(Map<String, String> condition, int page, int rows) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }
