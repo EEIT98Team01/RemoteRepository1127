@@ -64,9 +64,9 @@
 			<!--產品明細-->
 			<section class="proudect_detail">
 
-				<div class="showPic">
-					<img src="<c:url value="/images/prouduct_item1.jpg"/>">
-				</div>
+<!-- 				<div class="showPic"> -->
+<%-- 					<img src="<c:url value="/images/prouduct_item1.jpg"/>"> --%>
+<!-- 				</div> -->
 
 				<div class="product_infor">
 					<div class="product_title">${productData.title}</div>

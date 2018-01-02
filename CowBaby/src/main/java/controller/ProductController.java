@@ -68,7 +68,13 @@ public class ProductController {
 	
 	// 前台商品頁面
 	@RequestMapping(value = ("AllProductController"), method = { RequestMethod.GET, RequestMethod.POST })
-	public String allProduct(Model model) {
+	public String allProduct(Model model, String title) {
+		
+		
+		if (title == null || "".equals(title.trim())) {
+			List<Object[]> list = productService.findObject();
+			model.addAttribute("productList", list);		
+		}
 		
 		// 顯示全部商品
 		List<Object[]> list = productService.findObject();
@@ -106,6 +112,19 @@ public class ProductController {
 	
 		
 		return "prouduct_item";
+	}
+	
+	@RequestMapping(value = ("ProductCommodity"), method = { RequestMethod.GET, RequestMethod.POST })
+	public String commodityview(Model model, String title) {
+		System.out.println(title);
+
+		if (title == null || "".equals(title.trim())) {
+			model.addAttribute("productList", productService.find());
+		} else {
+			model.addAttribute("productList", productService.findBycommodity(title));
+			
+		}
+		return "all_product_list";
 	}
 	
 	

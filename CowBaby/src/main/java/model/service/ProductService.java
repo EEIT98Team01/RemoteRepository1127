@@ -73,6 +73,22 @@ public class ProductService {
 			return productDao.findByCondition(condition);
 		}
 	}
+	
+	//全域搜尋
+	@Transactional(readOnly = true)
+	public List<ProductBean> findBycommodity(String title) {
+		if((title == null) || "".equals(title.trim())){
+			return productDao.find();//未使用任何條件
+		}else{
+			Map<String,String> condition = new HashMap<String,String>();
+			if(title != null){
+				condition.put("title", "like '%" + title + "%'");
+			}
+			 List<ProductBean> JJ = productDao.findByCondition(condition);
+			 System.out.println(JJ);
+			 return JJ;
+		}
+	}
 
 	// 回傳符合某條件的N筆資料,若無資料,則回傳之List為空集合
 	@Transactional(readOnly = true)
