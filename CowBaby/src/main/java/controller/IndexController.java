@@ -38,6 +38,9 @@ public class IndexController {
 		// 處理最新商品
 		model.addAttribute("newProductList", productManagmentService.findProduct(null, null, null, null, null, "1", 1, 10, "DisplayTime desc"));
 		
+		// 處理熱門商品
+		model.addAttribute("hotProductList", productManagmentService.hotProductList(10));
+		
 		return "index";
 	}
 }
