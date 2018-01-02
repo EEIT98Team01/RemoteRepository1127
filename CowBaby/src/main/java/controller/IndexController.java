@@ -1,5 +1,8 @@
 package controller;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +18,7 @@ public class IndexController {
 	@Autowired
 	private ProductManagmentService productManagmentService;
 	@Autowired
-	private BlogService clogService;
+	private BlogService blogService;
 	@Autowired
 	private SellerBackstageManageService sellerBackstageManageService;
 	
@@ -40,6 +43,17 @@ public class IndexController {
 		
 		// 處理熱門商品
 		model.addAttribute("hotProductList", productManagmentService.hotProductList(10));
+		
+		// 處理熱門店家
+		model.addAttribute("hotStoreList", sellerBackstageManageService.hotStoreList(4, 10000, 10));
+		
+		// 處理媽咪推薦文章
+		List<Object[]> blogList = blogService.findObject();
+		List<Object[]> newBlogList = new LinkedList<Object[]>();
+		for(int i = 0; i < 4; i++) {
+			newBlogList.add(blogList.get(i));
+		}
+		model.addAttribute("newBlogList", newBlogList);
 		
 		return "index";
 	}

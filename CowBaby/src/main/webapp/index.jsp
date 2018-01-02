@@ -159,121 +159,37 @@
 			<!--slidershow-->
 			<section class="slidershow">
 				<div class="slidershow-Wrapper3">
-					<div class="item">
-						<div class="choice"></div>
-						<img src="<c:url value="/images/newArrived1.jpg"/>">
-						<div class="shopName">兔兔的家</div>
-						<div class="description">
-							秋冬新款全面鋪貨中 每一款都是精心挑選出來了 這裏有最好的質量歡迎來諮詢 ！！
-						</div>
-						<div class="stars">
-							<ul>
-								<li><i class="fa fa-star" aria-hidden="true"></i></li>
-								<li><i class="fa fa-star" aria-hidden="true"></i></li>
-								<li><i class="fa fa-star" aria-hidden="true"></i></li>
-								<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-								<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-							</ul>
-							
-						</div>
-						<div class="likes">
-							<i class="fa fa-gratipay" aria-hidden="true"></i>
-							<span>1234</span>
-						</div>
-					</div>
-
-					<div class="item">
-						<div class="choice"></div>
-						<img src="<c:url value="/images/newArrived1.jpg"/>">
-						<div class="shopName">兔兔的家</div>
-						<div class="description">
-							秋冬新款全面鋪貨中 每一款都是精心挑選出來了 這裏有最好的質量歡迎來諮詢 ！！
-						</div>
-						<div class="stars">
-							<ul>
-								<li><i class="fa fa-star" aria-hidden="true"></i></li>
-								<li><i class="fa fa-star" aria-hidden="true"></i></li>
-								<li><i class="fa fa-star" aria-hidden="true"></i></li>
-								<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-								<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-							</ul>
-							
-						</div>
-						<div class="likes">
-							<i class="fa fa-gratipay" aria-hidden="true"></i>
-							<span>1234</span>
-						</div>
-					</div>
-
-					<div class="item">
-						<div class="choice"></div>
-						<img src="<c:url value="/images/newArrived1.jpg"/>">
-						<div class="shopName">雄大的農場</div>
-						<div class="description">
-							秋冬新款全面鋪貨中 每一款都是精心挑選出來了 這裏有最好的質量歡迎來諮詢 ！！
-						</div>
-						<div class="stars">
-							<ul>
-								<li><i class="fa fa-star" aria-hidden="true"></i></li>
-								<li><i class="fa fa-star" aria-hidden="true"></i></li>
-								<li><i class="fa fa-star" aria-hidden="true"></i></li>
-								<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-								<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-							</ul>
-							
-						</div>
-						<div class="likes">
-							<i class="fa fa-gratipay" aria-hidden="true"></i>
-							<span>1234</span>
-						</div>
-					</div>
-
-
-					<div class="item">
-						<div class="choice"></div>
-						<img src="<c:url value="/images/newArrived1.jpg"/>">
-						<div class="shopName">珠珠的小天地</div>
-						<div class="description">
-							秋冬新款全面鋪貨中 每一款都是精心挑選出來了 這裏有最好的質量歡迎來諮詢 ！！
-						</div>
-						<div class="stars">
-							<ul>
-								<li><i class="fa fa-star" aria-hidden="true"></i></li>
-								<li><i class="fa fa-star" aria-hidden="true"></i></li>
-								<li><i class="fa fa-star" aria-hidden="true"></i></li>
-								<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-								<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-							</ul>
-							
-						</div>
-						<div class="likes">
-							<i class="fa fa-gratipay" aria-hidden="true"></i>
-							<span>1234</span>
-						</div>
-					</div>
-
-					<div class="item">
-						<div class="choice"></div>
-						<img src="<c:url value="/images/newArrived1.jpg"/>">
-						<div class="shopName">汪汪的小舖鋪</div>
-						<div class="description">
-							秋冬新款全面鋪貨中 每一款都是精心挑選出來了 這裏有最好的質量歡迎來諮詢 ！！
-						</div>
-						<div class="stars">
-							<ul>
-								<li><i class="fa fa-star" aria-hidden="true"></i></li>
-								<li><i class="fa fa-star" aria-hidden="true"></i></li>
-								<li><i class="fa fa-star" aria-hidden="true"></i></li>
-								<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-								<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-							</ul>
-							
-						</div>
-						<div class="likes">
-							<i class="fa fa-gratipay" aria-hidden="true"></i>
-							<span>1234</span>
-						</div>
-					</div>
+					<c:forEach var="hotStore" varStatus="st" items="${hotStoreList}">
+						<a href='<c:url value='/ProductItemOfShop?storeID=&productID=${hotStore[0]}'/>'>
+							<div class="item">
+								<div class="choice"></div>
+									<img src="data:image/jpeg;base64,${hotStore[1]}"/>">
+									<div class="shopName">${hotStore[2]}</div>
+									<div class="description">
+										${hotStore[3]}
+									</div>
+								<div class="stars">
+									<ul>
+										<li><i class="fa fa-star" aria-hidden="true"></i></li>
+										<li><i class="fa fa-star" aria-hidden="true"></i></li>
+										<li><i class="fa fa-star" aria-hidden="true"></i></li>
+										<li><i class="fa fa-star" aria-hidden="true"></i></li>
+										<c:if test="${hotStore[4] == 4}">
+											<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+										</c:if>
+										<c:if test="${hotStore[4] == 5}">
+											<li><i class="fa fa-star" aria-hidden="true"></i></li>
+										</c:if>
+										
+									</ul>
+								</div>
+								<div class="likes">
+									<i class="fa fa-gratipay" aria-hidden="true"></i>
+									<span>${hotStore[5]}</span>
+								</div>
+							</div>
+						</a>
+					</c:forEach>
 				</div>
 			</section>
 		</section>
@@ -284,54 +200,23 @@
 		<!--媽咪文章-->
 		<div class="momBlog">
 			<img class="momlogo" src="<c:url value="/images/mon_pic.png"/>">
-			<div class="momTitle"><img src="<c:url value="/images/monBlog_title.png"/>"><span><a href="#">看更多..</a></span></div>
+			<div class="momTitle"><img src="<c:url value="/images/monBlog_title.png"/>"><span><a target="_blank" href="<c:url value='AllBlogController'/>">看更多..</a></span></div>
 
-			<div class="momArtical">
-				<div class="articalL">
-					<img src="<c:url value="/images/artical_img1.png"/>">
-					<p>部落客 牛牛媽咪</p>
-				</div>
-
-				<div class="articalR">
-					<p>保暖啾啾褲超好穿大推!!</p>
-					<p>秋冬新款全面鋪貨中 每一款都是精心挑選出來了 這裏有最新款全面鋪貨中 每一款全面鋪貨中 貨中 每一款全面都是精心挑選全面鋪貨中 好的質...MORE</p>
-				</div>
-			</div>
-
+			<c:forEach var="newBlog" varStatus="st" items="${newBlogList}">
 				<div class="momArtical">
-				<div class="articalL">
-					<img src="<c:url value="/images/artical_img1.png"/>">
-					<p>部落客 牛牛媽咪</p>
-				</div>
+					<a  target="_blank" href='<c:url value='/BlogItemOfArticle?articleID=${newBlog[0]}'/>'>
+						<div class="articalL">
+							<img width="120" height="120" src="data:image/jpeg;base64,${newBlog[1]}">
+						</div>
 
-				<div class="articalR">
-					<p>保暖啾啾褲超好穿大推!!</p>
-					<p>秋冬新款全面鋪貨中 每一款都是精心挑選出來了 這裏有最新款全面鋪貨中 每一款全面鋪貨中 貨中 每一款全面都是精心挑選全面鋪貨中 好的質...MORE</p>
+						<div class="articalR">
+							<p>${newBlog[3]}</p>
+							<p>${newBlog[2]}...MORE</p>
+						</div>
+					</a>
 				</div>
-			</div>
-
-			<div class="momArtical">
-				<div class="articalL">
-					<img src="<c:url value="/images/artical_img1.png"/>">
-					<p>部落客 牛牛媽咪</p>
-				</div>
-
-				<div class="articalR">
-					<p>保暖啾啾褲超好穿大推!!</p>
-					<p>秋冬新款全面鋪貨中 每一款都是精心挑選出來了 這裏有最新款全面鋪貨中 每一款全面鋪貨中 貨中 每一款全面都是精心挑選全面鋪貨中 好的質...MORE</p>
-				</div>
-			</div>
-			<div class="momArtical">
-				<div class="articalL">
-					<img src="<c:url value="/images/artical_img1.png"/>">
-					<p>部落客 牛牛媽咪</p>
-				</div>
-
-				<div class="articalR">
-					<p>保暖啾啾褲超好穿大推!!</p>
-					<p>秋冬新款全面鋪貨中 每一款都是精心挑選出來了 這裏有最新款全面鋪貨中 每一款全面鋪貨中 貨中 每一款全面都是精心挑選全面鋪貨中 好的質...MORE</p>
-				</div>
-			</div>	
+			</c:forEach>
+				
 		</div>
 
 		<!--友情連結-->

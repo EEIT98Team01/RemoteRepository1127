@@ -201,6 +201,7 @@
 		        type:"GET",                   
 		        url: "/CowBaby/prouducts/inquire",    
 		        data: {
+		        	 keyWord:"${keyWord}",
 		        	 productClassfication:classfication,
 		        	 suitableAges:suitableAges,
 		        	 genderPreference:genderPreference,
