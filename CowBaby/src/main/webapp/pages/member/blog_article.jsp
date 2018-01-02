@@ -36,23 +36,11 @@
 			<div class="article_classify">
 				<div class="classify_title">最新文章</div>
 				<ul>
-					<li><a href="#">這是文章1</a></li>
-					<li><a href="#">這是文章1</a></li>
-					<li><a href="#">這是文章1</a></li>
-					<li><a href="#">這是文章1</a></li>
-					<li><a href="#">這是文章1</a></li>
-				</ul>
-				
-			</div>
-
-			<div class="article_classify">
-				<div class="classify_title">最新文章</div>
-				<ul>
-					<li><a href="#">這是文章1</a></li>
-					<li><a href="#">這是文章1</a></li>
-					<li><a href="#">這是文章1</a></li>
-					<li><a href="#">這是文章1</a></li>
-					<li><a href="#">這是文章1</a></li>
+					<li><a href="http://localhost:8080/CowBaby/BlogItemOfArticle?articleID=12"><米菲>好英文圖書介紹，淺移默化</a></li>
+					<li><a href="http://localhost:8080/CowBaby/BlogItemOfArticle?articleID=11">澳洲We Might Be Tiny矽膠防滑餐墊</a></li>
+					<li><a href="http://localhost:8080/CowBaby/BlogItemOfArticle?articleID=10">來至加拿大 3 Sprouts~動物眼睛都很大的趣味收納法寶媽媽推薦居家生活</a></li>
+					<li><a href="http://localhost:8080/CowBaby/BlogItemOfArticle?articleID=9">鐵寶包週歲溫馨小party之廠商分享</a></li>
+					<li><a href="http://localhost:8080/CowBaby/BlogItemOfArticle?articleID=8">【私物分享】★美國 Little Giraffe★ 安撫、保暖、舒適媽媽推薦居家生活</a></li>
 				</ul>
 				
 			</div>
@@ -96,9 +84,10 @@
 									
 									
 
-								<input type="button" id="beforePage" class="btn btn-primary pull-left" value="返回查詢頁面" />
 							  </div>
+							  
 	                      	</section>
+                	 		<input type="button" id="beforePage" class="btn btn-primary pull-left" value="返回查詢頁面" />
 	                      	
 						</div>
 					</div>	
@@ -131,7 +120,7 @@
 
 		 // 返回所有部落格頁面
 		 $("#beforePage").on('click', function () {
-			window.location.assign('<c:url value="/pages/member/all_blog.jsp" />');
+			window.location.assign('<c:url value="http://localhost:8080/CowBaby/AllBlogController" />');
 		 })
 		
 		 // side_menu 帳戶總覽填充背景色

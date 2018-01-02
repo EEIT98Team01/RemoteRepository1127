@@ -28,9 +28,9 @@
 	<div class="login">
 		<div class="nav pull-right">
 			<li class="login-user">
-				<img src="${pageContext.request.contextPath}/images/line.jpg"><span>HI! 雄大</span>
+				<img src="${pageContext.request.contextPath}/images/line.jpg"><span>${user.customerName}</span>
 			</li>
-			<li><a class="logout" href="#">登出</a></li>
+			<li><a class="logout" href="<c:url value="/LoingOutController"/>">登出</a></li>
 		</div>
 	</div>
 </header>

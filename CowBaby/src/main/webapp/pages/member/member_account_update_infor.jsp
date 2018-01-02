@@ -39,7 +39,6 @@
 				</ul>	
 			</div>	
 		</div>
-
 		<!-- 個人商店頁面-->
 		<div class="main_container_col_2 member_information">
 			<ul class="breadcrumb">
@@ -49,7 +48,7 @@
 			</ul>
 			<div class="welcome_text">
 				<p>HI! 
-					<span>${user.customerName}</span>~歡迎來到CowBaby~
+					<span style="color: #f1648f;font-size: 15px;">${user.customerName}</span>~歡迎來到CowBaby~
 					<span class="user_stauts">
 						<c:if test="${user.userID==1}">
 						   <c:out value="一般會員"/>
@@ -61,10 +60,14 @@
 						   <c:out value="黑名單"/>
 						</c:if>				
 					</span> 
+					<c:if test="${user.userID==1}">
 					<a class="open_shop" href="<c:url value="/pages/member/member_apply_shop.jsp"/>">我要開店</a>
+					</c:if>
 				</p>
 			</div>
 			<div class="review_member_infor">
+			<form action="${pageContext.servletContext.contextPath}/CustomerUpdate.controller"
+			      method="POST">>
 				<div class="wrapper">
 					<div class="title">會員基本資訊</div>
 					<div class="wrapper_box1">
@@ -72,6 +75,7 @@
 							<tr>
 								<td>帳號E-mail</td>
 								<td>${user.email}</td>
+								<input type="text" style="display:none" name="customerID" value="${user.customerID}" />
 								<td>會員註冊日</td>
 								<td>${user.createTime}</td>
 							</tr>
@@ -83,9 +87,11 @@
 							</tr>
 							<tr>
 								<td>修改密碼</td>
-								<td><input type="text" class="form-control"></td>
+								<td><input type="text" class="form-control" name="password" id="password" value="${user.password}"><p style="color: #e21124;">${errors.password}</p></td>
+								
 								<td>確認密碼</td>
-								<td><input type="text" class="form-control"></td>
+								<td><input type="text" class="form-control" name="checkPassword" id="checkPassword" value="${user.password}"><p style="color: #e21124;">${errors.checkPassword}</p></td>
+								
 							</tr>
 						</table>
 					</div>
@@ -102,31 +108,37 @@
 								<td>您的生日 * :</td>
 								<td>${user.birthday}</td>
 								<td>婚姻狀況 * :</td>
-								<td>${user.marriage}</td>
+								<c:if test="${user.marriage==false}">
+									<td colspan="3">未婚</td>
+								</c:if>
+								<c:if test="${user.marriage==true}">
+									<td colspan="3">已婚</td>
+								</c:if>
 							</tr>
 							<tr>
 								<td>您的電話 *:</td>
-								<td><input type="text" class="form-control"></td>
+								<td><input type="text" class="form-control" name="landline" id="landline" value="${user.landline}"></td>
 								<td>行動電話*</td>
-								<td><input type="text" class="form-control"></td>
+								<td><input type="text" class="form-control" name="mobilePhone" id="mobilePhone" value="${user.mobilePhone}"></td>
 							</tr>
 							<tr>
 								<td>聯絡地址 * :</td>
-								<td><input type="text" class="form-control"></td>
+								<td><input type="text" class="form-control" name="address" id="address" value="${user.address}"></td>
 								<td>月收入狀況 :</td>
-								<td><input type="text" class="form-control"></td>
+								<td><input type="text" class="form-control" name="income" id="income" value="${user.income}"></td>
 							</tr>
 							<tr>
 								<td>是否定閱電子報 :</td>
 								<td colspan="3">
-									<label class="radio-inline"><input type="radio" name="optradio"> 是 </label>
-									<label class="radio-inline"><input type="radio" name="optradio"> 否 </label>
+									<label class="radio-inline"><input type="radio" name="subscription" id="subscription"> 是 </label>
+									<label class="radio-inline"><input type="radio" name="subscription" id="subscription"> 否 </label>
 								</td>
 							</tr>
 						</table>	
 					</div>	
 				</div>
-				<div class="submit_btn"><button type="button" class="btn btn-primary pull-right">確認提交</button></div>
+				<div><button  type="submit" class="btn btn-primary pull-right">確認提交</button></div>
+				</form>
 			</div>
 		</div>		
 	</section>

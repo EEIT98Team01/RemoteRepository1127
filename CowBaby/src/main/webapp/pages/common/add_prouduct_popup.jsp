@@ -30,7 +30,7 @@
 			<label class="c-choice__label" for="radio1" >啟用</label>
 
 			<input class="c-choice__input" id="radio1" name="StartStopStatus" type="radio" value="false">
-			<label class="c-choice__label" for="radio1" >不啟用</label>
+			<label class="c-choice__label" for="radio1" >停用</label>
 		</div>
 	</div>
 	

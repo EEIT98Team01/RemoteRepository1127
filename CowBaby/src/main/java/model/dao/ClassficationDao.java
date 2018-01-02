@@ -38,4 +38,9 @@ public interface ClassficationDao {
 				
 	// 取得符合某條件之 Classification 數量
 	public int getConditionQuantity(Map<String, String> condition);
+	
+	public List<ClassficationBean> findByCondition1(Map<String, String> condition, int page, int rows);
+	
+	
+	
 }

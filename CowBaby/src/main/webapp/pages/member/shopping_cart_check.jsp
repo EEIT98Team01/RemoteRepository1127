@@ -36,9 +36,9 @@
 		<div class="line1 lineActive"></div>
 		<div class="line2"></div>
 		<ul>
-			<li><a class="step_link active" href="">Step1</a><small>確認購物明細</small></li>
-			<li><a class="step_link" href="">Step2</a><small>選擇附款方式</small></li>
-			<li><a class="step_link" href="">Step3</a><small>確認結帳完成</small></li>
+			<li><a class="step_link step1Btn active" href="">Step1</a><small>確認購物明細</small></li>
+			<li><a class="step_link step2Btn" href="">Step2</a><small>選擇附款方式</small></li>
+			<li><a class="step_link step3Btn" href="">Step3</a><small>確認結帳完成</small></li>
 		</ul>
 	</div>
 	
@@ -46,13 +46,16 @@
 	<!--每頁主要內容-->
 	<section class="page_container shopping_cart_check">
 		<!-- 主要內容-->
-		<div class="main_container_col_1">
+		
+		<!--------購物車訂單列表---------->
+		<div class="main_container_col_1 step1">
 			<c:forEach var="objectArray" items="${shoppingCartInfo}">
 				<div class="myshopOrder">
 					<div class="shop_name">
-						<span><i class="fa fa-user-secret" aria-hidden="true"></i>${objectArray[0]}</span>
-						<span>|</span>
-						<span>店家ID : (這到底要部要寫進去?寫進去也只有1.2.3..)</span>
+						<span>
+							<i class="fa fa-user-secret" aria-hidden="true"></i>
+							<span class="myshoptext">${objectArray[0]}</span>
+						</span>
 					</div>
 					<table>
 						<tr>
@@ -74,13 +77,12 @@
 							<td>${var.quantity*var.unitPrice}</td> 
 							<td><a class="btn btn-primary" href="<c:url value="/deleteProuductController"/>?productID=${var.productID}&spec=${var.productSpec}">刪除</a></td>
 						</tr> 
-						
 						</c:forEach>
 						<tr>
-						<td colspan="7" style="text-align: right;">
+							<td colspan="7" style="text-align: right;">
 								<div class="bonusbox">
 									<span>目前紅利金為<span class="totalbonus">500</span>點，我要折抵</span>
-									<span><input class="useBonusbox" type="text" name="" value="0"></span>
+									<span><input class="useBonusbox" type="text" name="mybounsText" value="0"></span>
 									<span>元</span>
 								</div>
 							</td>
@@ -96,6 +98,7 @@
 				</div>
 			</c:forEach>
 
+			<!--------購物車總金額列表---------->
 			<div class="total_order">
 				<div class="total_order_my_prouduct">
 					<div>購買總金額 (<span class="all_prousuct">${shoppingCart.totalItems}</span> 個商品):
@@ -104,12 +107,12 @@
 					<div class="this_order_bonus">此次紅利點數 : <span>123456</span>點</div>		
 				</div>
 				<div class="go_checkout">
-					<%-- <a href="<c:url value="/pages/member/shopping_payment.jsp"/>" class="go_checkout_btn">下ㄧ步</a> --%>
-					<a href="#" class="go_checkout_btn">下ㄧ步</a> 
+					<a href="#" class="go_checkout_btn">下ㄧ步</a>
+				<!-- 	<button style="padding:15px 75px;background: #f27373;font-size: 16px; border: none;" type="submit go_checkout_btn" class="btn btn-primary pull-right">下ㄧ步</button> -->
 				</div>
 			</div>
-		</div>	
-		    
+			
+		</div>
 	</section>
 
 	<!--引入 footer-->
@@ -128,56 +131,56 @@
 
 $(function(){
 	
-	$(".go_checkout_btn").click(function(){	
+	 $(".go_checkout_btn").click(function(event){	
 		
-		var group_names = [];
-		var store="0";
+		event.preventDefault();
+		
+		var storeName = [];
+		var storeBonus = []; 
+	    var data={};
+		 
+		$('.myshoptext').each(function(index){
+			storeName.push($(this).text());	
+		})
+		console.log("storeName",storeName);
+		
+		
         $('.useBonusbox').each(function(index){
-        	  var i=0;
-        	  var obj={
-        			i:$(this).val()
-        	  };
-        	 /*  obj.store=$(this).val(); */
-        	  group_names.push(obj);
-        	  
-             /*  group_names.push($(this).val());  */
+        	storeBonus.push($(this).val());	
      	});
-        
-        console.log("group_names",group_names);
-        
-        
-	   /*  $.ajax({
-        type:"GET",                   
-        url: "/CowBaby/shopping/useBonus",    
-        data: {
-        	bonus:
-        }, 
-         
-        dataType:"json",   
-        
-        // ajax載入前
-        beforeSend: function(){
-        	//顯示laoding 參考網址=>https://gasparesganga.com/labs/jquery-loading-overlay/#quick-demo
-        	$("#customerList").LoadingOverlay("show");
-		}, 
-		
-		// 成功要做的事
-        success : function(response){   
-           // response 回來的字串轉 json物件
-           var obj = JSON.parse(response.list);	
-           setTimeout(function(){
-        		$("#customerList").LoadingOverlay("hide");
-        	},300)
-        },
-		     
-		// 發ajax錯誤
-        error:function(xhr, ajaxOptions, thrownError){
-            alert(xhr.status+"\n"+thrownError);
+        console.log("storeBonus",storeBonus);
+               
+        for(var i =0;i<storeName.length;i++){
+ 
+        	data[storeName[i]] = storeBonus[i];
         }
-      }) */
+        
 
-    })
-}) 
+        console.log("data",data);
+        
+		$.ajax({
+	        type:"post",                   
+	        url: "/CowBaby/shopping/useBonus",    
+	        data: {
+	        	bonus:JSON.stringify(data)
+	        },
+         
+	        dataType:"json",   
+	        
+	        success : function(response){   
+	          console.log("成功")
+	          document.location.href="http://localhost:8080/CowBaby/pages/member/shopping_payment.jsp"; 
+	         /*  /CowBaby/sss */
+	        },
+			     			
+	        error:function(xhr, ajaxOptions, thrownError){
+	            alert(xhr.status+"\n"+thrownError);
+	        }
+       }) 
 
+    }) 
+    
+})   
+   
 	
 </script>

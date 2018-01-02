@@ -9,15 +9,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import model.bean.ClassficationBean;
 import model.bean.CustomerServiceBean;
 import model.service.CustomerServiceAuditService;
+import model.service.MessageService;
 
 @Controller
 public class CustomerReviewController {
 
 	@Autowired
 	CustomerServiceAuditService customerServiceAuditService;
+	
+	@Autowired
+	MessageService messageService;
 
 	@RequestMapping(value = ("CustomerReview.controller"), method = { RequestMethod.GET, RequestMethod.POST })
 	public String review(Model model, String email, String processStatus, String problemTypes) {
@@ -82,6 +85,27 @@ public class CustomerReviewController {
 				
 				customerServiceAuditService.updateCustomerData(aa);
 			}
+		}
+		return "customer_review_success";
+	}
+	
+	@RequestMapping(value = ("CustomerReviewInsert.controller"), method = { RequestMethod.GET, RequestMethod.POST })
+	public String reviewupdateReply(Model model,int reportid, String serviceFeedback) {
+		System.out.println(serviceFeedback);
+
+		if ((serviceFeedback == null) || ("".equals(serviceFeedback.trim())))
+		 {
+			return "customer_review_success";
+		} else {
+			CustomerServiceBean bean = customerServiceAuditService.findById(reportid);
+			bean.setServiceFeedback(serviceFeedback);
+			
+			customerServiceAuditService.updateCustomerData(bean);
+			messageService.sendMessage("999@gmail.com", bean.getEmail(), "親愛的會員您好");
+			
+//			CustomerServiceBean bean = new CustomerServiceBean();
+//			bean.setServiceFeedback(serviceFeedback);
+//			customerServiceAuditService.updateCustomerData(bean);
 		}
 		return "customer_review_success";
 	}

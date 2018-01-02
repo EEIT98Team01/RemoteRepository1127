@@ -38,25 +38,8 @@
 					action="${pageContext.servletContext.contextPath}/ProductController"
 					method="POST">
 					<div class="form-group">
-						<label for="exampleInputName2">會員帳號:</label> 
+						<label for="exampleInputName2">商品名稱:</label> 
 						<input type='text' name='classficationID' class="form-control" value="" />
-					</div>
-					<div class="form-group">
-						<label for="exampleInputName2">會員身份:</label> 
-						<select class="form-control" name="productStatus">
-							<option>
-								<c:if test="${productStatus==''}">selected="true"</c:if>全部 
-							</option>
-							<option>
-								<c:if test="${productStatus=='1'}">selected="true"</c:if>一般會員
-							</option>
-							<option>
-								<c:if test="${productStatus=='2'}">selected="true"</c:if>平台賣家
-							</option>
-							<option>
-								<c:if test="${productStatus=='3'}">selected="true"</c:if>黑名單
-							</option>
-						</select>
 					</div>
 
 					<button type="submit" class="btn btn-primary inquire">查詢</button>
@@ -93,15 +76,47 @@
 							<td>${classfication.summary}</td>
 							<td>${classfication.unitPrice}</td>
 							<td>${classfication.productDescription}</td>
-							<td>${classfication.productStatus}</td>
-							<td>${classfication.classficationID}</td>
+								<c:choose>
+								<c:when test="${classfication.productStatus == true}">
+									<td>上架</td>
+								</c:when>
+								<c:otherwise>
+									<td>下架</td>
+								</c:otherwise>
+							    </c:choose>
+							<c:choose>
+								<c:when test="${classfication.classficationID == 1}">
+									<td>玩具</td>
+								</c:when>
+								<c:when test="${classfication.classficationID == 2}">
+									<td>圖書</td>
+								</c:when>
+								<c:when test="${classfication.classficationID == 3}">
+									<td>衣服</td>
+								</c:when>
+								<c:when test="${classfication.classficationID == 4}">
+									<td>鞋子</td>
+								</c:when>
+								<c:when test="${classfication.classficationID == 5}">
+									<td>日用品</td>
+								</c:when>					
+							    </c:choose>
 							<td>${classfication.suitableAges}</td>
 							<td>${classfication.genderPreference}</td>
+							<c:choose>
+								<c:when test="${classfication.genderPreference == M}">
+									<td>男</td>
+								</c:when>
+								<c:when test="${classfication.genderPreference == F}">
+									<td>女</td>
+								</c:when>				
+							</c:choose>
 							<td>${classfication.displayTime}</td>
 							<td>${classfication.productImage}</td>
 							<!-- <td><span class="label label-success">啟用</span></td>
 							 -->
-							<td><a href="#" class='btn btn-primary'> 
+							<td><a href="#" class='btn btn-primary product_management_btn'> 
+								<span style="display: none;">${classfication.productID}</span>
 							<i class='fa fa-pencil'></i>
 							</a></td>
 						</tr>
@@ -154,6 +169,36 @@
 		$(".productManagement").find('.sub a').eq(0).css({
 			'color' : 'yellow'
 		});
+		
+		// 商品分類編輯彈出框
+		$(".product_management_btn").click(function(){
+			console.log("AAA");
+			var sss = $(this).find('span').text();
+			console.log(sss)
+
+				BootstrapDialog.show({
+					message : $('<div></div>').load('/CowBaby/pages/common/produt_management_popup.jsp?sss='+sss),
+					title : "商品列表設定",
+					buttons : [ {
+						label : '確定',
+						// no title as it is optional
+						cssClass : 'btn-primary',
+						data : {
+							js : 'btn-confirm',
+							'user-id' : '3'
+						},
+						action : function() {
+							console.log("AAA");
+		                	$("#qqq").submit();
+						}
+					}, {
+						label : '取消',
+						action : function(dialogItself) {
+							dialogItself.close();
+						}
+					} ]
+				});
+			})
 
 	})
 </script>
