@@ -5,14 +5,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import javax.xml.bind.helpers.ParseConversionEventImpl;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import model.bean.ProductBean;
-import model.bean.ProductSizeBean;
 import model.dao.ProductDao;
 import model.dao.ProductSizeDao;
 import model.dao.SellerBackstageManageDao;
@@ -73,6 +70,22 @@ public class ProductService {
 			return productDao.findByCondition(condition);
 		}
 	}
+	
+	//全域搜尋
+	@Transactional(readOnly = true)
+	public List<ProductBean> findBycommodity(String title) {
+		if((title == null) || "".equals(title.trim())){
+			return productDao.find();//未使用任何條件
+		}else{
+			Map<String,String> condition = new HashMap<String,String>();
+			if(title != null){
+				condition.put("title", "like '%" + title + "%'");
+			}
+			 List<ProductBean> JJ = productDao.findByCondition(condition);
+			 System.out.println(JJ);
+			 return JJ;
+		}
+	}
 
 	// 回傳符合某條件的N筆資料,若無資料,則回傳之List為空集合
 	@Transactional(readOnly = true)
@@ -103,6 +116,12 @@ public class ProductService {
 		}
 		return result;
 	}
+	
+	// 回傳符合某條件的N筆資料,若無資料,則回傳之List為空集合(DIN**)
+	@Transactional(readOnly = true)
+		public List<ProductBean> findByCondition(int storeId, int page, int rows) {
+			return productDao.findByCondition(this.createCondition(storeId), page, rows);
+	}
 
 	// 將查詢條件塞進Map
 	private HashMap<String, String> createCondition(String account, String userType, String clusterID) {
@@ -128,8 +147,8 @@ public class ProductService {
 	}
 	
 	// 回傳有商店名稱的商品
-	public List<Object[]> findObject() {
-		List<ProductBean> list = this.find();
+	public List<Object[]> findObject(int page, int rows, String sortCondition) {
+		List<ProductBean> list = productDao.find(page, rows, sortCondition);
 		List<Object[]> objList = new LinkedList<Object[]>();
 		// 自己組要的資料塞回頁面
 		for(ProductBean bean: list) {
@@ -152,6 +171,17 @@ public class ProductService {
 		return productDao.selectCountByClassficationId(classficationID);
 	};
 	
+	// DIN
+	private HashMap<String, String> createCondition(int storeId) {
+		HashMap<String, String> condition = new HashMap<String, String>();
+
+		// account對應到資料庫中的email,若為null或"",表不設定該條件
+		if (storeId!= 0) {
+			condition.put("storeId", "= " + storeId);
+		}
+		return condition;
+	}
+
 
 	
 }

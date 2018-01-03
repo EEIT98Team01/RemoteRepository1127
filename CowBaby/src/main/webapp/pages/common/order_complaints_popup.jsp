@@ -5,7 +5,7 @@
 
 <p>請選則要處理的狀態</p>
 <form class="form-horizontal" role="form" id="qqq" 
-		action="${pageContext.servletContext.contextPath}/OrderUpdate.controller" method="POST">
+		action="${pageContext.servletContext.contextPath}/pages/backstageSeller/OrderUpdate.controller" method="POST">
 <input class="c-choice__input" id="radio1" name="status" type="radio" value="未處理">
 <label class="c-choice__label" for="radio1">未處理</label>
 

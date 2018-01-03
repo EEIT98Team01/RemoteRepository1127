@@ -30,7 +30,7 @@
 					<div class="showMemberPannal">
 						<c:if test="${user.userID==2}">
 						<div><a href="#">我的賣場</a></div>
-						<div><a href="<c:url value="/SellerBackstagePageController.controller"/>">我的管理著後台</a></div>
+						<div><a href="<c:url value="/pages/backstageSeller/SellerBackstagePageController.controller"/>">我的管理著後台</a></div>
 						</c:if>
 						<div><a href="<c:url value="/pages/member/member_account_infor.jsp"/>">我的資訊</a></div>
 						<div><a href="<c:url value="/LoingOutController"/>">安全登出</a></div>
@@ -47,16 +47,16 @@
 	<section class="container">
 		<row>
 			<div class="col-md-2 logo">
-				<a href="<c:url value="/index.jsp"/>"><img src="<c:url value="/images/logo.jpg"/>"></a>
+				<a href="<c:url value="/"/>"><img src="<c:url value="/images/logo.jpg"/>"></a>
 			</div>
 			<div class="col-md-2 slogan" >
 				<span>開心玩樂開心學習~</span>
 				<span>給孩子最好的就在牛寶貝!!</span>
 			</div>
 
-			<form class="col-md-5 pull-right searchProduct" role="search">
+			<form class="col-md-5 pull-right searchProduct" role="search" action="<c:url value='AllProductController'/>" method="post">
 			    <div class="input-group add-on">
-			      	<input class="form-control" style="border: 2px solid #9ee2ea;" placeholder="Search" name="srch-term" id="title" value="${title}"type="text">
+			      	<input class="form-control" style="border: 2px solid #9ee2ea;" placeholder="Search" name="keyWord" id="title" value="${keyWord}" type="text">
 			      	<div class="input-group-btn">
 			        	<button class="btn btn-default searchStyle" type="submit"><i class="glyphicon glyphicon-search"></i></button>
 			      	</div>
@@ -70,7 +70,7 @@
 			<ul class="nav navbar-nav">
 				<li><a href="<c:url value="/AllProductController"/>"><i class="fa fa-gift fa-2x" aria-hidden="true"></i>全部商品</a></li>
 				<li><a href="<c:url value="/NewArrivalController"/>"><i class="fa fa-diamond fa-2x" aria-hidden="true"></i>最新商品</a></li>
-				<li><a href="<c:url value="/pages/member/all_shops.jsp"/>"><i class="fa fa-heartbeat fa-2x" aria-hidden="true"></i>精選商家</a></li>
+				<li><a href="<c:url value="/AllShopController"/>"><i class="fa fa-heartbeat fa-2x" aria-hidden="true"></i>精選商家</a></li>
 				<li><a href="<c:url value="/AllBlogController"/>"/><i class="fa fa-star-half-o fa-2x" aria-hidden="true"></i>媽咪推薦</a></li>
 				<li><a href="<c:url value="/pages/member/customer_service.jsp"/>"/><i class="fa fa-thumbs-up fa-2x" aria-hidden="true"></i>客戶服務</a></li>
 			</ul>
@@ -124,7 +124,7 @@ $(function(){
 		    	    // 全部購買總商品數量
 		    	    totalBuyNumber = totalBuyNumber + productInfor[key][i].quantity;
 		       		item  = item +"<li>"+
-		        			"<img src='<c:url value='/images/ad1.jpg'/>'>"+
+		        			"<img src='" + productInfor[key][i].productImage + "'>"+
 							"<div class='cartList'>"+
 								"<p>"+ key +"</p>"+
 								"<p>"+ productInfor[key][i].productName + "<span>-"+ productInfor[key][i].productSpec+"</span></p>"+

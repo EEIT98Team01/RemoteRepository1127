@@ -71,9 +71,78 @@
 				</div>
 				
 			</div>
-			<!--產品LIST-->
-			<section class="shopList">
-				<div class="item">
+			<!--全部商店-->
+			<section class="shopList"> 
+				<c:forEach var="list" items="${shopList}">
+										
+					<a class="item" href="<c:url value="PersonShopController"/>?storeID=${list.storeID}&email=${list.email}" >
+						<img src="<c:url value="/images/newArrived1.jpg"/>">
+						<div class="shopName">${list.storeName}</div>
+						<div class="description">${list.storeDescription}</div>
+						<div class="stars">
+							<c:if test="${list.storeRating==0}">
+								<ul>
+									<li><i class="fa fa-star" aria-hidden="true"></i></li>
+									<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+									<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+									<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+									<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+								</ul>
+							</c:if>
+							<c:if test="${list.storeRating==1}">
+								<ul>
+									<li><i class="fa fa-star" aria-hidden="true"></i></li>
+									<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+									<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+									<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+									<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+								</ul>
+							</c:if>
+							<c:if test="${list.storeRating==2}">
+								<ul>
+									<li><i class="fa fa-star" aria-hidden="true"></i></li>
+									<li><i class="fa fa-star" aria-hidden="true"></i></li>
+									<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+									<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+									<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+								</ul>
+							</c:if>
+							<c:if test="${list.storeRating==3}">
+								<ul>
+									<li><i class="fa fa-star" aria-hidden="true"></i></li>
+									<li><i class="fa fa-star" aria-hidden="true"></i></li>
+									<li><i class="fa fa-star" aria-hidden="true"></i></li>
+									<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+									<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+								</ul>
+							</c:if>
+							<c:if test="${list.storeRating==4}">
+								<ul>
+									<li><i class="fa fa-star" aria-hidden="true"></i></li>
+									<li><i class="fa fa-star" aria-hidden="true"></i></li>
+									<li><i class="fa fa-star" aria-hidden="true"></i></li>
+									<li><i class="fa fa-star" aria-hidden="true"></i></li>
+									<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+								</ul>
+							</c:if>
+							<c:if test="${list.storeRating==5}">
+								<ul>
+									<li><i class="fa fa-star" aria-hidden="true"></i></li>
+									<li><i class="fa fa-star" aria-hidden="true"></i></li>
+									<li><i class="fa fa-star" aria-hidden="true"></i></li>
+									<li><i class="fa fa-star" aria-hidden="true"></i></li>
+									<li><i class="fa fa-star" aria-hidden="true"></i></li>
+								</ul>
+							</c:if>
+						</div>
+						<div class="likes">
+							<i class="fa fa-gratipay" aria-hidden="true"></i>
+							<span>${list.totalPageView}</span>
+						</div>
+					</a>
+				</c:forEach>
+				
+				<%-- <div class="item">
 					<img src="<c:url value="/images/newArrived1.jpg"/>">
 					<div class="shopName">兔兔的家</div>
 					<div class="description">
@@ -93,139 +162,7 @@
 						<i class="fa fa-gratipay" aria-hidden="true"></i>
 						<span>1234</span>
 					</div>
-				</div>
-
-				<div class="item">
-					<img src="<c:url value="/images/newArrived1.jpg"/>">
-					<div class="shopName">兔兔的家</div>
-					<div class="description">
-						秋冬新款全面鋪貨中 每一款都是精心挑選出來了 這裏有最好的質量歡迎來諮詢 ！！
-					</div>
-					<div class="stars">
-						<ul>
-							<li><i class="fa fa-star" aria-hidden="true"></i></li>
-							<li><i class="fa fa-star" aria-hidden="true"></i></li>
-							<li><i class="fa fa-star" aria-hidden="true"></i></li>
-							<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-							<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-						</ul>
-						
-					</div>
-					<div class="likes">
-						<i class="fa fa-gratipay" aria-hidden="true"></i>
-						<span>1234</span>
-					</div>
-				</div>
-
-				<div class="item">
-					<img src="<c:url value="/images/newArrived1.jpg"/>">
-					<div class="shopName">兔兔的家</div>
-					<div class="description">
-						秋冬新款全面鋪貨中 每一款都是精心挑選出來了 這裏有最好的質量歡迎來諮詢 ！！
-					</div>
-					<div class="stars">
-						<ul>
-							<li><i class="fa fa-star" aria-hidden="true"></i></li>
-							<li><i class="fa fa-star" aria-hidden="true"></i></li>
-							<li><i class="fa fa-star" aria-hidden="true"></i></li>
-							<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-							<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-						</ul>
-						
-					</div>
-					<div class="likes">
-						<i class="fa fa-gratipay" aria-hidden="true"></i>
-						<span>1234</span>
-					</div>
-				</div>
-
-				<div class="item">
-					<img src="<c:url value="/images/newArrived1.jpg"/>">
-					<div class="shopName">兔兔的家</div>
-					<div class="description">
-						秋冬新款全面鋪貨中 每一款都是精心挑選出來了 這裏有最好的質量歡迎來諮詢 ！！
-					</div>
-					<div class="stars">
-						<ul>
-							<li><i class="fa fa-star" aria-hidden="true"></i></li>
-							<li><i class="fa fa-star" aria-hidden="true"></i></li>
-							<li><i class="fa fa-star" aria-hidden="true"></i></li>
-							<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-							<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-						</ul>
-						
-					</div>
-					<div class="likes">
-						<i class="fa fa-gratipay" aria-hidden="true"></i>
-						<span>1234</span>
-					</div>
-				</div>
-
-				<div class="item">
-					<img src="<c:url value="/images/newArrived1.jpg"/>">
-					<div class="shopName">兔兔的家</div>
-					<div class="description">
-						秋冬新款全面鋪貨中 每一款都是精心挑選出來了 這裏有最好的質量歡迎來諮詢 ！！
-					</div>
-					<div class="stars">
-						<ul>
-							<li><i class="fa fa-star" aria-hidden="true"></i></li>
-							<li><i class="fa fa-star" aria-hidden="true"></i></li>
-							<li><i class="fa fa-star" aria-hidden="true"></i></li>
-							<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-							<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-						</ul>
-						
-					</div>
-					<div class="likes">
-						<i class="fa fa-gratipay" aria-hidden="true"></i>
-						<span>1234</span>
-					</div>
-				</div>
-
-				<div class="item">
-					<img src="<c:url value="/images/newArrived1.jpg"/>">
-					<div class="shopName">兔兔的家</div>
-					<div class="description">
-						秋冬新款全面鋪貨中 每一款都是精心挑選出來了 這裏有最好的質量歡迎來諮詢 ！！
-					</div>
-					<div class="stars">
-						<ul>
-							<li><i class="fa fa-star" aria-hidden="true"></i></li>
-							<li><i class="fa fa-star" aria-hidden="true"></i></li>
-							<li><i class="fa fa-star" aria-hidden="true"></i></li>
-							<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-							<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-						</ul>
-						
-					</div>
-					<div class="likes">
-						<i class="fa fa-gratipay" aria-hidden="true"></i>
-						<span>1234</span>
-					</div>
-				</div>
-
-				<div class="item">
-					<img src="<c:url value="/images/newArrived1.jpg"/>">
-					<div class="shopName">兔兔的家</div>
-					<div class="description">
-						秋冬新款全面鋪貨中 每一款都是精心挑選出來了 這裏有最好的質量歡迎來諮詢 ！！
-					</div>
-					<div class="stars">
-						<ul>
-							<li><i class="fa fa-star" aria-hidden="true"></i></li>
-							<li><i class="fa fa-star" aria-hidden="true"></i></li>
-							<li><i class="fa fa-star" aria-hidden="true"></i></li>
-							<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-							<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-						</ul>
-						
-					</div>
-					<div class="likes">
-						<i class="fa fa-gratipay" aria-hidden="true"></i>
-						<span>1234</span>
-					</div>
-				</div>
+				</div> --%>
 			</section>
 		</div>
 	</section>
@@ -253,8 +190,15 @@
 <script type="text/javascript">
 
 $(function(){
-	// 一進來先獲取購物車內的內容
-	/* new ShoppingCatAPI("","",""); */
+	
+	  $(".all_shops_page_container .shopList .item .description").each(function(){
+	    	console.log($(this).text());
+	    	var mytext = $(this).text();
+			var newText = mytext.substr(0,40);
+			console.log("newText",newText);
+			$(this).text(newText+"...");
+	    	
+	  });
 
 })
 </script>

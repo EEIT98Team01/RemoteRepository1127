@@ -22,13 +22,11 @@ public class ProductDaoImpl implements ProductDao {
 	private Session getSession() {
 		return sessionFactory.getCurrentSession();
 	}
-
-	@Override
 	public ProductBean findById(int id) {
 		return this.getSession().get(ProductBean.class, id);
 	}
 
-	@Override
+	// 新增 Product 資料用
 	public ProductBean insert(ProductBean bean) {
 		if (bean != null) {
 			ProductBean temp = this.findById(bean.getProductID());
@@ -42,7 +40,7 @@ public class ProductDaoImpl implements ProductDao {
 		return null;
 	}
 
-	@Override
+	// 編輯 Product 資料用
 	public ProductBean update(ProductBean bean) {
 		ProductBean select = this.findById(bean.getProductID());
 
@@ -64,25 +62,25 @@ public class ProductDaoImpl implements ProductDao {
 		return null;
 	}
 
-	@Override
+	// 取得所有 Product 資料
 	public List<ProductBean> find() {
 		Query<ProductBean> query = this.getSession().createQuery("FROM ProductBean", ProductBean.class);
 		return query.getResultList();
 	}
 
-	@Override
+	// 取得所有 Product 資料中某頁的n筆資料,供分頁功能使用
 	public List<ProductBean> find(int page, int rows) {
 		return this.subList(this.find(), (page - 1) * rows, rows);
 	}
 
-	@Override
+	// 取得所有 Product 資料中某頁的n筆資料,供分頁功能使用,Product資料會先依某條件進行排序
 	public List<ProductBean> find(int page, int rows, String sortCondition) {
 		Query<ProductBean> query = this.getSession().createQuery("FROM ProductBean ORDER BY " + sortCondition,
 				ProductBean.class);
 		return this.subList(query.getResultList(), (page - 1) * rows, rows);
 	}
 
-	@Override
+	// 取得符合某條件之 Product 資料(K為欄位名稱, V為條件)
 	public List<ProductBean> findByCondition(Map<String, String> condition) {
 		if (condition != null) {
 			// 組合hql查詢字串
@@ -96,7 +94,7 @@ public class ProductDaoImpl implements ProductDao {
 		return null;
 	}
 
-	@Override
+	// 取得符合某條件之 Product 資料(K為欄位名稱, V為條件)中某頁的n筆資料,供分頁功能使用
 	public List<ProductBean> findByCondition(Map<String, String> condition, int page, int rows) {
 		List<ProductBean> temp = this.findByCondition(condition);
 
@@ -107,7 +105,7 @@ public class ProductDaoImpl implements ProductDao {
 		return null;
 	}
 
-	@Override
+	// 取得符合某條件之 Product 資料(K為欄位名稱, V為條件)中某頁的n筆資料,供分頁功能使用,符合條件之資料會先依某條件進行排序
 	public List<ProductBean> findByCondition(Map<String, String> condition, int page, int rows, String sortCondition) {
 		if (condition != null) {
 			// 組合hql查詢字串
@@ -122,12 +120,12 @@ public class ProductDaoImpl implements ProductDao {
 		return null;
 	}
 
-	@Override
+	// 取得所有 Product 數量
 	public int getQuantity() {
 		return this.find().size();
 	}
 
-	@Override
+	// 取得符合某條件之 Product 數量
 	public int getConditionQuantity(Map<String, String> condition) {
 		return this.findByCondition(condition).size();
 	}

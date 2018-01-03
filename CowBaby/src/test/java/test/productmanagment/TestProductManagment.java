@@ -22,21 +22,21 @@ public class TestProductManagment {
 			*/
 		
 		  // ProductBean insertProduct(ProductBean bean)
-			
-			ProductBean insert = new ProductBean();
-			insert.setStoreID(1);
-			insert.setTitle("牛牛娃娃");
-			insert.setSummary("牛牛娃娃寶寶9");
-			insert.setUnitPrice(66);
-			insert.setProductDescription("噹噹噹");
-			insert.setProductStatus(true);
-			insert.setClassficationID(2);
-			insert.setSuitableAges(2);
-			insert.setGenderPreference("M");
-			insert.setDisplayTime(new java.sql.Timestamp(new java.util.Date("2017/11/11 08:11:31").getTime()));
-			insert.setProductImage("123.jpg");
-			service.insertProduct(insert);
-			
+//			
+//			ProductBean insert = new ProductBean();
+//			insert.setStoreID(1);
+//			insert.setTitle("牛牛娃娃");
+//			insert.setSummary("牛牛娃娃寶寶9");
+//			insert.setUnitPrice(66);
+//			insert.setProductDescription("噹噹噹");
+//			insert.setProductStatus(true);
+//			insert.setClassficationID(2);
+//			insert.setSuitableAges(2);
+//			insert.setGenderPreference("M");
+//			insert.setDisplayTime(new java.sql.Timestamp(new java.util.Date("2017/11/11 08:11:31").getTime()));
+//			insert.setProductImage("123.jpg");
+//			service.insertProduct(insert);
+//			
 			
 		  // updateProdcut(ProductBean bean)
 			/*
@@ -59,11 +59,11 @@ public class TestProductManagment {
 		  // List<ProductBean> findProduct(String storeId, String productName, String productClassfication, 
 		  //                               String suitableAges, String genderPreference, String productStatus, 
 		  //                               int page, int rows, String sortCondition)
-			/*
-			for(ProductBean bean: service.findProduct("", "", "", "", "", "0", 1, 10, "displayTime desc")) {
+			
+			for(ProductBean bean: service.findProduct("", "Iphone", "", "", "", "1", 1, 10, "displayTime desc")) {
 				System.out.println(bean);
 			}
-			*/
+			
 			
 		/*---------------------------------------------------------------------------------------------*/
 			((ConfigurableApplicationContext) context).close();

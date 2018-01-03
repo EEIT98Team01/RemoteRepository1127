@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -29,7 +30,7 @@
 	<!--每頁 page_container-->
 		<div class="main_page_title">
 		<h3>我的購物車 My ShoppingCart</h3>
-		<h5>親愛的XXX你好，以下是你的購物車清單<h5>
+		<h5>親愛的${user.customerName}你好，以下是你的購物車清單<h5>
 	</div>
 
 	<div class="shopping_step">
@@ -81,7 +82,7 @@
 						<tr>
 							<td colspan="7" style="text-align: right;">
 								<div class="bonusbox">
-									<span>目前紅利金為<span class="totalbonus">500</span>點，我要折抵</span>
+									<span>目前紅利金為<span class="totalbonus">${user.bonus}</span>點，我要折抵</span>
 									<span><input class="useBonusbox" type="text" name="mybounsText" value="0"></span>
 									<span>元</span>
 								</div>
@@ -104,7 +105,7 @@
 					<div>購買總金額 (<span class="all_prousuct">${shoppingCart.totalItems}</span> 個商品):
 						<span class="all_prousuct_price">$<span>${shoppingCart.totalAmount}</span></span>
 					</div>
-					<div class="this_order_bonus">此次紅利點數 : <span>123456</span>點</div>		
+					<div class="this_order_bonus">此次紅利點數 : <span><fmt:formatNumber value="${shoppingCart.totalAmount/100}" pattern="#" type="number"/> </span>點</div>		
 				</div>
 				<div class="go_checkout">
 					<a href="#" class="go_checkout_btn">下ㄧ步</a>

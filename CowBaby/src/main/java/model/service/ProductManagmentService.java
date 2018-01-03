@@ -213,7 +213,7 @@ public class ProductManagmentService {
 	
 	// 回傳有商店名稱的商品  
 	public List<Object[]> findObject(String storeId, String productName, String productClassfication, String suitableAges, String genderPreference, String productStatus, int page, int rows, String sortCondition) {
-		List<ProductBean> list = this.findProduct(null, null, null, null, null, null, page, rows, sortCondition);
+		List<ProductBean> list = this.findProduct(null, productName, null, null, null, "1", page, rows, sortCondition);
 		List<Object[]> objList = new LinkedList<Object[]>();
 		// 自己組要的資料塞回頁面
 		for(ProductBean bean: list) {

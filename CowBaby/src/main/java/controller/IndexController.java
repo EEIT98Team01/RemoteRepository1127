@@ -24,7 +24,7 @@ public class IndexController {
 	
 	// 商品管理/新增商品使用
 	@RequestMapping(
-			value=("index"),
+			value=("/"),
 			method={RequestMethod.GET, RequestMethod.POST}
 	)
 	public String index(Model model) {

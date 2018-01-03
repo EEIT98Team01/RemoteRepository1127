@@ -298,13 +298,12 @@ $(function(){
      	} else {
      		html = "";
      		html = "<tr>" +
-					"<th>標記</th>" +
 					"<th>寄件人</th>" +
 					"<th>敘述</th>" +
 					"<th>時間</th>" +
 					"<th>狀態</th>" +
 					"<th>刪除</th>" +
-			   	"</tr>"
+			   	   "</tr>"
 			$('thead').append(html);
 			   	
 		    $.ajax({
@@ -342,15 +341,21 @@ $(function(){
 		           $.each(obj, function (index, message) {
 		           	    var html="";
 		 		    	html="<tr>"+
-								"<td>" + message.msgMarker + "</td>" +
 								"<td>" + message.msgSenderID + "</td>" +
 								"<td>" +
 									"<a href='<c:url value='/pages/member/messageView?messageId=" +
 									message.msgID + "'/>' class='linklist'>" + message.msgContent + "</a>" +
 								"</td>" +
-								"<td>" + message.msgTime.substr(0,19) + "</td>" +
-								"<td>" + message.readStatus + "</td>" +
-								"<td> <a href='<c:url value='/pages/member/messageDelete?messageId=" +
+								"<td>" + message.msgTime.substr(0,19) + "</td>";
+								//"<td>" + message.readStatus + "</td>" +
+								
+								if(message.readStatus == true) {
+									html = html + "<td>已讀</td>"
+								} else {
+									html = html + "<td>未讀</td>"
+								}
+								
+						html=html+"<td> <a href='<c:url value='/pages/member/messageDelete?messageId=" +
 								message.msgID + "'/>' class='btn btn-primary'> <i class='fa fa-trash-o'></i> </a> </td>" +
 							 "</tr>";				
 			    		$('tbody').append(html);
