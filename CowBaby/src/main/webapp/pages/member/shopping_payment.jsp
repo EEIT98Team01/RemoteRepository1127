@@ -29,7 +29,7 @@
 	<!--每頁 page_container-->
 		<div class="main_page_title">
 		<h3>我的購物車 My ShoppingCart</h3>
-		<h5>親愛的XXX你好，以下是你的購物車清單<h5>
+		<h5>親愛的${user.customerName}你好，以下是你的購物車清單<h5>
 	</div>
 	
 	<div class="shopping_step">
@@ -44,9 +44,6 @@
 	
 	<!--每頁主要內容-->
 	<section class="page_container shopping_payment">
-		<P>我的bouns==>${bonus}</P>
-		<P>我選的便利商電==>${convenienceStore.convenienceStoreName}</P>
-		
 		<!-- 主要內容-->
 		<div class="main_container_col_1">
 			<div class="panel panel-info">
@@ -154,7 +151,7 @@
 				      			<td>便利商店電話</textarea>
 								<td><input type="text" name="convenienceStoreTel" value="${convenienceStorData.convenienceStoreTel}"></td>
 				      		</tr>
-				      		<tr>
+				      		<tr style="display:none">
 				      			<td>我的紅利</td>
 								<td><textarea  style="width: 100%;" name="recipientbonus">${bonus}</textarea></td>
 				      		</tr>

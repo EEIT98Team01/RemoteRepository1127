@@ -73,7 +73,6 @@
 		                <table class="table table-bordered" style="background-color: #fff;" id="messageList">                  
                         	<thead>
 							  	<tr>
-									<th>標記</th>
 									<th>寄件人</th>
 									<th>敘述</th>
 									<th>時間</th>
@@ -222,15 +221,21 @@ $(function(){
 	           $.each(obj, function (index, message) {
 	           	    var html="";
 	 		    	html="<tr>"+
-							"<td>" + message.msgMarker + "</td>" +
 							"<td>" + message.msgSenderID + "</td>" +
 							"<td>" +
 								"<a href='<c:url value='/pages/backstageSeller/messageView?messageId=" +
 								message.msgID + "'/>' class='linklist'>" + message.msgContent + "</a>" +
 							"</td>" +
+							"<td>" + message.msgTime.substr(0,19) + "</td>";
+							//"<td>" + message.readStatus + "</td>" +
 							
-							"<td>" + message.msgTime.substr(0,19) + "</td>" +
-							"<td>" + message.readStatus + "</td>" +
+							if(message.readStatus == true) {
+								html = html + "<td>已讀</td>"
+							} else {
+								html = html + "<td>未讀</td>"
+							}
+							
+					html=html+
 							"<td> <a href='<c:url value='/pages/backstageSeller/messageDelete?messageId=" +
 							message.msgID + "'/>' class='btn btn-primary'> <i class='fa fa-trash-o'></i> </a> </td>" +
 						 "</tr>";				

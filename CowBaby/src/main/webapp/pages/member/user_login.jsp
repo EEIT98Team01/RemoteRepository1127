@@ -31,12 +31,12 @@
 				<form class="form-inline" action="<c:url value="/CustomerUserLoginController" />" method="POST" >
 					<div class="form-group" style="margin-right: 15px">
 						<label for="email">Email帳號</label>
-						<input type="email" class="form-control" name="useremail" id="email">
+						<input type="email" class="form-control" name="useremail" value="${param.useremail}">
 						<p style="color: #e21124;">${errors.useremail}</p>
 					</div>
 					<div class="form-group">
 						<label for="pwd">密碼</label>
-						<input type="password" class="form-control" name="password" id="pwd">
+						<input type="password" class="form-control" name="password" value="${param.password}">
 						<p style="color: #e21124;">${errors.password}</p>
 				    </div>
 				    <button type="submit" class="btn btn-primary btn-md">我要登入</button>
