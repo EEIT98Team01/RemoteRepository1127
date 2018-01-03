@@ -30,7 +30,7 @@
 	<!--每頁 page_container-->
 	<!--每頁Banner-->
 	<section class="page_banner">
-		<img src="<c:url value="/images/all_prouducts_banner.png"/>">
+		<img src="${shopData.storeBanner}">
 	</section>
 
 	<section class="page_container personal_shop_page_container loadingBox">
