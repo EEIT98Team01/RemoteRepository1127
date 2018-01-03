@@ -220,15 +220,9 @@
 
 		// side_menu 帳戶總覽填充背景色
 		$("#nav-accordion").find('li a').eq(3).addClass('active');
-		$("#nav-accordion li a").siblings(".sub").css({
-			'display' : 'block'
-		});
-		$("#nav-accordion li ul").find('a').eq(1).css({
-			'color' : 'yellow'
-		});
-		$("#nav-accordion li").eq(3).css({
-			'background' : '#3a4152'
-		});
+		$("#nav-accordion li a").siblings(".sub").css({'display':'block'});
+		$("#nav-accordion li ul").find('a').eq(0).css({'color':'yellow'});
+		$("#nav-accordion li").eq(3).css({'background':'#3a4152'});
 
 		// 圖片預覽功能
 		$("body").on("change", ".ImageUpl", function (){

@@ -36,11 +36,11 @@
 			<div class="article_classify">
 				<div class="classify_title">最新文章</div>
 				<ul>
-					<li><a href="http://localhost:8080/CowBaby/BlogItemOfArticle?articleID=10">小魚兒屁屁褲</a></li>
-					<li><a href="http://localhost:8080/CowBaby/BlogItemOfArticle?articleID=9">如何生出白人寶寶</a></li>
-					<li><a href="http://localhost:8080/CowBaby/BlogItemOfArticle?articleID=8">如何生出黑人寶寶</a></li>
-					<li><a href="http://localhost:8080/CowBaby/BlogItemOfArticle?articleID=7">如何生出漂亮寶寶</a></li>
-					<li><a href="http://localhost:8080/CowBaby/BlogItemOfArticle?articleID=6">DinDin鞋</a></li>
+					<li><a href="http://localhost:8080/CowBaby/BlogItemOfArticle?articleID=12"><米菲>好英文圖書介紹，淺移默化</a></li>
+					<li><a href="http://localhost:8080/CowBaby/BlogItemOfArticle?articleID=11">澳洲We Might Be Tiny矽膠防滑餐墊</a></li>
+					<li><a href="http://localhost:8080/CowBaby/BlogItemOfArticle?articleID=10">來至加拿大 3 Sprouts~動物眼睛都很大的趣味收納法寶媽媽推薦居家生活</a></li>
+					<li><a href="http://localhost:8080/CowBaby/BlogItemOfArticle?articleID=9">鐵寶包週歲溫馨小party之廠商分享</a></li>
+					<li><a href="http://localhost:8080/CowBaby/BlogItemOfArticle?articleID=8">【私物分享】★美國 Little Giraffe★ 安撫、保暖、舒適媽媽推薦居家生活</a></li>
 				</ul>
 				
 			</div>

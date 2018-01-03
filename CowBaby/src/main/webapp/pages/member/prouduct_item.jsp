@@ -42,20 +42,6 @@
 				<li><a href="#">特價商品</a></li>
 				<li><a href="#">出清商品</a></li>
 			</ul>
-
-			<ul>
-				<li class="sort-title">年齡分類</li>
-				<li><label><input type="checkbox" value=""> <span>0-6 歲</span> <span>(4890)</span></label> </li>
-				<li><label><input type="checkbox" value=""> <span>0-3 Months</span> <span>(4890)</span></label> </li>
-				<li><label><input type="checkbox" value=""> <span>0-3 Months</span> <span>(4890)</span></label> </li>	
-			</ul>
-
-			<ul>
-				<li class="sort-title">性別分類</li>
-				<li><label><input type="checkbox" value=""> <span>0-3 Months</span> <span>(4890)</span></label> </li>
-				<li><label><input type="checkbox" value=""> <span>0-3 Months</span> <span>(4890)</span></label> </li>
-				<li><label><input type="checkbox" value=""> <span>0-3 Months</span> <span>(4890)</span></label> </li>	
-			</ul>
 		</div>
 
 		<!-- 主要內容-->
@@ -64,9 +50,9 @@
 			<!--產品明細-->
 			<section class="proudect_detail" style="overflow: auto;">
 
-<!-- 				<div class="showPic"> -->
-<%-- 					<img src="<c:url value="/images/prouduct_item1.jpg"/>"> --%>
-<!-- 				</div> -->
+				<div class="showPic">
+					<img src="${productData.productImage}">
+				</div>
 
 				<div class="product_infor">
 					<div class="product_title">${productData.title}</div>
@@ -97,7 +83,6 @@
 			</section>
 			
 			<section class="proudect_ckeditor" style="padding-top: 30px;clear: both;">
-				CKEDITOR
 				${productData.productDescription}
 			</section>
 		</div>

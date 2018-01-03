@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
+import model.bean.BlogBean;
 import model.service.BlogService;
 import model.service.CustomerManagementService;
 
@@ -38,19 +40,61 @@ public class BlogListController {
 			RequestMethod.POST })
 	public String view(Model model, String id) {
 		if (id != null && !"".equals(id.trim())) {
+			
+			//以下為顯示小圖編輯
+			BlogBean bean2 = blogService.findById(Integer.parseInt(id));
+			// 如果大頭貼為空
+			if(bean2.getArticlePhoto()!=null){			
+				// 從資料庫抓取LOGO圖片編碼(二進制)
+				 java.sql.Blob logingPhoto = bean2.getArticlePhoto();
+				 try {
+					 // LOGO圖片編碼(二進制)->轉base64
+					 byte[] img = Base64.getEncoder().encode(logingPhoto.getBytes(1, (int)logingPhoto.length())); 
+					 // base64 -> 轉字串顯示於畫面上
+					 String logingPhotoImg = new String(img);				 
+					 model.addAttribute("logingPhotoImg", logingPhotoImg);
+				 } catch (Exception e) {				 
+					 e.printStackTrace();
+				 }
+			}			
 			model.addAttribute("blogData", blogService.findById(Integer.parseInt(id)));
 		}						//↑識別字串
-
 		return "blog_view"; //← 要放view用
-	}					
+	}			
+	
 	
 	// 後台Blog編輯使用									//識別字串，與JSP對應
 	@RequestMapping(value = ("/pages/backstageAdmit/blogDelete"), method = { RequestMethod.GET,
 			RequestMethod.POST })
 	public String edit(Model model, String id) {
 		if (id != null && !"".equals(id.trim())) {
+			
+			//以下為顯示小圖編輯
+			BlogBean bean = blogService.findById(Integer.parseInt(id));
+			// 如果大頭貼為空
+			if(bean.getArticlePhoto()!=null){
+				
+				// 從資料庫抓取LOGO圖片編碼(二進制)
+				 java.sql.Blob logingPhoto = bean.getArticlePhoto();
+				 try {
+					 // LOGO圖片編碼(二進制)->轉base64
+					 byte[] img = Base64.getEncoder().encode(logingPhoto.getBytes(1, (int)logingPhoto.length())); 
+					 // base64 -> 轉字串顯示於畫面上
+					 String logingPhotoImg = new String(img);
+					 
+					 model.addAttribute("logingPhotoImg", logingPhotoImg);
+				 } catch (Exception e) {
+					 
+					 e.printStackTrace();
+				 }
+			}
+			//以上為小圖編輯
+			
 			model.addAttribute("blogData", blogService.findById(Integer.parseInt(id)));
 		}
+		
+		
+		
 
 		return "blog_edit";
 	}

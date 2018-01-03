@@ -2,6 +2,7 @@ package webservice;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,6 +31,8 @@ import model.utils.PrimitiveNumberEditor;
 public class BlogListWebService {
 	@Autowired
 	BlogService blogService;
+	
+	/* ==================================以下為blog_add=================================================*/
 	
 	@RequestMapping(
 			value="/addBlogData",    /*"/qoo"*/ 
@@ -220,14 +223,27 @@ public class BlogListWebService {
 			method={RequestMethod.POST},
 			produces={"application/json;charset=UTF-8"}
 	)
-	public String blogDataUpdate(BlogBean bean, BindingResult bindingResult) {
+	public String blogDataUpdate(BlogBean bean, BindingResult bindingResult, MultipartFile articlePhoto) throws Exception, IOException {
 		System.out.println(bean.getArticleContent());
 		System.out.println(bean.getArticleHeader());
 		System.out.println(bean.getArticleID());
 		System.out.println(bean.getBloggerName());
 		System.out.println(bean.getArticlePhoto());
-
-		bean.setArticlePhoto(((BlogBean) blogService.findById(bean.getArticleID())).getArticlePhoto() );
+		//如果getOringinalFilename()不等於空字串代表有上傳檔案就將檔案上傳資料庫
+		if(!articlePhoto.getOriginalFilename().equals("")) {
+			// 把 storeLogo 類型轉為  File 類型
+		    File convFile = new File( articlePhoto.getOriginalFilename());
+		    articlePhoto.transferTo(convFile);
+		    // 把 storeLogo 類型轉為 BYTE[] 類型
+		    byte[] articlePhotoImgByte = new byte[(int) convFile.length()];
+		    FileInputStream fis = new FileInputStream(convFile);
+		    fis.read(articlePhotoImgByte);
+		    fis.close();
+		    
+		    bean.setArticlePhoto(new javax.sql.rowset.serial.SerialBlob(articlePhotoImgByte));
+		} else { //如果getOringinalFilename()等於空字串代表沒上傳檔案就將資料庫的照片取出
+			bean.setArticlePhoto(blogService.findById(bean.getArticleID()).getArticlePhoto());
+		}
 
 		if(blogService.updateBlogData(bean)) {
 			return "{\"status\":\"updateOK\"}";

@@ -29,6 +29,8 @@
     font-size: 13px;
     padding: 0px 12px;
     line-height: 18px;
+    height:70px;
+    overflow: hidden;
 }
 
 .all_shops_page_container .shopList .item .stars{

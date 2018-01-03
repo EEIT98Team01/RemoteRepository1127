@@ -279,7 +279,7 @@ $(function(){
 			     
 			// 發ajax錯誤
 	        error:function(xhr, ajaxOptions, thrownError){
-	            alert(xhr.status+"\n"+thrownError);
+	            //alert(xhr.status+"\n"+thrownError);
 	        }
 
    	});

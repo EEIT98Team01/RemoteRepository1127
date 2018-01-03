@@ -49,12 +49,17 @@
 										<label class="col-md-2 control-label" style="text-align:left; width:auto;">${blogData.articleID}</label>
 									</div>
 									
-									<!-- 到底要怎麼插小圖阿，靠北耶 -->
+									<!-- 顯示部落格小圖阿 -->
 									<div class="form-group col-md-12" style="padding-top: 30px">
 										<label class="col-md-2 control-label">部落格小圖</label>
-										<label class="col-md-2 control-label" style="text-align:left; width:auto;">${blogData.articlePhoto}</label>
-									</div>
+										<label class="col-md-2 control-label" style="text-align:left; width:auto;"></label>
+										<img width="150" height="100"   src="data:image/jpg;base64,${logingPhotoImg}">		
+									</div>									
+
 									
+									<div class="dash-line col-md-12"/></div>
+									
+								
 									<div class="form-group col-md-12">
 										<label class="col-md-2 control-label">部落客大名</label>
 										<label class="col-md-2 control-label" style="text-align:left; width:auto;">${blogData.bloggerName}</label>
