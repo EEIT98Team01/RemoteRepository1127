@@ -194,7 +194,7 @@ $(function(){
 					"<th>收件人</th>" +
 					"<th>時間</th>" +
 					"<th>敘述</th>" +
-					"<th>回覆</th>" +
+					"<th>回覆狀態</th>" +
 					"<th>刪除</th>" +
 			   	"</tr>"
 			$('thead').append(html);
@@ -240,9 +240,16 @@ $(function(){
 								"<td>" +
 									"<a href='<c:url value='/pages/member/messageView?messageId=" +
 									message.msgID + "'/>' class='linklist'>" + message.msgContent + "</a>" +
-								"</td>" +
-							
-								"<td>" + message.msgResponse + "</td>" +
+								"</td>";
+
+								if(message.msgResponse == null)
+								{
+								    html = html + "<td>尚未回覆</td>";
+								} else {
+									html = html + "<td>已回覆</td>";
+								}
+
+						html=html+
 								"<td> <a href='<c:url value='/pages/member/messageDelete?messageId=" +
 								message.msgID + "'/>' class='btn btn-primary'> <i class='fa fa-trash-o'></i> </a> </td>" +
 							 "</tr>";				

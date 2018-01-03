@@ -136,4 +136,36 @@ public class AllProuductSelectWebService {
 
 		return jsonObj.toString();
 	}
+	
+	// 查詢目前以勾選條件
+		@RequestMapping(value = "/storeProdcut", method = { RequestMethod.GET }, produces = { "application/json;charset=UTF-8" })
+		public String NewArrivalSelect(String storeID, int pageNumber, int pageSize) {
+			JSONObject jsonObj = new JSONObject();	// json物件,儲存欲回傳資料
+			JSONArray array;						// 儲存List<ProductBean>的json物件
+			int quantity;							// 回傳的資料筆數
+			int pageQuantity;						// 總頁數
+
+			System.out.println("StoreID:" + storeID);
+			
+			array = new JSONArray(productManagmentService.findProduct(storeID, null, null, null, null, "1", pageNumber, pageSize, "DisplayTime desc"));
+			quantity = productManagmentService.getQuantity(storeID, null, null, null, null, "1");
+			
+			// 計算總頁數
+			if((quantity%10) == 0) {
+				pageQuantity = quantity/10;
+			} else {
+				pageQuantity = quantity/10+1;
+			}
+
+			// 將回傳資料塞入json物件
+			jsonObj.put("tatal", quantity); 
+			jsonObj.put("tatalPage", pageQuantity); 
+			jsonObj.put("pageNumber", pageNumber);
+			jsonObj.put("pageSize", pageSize); 
+			jsonObj.put("list", array.toString()); 
+			
+			System.out.println("近來啦");
+			
+			return jsonObj.toString();
+		}
 }
