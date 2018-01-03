@@ -186,7 +186,7 @@ $(function(){
 				    	    totalBuyNumber = totalBuyNumber + productInfor[key][i].quantity;
 				        	
 				       		item  = item +"<li>"+
-				        			"<img src='<c:url value='/images/ad1.jpg'/>'>"+
+				       				"<img src='" + productInfor[key][i].productImage + "'>"+
 									"<div class='cartList'>"+
 										"<p>"+ key +"</p>"+
 										"<p>"+ productInfor[key][i].productName + "<span>-"+ productInfor[key][i].productSpec+"</span></p>"+
