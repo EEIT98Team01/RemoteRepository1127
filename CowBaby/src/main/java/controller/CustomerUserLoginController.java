@@ -61,11 +61,13 @@ public class CustomerUserLoginController {
 			return "login_error";
 		} else {
 			
-			List<SellerBackstageManageBean> temp = SellerBackstageManageService.findStore(bean.getEmail(), 1, 999, "store");
+			List<SellerBackstageManageBean> temp = SellerBackstageManageService.findStore(bean.getEmail(), 1, 999, "storeID");
+			System.out.println("temp"+temp);
 			if(bean.getUserID()==2){
 				
 				if(temp.size()!=0){
 					int storeID =temp.get(0).getStoreID();
+					
 					model.addAttribute("myStoreID", storeID);
 				}
 			}
