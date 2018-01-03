@@ -52,20 +52,20 @@ public class Order01Service {
 
 	//5 回傳符合某條件的資料
 	@Transactional(readOnly=true)
-	public List<Order01Bean> findByCondition(String orderID, String status, String startTime, String endTime) {
-		return order01Dao.findByCondition(this.createCondition(orderID, status, startTime, endTime));
+	public List<Order01Bean> findByCondition(String orderID, String storeID, String status, String startTime, String endTime) {
+		return order01Dao.findByCondition(this.createCondition(orderID, storeID, status, startTime, endTime));
 	}
 	
 	//6 回傳符合某條件的N筆資料,若無資料,則回傳之List為空集合
 	@Transactional(readOnly=true)
-	public List<Order01Bean> findByCondition(String orderID, String status, String startTime,String endTime, int page, int rows) {
-		return order01Dao.findByCondition(this.createCondition(orderID, status, startTime, endTime), page, rows);
+	public List<Order01Bean> findByCondition(String orderID,String storeID, String status, String startTime,String endTime, int page, int rows) {
+		return order01Dao.findByCondition(this.createCondition(orderID, storeID, status, startTime, endTime), page, rows);
 	}
 
 	//7 先依某條件進行排序,回傳符合某某條件的N筆資料
 	@Transactional(readOnly=true)
-	public List<Order01Bean> findByCondition(String orderID, String status, String startTime, String endTime, int page, int rows, String sortCondition) {
-		return order01Dao.findByCondition(this.createCondition(orderID, status, startTime, endTime), page, rows, sortCondition);
+	public List<Order01Bean> findByCondition(String orderID,String storeID, String status, String startTime, String endTime, int page, int rows, String sortCondition) {
+		return order01Dao.findByCondition(this.createCondition(orderID, storeID, status, startTime, endTime), page, rows, sortCondition);
 	}
 
 	//8 回傳資料總筆數
@@ -76,8 +76,8 @@ public class Order01Service {
 	
 	//9回傳符合條件之資料筆數
 	@Transactional(readOnly=true)
-	public int getConditionQuantity(String orderID, String status, String startTime, String endTime) {
-		return order01Dao.getConditionQuantity(this.createCondition(orderID, status, startTime, endTime));
+	public int getConditionQuantity(String orderID,String storeID, String status, String startTime, String endTime) {
+		return order01Dao.getConditionQuantity(this.createCondition(orderID, storeID, status, startTime, endTime));
 	}
 	
 	// 更新會員資料
@@ -92,13 +92,16 @@ public class Order01Service {
 	}
 	
 	// 10.將查詢條件塞進Map
-	private HashMap<String, String> createCondition(String orderID, String status, String startTime, String endTime) {
+	private HashMap<String, String> createCondition(String orderID,String storeID, String status, String startTime, String endTime) {
 		HashMap<String, String> condition = new HashMap<String, String>();
 		
 		// orderID對應到資料庫中的orderID,若為null或"",表不設定該條件
-		if(orderID != null && orderID.trim().length() != 0) {
+		if((orderID != null && orderID.trim().length() != 0 )) {
 			condition.put("orderID", "= " + orderID);
-		}			
+		}
+		if((storeID != null && storeID.trim().length() != 0 )) {
+			condition.put("storeID", "= " + storeID);
+		}	
 		// status對應到資料庫中的status,若為null或"",表不設定該條件
 		if(status != null && status.trim().length() != 0) {
 			condition.put("status", "= " + status);
@@ -139,7 +142,4 @@ public class Order01Service {
 */
 	
 
-
-	
-	
 }

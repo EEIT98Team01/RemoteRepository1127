@@ -56,18 +56,39 @@ public class AllShopsController {
 			pageSize = "10";
 		}
 		
-		// 依據最新時間顯示商店 //String email, Integer.parseInt(pageNumber);
+		// 依據最新時間顯示商店
 		List<SellerBackstageManageBean> list = sellerBackstageManageService.findStore(null,Integer.parseInt(pageNumber), Integer.parseInt(pageSize), "storeName");
-		
+		quantity = sellerBackstageManageService.getQuantity();
 		model.addAttribute("shopList", list);
 		
 		// 計算總頁數
-		/*if((quantity%Integer.parseInt(pageSize)) == 0) {
+		if((quantity%Integer.parseInt(pageSize)) == 0) {
 			pageQuantity = quantity/Integer.parseInt(pageSize);
 		} else {
 			pageQuantity = quantity/Integer.parseInt(pageSize)+1;
-		}*/
+		}
 		
+		// 將分頁及表格所需資料回傳
+		model.addAttribute("tatal", quantity);
+		model.addAttribute("totalPage", pageQuantity);
+		model.addAttribute("pageNumber", pageNumber);
+		model.addAttribute("pageSize", pageSize);
+		
+		// 如果商店頭貼不為空
+		/*if(shopData.getStoreLogo()!=null){
+			// 從資料庫抓取LOGO圖片編碼(二進制)
+			 java.sql.Blob shopLogo = shopData.getStoreLogo();
+			 try {
+				 // LOGO圖片編碼(二進制)->轉base64
+				 byte[] img = Base64.getEncoder().encode(shopLogo.getBytes(1, (int)shopLogo.length())); 
+				 // base64 -> 轉字串顯示於畫面上
+				 String shopLogoImg = new String(img);
+				 model.addAttribute("shopLogoImg", shopLogoImg);
+			 } catch (Exception e) {
+				 
+				 e.printStackTrace();
+			 }
+		}*/
 		
 		return "all_shop"; 
 	}

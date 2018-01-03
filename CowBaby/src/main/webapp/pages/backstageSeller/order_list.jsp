@@ -25,7 +25,7 @@
 	<div class="breadcrumb-row">
 		<h3>訂單查詢</h3>
 		<ol class="breadcrumb">
-			<li><a href="http://localhost:8080/CowBaby/OrderUpdate.controller">訂單查詢</a></li>
+			<li><a href="http://localhost:8080/CowBaby/pages/backstageSeller/order_list.jsp">訂單查詢</a></li>
 		</ol>
 	</div>
 	<div class="row">
@@ -181,7 +181,7 @@
 
 		// 抓取表單欄位
 		formData = $(".orderFrom").serializeArray();
-		console.log("aaaa");
+		console.log("aaa");
 		
 		// 發 ajax 查詢表單資料
 		inqueryData(formData , pagenow);

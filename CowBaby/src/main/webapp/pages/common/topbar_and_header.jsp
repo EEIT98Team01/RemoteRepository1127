@@ -29,7 +29,7 @@
 				<li><img src="data:image/jpg;base64,${logingPhotoImg}"/>${user.customerName}
 					<div class="showMemberPannal">
 						<c:if test="${user.userID==2}">
-						<div><a href="#">我的賣場</a></div>
+						<div><a href="<c:url value="PersonShopController"/>?storeID=${myStoreID}&email=${user.email}">我的賣場</a></div>
 						<div><a href="<c:url value="/pages/backstageSeller/SellerBackstagePageController.controller"/>">我的管理著後台</a></div>
 						</c:if>
 						<div><a href="<c:url value="/pages/member/member_account_infor.jsp"/>">我的資訊</a></div>

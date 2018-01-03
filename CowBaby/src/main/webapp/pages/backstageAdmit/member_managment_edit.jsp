@@ -149,20 +149,21 @@
 		                                        <select class="form-control" name="userID">
 													<option value="1" <c:if test="${customerData.userID=='1'}">selected="true"</c:if>>一般會員</option>
 													<option value="2" <c:if test="${customerData.userID=='2'}">selected="true"</c:if>>平台賣家</option>
-													<option value="3" <c:if test="${customerData.userID=='3'}">selected="true"</c:if>>黑名單</option>	
+													<option value="3" <c:if test="${customerData.userID=='3'}">selected="true"</c:if>>黑名單</option>
+													<option value="4" <c:if test="${customerData.userID=='4'}">selected="true"</c:if>>系統管理者</option>	
 												</select>
 		                                    </div>
 		                                </div>
-		                                <div class="form-group col-md-12">
-		                                    <label class="col-md-2 control-label">消費群集</label>
-		                                    <div class="col-md-6">
-		                                        <select class="form-control" name="consumerSegmentation">
-													<option value="1" <c:if test="${customerData.consumerSegmentation=='1'}">selected="true"</c:if>>群集1</option>
-													<option value="2" <c:if test="${customerData.consumerSegmentation=='2'}">selected="true"</c:if>>群集2</option>
-													<option value="3" <c:if test="${customerData.consumerSegmentation=='3'}">selected="true"</c:if>>群集3</option>
-												</select>
-		                                    </div>
-		                                </div>
+<!-- 		                                <div class="form-group col-md-12"> -->
+<!-- 		                                    <label class="col-md-2 control-label">消費群集</label> -->
+<!-- 		                                    <div class="col-md-6"> -->
+<!-- 		                                        <select class="form-control" name="consumerSegmentation"> -->
+<%-- 													<option value="1" <c:if test="${customerData.consumerSegmentation=='1'}">selected="true"</c:if>>群集1</option> --%>
+<%-- 													<option value="2" <c:if test="${customerData.consumerSegmentation=='2'}">selected="true"</c:if>>群集2</option> --%>
+<%-- 													<option value="3" <c:if test="${customerData.consumerSegmentation=='3'}">selected="true"</c:if>>群集3</option> --%>
+<!-- 												</select> -->
+<!-- 		                                    </div> -->
+<!-- 		                                </div> -->
 		                                <div class="form-group col-md-12">
 		                                    <label class="col-md-2 control-label">訂閱電子報</label>
 		                                    <div class="col-md-6">
