@@ -53,6 +53,7 @@ public class CustomerUserLoginController {
 
 		// 進行商業服務
 		CustomerBean bean = customerUserLoginService.findByCondition(useremail, password);
+		
 		// 依照執行結果挑選適當的View元件
 		
 
@@ -62,6 +63,7 @@ public class CustomerUserLoginController {
 		} else {
 			
 			List<SellerBackstageManageBean> temp = SellerBackstageManageService.findStore(bean.getEmail(), 1, 999, "store");
+			System.out.println("temp"+temp);
 			if(bean.getUserID()==2){
 				
 				if(temp.size()!=0){
