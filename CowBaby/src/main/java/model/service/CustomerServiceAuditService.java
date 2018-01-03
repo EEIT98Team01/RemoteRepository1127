@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import model.bean.CustomerServiceBean;
+import model.bean.OrderDetailBean;
 import model.bean.SellerBackstageManageBean;
 import model.dao.CustomerServiceDao;
 
@@ -53,6 +54,26 @@ public class CustomerServiceAuditService {
 	public CustomerServiceBean getReprotData(int reportID) {
 		return CustomerServiceDao.findById(reportID);
 	}
+	
+	
+		@Transactional  
+		public List<CustomerServiceBean> findByCondition(String email, int problemTypes,int processStatus) {
+			HashMap<String, String> condition = new HashMap<String, String>();
+			
+			if(email != null && !"".equals(email.trim())) {
+				condition.put("email", "like '%" + email + "%'"); 
+			}
+			
+			if(problemTypes != 0) {
+				condition.put("problemTypes", "= " + problemTypes); 
+			}
+			
+			if(processStatus != 0) {
+				condition.put("processStatus", "= " + processStatus);
+			}
+
+			return CustomerServiceDao.findByCondition(condition);
+		}
 	
 	@Transactional(readOnly = true)
 	public List<CustomerServiceBean> findByReview(String email, String processStatus, String problemTypes) {
