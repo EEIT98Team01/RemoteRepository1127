@@ -56,15 +56,14 @@
 						<tr>
 							<th>序號</th>
 							<th>商品名稱</th>
-							<th>摘要</th>
 							<th>單價</th>
-							<th>商品內容描述</th>
 							<th>狀態</th>
 							<th>分類</th>
 							<th>適用年齡</th>
 							<th>性別</th>
 							<th>上架時間</th>
 							<th>商品圖示</th>
+							<th>檢視</th>
 							<th>編輯</th>
 						</tr>
 					</thead>
@@ -73,9 +72,7 @@
 						<tr>
 							<td>${st.count}</td>
 							<td>${classfication.title}</td>
-							<td>${classfication.summary}</td>
 							<td>${classfication.unitPrice}</td>
-							<td>${classfication.productDescription}</td>
 								<c:choose>
 								<c:when test="${classfication.productStatus == true}">
 									<td>上架</td>
@@ -100,21 +97,39 @@
 								<c:when test="${classfication.classficationID == 5}">
 									<td>日用品</td>
 								</c:when>					
-							    </c:choose>
-							<td>${classfication.suitableAges}</td>
-							<td>${classfication.genderPreference}</td>
+							 </c:choose>
+							 <c:choose>
+								<c:when test="${classfication.suitableAges == 1}">
+									<td>0-3歲</td>
+								</c:when>
+								<c:when test="${classfication.suitableAges == 2}">
+									<td>3-6歲</td>
+								</c:when>
+								<c:when test="${classfication.suitableAges == 3}">
+									<td>6-12歲</td>
+								</c:when>
+								<c:when test="${classfication.suitableAges == 4}">
+									<td>12歲以上</td>
+								</c:when>
+							 </c:choose>
 							<c:choose>
-								<c:when test="${classfication.genderPreference == M}">
+								<c:when test="${classfication.genderPreference == 'A'}">
+									<td>通用</td>
+								</c:when>
+								<c:when test="${classfication.genderPreference == 'M'}">
 									<td>男</td>
 								</c:when>
-								<c:when test="${classfication.genderPreference == F}">
+								<c:when test="${classfication.genderPreference == 'F'}">
 									<td>女</td>
 								</c:when>				
 							</c:choose>
 							<td>${classfication.displayTime}</td>
-							<td>${classfication.productImage}</td>
+							<td><img src="${classfication.productImage}"></td>
 							<!-- <td><span class="label label-success">啟用</span></td>
 							 -->
+							<td>
+								<a href='<c:url value='/ProductItemOfShop?storeID=&productID=${classfication.productID}'/>' target="_blank" class='btn btn-success'> <i class='fa fa-eye'></i> </a> </td>
+							</td>
 							<td><a href="#" class='btn btn-primary product_management_btn'> 
 								<span style="display: none;">${classfication.productID}</span>
 							<i class='fa fa-pencil'></i>

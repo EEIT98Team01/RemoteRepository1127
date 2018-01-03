@@ -19,6 +19,7 @@ public class SellerBackstageManageService {
 	@Autowired
 	private SellerBackstageManageDao sellerBackstageManageDao;
 	
+
 	// 查詢該店家設店設置資料
 	@Transactional(readOnly=true)
 	public SellerBackstageManageBean getStoreData(int storeID) {
@@ -52,6 +53,13 @@ public class SellerBackstageManageService {
 		}
 	}
 	
+	
+	// 取得符合特定條件商店數量
+	public int getQuantity() {
+			
+		return sellerBackstageManageDao.getQuantity();
+	}
+	
 	public List<Object[]> hotStoreList(int rating, int pageView, int quantity) {
 		Map<String, String> condition = new HashMap<String, String>();
 		condition.put("storeRating", ">= " + rating);
@@ -61,12 +69,13 @@ public class SellerBackstageManageService {
 		List<Object[]> result = new LinkedList<Object[]>();
 		for(int i = 0; i < storeList.size(); i++) {
 			SellerBackstageManageBean store = storeList.get(i);
-			Object[] obj = new Object[6];
+			Object[] obj = new Object[7];
 			obj[0] = store.getStoreID();
 			obj[2] = store.getStoreName();
 			obj[3] = store.getStoreDescription();
 			obj[4] = store.getStoreRating();
 			obj[5] = store.getTotalPageView();
+			obj[6] = store.getEmail();
 			
 			// 處理圖片
 			java.sql.Blob blobimg = store.getStoreLogo();
@@ -83,5 +92,7 @@ public class SellerBackstageManageService {
 		
 		return result;
 	}
+
+	
 	
 }

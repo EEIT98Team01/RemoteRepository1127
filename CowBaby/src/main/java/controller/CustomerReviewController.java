@@ -1,7 +1,9 @@
 package controller;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import model.bean.CustomerServiceBean;
+import model.bean.OrderDetailBean;
 import model.service.CustomerServiceAuditService;
 import model.service.MessageService;
 
@@ -28,37 +31,18 @@ public class CustomerReviewController {
 		System.out.println(processStatus);
 		System.out.println(problemTypes);
 
-		if ("全部".equals(processStatus)) {
-			processStatus = "1";
-		} else if ("未處理".equals(processStatus)) {
-			processStatus = "2";
-		} else if ("處理中".equals(processStatus)) {
-			processStatus = "3";
-		} else if ("已處理".equals(processStatus)) {
-			processStatus = "4";
-		}
-
-		if ("全部".equals(problemTypes)) {
-			problemTypes = "1";
-		} else if ("檢舉黑名單".equals(problemTypes)) {
-			problemTypes = "2";
-		} else if ("帳號問題".equals(problemTypes)) {
-			problemTypes = "3";
-		} else if ("BUG回報".equals(problemTypes)) {
-			problemTypes = "4";
-		} else if ("其他".equals(problemTypes)) {
-			problemTypes = "5";
-		}
-
 		if ("".equals(email)) {
 			email = null;
 		}
 
-		if (email == null || "".equals(email.trim()) && processStatus == null && problemTypes == null) {
+		if ( (email == null || "".equals(email.trim())) && 
+			  "0".equals(processStatus) && 
+			  "0".equals(problemTypes)) {
 			model.addAttribute("reviewList", customerServiceAuditService.find());
 		} else {
-			model.addAttribute("reviewList",
-					customerServiceAuditService.findByReview(email, processStatus, problemTypes));
+			List<CustomerServiceBean> customerDetailListTemp = customerServiceAuditService.findByCondition(email, Integer.parseInt(problemTypes), Integer.parseInt(processStatus));
+			
+			model.addAttribute("reviewList", customerDetailListTemp);
 		}
 		return "customer_review_success";
 	}

@@ -39,8 +39,8 @@
 			<div class="container_pagination">
 				<div class="container_pagination_title col-md-2">全部商家</div>
 				<div class="pull-right">
-					<ul class="pagination">
-						<li>
+					<ul class="pagination" id="myPagination">
+						<!-- <li>
 						    <a  style="border-radius:50%" href="#" aria-label="Previous">
 						        <span aria-hidden="true">«</span>
 						    </a>
@@ -53,18 +53,18 @@
 					    <li>
 					    <a style="border-radius:50%" href="#" aria-label="Next">
 					        <span aria-hidden="true">»</span>
-					    </a>
+					    </a> -->
 					</ul>
 				</div>
 				<div class="col-md-2 col-md-offset-3 pull-right">
 					<form class="form-inline">
 						<div class="form-group">
-							<label for="exampleInputName2">顯示</label>
-							<select class="form-control">
-								<option>10</option>
-								<option>20</option>
-								<option>30</option>
-								<option>40</option>		
+							<label>顯示</label>
+							<select class="form-control mySelect">
+								<option <c:if test="${pageSize == 10}"> selected="true" </c:if> value="10">10</option>
+								<option <c:if test="${pageSize == 2}"> selected="true" </c:if> value="2">2</option>
+								<option <c:if test="${pageSize == 4}"> selected="true" </c:if> value="4">4</option>
+								<option <c:if test="${pageSize == 6}"> selected="true" </c:if> value="6">6</option>		
 							</select>
 						</div>
 					</form>	
@@ -75,12 +75,12 @@
 			<section class="shopList"> 
 				<c:forEach var="list" items="${shopList}">
 										
-					<a class="item" href="<c:url value="PersonShopController"/>?storeID=${list.storeID}&email=${list.email}" >
-						<img src="<c:url value="/images/newArrived1.jpg"/>">
-						<div class="shopName">${list.storeName}</div>
-						<div class="description">${list.storeDescription}</div>
+					<a class="item" href="<c:url value="PersonShopController"/>?storeID=${list[0]}&email=${list[1]}" >
+						<img src="data:image/jpeg;base64,${list[6]}">
+						<div class="shopName">${list[2]}</div>
+						<div class="description">${list[3]}</div>
 						<div class="stars">
-							<c:if test="${list.storeRating==0}">
+							<c:if test="${list[4]==0}">
 								<ul>
 									<li><i class="fa fa-star" aria-hidden="true"></i></li>
 									<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
@@ -89,7 +89,7 @@
 									<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
 								</ul>
 							</c:if>
-							<c:if test="${list.storeRating==1}">
+							<c:if test="${list[4]==1}">
 								<ul>
 									<li><i class="fa fa-star" aria-hidden="true"></i></li>
 									<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
@@ -98,7 +98,7 @@
 									<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
 								</ul>
 							</c:if>
-							<c:if test="${list.storeRating==2}">
+							<c:if test="${list[4]==2}">
 								<ul>
 									<li><i class="fa fa-star" aria-hidden="true"></i></li>
 									<li><i class="fa fa-star" aria-hidden="true"></i></li>
@@ -107,7 +107,7 @@
 									<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
 								</ul>
 							</c:if>
-							<c:if test="${list.storeRating==3}">
+							<c:if test="${list[4]==3}">
 								<ul>
 									<li><i class="fa fa-star" aria-hidden="true"></i></li>
 									<li><i class="fa fa-star" aria-hidden="true"></i></li>
@@ -116,7 +116,7 @@
 									<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
 								</ul>
 							</c:if>
-							<c:if test="${list.storeRating==4}">
+							<c:if test="${list[4]==4}">
 								<ul>
 									<li><i class="fa fa-star" aria-hidden="true"></i></li>
 									<li><i class="fa fa-star" aria-hidden="true"></i></li>
@@ -125,7 +125,7 @@
 									<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
 								</ul>
 							</c:if>
-							<c:if test="${list.storeRating==5}">
+							<c:if test="${list[4]==5}">
 								<ul>
 									<li><i class="fa fa-star" aria-hidden="true"></i></li>
 									<li><i class="fa fa-star" aria-hidden="true"></i></li>
@@ -137,7 +137,7 @@
 						</div>
 						<div class="likes">
 							<i class="fa fa-gratipay" aria-hidden="true"></i>
-							<span>${list.totalPageView}</span>
+							<span>${list[5]}</span>
 						</div>
 					</a>
 				</c:forEach>
@@ -180,9 +180,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/js/bootstrap-switch.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/js/bootstrap-dialog.min.js"></script>
 <script src="<c:url value="/pluging/Bxsliders/jquery.bxslider.min.js"/>"></script>
-
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.12/jquery.bxslider.js"></script> -->
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.12/jquery.bxslider.css">  -->
+<script src="<c:url value="/pluging/Bootsrap/jquery.twbsPagination.js"/>"></script>
  
 
 
@@ -190,15 +188,68 @@
 <script type="text/javascript">
 
 $(function(){
+
+	$(".all_shops_page_container .shopList .item .description").each(function(){
+    	var mytext = $(this).text();
+		var newText = mytext.substr(0,40);
+		$(this).text(newText+"..."); 	
+	});
 	
-	  $(".all_shops_page_container .shopList .item .description").each(function(){
-	    	console.log($(this).text());
-	    	var mytext = $(this).text();
-			var newText = mytext.substr(0,40);
-			console.log("newText",newText);
-			$(this).text(newText+"...");
-	    	
-	  });
+	// 預設當前頁
+  	var pagenow = 1;
+  	// 預設總頁數
+  	var totalPage = 1;
+  	// 預設每頁顯示筆數
+  	var visiblecount = 10;
+  	// 分頁的插件，一定要加
+    $('#myPagination').twbsPagination('destroy');
+  	
+ 	// 自動產生分頁
+ 	var totalPages = ${totalPage};
+    var pageSize  = ${pageSize};
+  	
+	$(".mySelect").change(function(){
+		pageSize =$(this).children('option:selected').val();
+  		console.log("visiblecount",visiblecount)
+  		
+  		$('#myPagination').twbsPagination('destroy');
+  		
+  		$('#myPagination').twbsPagination({
+ 			startPage: 1,
+ 			totalPages: totalPages,
+ 			visiblePages: 5,
+ 			initiateStartPageClick: true,
+ 			
+ 			onPageClick: function (evt, page) { 
+ 				var url = "";
+ 				url = url + 
+ 				      "${pageContext.servletContext.contextPath}/AllShopController?" +
+ 				      "pageNumber=" + page + "&" +
+ 				      "pageSize="+pageSize;		
+ 				window.location.replace(url);
+ 			}
+ 		});
+	});
+
+
+	if(!totalPages==0) {
+		// 如果查詢有資料
+		$('#myPagination').twbsPagination({
+			startPage: ${pageNumber},
+			totalPages: totalPages,
+			visiblePages: 5,
+			initiateStartPageClick: false,
+			
+			onPageClick: function (evt, page) { 
+				var url = "";
+				url = url + 
+				      "${pageContext.servletContext.contextPath}/AllShopController?" +
+				      "pageNumber=" + page + "&" +
+				      "pageSize=${pageSize}"				
+				window.location.replace(url);
+			}
+		});
+	}
 
 })
 </script>

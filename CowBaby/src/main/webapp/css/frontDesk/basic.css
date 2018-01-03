@@ -284,6 +284,12 @@ a, a:hover, a:focus {
     width: 1170px;
     height: 150px;
     margin: 0px auto;
+    overflow: hidden;
+}
+
+.page_banner img{
+	width: 1170px;
+    height: 150px;
 }
 
 /*每頁的 page_container*/
@@ -361,12 +367,37 @@ a, a:hover, a:focus {
 	width: 150px;
     padding: 10px;
     text-align: center;
-    border: 2px solid #8ad1d9;
-    background: #fff;
+    border: 2px solid #3e9da8;
+    background: #e0f0f2;
     border-radius: 5px;
     position: absolute;
     z-index: 999;
-    top: 30px;
+    top: 50px;
+}
+
+.showMemberPannal .arrow{
+	width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 10px 10px 10px;
+    border-color: transparent transparent #3e9da8;
+    position: absolute;
+    top: -10px;
+    left: 62px;
+	
+}
+
+.showMemberPannal a{
+    color: #378f9a;
+    font-size: 14px;
+    font-weight: bolder;
+    padding: 5px 0;
+   
+}
+
+.showMemberPannal a:hover{
+	color: #fff;
+    background: #9dd6dd;
 }
 
 /***********currentShoppingCartList****************/
@@ -390,6 +421,26 @@ a, a:hover, a:focus {
 	font-size:14px;
 	text-align: center;
 }
+
+.top-bar .top-bar-menu .myshopStore{
+	border: 1px solid #57a6af;
+    padding: 3px 10px;
+    border-radius: 5px;
+    background: #6ab3bb;
+    color: #eaf5f6;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+
+.top-bar .top-bar-menu .myshopStore img{
+	border-radius: 0px;
+    border: none;
+    width: 19px;
+    height: 18px;
+}
+}
+
 .top-bar .top-bar-menu li:nth-child(2) .currentShoppingCartList li{
 		max-width: 300px;
 		padding-bottom: 10px;
