@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -37,46 +38,93 @@
 			<div class="personal_infor">
 				<div class="seller_title">賣家資訊</div>
 				<div class="seller_img">
-					<img src="<c:url value="/images/toto.png"/>">
+					<img src="data:image/jpg;base64,${shopLogoImg}">
 				</div>
 				<div class="infor_titile">
 					<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
-					<span>兔兔的店</span>
+					<span>${shopData.storeName}</span>
 				</div>
 				<div class="infor_titile">
 					<span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span>
-					<span>0932-132-456</span>
+					<span>${shopData.storePhone}</span>
 				</div>
 
 				<div class="infor_valuation">
-					<span>消費者滿意度：<span class="score">9.6</span></span>
+					<span>消費者滿意度：<span class="score">${shopData.storeRating*2}</span></span>
 					<div class="stars">
-						<ul>
-							<li><i class="fa fa-star" aria-hidden="true"></i></li>
-							<li><i class="fa fa-star" aria-hidden="true"></i></li>
-							<li><i class="fa fa-star" aria-hidden="true"></i></li>
-							<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-							<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-						</ul>			
+							
+							<c:if test="${shopData.storeRating==0}">
+								<ul>
+									<li><i class="fa fa-star" aria-hidden="true"></i></li>
+									<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+									<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+									<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+									<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+								</ul>
+							</c:if>
+							<c:if test="${shopData.storeRating==1}">
+								<ul>
+									<li><i class="fa fa-star" aria-hidden="true"></i></li>
+									<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+									<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+									<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+									<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+								</ul>
+							</c:if>
+							<c:if test="${shopData.storeRating==2}">
+								<ul>
+									<li><i class="fa fa-star" aria-hidden="true"></i></li>
+									<li><i class="fa fa-star" aria-hidden="true"></i></li>
+									<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+									<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+									<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+								</ul>
+							</c:if>
+							<c:if test="${shopData.storeRating==3}">
+								<ul>
+									<li><i class="fa fa-star" aria-hidden="true"></i></li>
+									<li><i class="fa fa-star" aria-hidden="true"></i></li>
+									<li><i class="fa fa-star" aria-hidden="true"></i></li>
+									<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+									<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+								</ul>
+							</c:if>
+							<c:if test="${shopData.storeRating==4}">
+								<ul>
+									<li><i class="fa fa-star" aria-hidden="true"></i></li>
+									<li><i class="fa fa-star" aria-hidden="true"></i></li>
+									<li><i class="fa fa-star" aria-hidden="true"></i></li>
+									<li><i class="fa fa-star" aria-hidden="true"></i></li>
+									<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+								</ul>
+							</c:if>
+							<c:if test="${shopData.storeRating==5}">
+								<ul>
+									<li><i class="fa fa-star" aria-hidden="true"></i></li>
+									<li><i class="fa fa-star" aria-hidden="true"></i></li>
+									<li><i class="fa fa-star" aria-hidden="true"></i></li>
+									<li><i class="fa fa-star" aria-hidden="true"></i></li>
+									<li><i class="fa fa-star" aria-hidden="true"></i></li>
+								</ul>
+							</c:if>		
 					</div>
 				</div>
 				
 			</div>
 			<!--其他功能-->
 			<div class="other_function">
-				<p>每日流覽人數: <span> 123456</span></p>
-				<p>人氣: <span> 123456</span></p>
+				<p>每日流覽人數: <span>${shopData.totalPageView}</span></p>
+				<p>人氣: <span><fmt:formatNumber value=" ${shopData.totalPageView*100/1.5}" pattern="#" type="number"/></span></p>
 				<a href="#"><i style="margin-right: 5px;" class="fa fa-commenting-o" aria-hidden="true"></i>留言給賣家</a>
 				<a style="margin-left: 15px;background:#818080;" href="#"><i style="margin-right: 5px;" class="fa fa-user-circle-o" aria-hidden="true"></i>檢舉</a>
 			</div>
 		</div>
 
-
 		<!-- 個人商店頁面-->
 		<div class="main_container_col_2 personal_shop">
 			<div class="shop_introduction">
-				<div class="personal_shop_name">兔兔的店</div>
-				<div class="personal_shop_description">行政院長賴清德盼企業提高薪資，台積電董事長張忠謀昨日直言，薪資應該是自由人力市場事情，政府勸企業提高薪水，有違自由市場規矩，「他（指政府）不必、也用不著勸我們，我們本來就是每年都在提高薪水。」</div>
+				<div class="personal_shop_name">${shopData.storeName}</div>
+				<div class="personal_shop_description">${shopData.storeDescription}</div>
 			</div>
 			<div class="container_pagination">
 				<div class="container_pagination_title col-md-2">全部商品</div>
@@ -114,89 +162,14 @@
 			</div>
 			<!--店家產品LIST-->
 			<section class="proudectList">
-				<div class="item">
+				
+				<c:forEach var="list" items="${shopProuductsList}">
+				<a class="item" href="<c:url value="ProductItemOfShop"/>?storeID=${list.storeID}&productID=${list.productID}">
 					<img src="<c:url value="/images/newArrived1.jpg"/>">
-					<p class="title">英國Blade ＆ Rose 聖誕款聖誕款聖款內內搭褲</p>
-					<div class="originalPrice">原價 NT 190</div>
-					<div class="specialPrice">特價 NT <span class="specialPriceNum">190</span></div>
-				</div>
-
-				<div class="item">
-					<img src="<c:url value="/images/newArrived2.jpg"/>">
-					<p class="title">英國Blade ＆ Rose 聖誕款內搭褲</p>
-					<div class="originalPrice">原價 NT 190</div>
-					<div class="specialPrice">特價 NT <span class="specialPriceNum">190</span></div>
-				</div>
-
-				<div class="item">
-					<img src="<c:url value="/images/newArrived1.jpg"/>">
-					<p class="title">英國Blade ＆ Rose 聖誕款內搭褲</p>
-					<div class="originalPrice">原價 NT 190</div>
-					<div class="specialPrice">特價 NT <span class="specialPriceNum">190</span></div>
-				</div>
-
-				<div class="item">
-					<img src="img/newArrived4.jpg">
-					<p class="title">英國Blade ＆ Rose 聖誕款內搭褲</p>
-					<div class="originalPrice">原價 NT 190</div>
-					<div class="specialPrice">特價 NT <span class="specialPriceNum">190</span></div>
-				</div>
-
-				<div class="item">
-					<img src="<c:url value="/images/newArrived1.jpg"/>">
-					<p class="title">英國Blade ＆ Rose 聖誕款內搭褲</p>
-					<div class="originalPrice">原價 NT 190</div>
-					<div class="specialPrice">特價 NT <span class="specialPriceNum">190</span></div>
-				</div>
-
-				<div class="item">
-					<img src="<c:url value="/images/newArrived1.jpg"/>">
-					<p class="title">英國Blade ＆ Rose 聖誕款內搭褲</p>
-					<div class="originalPrice">原價 NT 190</div>
-					<div class="specialPrice">特價 NT <span class="specialPriceNum">190</span></div>
-				</div>
-
-				<div class="item">
-					<img src="<c:url value="/images/newArrived1.jpg"/>">
-					<p class="title">英國Blade ＆ Rose 聖誕款內搭褲</p>
-					<div class="originalPrice">原價 NT 190</div>
-					<div class="specialPrice">特價 NT <span class="specialPriceNum">190</span></div>
-				</div>
-
-				<div class="item">
-					<img src="<c:url value="/images/newArrived1.jpg"/>">
-					<p class="title">英國Blade ＆ Rose 聖誕款內搭褲</p>
-					<div class="originalPrice">原價 NT 190</div>
-					<div class="specialPrice">特價 NT <span class="specialPriceNum">190</span></div>
-				</div>
-
-				<div class="item">
-					<img src="<c:url value="/images/newArrived1.jpg"/>">
-					<p class="title">英國Blade ＆ Rose 聖誕搭褲聖誕搭褲</p>
-					<div class="originalPrice">原價 NT 190</div>
-					<div class="specialPrice">特價 NT <span class="specialPriceNum">190</span></div>
-				</div>
-
-				<div class="item">
-					<img src="<c:url value="/images/newArrived1.jpg"/>">
-					<p class="title">英國Blade ＆ Rose 聖誕款內搭褲</p>
-					<div class="originalPrice">原價 NT 190</div>
-					<div class="specialPrice">特價 NT <span class="specialPriceNum">190</span></div>
-				</div>
-
-				<div class="item">
-					<img src="<c:url value="/images/newArrived1.jpg"/>">
-					<p class="title">英國Blade ＆ Rose 聖誕款內搭褲</p>
-					<div class="originalPrice">原價 NT 190</div>
-					<div class="specialPrice">特價 NT <span class="specialPriceNum">190</span></div>
-				</div>
-
-				<div class="item">
-					<img src="<c:url value="/images/newArrived1.jpg"/>">
-					<p class="title">英國Blade ＆ Rose 聖誕款內搭褲</p>
-					<div class="originalPrice">原價 NT 190</div>
-					<div class="specialPrice">特價 NT <span class="specialPriceNum">190</span></div>
-				</div>
+					<p class="title">${list.title}</p>
+					<div class="specialPrice">特價 NT <span class="specialPriceNum">${list.unitPrice}</span></div>
+				</a>
+				</c:forEach>
 			</section>
 		</div>
 	</section>

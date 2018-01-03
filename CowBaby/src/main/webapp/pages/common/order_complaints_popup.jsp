@@ -10,7 +10,7 @@
 <label class="c-choice__label" for="radio1">未處理</label>
 
 <input class="c-choice__input" id="radio1" name="status" type="radio" value="檢貨中">
-<label class="c-choice__label" for="radio1">檢貨中</label>
+<label class="c-choice__label" for="radio1">撿貨中</label>
 
 <input class="c-choice__input" id="radio1" name="status" type="radio" value="送貨中">
 <label class="c-choice__label" for="radio1">送貨中</label>
