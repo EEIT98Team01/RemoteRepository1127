@@ -75,7 +75,7 @@
 				<c:forEach var="array" varStatus="st" items="${blogList}">
 					<div class="item"> 
 						<a href="<c:url value="BlogItemOfArticle"/>?articleID=${array[0]}" >
-							<img width="140" height="280"   src="data:image/jpeg;base64,${array[1]}">
+							<img width="250" height="230"   src="data:image/jpeg;base64,${array[1]}">
 							<p class="articlHeader">${array[2]}</p>
 							<p class="bloggerName">${array[3]}</p>
 						</a>

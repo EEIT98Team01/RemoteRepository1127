@@ -18,22 +18,22 @@ import model.service.CustomerUserLoginService;
 
 @Controller
 @RequestMapping("CustomerUserLoginController")
-@SessionAttributes(names={"user","logingPhotoImg"})
+@SessionAttributes(names = { "user", "logingPhotoImg" })
 
 public class CustomerUserLoginController {
-	
+
 	@Autowired
 	CustomerUserLoginService customerUserLoginService;
-	
-	@RequestMapping(method={RequestMethod.GET, RequestMethod.POST})
+
+	@RequestMapping(method = { RequestMethod.GET, RequestMethod.POST })
 	public String method(String useremail, String password, Model model) {
-		
+
 		System.out.println(useremail);
 		System.out.println(password);
-		
-		//讀取使用者輸入資料
-		//進行必要的資料型態轉換
-		//進行資料檢查
+
+		// 讀取使用者輸入資料
+		// 進行必要的資料型態轉換
+		// 進行資料檢查
 		Map<String, String> errors = new HashMap<>();
 		model.addAttribute("errors", errors);
 
@@ -47,36 +47,32 @@ public class CustomerUserLoginController {
 		if (errors != null && !errors.isEmpty()) {
 			return "login_error";
 		}
-		
-	
-		//進行商業服務	
+
+		// 進行商業服務
 		CustomerBean bean = customerUserLoginService.findByCondition(useremail, password);
+		// 依照執行結果挑選適當的View元件
+
 		
-		System.out.println("bean==>"+bean.toString());
-		
-		// 如果大頭貼為空
-		if(bean.getLoginPhoto()!=null){
-			
-			// 從資料庫抓取LOGO圖片編碼(二進制)
-			 java.sql.Blob logingPhoto = bean.getLoginPhoto();
-			 try {
-				 
-				 // LOGO圖片編碼(二進制)->轉base64
-				 byte[] img = Base64.getEncoder().encode(logingPhoto.getBytes(1, (int)logingPhoto.length())); 
-				 // base64 -> 轉字串顯示於畫面上
-				 String logingPhotoImg = new String(img);
-				 model.addAttribute("logingPhotoImg", logingPhotoImg);
-			 } catch (Exception e) {
-				 
-				 e.printStackTrace();
-			 }
-		}
-		
-		//依照執行結果挑選適當的View元件
-		if(bean==null) {
+		if (bean == null) {
 			errors.put("password", "登入失敗 ");
 			return "login_error";
 		} else {
+			// 如果大頭貼為空
+			if (bean.getLoginPhoto() != null) {
+
+				// 從資料庫抓取LOGO圖片編碼(二進制)
+				java.sql.Blob logingPhoto = bean.getLoginPhoto();
+				try {
+					// LOGO圖片編碼(二進制)->轉base64
+					byte[] img = Base64.getEncoder().encode(logingPhoto.getBytes(1, (int) logingPhoto.length()));
+					// base64 -> 轉字串顯示於畫面上
+					String logingPhotoImg = new String(img);
+					model.addAttribute("logingPhotoImg", logingPhotoImg);
+				} catch (Exception e) {
+
+					e.printStackTrace();
+				}
+			}
 			model.addAttribute("user", bean);
 			return "login_success";
 		}

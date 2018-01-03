@@ -73,7 +73,6 @@ public class ProductController {
 		
 		return "product_managment_list";
 	}
-	
 	// 前台單品資訊
 	@RequestMapping(value = ("ProductItemOfShop"), method = { RequestMethod.GET, RequestMethod.POST })
 	public String productItem(Model model, String storeID, String productID) {

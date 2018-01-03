@@ -36,11 +36,11 @@
 			<div class="article_classify">
 				<div class="classify_title">最新文章</div>
 				<ul>
-					<li><a href="http://localhost:8080/CowBaby/BlogItemOfArticle?articleID=12"><米菲>好英文圖書介紹，淺移默化</a></li>
-					<li><a href="http://localhost:8080/CowBaby/BlogItemOfArticle?articleID=11">澳洲We Might Be Tiny矽膠防滑餐墊</a></li>
-					<li><a href="http://localhost:8080/CowBaby/BlogItemOfArticle?articleID=10">來至加拿大 3 Sprouts~動物眼睛都很大的趣味收納法寶媽媽推薦居家生活</a></li>
-					<li><a href="http://localhost:8080/CowBaby/BlogItemOfArticle?articleID=9">鐵寶包週歲溫馨小party之廠商分享</a></li>
-					<li><a href="http://localhost:8080/CowBaby/BlogItemOfArticle?articleID=8">【私物分享】★美國 Little Giraffe★ 安撫、保暖、舒適媽媽推薦居家生活</a></li>
+					<li><a href="http://localhost:8080/CowBaby/BlogItemOfArticle?articleID=13"><米菲>美國VANS 滑板鞋 – 孩童款</a></li>
+					<li><a href="http://localhost:8080/CowBaby/BlogItemOfArticle?articleID=12">法國DJECO多片數厚紙拼圖</a></li>
+					<li><a href="http://localhost:8080/CowBaby/BlogItemOfArticle?articleID=11">Les Jouets Libres顛覆傳統之經典滾珠&紙牌桌遊</a></li>
+					<li><a href="http://localhost:8080/CowBaby/BlogItemOfArticle?articleID=10">澳洲We Might Be Tiny 矽膠防滑動物造型餐墊 & bobo&boo</a></li>
+					<li><a href="http://localhost:8080/CowBaby/BlogItemOfArticle?articleID=9">澳洲 bobo&boo 天然無毒馬卡龍餐具組</a></li>
 				</ul>
 				
 			</div>
