@@ -160,7 +160,7 @@
 			<section class="slidershow">
 				<div class="slidershow-Wrapper3">
 					<c:forEach var="hotStore" varStatus="st" items="${hotStoreList}">
-						<a href='<c:url value='/ProductItemOfShop?storeID=&productID=${hotStore[0]}'/>'>
+						<a href='<c:url value='/PersonShopController?storeID=${hotStore[0]}&email=${hotStore[6]}'/>'>
 							<div class="item">
 								<div class="choice"></div>
 									<img src="data:image/jpeg;base64,${hotStore[1]}"/>">

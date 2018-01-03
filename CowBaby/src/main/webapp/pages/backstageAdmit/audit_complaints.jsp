@@ -46,20 +46,20 @@
 					<div class="form-group">
 						<label for="exampleInputName2">審核狀態:</label> <select
 							class="form-control" id="processStatus" name="processStatus">
-							<option value="1">全部</option>
-							<option value="2">未處理</option>
-							<option value="3">處理中</option>
-							<option value="4">已處理</option>
+							<option value="0">全部</option>
+							<option value="1">未處理</option>
+							<option value="2">處理中</option>
+							<option value="3">已處理</option>
 						</select>
 					</div>
 					<div class="form-group">
 						<label for="exampleInputName2">案件類型:</label> <select
 							class="form-control" id="problemTypes" name="problemTypes">
-							<option value="1">全部</option>
-							<option value="2">檢舉黑名單</option>
-							<option value="3">帳號問題</option>
-							<option value="4">BUG回報</option>
-							<option value="5">其他</option>
+							<option value="0">全部</option>
+							<option value="1">檢舉黑名單</option>
+							<option value="2">帳號問題</option>
+							<option value="3">BUG回報</option>
+							<option value="4">其他</option>
 						</select>
 					</div>
 					<button type="submit" class="btn btn-primary">查詢</button>
@@ -93,13 +93,13 @@
 								<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${CustomerReview.reportTime}"/></td>
 <%-- 								<td>${CustomerReview.problemTypes}</td> --%>
 								<c:choose>
-								<c:when test="${CustomerReview.problemTypes == 1}">
+								<c:when test="${CustomerReview.problemTypes == 2}">
 									<td>帳號問題</td>
 								</c:when>
-								<c:when test="${CustomerReview.problemTypes == 2}">
+								<c:when test="${CustomerReview.problemTypes == 3}">
 									<td>BUG問題</td>
 								</c:when>
-								<c:when test="${CustomerReview.problemTypes == 3}">
+								<c:when test="${CustomerReview.problemTypes == 1}">
 									<td>黑名單檢舉</td>
 								</c:when>
 								<c:when test="${CustomerReview.problemTypes == 4}">
@@ -109,14 +109,14 @@
 <%-- 								<td>${CustomerReview.processStatus}</td> --%>
 								<c:choose>
 								<c:when test="${CustomerReview.processStatus == 1}">
-									<td><span class="label label-info">處理中</span></td>
+									<td><span class="label label-danger">未處理</span></td>
 								</c:when>
 								<c:when test="${CustomerReview.processStatus == 2}">
+									<td><span class="label label-info">處理中</span></td>
+								</c:when>
+								<c:when test="${CustomerReview.processStatus == 3}">
 									<td><span class="label label-primary">已處理</span></td>
 								</c:when>
-								<c:otherwise>
-									<td><span class="label label-danger">未處理</span></td>
-								</c:otherwise>
 							    </c:choose>
 								<td>${CustomerReview.problemDescription}</td>
 								<td>${CustomerReview.serviceFeedback}</td>
