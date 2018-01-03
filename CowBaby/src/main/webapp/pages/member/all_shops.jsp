@@ -61,10 +61,10 @@
 						<div class="form-group">
 							<label>顯示</label>
 							<select class="form-control mySelect">
-								<option value="10">10</option>
-								<option value="2">2</option>
-								<option value="4">4</option>
-								<option value="6">6</option>		
+								<option <c:if test="${pageSize == 10}"> selected="true" </c:if> value="10">10</option>
+								<option <c:if test="${pageSize == 2}"> selected="true" </c:if> value="2">2</option>
+								<option <c:if test="${pageSize == 4}"> selected="true" </c:if> value="4">4</option>
+								<option <c:if test="${pageSize == 6}"> selected="true" </c:if> value="6">6</option>		
 							</select>
 						</div>
 					</form>	
@@ -75,12 +75,12 @@
 			<section class="shopList"> 
 				<c:forEach var="list" items="${shopList}">
 										
-					<a class="item" href="<c:url value="PersonShopController"/>?storeID=${list.storeID}&email=${list.email}" >
-						<img src="<c:url value="/images/newArrived1.jpg"/>">
-						<div class="shopName">${list.storeName}</div>
-						<div class="description">${list.storeDescription}</div>
+					<a class="item" href="<c:url value="PersonShopController"/>?storeID=${list[0]}&email=${list[1]}" >
+						<img src="data:image/jpeg;base64,${list[6]}">
+						<div class="shopName">${list[2]}</div>
+						<div class="description">${list[3]}</div>
 						<div class="stars">
-							<c:if test="${list.storeRating==0}">
+							<c:if test="${list[4]==0}">
 								<ul>
 									<li><i class="fa fa-star" aria-hidden="true"></i></li>
 									<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
@@ -89,7 +89,7 @@
 									<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
 								</ul>
 							</c:if>
-							<c:if test="${list.storeRating==1}">
+							<c:if test="${list[4]==1}">
 								<ul>
 									<li><i class="fa fa-star" aria-hidden="true"></i></li>
 									<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
@@ -98,7 +98,7 @@
 									<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
 								</ul>
 							</c:if>
-							<c:if test="${list.storeRating==2}">
+							<c:if test="${list[4]==2}">
 								<ul>
 									<li><i class="fa fa-star" aria-hidden="true"></i></li>
 									<li><i class="fa fa-star" aria-hidden="true"></i></li>
@@ -107,7 +107,7 @@
 									<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
 								</ul>
 							</c:if>
-							<c:if test="${list.storeRating==3}">
+							<c:if test="${list[4]==3}">
 								<ul>
 									<li><i class="fa fa-star" aria-hidden="true"></i></li>
 									<li><i class="fa fa-star" aria-hidden="true"></i></li>
@@ -116,7 +116,7 @@
 									<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
 								</ul>
 							</c:if>
-							<c:if test="${list.storeRating==4}">
+							<c:if test="${list[4]==4}">
 								<ul>
 									<li><i class="fa fa-star" aria-hidden="true"></i></li>
 									<li><i class="fa fa-star" aria-hidden="true"></i></li>
@@ -125,7 +125,7 @@
 									<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
 								</ul>
 							</c:if>
-							<c:if test="${list.storeRating==5}">
+							<c:if test="${list[4]==5}">
 								<ul>
 									<li><i class="fa fa-star" aria-hidden="true"></i></li>
 									<li><i class="fa fa-star" aria-hidden="true"></i></li>
@@ -137,7 +137,7 @@
 						</div>
 						<div class="likes">
 							<i class="fa fa-gratipay" aria-hidden="true"></i>
-							<span>${list.totalPageView}</span>
+							<span>${list[5]}</span>
 						</div>
 					</a>
 				</c:forEach>
@@ -217,7 +217,7 @@ $(function(){
   		$('#myPagination').twbsPagination({
  			startPage: 1,
  			totalPages: totalPages,
- 			visiblePages: pageSize,
+ 			visiblePages: 5,
  			initiateStartPageClick: true,
  			
  			onPageClick: function (evt, page) { 
@@ -237,7 +237,7 @@ $(function(){
 		$('#myPagination').twbsPagination({
 			startPage: ${pageNumber},
 			totalPages: totalPages,
-			visiblePages: pageSize,
+			visiblePages: 5,
 			initiateStartPageClick: false,
 			
 			onPageClick: function (evt, page) { 

@@ -33,7 +33,7 @@
 		<img src="<c:url value="/images/all_prouducts_banner.png"/>">
 	</section>
 
-	<section class="page_container personal_shop_page_container">
+	<section class="page_container personal_shop_page_container loadingBox">
 		<div class="side_bar">
 			<div class="personal_infor">
 				<div class="seller_title">賣家資訊</div>
@@ -115,7 +115,7 @@
 			<div class="other_function">
 				<p>每日流覽人數: <span>${shopData.totalPageView}</span></p>
 				<p>人氣: <span><fmt:formatNumber value=" ${shopData.totalPageView*100/1.5}" pattern="#" type="number"/></span></p>
-				<a href="#"><i style="margin-right: 5px;" class="fa fa-commenting-o" aria-hidden="true"></i>留言給賣家</a>
+				<a href="#" class="audit_popupbox_btn"><i style="margin-right: 5px;" class="fa fa-commenting-o" aria-hidden="true"></i>發訊給賣家</a>
 				<a style="margin-left: 15px;background:#818080;" href="#"><i style="margin-right: 5px;" class="fa fa-user-circle-o" aria-hidden="true"></i>檢舉</a>
 			</div>
 		</div>
@@ -129,22 +129,7 @@
 			<div class="container_pagination">
 				<div class="container_pagination_title col-md-2">全部商品</div>
 				<div class="pull-right">
-					<ul class="pagination">
-						<li>
-						    <a  style="border-radius:50%" href="#" aria-label="Previous">
-						        <span aria-hidden="true">«</span>
-						    </a>
-					    </li>
-					    <li><a href="#">1</a></li>
-					    <li><a href="#">2</a></li>
-					    <li><a href="#">3</a></li>
-					    <li><a href="#">4</a></li>
-					    <li><a href="#">5</a></li>
-					    <li>
-					    <a style="border-radius:50%" href="#" aria-label="Next">
-					        <span aria-hidden="true">»</span>
-					    </a>
-					</ul>
+					<ul class="pagination" id="myPagination"></ul>	
 				</div>
 				<div class="col-md-2 col-md-offset-3 pull-right">
 					<form class="form-inline">
@@ -162,14 +147,7 @@
 			</div>
 			<!--店家產品LIST-->
 			<section class="proudectList">
-				
-				<c:forEach var="list" items="${shopProuductsList}">
-				<a class="item" href="<c:url value="ProductItemOfShop"/>?storeID=${list.storeID}&productID=${list.productID}">
-					<img src="<c:url value="/images/newArrived1.jpg"/>">
-					<p class="title">${list.title}</p>
-					<div class="specialPrice">特價 NT <span class="specialPriceNum">${list.unitPrice}</span></div>
-				</a>
-				</c:forEach>
+
 			</section>
 		</div>
 	</section>
@@ -188,6 +166,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/js/bootstrap-switch.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/js/bootstrap-dialog.min.js"></script>
 <script src="<c:url value="/pluging/Bxsliders/jquery.bxslider.min.js"/>"></script>
+<script src="<c:url value="/pluging/Bootsrap/jquery.twbsPagination.js"/>"></script>
+<script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@1.5.4/src/loadingoverlay.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@1.5.4/extras/loadingoverlay_progress/loadingoverlay_progress.min.js"></script>
+
 
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.12/jquery.bxslider.js"></script> -->
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.12/jquery.bxslider.css">  -->
@@ -198,7 +180,160 @@
 <script type="text/javascript">
 
 	$(function(){
+		// 預設當前頁
+	   	var pagenow = 1; 
+	   	// 預設總頁數
+	   	var totalPage = 1; 
+	   	// 預設每頁顯示筆數
+	   	var visiblecount = 10; 
 
+	 	// 設置 loaading圖案
+		$.LoadingOverlaySetup({ size : "12%"});
+	   	
+		queryData(10, 1);
+		
+		// 查詢過濾勾選的商品
+		function queryData(pageSize,pageNumber){
+			// 將畫面清空
+			$('.proudectList').empty();
+			
+	    	$.ajax({
+		        type:"GET",
+		        url: "/CowBaby/prouducts/storeProdcut",
+		        data: {
+		        	 storeID:"${storeID}",
+			       	 pageSize:pageSize,
+		       		 pageNumber:pageNumber
+		        }, 
+		         
+		        dataType:"json",   
+		        
+		       // ajax載入前
+		        beforeSend: function(){
+		        	$(".loadingBox").LoadingOverlay("show");
+				},
+				
+				// 成功要做的事
+		        success : function(response){   
+			        console.log("response",response);
+			        
+			        $(".loadingBox").LoadingOverlay("hide");
+			        var obj = JSON.parse(response.list);
+			        
+			        $.each(obj, function (index, myitem) {
+			        	   console.log("customer",myitem);
+			           	    var html="";
+			 		    	html="<div class='item'>"+                                                                                        
+		 							"<a href='<c:url value='ProductItemOfShop'/>?storeID=&productID=" + myitem.productID + "'>"+
+			 							"<img src='" + myitem.productImage + "'>"+
+			 							"<p class='stroe_name'>"+ myitem.title +"</p>"+
+			 							"<div class='specialPrice'>售價 NT <span class='specialPriceNum'>" + myitem.unitPrice + "</span></div>"
+		 							"</a>"+
+								  "</div>";				
+		 		    		$('.proudectList').append(html);
+			         })
+			         
+	         		 // 自動產生分頁
+		         	 var totalPages = response.tatalPage;
+		             var pageSize  = response.pageSize;
+	 
+	 				 if(!totalPages==0){
+	 				 // 如果查詢有資料
+					    $('#myPagination').twbsPagination({
+			                  totalPages: totalPages,
+			                  visiblePages: visiblecount,
+			                  initiateStartPageClick: false,
+			                 /*  hideOnlyOnePage: true, */
+			                  onPageClick: function (evt, page) { 
+			                	  queryData(10,page);
+				       	　　　　}
+		                 });
+	 				  
+						 // 把頁數 ，筆數，開始筆數-結束筆數 塞回去
+			             $(".pageNum").html(response.pageNumber);
+			             $(".firstNum").html( ((response.pageNumber-1)*response.pageSize) +1);
+			             $(".endNum").html(response.pageNumber*response.pageSize);
+			             $(".totalNum").html(response.tatal);
+					  
+	 				 }else{
+	 			 	 // 如果查詢無資料	
+	 					 $(".pageNum").html(0);
+	 		             $(".firstNum").html(0);
+	 		             $(".endNum").html(0);
+	 		             $(".totalNum").html(0);
+	 		             $('tbody').html('<tr><td colspan="10">目前無任何資料</td></tr>');	
+	 				 }
+	        	
+		        },
+
+		         
+				// 發ajax錯誤
+		        error:function(xhr, ajaxOptions, thrownError) {
+		            /* alert(xhr.status+"\n"+thrownError); */
+		        	 $(".loadingBox").LoadingOverlay("hide");
+		        }
+
+	    	});
+		}
+		
+		// 申訴審核彈出框
+		$(".audit_popupbox_btn").click(function(){
+			event.preventDefault(); 
+
+	 		var emailId = $(this).parents('tr').find('td').eq(1).text();
+	 		var id = $(this).parents('tr').find('td').eq(6).text();
+	 		
+	 		BootstrapDialog.show({
+	 			 message: $('<div></div>').load('${pageContext.request.contextPath}/pages/common/send_message.jsp'),
+	             title:"發訊息給賣家",
+	             buttons: [{
+	 		                label: '確定',
+	 		                // no title as it is optional
+	 		                cssClass: 'btn-primary',
+	 		                action: function(dialogItself){
+	 		                	// 抓取裡面表單資料
+	 		                	formData = $(".seller_audit_popupForm").serializeArray();
+	 		                	sendMessage("${user.email}", "${shopData.email}", formData[0].value);
+	 		                	dialogItself.close();
+	 		                }
+	 		            },{
+	 		                label: '取消',
+	 		                action: function(dialogItself){
+	 		                    dialogItself.close();
+	 		               }
+	 		            }]
+	 	     });
+		});
+		
+		//改變審核狀態
+	 	function sendMessage(sender, receiver, content){
+	 		$.ajax({
+		        type:"POST",                   
+		        url: "/CowBaby/message/sendMessage",
+		        data: {
+		        	msgSenderAccount:sender,
+		        	msgReceiverAccount:receiver,
+		        	msgContent:content
+		        }, 
+		         
+		        dataType:"json",          
+				// 成功要做的事
+		        success : function(response){
+		        	//通知儲存成功  ，call BootstrapDialog      		       
+					BootstrapDialog.show({
+						type: BootstrapDialog.TYPE_INFO,
+						title: "訊息",
+						message: '傳送成功!!',
+						buttons: [{
+							label: 'Close',
+							action: function(dialogItself){
+								dialogItself.close();
+							}
+						}]
+					});  
+		        }
+	 		})         
+	 	} 
 
 	})
 </script>
