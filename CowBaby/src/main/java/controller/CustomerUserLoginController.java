@@ -55,20 +55,23 @@ public class CustomerUserLoginController {
 		CustomerBean bean = customerUserLoginService.findByCondition(useremail, password);
 		// 依照執行結果挑選適當的View元件
 		
-		//如果是賣家，則把STOREID放入session
-		if(bean.getUserID()==2){
-			/*bean.getEmail();*/
-			/*SellerBackstageManageBean sellerBackstageManageBean = SellerBackstageManageService.getStoreData(bean.getEmail());
-			int id = sellerBackstageManageBean.getStoreID();*/
-			int storeID = SellerBackstageManageService.findStore(bean.getEmail(), 1, 999, "storeID").get(0).getStoreID();
-			model.addAttribute("myStoreID", storeID);
-		}
 
-		
 		if (bean == null) {
 			errors.put("password", "登入失敗 ");
 			return "login_error";
 		} else {
+			
+			List<SellerBackstageManageBean> temp = SellerBackstageManageService.findStore(bean.getEmail(), 1, 999, "storeID");
+			System.out.println("temp"+temp);
+			if(bean.getUserID()==2){
+				
+				if(temp.size()!=0){
+					int storeID =temp.get(0).getStoreID();
+					
+					model.addAttribute("myStoreID", storeID);
+				}
+			}
+			
 			// 如果大頭貼為空
 			if (bean.getLoginPhoto() != null) {
 
