@@ -47,7 +47,7 @@
 	<section class="container">
 		<row>
 			<div class="col-md-2 logo">
-				<a href="<c:url value="/index"/>"><img src="<c:url value="/images/logo.jpg"/>"></a>
+				<a href="<c:url value="/"/>"><img src="<c:url value="/images/logo.jpg"/>"></a>
 			</div>
 			<div class="col-md-2 slogan" >
 				<span>開心玩樂開心學習~</span>
@@ -124,7 +124,7 @@ $(function(){
 		    	    // 全部購買總商品數量
 		    	    totalBuyNumber = totalBuyNumber + productInfor[key][i].quantity;
 		       		item  = item +"<li>"+
-		        			"<img src='<c:url value='/images/ad1.jpg'/>'>"+
+		        			"<img src='" + productInfor[key][i].productImage + "'>"+
 							"<div class='cartList'>"+
 								"<p>"+ key +"</p>"+
 								"<p>"+ productInfor[key][i].productName + "<span>-"+ productInfor[key][i].productSpec+"</span></p>"+
