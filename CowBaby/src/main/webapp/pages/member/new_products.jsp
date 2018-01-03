@@ -51,7 +51,7 @@
 
 			<ul>
 				<li class="sort-title">性別分類</li>
-				<li><label><input type="checkbox" name ="genderPreference" value="ALL"> <span>全部</span> <span>(4890)</span></label> </li>
+				<li><label><input type="checkbox" name ="genderPreference" value="A"> <span>通用</span> <span>(4890)</span></label> </li>
 				<li><label><input type="checkbox" name ="genderPreference" value="M"> <span>男</span> <span>(4890)</span></label> </li>
 				<li><label><input type="checkbox" name ="genderPreference" value="F"> <span>女</span> <span>(4890)</span></label> </li>	
 			</ul>
