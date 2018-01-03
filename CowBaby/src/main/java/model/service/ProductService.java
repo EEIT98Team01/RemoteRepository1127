@@ -100,6 +100,12 @@ public class ProductService {
 		}
 		return result;
 	}
+	
+	// 回傳符合某條件的N筆資料,若無資料,則回傳之List為空集合(DIN**)
+	@Transactional(readOnly = true)
+		public List<ProductBean> findByCondition(int storeId, int page, int rows) {
+			return productDao.findByCondition(this.createCondition(storeId), page, rows);
+	}
 
 	// 將查詢條件塞進Map
 	private HashMap<String, String> createCondition(String account, String userType, String clusterID) {
@@ -149,6 +155,17 @@ public class ProductService {
 		return productDao.selectCountByClassficationId(classficationID);
 	};
 	
+	// DIN
+	private HashMap<String, String> createCondition(int storeId) {
+		HashMap<String, String> condition = new HashMap<String, String>();
+
+		// account對應到資料庫中的email,若為null或"",表不設定該條件
+		if (storeId!= 0) {
+			condition.put("storeId", "= " + storeId);
+		}
+		return condition;
+	}
+
 
 	
 }

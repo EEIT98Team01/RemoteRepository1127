@@ -75,7 +75,7 @@
 			<section class="shopList"> 
 				<c:forEach var="list" items="${shopList}">
 										
-					<a class="item" href="<c:url value="PersonShopController"/>?storeID=${list.storeID}" >
+					<a class="item" href="<c:url value="PersonShopController"/>?storeID=${list.storeID}&email=${list.email}" >
 						<img src="<c:url value="/images/newArrived1.jpg"/>">
 						<div class="shopName">${list.storeName}</div>
 						<div class="description">${list.storeDescription}</div>
@@ -194,7 +194,7 @@ $(function(){
 	  $(".all_shops_page_container .shopList .item .description").each(function(){
 	    	console.log($(this).text());
 	    	var mytext = $(this).text();
-			var newText = mytext.substr(0,70);
+			var newText = mytext.substr(0,40);
 			console.log("newText",newText);
 			$(this).text(newText+"...");
 	    	

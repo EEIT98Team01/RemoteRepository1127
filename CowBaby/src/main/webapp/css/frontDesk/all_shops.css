@@ -6,6 +6,7 @@
     border: 1px solid #e6e6e6;
     float: left;
     margin: 30px 23px 15px 0px;
+    color:#707070;
 }
 
 .all_shops_page_container .shopList .item:nth-child(5n+5){
@@ -29,6 +30,9 @@
     font-size: 13px;
     padding: 0px 12px;
     line-height: 18px;
+    height:52px;
+    overflow: hidden;
+    text-align: justify;
 }
 
 .all_shops_page_container .shopList .item .stars{
