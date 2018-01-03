@@ -73,7 +73,6 @@
 									<th>手機</th>
 									<th>性別</th>
 									<th>身份</th>
-									<th>所屬會員群集</th>
 									<th>累積消費金額</th>
 									<th>檢視</th>
 									<th>編輯</th>								
@@ -219,10 +218,27 @@ $(function(){
  							"<td>"+(index+1+ (response.pageSize*(response.pageNumber-1)))+"</td>" +
  							"<td>"+customer.email+"</td>" +
  							"<td>"+customer.customerName+"</td>" +
- 							"<td>"+customer.mobilePhone+"</td>" +
- 							"<td>"+customer.gender+"</td>" +
- 							"<td>"+customer.userID+"</td>" +
- 							"<td>"+customer.consumerSegmentation+"</td>" +
+ 							"<td>"+customer.mobilePhone+"</td>";
+ 							
+ 							//"<td>"+customer.gender+"</td>" +
+ 							//"<td>"+customer.userID+"</td>" +
+ 							if(customer.gender == 'M') {
+ 								html = html + "<td>男</td>";
+ 							} else {
+ 								html = html + "<td>女</td>";
+ 							}
+ 							
+ 							if(customer.userID == 1) {
+ 								html = html + "<td>一般會員</td>";
+ 							} else if(customer.userID == 2) {
+ 								html = html + "<td>平台賣家</td>";
+ 							} else if(customer.userID == 3) {
+ 								html = html + "<td>黑名單</td>";
+ 							} else if(customer.userID == 4) {
+ 								html = html + "<td>系統管理者</td>";
+ 							}
+ 							
+ 					html=html+
  							"<td>"+customer.totalAmoutOfConsumption+"</td>" +
  							"<td> <a href='<c:url value='CustomerManagementView.controller'/>?id=" + customer.customerID + 
  							"' class='btn btn-success'> <i class='fa fa-eye'></i> </a> </td>" +
