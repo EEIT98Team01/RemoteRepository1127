@@ -1,6 +1,9 @@
 package webservice;
 
 import java.text.SimpleDateFormat;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSONObject;
 
+import model.bean.CustomerBean;
+import model.bean.SellerBackstageManageBean;
 import model.service.Order01Service;
+import model.service.SellerBackstageManageService;
 import model.utils.PrimitiveNumberEditor;  
 
 @RestController
@@ -21,7 +27,10 @@ import model.utils.PrimitiveNumberEditor;
 public class Order01ListWebService {
 	@Autowired
 	Order01Service order01Service;
-	
+	@Autowired
+	private HttpSession session;
+	@Autowired
+	private SellerBackstageManageService sellerBackstageManageService;
 
 	// FormBean客製化
 	@InitBinder
@@ -52,16 +61,25 @@ public class Order01ListWebService {
 		System.out.println("startTime==>"+startTime);
 		System.out.println("endTime==>"+endTime);
 		
+		// 取得當前使用者帳號及商店資料
+		 CustomerBean user = (CustomerBean)session.getAttribute("user");
+		 List<SellerBackstageManageBean> temp = sellerBackstageManageService.findStore(user.getEmail(), 1, 999, "storeID");
+		 int storeID = temp.get(0).getStoreID();
+		
 		// 檢查使用者輸入條件之情形，呼叫相對應方法
 		if( (orderID == null || "".equals(orderID.trim())) && 
 			(status == null || "".equals(status.trim())) && 
 			( (startTime == null || "".equals(startTime.trim())) || (endTime == null || "".equals(endTime.trim())) )
 		  ) {
-			array = new JSONArray(order01Service.find(Integer.parseInt(pageNumber), Integer.parseInt(pageSize), "orderID desc"));
-			quantity = order01Service.getQuantity();
+//			array = new JSONArray(order01Service.find(Integer.parseInt(pageNumber), Integer.parseInt(pageSize), "orderID desc"));
+//			quantity = order01Service.getQuantity();
+			
+			array = new JSONArray(order01Service.findByCondition(null, storeID+"", null, null, null, Integer.parseInt(pageNumber), Integer.parseInt(pageSize),"orderID desc"));
+			quantity = order01Service.getConditionQuantity(null, storeID+"", null, null, null);
+		
 		} else {
-			array = new JSONArray(order01Service.findByCondition(orderID, status, startTime, endTime, Integer.parseInt(pageNumber), Integer.parseInt(pageSize),"orderID desc"));
-			quantity = order01Service.getConditionQuantity(orderID, status, startTime, endTime);
+			array = new JSONArray(order01Service.findByCondition(orderID, storeID+"", status, startTime, endTime, Integer.parseInt(pageNumber), Integer.parseInt(pageSize),"orderID desc"));
+			quantity = order01Service.getConditionQuantity(orderID, storeID+"", status, startTime, endTime);
 		}
 				
 		// 計算總頁數

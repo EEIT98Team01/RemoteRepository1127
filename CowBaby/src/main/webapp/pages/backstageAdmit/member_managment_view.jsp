@@ -139,11 +139,9 @@
 										<c:if test="${customerData.userID == 3}">
 											<label class="col-md-2 control-label" style="text-align:left; width:auto;">黑名單</label>
 										</c:if>
-									</div>
-									
-									<div class="form-group col-md-12">
-										<label class="col-md-2 control-label">消費群集</label>
-										<label class="col-md-2 control-label" style="text-align:left; width:auto;">群集${customerData.consumerSegmentation}</label>
+										<c:if test="${customerData.userID == 4}">
+											<label class="col-md-2 control-label" style="text-align:left; width:auto;">系統管理者</label>
+										</c:if>
 									</div>
 		                                
 									<div class="form-group col-md-12">

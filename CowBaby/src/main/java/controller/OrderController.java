@@ -64,7 +64,7 @@ public class OrderController {
 		int statuss = -1;
 		if ("未處理".equals(status)) {
 			statuss = 1;
-		} else if ("檢貨中".equals(status)) {
+		} else if ("撿貨中".equals(status)) {
 			statuss = 2;
 		} else if ("送貨中".equals(status)) {
 			statuss = 3;

@@ -59,14 +59,14 @@ public class ProductService {
 
 	// 回傳符合某條件的資料
 	@Transactional(readOnly = true)
-	public List<ProductBean> findByCondition(String classficationID,String productStatus) {
-		if((classficationID == null) || "".equals(classficationID.trim()) && (productStatus == null)){
+	public List<ProductBean> findByCondition(String productName) {
+
+		
+		if((productName == null) || "".equals(productName.trim())){
 			return productDao.find();//未使用任何條件
 		}else{
 			Map<String,String> condition = new HashMap<String,String>();
-			if(classficationID != null){
-				condition.put("classficationID", "= " + classficationID);
-			}
+			condition.put("title", "like '%" + productName + "%'");
 			return productDao.findByCondition(condition);
 		}
 	}
