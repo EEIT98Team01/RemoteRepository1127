@@ -69,12 +69,13 @@ public class SellerBackstageManageService {
 		List<Object[]> result = new LinkedList<Object[]>();
 		for(int i = 0; i < storeList.size(); i++) {
 			SellerBackstageManageBean store = storeList.get(i);
-			Object[] obj = new Object[6];
+			Object[] obj = new Object[7];
 			obj[0] = store.getStoreID();
 			obj[2] = store.getStoreName();
 			obj[3] = store.getStoreDescription();
 			obj[4] = store.getStoreRating();
 			obj[5] = store.getTotalPageView();
+			obj[6] = store.getEmail();
 			
 			// 處理圖片
 			java.sql.Blob blobimg = store.getStoreLogo();
