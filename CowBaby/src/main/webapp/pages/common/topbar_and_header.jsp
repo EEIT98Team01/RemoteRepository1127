@@ -7,9 +7,14 @@
 <div class="container-fliud top-bar">
 	<section class="container">
 		<ul class="top-bar-menu pull-right">
-			<li><a class="facebook" href="#">FB</a></li>	
+			<c:if test="${user.userID==2}">
+				<li><a class="myshopStore" href="<c:url value="PersonShopController"/>?storeID=${myStoreID}&email=${user.email}">
+					<img src="<c:url value="/images/myshop.png"/>">myshop</a>
+				</li>
+			</c:if>
+			
 			<li>
-				<a class="shopcart" href="#">
+				<a class="shopcart" href="<c:url value="/pages/backstageSeller/SellerBackstagePageController.controller"/>">
 					<i class="fa fa-cart-plus fa-2x" aria-hidden="true"></i>
 					<span class="shopcart-total-number">0</span>
 				</a>
@@ -28,9 +33,10 @@
 			<c:if test="${not empty user}">
 				<li><img src="data:image/jpg;base64,${logingPhotoImg}"/>${user.customerName}
 					<div class="showMemberPannal">
+						<div class="arrow"></div>
 						<c:if test="${user.userID==2}">
-						<div><a href="<c:url value="PersonShopController"/>?storeID=${myStoreID}&email=${user.email}">我的賣場</a></div>
-						<div><a href="<c:url value="/pages/backstageSeller/SellerBackstagePageController.controller"/>">我的管理著後台</a></div>
+							<div><a href="<c:url value="PersonShopController"/>?storeID=${myStoreID}&email=${user.email}">我的賣場</a></div>
+							<div><a href="<c:url value="/pages/backstageSeller/SellerBackstagePageController.controller"/>">賣場管理後台</a></div>
 						</c:if>
 						<div><a href="<c:url value="/pages/member/member_account_infor.jsp"/>">我的資訊</a></div>
 						<div><a href="<c:url value="/LoingOutController"/>">安全登出</a></div>

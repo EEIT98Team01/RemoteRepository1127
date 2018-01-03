@@ -29,6 +29,7 @@
 .personal_shop_page_container .personal_infor .seller_img img{
     margin-top: 7px;
     width: 115px;
+    height:115px;
     border-radius: 50%; 
 }
 
