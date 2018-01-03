@@ -25,9 +25,8 @@
 		             <span>商店設置</span> 
 		         </a>
 		    </li>
-		     
 		    <li>
-		         <a href="order_list.jsp" >
+		         <a href="${pageContext.servletContext.contextPath}/pages/backstageSeller/order_list.jsp" >
 		             <i class="fa fa-file-text" aria-hidden="true"></i>
 		             <span>訂單查詢</span> 
 		         </a>

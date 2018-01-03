@@ -56,15 +56,15 @@ public class OrderController {
 		return "order_view"; // ← 要放view用
 	}
 	
-	//order編輯
-	@RequestMapping(value = ("OrderUpdate.controller"), method = { RequestMethod.GET, RequestMethod.POST })
+	//order編輯				
+	@RequestMapping(value = ("/pages/backstageSeller/OrderUpdate"), method = { RequestMethod.GET, RequestMethod.POST })
 	public String orderupdate(Model model, int orderID, String status) {
 		System.out.println(status);
 
 		int statuss = -1;
 		if ("未處理".equals(status)) {
 			statuss = 1;
-		} else if ("檢貨中".equals(status)) {
+		} else if ("撿貨中".equals(status)) {
 			statuss = 2;
 		} else if ("送貨中".equals(status)) {
 			statuss = 3;
