@@ -19,6 +19,7 @@ public class SellerBackstageManageService {
 	@Autowired
 	private SellerBackstageManageDao sellerBackstageManageDao;
 	
+
 	// 查詢該店家設店設置資料
 	@Transactional(readOnly=true)
 	public SellerBackstageManageBean getStoreData(int storeID) {
@@ -52,6 +53,13 @@ public class SellerBackstageManageService {
 		}
 	}
 	
+	
+	// 取得符合特定條件商店數量
+	public int getQuantity() {
+			
+		return sellerBackstageManageDao.getQuantity();
+	}
+	
 	public List<Object[]> hotStoreList(int rating, int pageView, int quantity) {
 		Map<String, String> condition = new HashMap<String, String>();
 		condition.put("storeRating", ">= " + rating);
@@ -83,5 +91,7 @@ public class SellerBackstageManageService {
 		
 		return result;
 	}
+
+	
 	
 }

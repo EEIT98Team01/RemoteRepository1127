@@ -15,15 +15,18 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import model.bean.CustomerBean;
 import model.bean.SellerBackstageManageBean;
 import model.service.CustomerUserLoginService;
+import model.service.SellerBackstageManageService;
 
 @Controller
 @RequestMapping("CustomerUserLoginController")
-@SessionAttributes(names = { "user", "logingPhotoImg" })
+@SessionAttributes(names = { "user", "logingPhotoImg","myStoreID"})
 
 public class CustomerUserLoginController {
 
 	@Autowired
 	CustomerUserLoginService customerUserLoginService;
+	@Autowired
+	SellerBackstageManageService SellerBackstageManageService;
 
 	@RequestMapping(method = { RequestMethod.GET, RequestMethod.POST })
 	public String method(String useremail, String password, Model model) {
@@ -51,6 +54,15 @@ public class CustomerUserLoginController {
 		// 進行商業服務
 		CustomerBean bean = customerUserLoginService.findByCondition(useremail, password);
 		// 依照執行結果挑選適當的View元件
+		
+		//如果是賣家，則把STOREID放入session
+		if(bean.getUserID()==2){
+			/*bean.getEmail();*/
+			/*SellerBackstageManageBean sellerBackstageManageBean = SellerBackstageManageService.getStoreData(bean.getEmail());
+			int id = sellerBackstageManageBean.getStoreID();*/
+			int storeID = SellerBackstageManageService.findStore(bean.getEmail(), 1, 999, "storeID").get(0).getStoreID();
+			model.addAttribute("myStoreID", storeID);
+		}
 
 		
 		if (bean == null) {

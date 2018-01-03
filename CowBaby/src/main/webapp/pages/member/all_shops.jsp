@@ -39,8 +39,8 @@
 			<div class="container_pagination">
 				<div class="container_pagination_title col-md-2">全部商家</div>
 				<div class="pull-right">
-					<ul class="pagination">
-						<li>
+					<ul class="pagination" id="myPagination">
+						<!-- <li>
 						    <a  style="border-radius:50%" href="#" aria-label="Previous">
 						        <span aria-hidden="true">«</span>
 						    </a>
@@ -53,18 +53,18 @@
 					    <li>
 					    <a style="border-radius:50%" href="#" aria-label="Next">
 					        <span aria-hidden="true">»</span>
-					    </a>
+					    </a> -->
 					</ul>
 				</div>
 				<div class="col-md-2 col-md-offset-3 pull-right">
 					<form class="form-inline">
 						<div class="form-group">
-							<label for="exampleInputName2">顯示</label>
-							<select class="form-control">
-								<option>10</option>
-								<option>20</option>
-								<option>30</option>
-								<option>40</option>		
+							<label>顯示</label>
+							<select class="form-control mySelect">
+								<option value="10">10</option>
+								<option value="2">2</option>
+								<option value="4">4</option>
+								<option value="6">6</option>		
 							</select>
 						</div>
 					</form>	
@@ -180,9 +180,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/js/bootstrap-switch.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/js/bootstrap-dialog.min.js"></script>
 <script src="<c:url value="/pluging/Bxsliders/jquery.bxslider.min.js"/>"></script>
-
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.12/jquery.bxslider.js"></script> -->
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.12/jquery.bxslider.css">  -->
+<script src="<c:url value="/pluging/Bootsrap/jquery.twbsPagination.js"/>"></script>
  
 
 
@@ -190,15 +188,68 @@
 <script type="text/javascript">
 
 $(function(){
+
+	$(".all_shops_page_container .shopList .item .description").each(function(){
+    	var mytext = $(this).text();
+		var newText = mytext.substr(0,40);
+		$(this).text(newText+"..."); 	
+	});
 	
-	  $(".all_shops_page_container .shopList .item .description").each(function(){
-	    	console.log($(this).text());
-	    	var mytext = $(this).text();
-			var newText = mytext.substr(0,40);
-			console.log("newText",newText);
-			$(this).text(newText+"...");
-	    	
-	  });
+	// 預設當前頁
+  	var pagenow = 1;
+  	// 預設總頁數
+  	var totalPage = 1;
+  	// 預設每頁顯示筆數
+  	var visiblecount = 10;
+  	// 分頁的插件，一定要加
+    $('#myPagination').twbsPagination('destroy');
+  	
+ 	// 自動產生分頁
+ 	var totalPages = ${totalPage};
+    var pageSize  = ${pageSize};
+  	
+	$(".mySelect").change(function(){
+		pageSize =$(this).children('option:selected').val();
+  		console.log("visiblecount",visiblecount)
+  		
+  		$('#myPagination').twbsPagination('destroy');
+  		
+  		$('#myPagination').twbsPagination({
+ 			startPage: 1,
+ 			totalPages: totalPages,
+ 			visiblePages: pageSize,
+ 			initiateStartPageClick: true,
+ 			
+ 			onPageClick: function (evt, page) { 
+ 				var url = "";
+ 				url = url + 
+ 				      "${pageContext.servletContext.contextPath}/AllShopController?" +
+ 				      "pageNumber=" + page + "&" +
+ 				      "pageSize="+pageSize;		
+ 				window.location.replace(url);
+ 			}
+ 		});
+	});
+
+
+	if(!totalPages==0) {
+		// 如果查詢有資料
+		$('#myPagination').twbsPagination({
+			startPage: ${pageNumber},
+			totalPages: totalPages,
+			visiblePages: pageSize,
+			initiateStartPageClick: false,
+			
+			onPageClick: function (evt, page) { 
+				var url = "";
+				url = url + 
+				      "${pageContext.servletContext.contextPath}/AllShopController?" +
+				      "pageNumber=" + page + "&" +
+				      "pageSize=${pageSize}"				
+				window.location.replace(url);
+			}
+		});
+	}
 
 })
 </script>
