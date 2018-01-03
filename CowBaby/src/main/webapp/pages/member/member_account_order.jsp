@@ -67,52 +67,33 @@
 				</p>
 			</div>
 			<div class="order_detail">
-				<table>
+				<table id="orderList">
 				    <thead>
 				      	<tr>
+				      		<th>項次</th>
 					        <th>訂單編號</th>
-					        <th>訂購店家</th>
-					        <th>商品名稱</th>
 					        <th>訂購日期</th>
+					        <th>付款方式</th>
 					        <th>總金額</th>
-					        <th>狀態</th>
-					        <th>訂單處理狀態</th>
+					        <th>商品數量</th>
+					        <th>處理狀態</th>
+					        <th>檢視細項</th>
 				      	</tr>
 				    </thead>
 				    <tbody>
-					    <tr>
-					        <td>S123456</td>
-					        <td>兔兔商店</td>
-					        <td>保暖寒冬大外套</td>
-					        <td>2017-10-10 20:08:08</td>
-					        <td>1000</td>
-					        <td>訂單未完成</td>
-					        <td>尚未處理</td>
-					    </tr>
 
-					     <tr>
-					        <td>S123456</td>
-					        <td>兔兔商店</td>
-					        <td>保暖寒冬大外套</td>
-					        <td>2017-10-10 20:08:08</td>
-					        <td>1000</td>
-					        <td>訂單未完成</td>
-					        <td>尚未處理</td>
-					    </tr>
-
-					    <tr>
-					        <td colspan="6" style="text-align: right;">本次紅利</td>
-					        <td><span class="bonus">50</span>點</td>
-					    </tr>
-
-					    <tr>
-					        <td colspan="5" style="text-align: right;">共3筆</td>
-					        <td style="text-align: right;">總價</td>
-					        <td><span class="price">10000</span>$</td>
-					    </tr>
 				    </tbody>
 				</table>
-			</div>	
+			</div>
+			<div class="row">
+				<div class="col-md-3 record-number">
+					<span>第 <span class="pageNum">0</span>頁</span>|
+					<span>第 <span class="firstNum">0</span> - <span class="endNum">0</span>筆</span>|
+					<span>共 <span class="totalNum">0</span>筆</span>
+				</div>
+					<!--分頁 -->
+				<ul class="pagination"  id="myPagination"></ul>
+			</div>
 		</div>	
 			
 	</section>
@@ -129,14 +110,137 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/js/bootstrap-switch.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/js/bootstrap-dialog.min.js"></script>
 <script src="<c:url value="/pluging/Bxsliders/jquery.bxslider.min.js"/>"></script>
+<script src="<c:url value="/pluging/Bootsrap/jquery.twbsPagination.js"/>"></script>
+<script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@1.5.4/src/loadingoverlay.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@1.5.4/extras/loadingoverlay_progress/loadingoverlay_progress.min.js"></script>
 
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.12/jquery.bxslider.js"></script> -->
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.12/jquery.bxslider.css">  -->
- 
 <script type="text/javascript">
 
 	$(function(){
-
+		 // 設置 loaading圖案
+		 $.LoadingOverlaySetup({ 
+			    size            : "10%"
+		 });
+		
+	   	 // 預設當前頁
+	   	 var pagenow = 1; 
+	   	 // 預設總頁數
+	   	 var totalPage = 1; 
+	   	 // 預設每頁顯示筆數
+	   	 var visiblecount = 10; 
+	   	 
+	   	 inqueryData(1);
+	   	 
+	   	 function inqueryData(pageNum){
+			$.ajax({
+		        type:"GET",                   
+		        url: "/CowBaby/order/getCustomerOrder",    
+		        data: {
+			       	 customerAccount:"${user.email}",
+			       	 pageSize:visiblecount,
+		       		 pageNumber:pageNum
+		        }, 
+		         
+		        dataType:"json",   
+		        
+		        // ajax載入前
+		        beforeSend: function(){
+		        	//顯示laoding 參考網址=>https://gasparesganga.com/labs/jquery-loading-overlay/#quick-demo
+		        	$("#orderList").LoadingOverlay("show");
+				}, 
+				
+				// 成功要做的事
+		        success : function(response){   
+	
+		           // response 回來的字串轉 json物件
+		           var obj = JSON.parse(response.list);
+		           
+		           // 組出 列表塞回 table  
+		           //讀取物件中的資料$.each(object,function(name,value){});
+		           $.each(obj, function (index, order) {
+		           	    var html="";
+		           	    
+// 				        <td>S123456</td>
+// 				        <td>2017-10-10 20:08:08</td>
+// 				        <td>超商取貨</td>
+// 				        <td>1000</td>
+// 				        <td>7項</td>
+// 				        <td>訂單未完成</td>
+// 				        <td> <a href='#' class='btn btn-success'> <i class='fa fa-eye'></i> </a> </td>
+		           	    
+		 		    	html="<tr>"+
+	 							"<td>"+(index+1+ (response.pageSize*(response.pageNumber-1)))+"</td>" +
+	 							"<td>"+order.orderID+"</td>" +
+	 							"<td>"+order.orderDate.substr(0,19)+"</td>" +
+	 							"<td>超商取貨</td>" + 
+	 							"<td>"+order.totalAmount+"</td>" +
+	 							"<td>"+order.totalItems+"項</td>";
+	 							
+	 							if(order.status == 1) {
+	 								html = html + "<td>未處理</td>";
+	 							} else if(order.status == 2) {
+	 								html = html + "<td>撿貨中</td>";
+	 							} else if(order.status == 3) {
+	 								html = html + "<td>送貨中</td>";
+	 							} else if(order.status == 4) {
+	 								html = html + "<td>已完成</td>";
+	 							}
+	 							
+	 					html=html+
+	 							"<td> <a href='<c:url value='/pages/member/orderDetail'/>?orderID=" + order.orderID + 
+	 							"' class='btn btn-success'> <i class='fa fa-eye'></i> </a> </td>" +
+							 "</tr>";
+							 
+						html=html+"<td style='display:none'></td>";
+	 		    		$('tbody').append(html);
+		           }) 
+		           
+		          	    
+	         		// 自動產生分頁
+		         	var totalPages = response.tatalPage;
+		            var pageSize  = response.pageSize;
+	 
+	 				if(!totalPages==0){
+	 				// 如果查詢有資料
+					   $('#myPagination').twbsPagination({
+			                  totalPages: totalPages,
+			                  visiblePages: pageSize,
+			                  initiateStartPageClick: false,
+			                  onPageClick: function (evt, page) { 
+								inqueryData(formData,page);
+				       	　　　　}
+		                });
+	
+						// 把頁數 ，筆數，開始筆數-結束筆數 塞回去
+			            $(".pageNum").html(response.pageNumber);
+			            $(".firstNum").html( ((response.pageNumber-1)*response.pageSize) +1);
+			            $(".endNum").html(response.pageNumber*response.pageSize);
+			            $(".totalNum").html(response.tatal);
+					  
+	 				}else{
+	 			 	// 如果查詢無資料	
+	 					$(".pageNum").html(0);
+	 		            $(".firstNum").html(0);
+	 		            $(".endNum").html(0);
+	 		            $(".totalNum").html(0);
+	 		            $('tbody').html('<tr><td colspan="10">目前無任何資料</td></tr>');	
+	 				}
+	  
+		        },
+	
+		        // ajax完成~隱藏loading
+		        complete: function(){
+		        	setTimeout(function(){
+		        		$("#orderList").LoadingOverlay("hide");
+		        	},300)
+				},
+				     
+				// 發ajax錯誤
+		        error:function(xhr, ajaxOptions, thrownError){
+		            //alert(xhr.status+"\n"+thrownError);
+		        }
+	    	});
+	   	 }
 
 	})
 </script>

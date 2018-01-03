@@ -17,7 +17,7 @@
 
 <link rel="stylesheet" href="<c:url value="/pluging/Bxsliders/jquery.bxslider.min.css"/>"> 
 <link rel="stylesheet" href="<c:url value="/css/frontDesk/basic.css"/>">
-<link rel="stylesheet" href="<c:url value="/css/frontDesk/member_account_update_infor.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/frontDesk/member_account_order.css"/>">
 
 
 <!--body-->
@@ -39,12 +39,13 @@
 				</ul>	
 			</div>	
 		</div>
+
 		<!-- 個人商店頁面-->
 		<div class="main_container_col_2 member_information">
 			<ul class="breadcrumb">
 			    <li><a href="#">首頁</a></li>
 			    <li>會員專區</li>
-			    <li class="active">會員資訊</li>
+			    <li class="active">我的訂單明細</li>
 			</ul>
 			<div class="welcome_text">
 				<p>HI! 
@@ -65,84 +66,79 @@
 					</c:if>
 				</p>
 			</div>
-			<div class="review_member_infor">
-			<form action="${pageContext.servletContext.contextPath}/CustomerUpdate.controller"
-			      method="POST">
-				<div class="wrapper">
-					<div class="title">會員基本資訊</div>
-					<div class="wrapper_box1">
-						<table>
+			
+			<!--這邊開始寫內容-->
+			<div class="order_detail">
+				<table>
+				    <thead>
+				      	<tr>
+							<th>商品名稱</th>
+							<th>數量</th>
+							<th>規格</th>
+							<th>價錢</th>
+				      	</tr>
+				    </thead>
+				    <tbody>
+					    <c:forEach var="orderDetail" varStatus="st" items="${orderDetail_list}">
 							<tr>
-								<td>帳號E-mail</td>
-								<td>${user.email}</td>
-								<input type="text" style="display:none" name="customerID" value="${user.customerID}" />
-								<td>會員註冊日</td>
-								<td>${user.createTime}</td>
+								<td><a href='<c:url value='/ProductItemOfShop?storeID=&productID=${orderDetail[5]}'/>' target="_blank">${orderDetail[0]}</a></td>
+								<td>${orderDetail[2]}</td>
+								<td>${orderDetail[3]}</td>
+								<td>${orderDetail[4]}</td>	
 							</tr>
-							<tr>
-								<td>累積消費金額</td>
-								<td>${user.totalAmoutOfConsumption}</td>
-								<td>消費紅利</td>
-								<td>${user.bonus}</td>
-							</tr>
-							<tr>
-								<td>修改密碼</td>
-								<td><input type="text" class="form-control" name="password" id="password" value="${user.password}"><p style="color: #e21124;">${errors.password}</p></td>
-								
-								<td>確認密碼</td>
-								<td><input type="text" class="form-control" name="checkPassword" id="checkPassword" value="${user.password}"><p style="color: #e21124;">${errors.checkPassword}</p></td>
-								
-							</tr>
-						</table>
-					</div>
-					<div class="title" style="margin-top: 40px;">個人基本資料 Personal information </div>
-					<div class="wrapper_box1 num2">
-						<table>
-							<tr>
-								<td>您的大名 * :</td>
-								<td>${user.customerName}</td>
-								<td>您的性別 * :</td>
-								<td>${user.gender}</td>
-							</tr>
-							<tr>
-								<td>您的生日 * :</td>
-								<td>${user.birthday}</td>
-								<td>婚姻狀況 * :</td>
-								<c:if test="${user.marriage==false}">
-									<td colspan="3">未婚</td>
-								</c:if>
-								<c:if test="${user.marriage==true}">
-									<td colspan="3">已婚</td>
-								</c:if>
-							</tr>
-							<tr>
-								<td>您的電話 *:</td>
-								<td><input type="text" class="form-control" name="landline" id="landline" value="${user.landline}"></td>
-								<td>行動電話*</td>
-								<td><input type="text" class="form-control" name="mobilePhone" id="mobilePhone" value="${user.mobilePhone}"></td>
-							</tr>
-							<tr>
-								<td>聯絡地址 * :</td>
-								<td><input type="text" class="form-control" name="address" id="address" value="${user.address}"></td>
-								<td>月收入狀況 :</td>
-								<td><input type="text" class="form-control" name="income" id="income" value="${user.income}"></td>
-							</tr>
-							<tr>
-								<td>是否定閱電子報 :</td>
-								<td colspan="3">
-									<label class="radio-inline"><input type="radio" name="subscription" id="subscription"> 是 </label>
-									<label class="radio-inline"><input type="radio" name="subscription" id="subscription"> 否 </label>
-								</td>
-							</tr>
-						</table>	
-					</div>	
-				</div>
-				<div><button  type="submit" class="btn btn-primary pull-right">確認提交</button></div>
-				</form>
-			</div>
-		</div>		
-	</section>
+						</c:forEach>						  	
 
+					    <tr>
+					        <td colspan="3" style="text-align: right;">本次使用紅利</td>
+					        <td><span class="bonus">${orderData.usebonus}</span>點</td>
+					    </tr>
+
+					    <tr>
+					        <td colspan="3" style="text-align: right;">總價</td>
+					        <td><span class="price">${orderData.totalAmount}</span>元</td>
+					    </tr>
+				    </tbody>
+				</table>
+				
+				<table>
+					<thead>
+						<tr>
+							<td colspan="2">訂單資訊</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>購買店家：</td>
+							<td><a href="<c:url value='/PersonShopController?storeID=${store.storeID}&email=${store.email}'/>" target="_blank">${store.storeName}</a></td>
+						<tr>
+						<tr>
+							<td>訂單編號：</td>
+							<td>${orderData.orderID}</td>
+						<tr>
+						<tr>
+							<td>下訂日期：</td>
+							<td>${1900+orderData.orderDate.year}-${1+orderData.orderDate.month}-${orderData.orderDate.date}</td>
+						<tr>
+						<tr>
+							<td>收件人姓名：</td>
+							<td>${orderData.receiverName}</td>
+						<tr>
+						<tr>
+							<td>收件人信箱：</td>
+							<td>${orderData.receiverEmail}</td>
+						<tr>
+						<tr>
+							<td>收件人電話：</td>
+							<td>${orderData.receiverPhone}</td>
+						<tr>
+					</tbody>
+				</table>
+				
+			</div>
+		</div>	
+			
+	</section>
+	
 	<!--引入 footer-->
 	<jsp:include page="/pages/common/footer.jsp"/>
 </body>
@@ -155,17 +151,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/js/bootstrap-switch.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/js/bootstrap-dialog.min.js"></script>
 <script src="<c:url value="/pluging/Bxsliders/jquery.bxslider.min.js"/>"></script>
-
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.12/jquery.bxslider.js"></script> -->
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.12/jquery.bxslider.css">  -->
- 
-
-
+<script src="<c:url value="/pluging/Bootsrap/jquery.twbsPagination.js"/>"></script>
+<script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@1.5.4/src/loadingoverlay.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@1.5.4/extras/loadingoverlay_progress/loadingoverlay_progress.min.js"></script>
 
 <script type="text/javascript">
 
 	$(function(){
-
 
 	})
 </script>

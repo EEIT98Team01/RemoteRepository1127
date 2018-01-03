@@ -35,7 +35,7 @@
 					<div class="showMemberPannal">
 						<div class="arrow"></div>
 						<c:if test="${user.userID==2}">
-							<div><a href="<c:url value="PersonShopController"/>?storeID=${myStoreID}&email=${user.email}">我的賣場</a></div>
+							<div><a href="${pageContext.servletContext.contextPath}/PersonShopController?storeID=${myStoreID}&email=${user.email}">我的賣場</a></div>
 							<div><a href="<c:url value="/pages/backstageSeller/SellerBackstagePageController.controller"/>">賣場管理後台</a></div>
 						</c:if>
 						<div><a href="<c:url value="/pages/member/member_account_infor.jsp"/>">我的資訊</a></div>

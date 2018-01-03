@@ -140,6 +140,18 @@ public class Order01Service {
 		}
 	}
 */
+	public List<Order01Bean> getCustomerOrder(String email, int page, int rows, String sortCondition) {
+		Map<String, String> condition = new HashMap<String, String>();
+		condition.put("email", "= '"+ email +"'");
+		
+		return order01Dao.findByCondition(condition, page, rows, sortCondition);
+	}
 	
+	public int getCustomerOrderQuantity(String email) {
+		Map<String, String> condition = new HashMap<String, String>();
+		condition.put("email", "= '"+ email +"'");
+		
+		return order01Dao.getConditionQuantity(condition);
+	}
 
 }

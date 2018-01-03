@@ -94,8 +94,8 @@
 					</div>
 				</div>	
 			
-				<div class="row"> 
-					<div class="col-md-12">    
+<!-- 				<div class="row">  -->
+					<div class="order_detail">    
 		                <table class="table table-bordered" style="background-color: #fff;" id="messageList">                  
                         	<thead>
 
@@ -105,7 +105,7 @@
 							</tbody>
 	                    </table>   
 	                </div>
-				</div>
+<!-- 				</div> -->
 				<div class="row">
 					<div class="col-md-3 record-number">
 						<span>第 <span class="pageNum">0</span>頁</span>|
@@ -252,7 +252,8 @@ $(function(){
 						html=html+
 								"<td> <a href='<c:url value='/pages/member/messageDelete?messageId=" +
 								message.msgID + "'/>' class='btn btn-primary'> <i class='fa fa-trash-o'></i> </a> </td>" +
-							 "</tr>";				
+							 "</tr>";		
+						html=html+"<td style='display:none'></td>";
 			    		$('tbody').append(html);
 		           }) 
 		           
@@ -364,7 +365,8 @@ $(function(){
 								
 						html=html+"<td> <a href='<c:url value='/pages/member/messageDelete?messageId=" +
 								message.msgID + "'/>' class='btn btn-primary'> <i class='fa fa-trash-o'></i> </a> </td>" +
-							 "</tr>";				
+							 "</tr>";
+						html=html+"<td style='display:none'></td>";
 			    		$('tbody').append(html);
 		           }) 
 		           
