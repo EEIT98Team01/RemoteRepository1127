@@ -35,18 +35,17 @@ public class ProductController {
 
 	// 後台商品列表頁
 	@RequestMapping(value = ("ProductController"), method = { RequestMethod.GET, RequestMethod.POST })
-	public String view(Model model, String classficationID, String productStatus) {
+	public String view(Model model, String classficationID) {
 		System.out.println(classficationID);
-		System.out.println(productStatus);
 
 		if ("".equals(classficationID)) {
 			classficationID = null;
 		}
 
-		if (classficationID == null || "".equals(classficationID.trim()) && (productStatus == null)) {
+		if (classficationID == null || "".equals(classficationID.trim())) {
 			model.addAttribute("classficationIDList", productService.find());
 		} else {
-			model.addAttribute("productStatusList", productService.findByCondition(classficationID, productStatus));
+			model.addAttribute("classficationIDList", productService.findByCondition(classficationID));
 		}
 		return "product_managment_list";
 	}
