@@ -98,41 +98,37 @@
 					        <td><span class="price">${orderData.totalAmount}</span>元</td>
 					    </tr>
 				    </tbody>
-				</table>
-				
-				<table>
-					<thead>
-						<tr>
-							<td colspan="2">訂單資訊</td>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>購買店家：</td>
-							<td><a href="<c:url value='/PersonShopController?storeID=${store.storeID}&email=${store.email}'/>" target="_blank">${store.storeName}</a></td>
-						<tr>
-						<tr>
-							<td>訂單編號：</td>
-							<td>${orderData.orderID}</td>
-						<tr>
-						<tr>
-							<td>下訂日期：</td>
-							<td>${1900+orderData.orderDate.year}-${1+orderData.orderDate.month}-${orderData.orderDate.date}</td>
-						<tr>
-						<tr>
-							<td>收件人姓名：</td>
-							<td>${orderData.receiverName}</td>
-						<tr>
-						<tr>
-							<td>收件人信箱：</td>
-							<td>${orderData.receiverEmail}</td>
-						<tr>
-						<tr>
-							<td>收件人電話：</td>
-							<td>${orderData.receiverPhone}</td>
-						<tr>
-					</tbody>
-				</table>
+						</table>
+						
+						<table>
+							<thead>
+								<tr>
+									<td colspan="2">訂單資訊</td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>訂單編號：</td>
+									<td>${orderData.orderID}</td>
+								<tr>
+								<tr>
+									<td>下訂日期：</td>
+									<td>${1900+orderData.orderDate.year}-${1+orderData.orderDate.month}-${orderData.orderDate.date}</td>
+								<tr>
+								<tr>
+									<td>收件人姓名：</td>
+									<td>${orderData.receiverName}</td>
+								<tr>
+								<tr>
+									<td>收件人信箱：</td>
+									<td>${orderData.receiverEmail}</td>
+								<tr>
+								<tr>
+									<td>收件人電話：</td>
+									<td>${orderData.receiverPhone}</td>
+								<tr>
+							</tbody>
+						</table>
 				
 			</div>
 		</div>	

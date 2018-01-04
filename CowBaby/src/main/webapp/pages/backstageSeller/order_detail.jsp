@@ -75,13 +75,48 @@
 <!-- 怎麼插另一個Table的圖片 -->				<td><img src="${orderDetail[1]}"></td>
 											<td>${orderDetail[2]}</td>
 											<td>${orderDetail[3]}</td>
-											<td>${orderDetail[4]}</td>	
+											<td>${orderDetail[4]}</td>
 									  	</tr>  
 									</c:forEach>
 								</tbody>
-							</table> 	
-						</div>
+							</table> 
+						</div>			
+					  </div>
 					</div>
+					
+				<div class="row">	
+					<div class="col-md-12">
+						<div class = "panel">
+							<table class="table table-bordered">
+								<thead>
+								<tr>
+									<td colspan="2">訂單資訊</td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>收件人姓名：</td>
+									<td>${orderData.receiverName}</td>
+								<tr>
+								<tr>
+									<td>收件人信箱：</td>
+									<td>${orderData.receiverEmail}</td>
+								<tr>
+								<tr>
+									<td>收件人信箱：</td>
+									<td>${orderData.pickUpStore}</td>
+								<tr>
+								<tr>
+									<td>收件人電話：</td>
+									<td>${orderData.receiverPhone}</td>
+								<tr>
+							</tbody>
+							</table>
+						</div>			
+					  </div>
+					</div>
+					
+					
 				</div>
 				<input type="button" id="beforePage" class="btn btn-primary pull-left" value="返回查詢頁面" />								 							
 				
