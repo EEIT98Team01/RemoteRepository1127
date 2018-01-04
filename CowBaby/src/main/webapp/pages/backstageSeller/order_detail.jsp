@@ -103,7 +103,7 @@
 									<td>${orderData.receiverEmail}</td>
 								<tr>
 								<tr>
-									<td>收件人信箱：</td>
+									<td>取件地點：</td>
 									<td>${orderData.pickUpStore}</td>
 								<tr>
 								<tr>
