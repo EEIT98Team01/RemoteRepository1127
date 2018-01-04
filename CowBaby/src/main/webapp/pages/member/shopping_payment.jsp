@@ -115,7 +115,7 @@
 				      	<table>
 				      		<tr>
 				      			<td><input type="checkbox" id="check1"/></td>
-								<td style="padding: 10px;font-size: 15px;text-align:left;">跟寄件人一樣</td>
+								<td style="padding: 10px;font-size: 15px;text-align:left;">跟訂購人一樣</td>
 				      		</tr>
 				      		<tr>
 				      			<td>姓名</td>
@@ -140,7 +140,7 @@
 				      	<!-- 把紅利 跟 便利商電地址 帶過去 -->
 						<table>
 				      		<tr>
-				      			<td>便利商店名子</textarea>
+				      			<td>便利商店名字</textarea>
 								<td><input type="text" name="convenienceStoreName" value="${convenienceStorData.convenienceStoreName}"></td>
 				      		</tr>
 				      		<tr>
