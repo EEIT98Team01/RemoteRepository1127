@@ -189,6 +189,7 @@
 
 $(function(){
 
+	$(".nav li").eq(2).find('a').css({"background": "#6abbc5","color": "#ffff"});
 	$(".all_shops_page_container .shopList .item .description").each(function(){
     	var mytext = $(this).text();
 		var newText = mytext.substr(0,40);

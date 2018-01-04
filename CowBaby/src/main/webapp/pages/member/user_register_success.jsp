@@ -32,7 +32,11 @@
 	<section class="page_container member_register_container">
 		<!-- 主要內容-->
 		<div class="main_container_col_1">
-			YAYAYAYAY成功快去EMAIL登入查看認證信件!!!!
+			<h3>恭喜您會員註冊成功，請至註冊的EMAIL登入後查看認證信件!!</h3></br>
+			
+			<h4><a target="blank" href="https://www.google.com/intl/zh-TW/gmail/about/#">GMAI信箱請點擊此處</a></h4>
+			<h4><a target="blank" href="https://login.yahoo.com/config/login?.intl=tw&.done=https://tw.yahoo.com/">YAHOO信箱請點擊此處</a></h4>
+			
 		</div>	
 	</section>
 	

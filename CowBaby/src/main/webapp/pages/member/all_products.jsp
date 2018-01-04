@@ -28,7 +28,7 @@
 	<!-- 這邊 開始寫內容-->
 	<!--每頁Banner-->
 	<section class="page_banner">
-		<img src="<c:url value="/images/all_prouducts_banner.png"/>">
+		<img src="<c:url value="/images/all_prouducts_banner.jpg"/>">
 	</section>
 	
 	<!--每頁 page_container-->
@@ -108,6 +108,9 @@
 <script type="text/javascript">
 
 	$(function(){
+		
+		
+		$(".nav li").eq(0).find('a').css({"background": "#6abbc5","color": "#ffff"})
 			   
 		//初始參數設定
 		var classfication ="";

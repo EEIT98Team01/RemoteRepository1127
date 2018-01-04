@@ -180,6 +180,9 @@
 <script type="text/javascript">
 
 	$(function(){
+		
+		
+		
 		// 預設當前頁
 	   	var pagenow = 1; 
 	   	// 預設總頁數

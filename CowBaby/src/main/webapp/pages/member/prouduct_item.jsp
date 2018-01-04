@@ -42,6 +42,14 @@
 				<li><a href="#">特價商品</a></li>
 				<li><a href="#">出清商品</a></li>
 			</ul>
+			
+			<ul>
+				<li class="sort-title">超人氣選購款</li>
+				<li><a href="#">民族風針織斗篷-桃紅</a></li>
+				<li><a href="#">紅條紋圍兜兜</a></li>
+				<li><a href="#">【甜蜜小孩系列】小販手推車</a></li>
+				<li><a href="#">丹麥熊熊安撫音樂鈴(粉紅)</a></li>
+			</ul>
 		</div>
 
 		<!-- 主要內容-->
@@ -69,20 +77,22 @@
 					</div>
 					
 					<div class="product_number">
-						<a href="#" class="add_num">+</a>
+						<span style="float: left;padding: 10px;font-size: 14px;">要購買數量</span>
+						<a href="#" class="add_num" style="color: #fff;border: 1px solid #939191;">+</a>
 						<input type="text" value="0" id="quantity">
-						<a href="#" class="reduce_num">-</a>
+						<a href="#" class="reduce_num" style="color: #fff;border: 1px solid #939191;">-</a>
 						
 					</div>
 
 					<div class="checkout">
 						<a class="add_cart"  href="#">加入購物車</a>
-						<a class="add_cart" href="#">去結帳</a>				
+						<a class="gopay" href="#">去結帳</a>				
 					</div>
 				</div>
 			</section>
 			
-			<section class="proudect_ckeditor" style="padding-top: 30px;clear: both;">
+			
+			<section class="proudect_ckeditor">
 				${productData.productDescription}
 			</section>
 		</div>

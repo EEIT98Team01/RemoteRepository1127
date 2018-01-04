@@ -109,6 +109,6 @@
 
 <script type="text/javascript">
 	$(function() {
-
+		$(".nav li").eq(4).find('a').css({"background": "#6abbc5","color": "#ffff"})
 	})
 </script>

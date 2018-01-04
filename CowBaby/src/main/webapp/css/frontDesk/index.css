@@ -95,7 +95,7 @@
 .slidershow .item{
     position: relative;
     width: 255px;
-    height: 315px;
+    height: 295px;
     border: 1px solid #e6e4e4;
     float: left;
     background: #fff;
@@ -109,7 +109,7 @@
 }
 
 .slidershow .item .title{
-    padding: 15px;
+    padding: 10px 15px;
     font-size: 15px;
     line-height: 24px;
     font-weight: bold;
@@ -122,7 +122,6 @@
     font-size: 14px;
     text-align: center;
     padding-bottom: 5px;
-    text-decoration:line-through;
 }
 
 .slidershow .item .specialPrice{
@@ -131,6 +130,11 @@
 }
 
 .slidershow .item .specialPrice .specialPriceNum{
+    font-size: 20px;
+    color: #e64242;
+}
+
+.slidershow .item .originalPrice .specialPriceNum{
     font-size: 20px;
     color: #e64242;
 }
@@ -249,6 +253,7 @@
     font-size: 13px;
     padding: 0px 12px;
     line-height: 18px;
+    color: #727171;
 }
 
 .hotSohpWrapper .slidershow .stars{
@@ -353,12 +358,18 @@
     font-size: 14px;
     font-weight: bolder;
     color: #434343;
+    border: 1px dashed #ccc;
+    padding: 5px;
+   
 }
 
 
 
 .otherContent .momBlog .momArtical .articalR{
    font-size: 13px;
+   margin-left: 180px;
+   color: #727171;
+   
 }
 
 .otherContent .momBlog .momArtical .articalR p:nth-child(1){
@@ -381,7 +392,6 @@
 
 .otherContent .otherLink .link{
     width: 350px;
-    border: 1px solid #ccc;
     height: 100px;
     margin-bottom: 25px;
 }
@@ -390,5 +400,15 @@
      height: 188px;
 }
 
-
-
+.lookdetail{
+	 /* background: #ccc; */
+    color: #fff;
+    /* display: block; */
+    /* padding: 5px; */
+    width: 85px;
+    background: #d6b353;
+    border-radius: 5px;
+    text-align: center;
+	
+}
+   

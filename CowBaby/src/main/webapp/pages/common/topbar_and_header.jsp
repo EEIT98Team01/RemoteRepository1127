@@ -8,43 +8,44 @@
 	<section class="container">
 		<ul class="top-bar-menu pull-right">
 			<c:if test="${user.userID==2}">
-				<li><a class="myshopStore" href="<c:url value="PersonShopController"/>?storeID=${myStoreID}&email=${user.email}">
-					<img src="<c:url value="/images/myshop.png"/>">myshop</a>
+				<li class="myshopStoreLi"><a class="myshopStore" href="<c:url value="PersonShopController"/>?storeID=${myStoreID}&email=${user.email}">
+						<span><img src="<c:url value="/images/myshop.png"/>"></span>
+						<span>myshop</span>
+					</a>
 				</li>
 			</c:if>
 			
-			<li>
+			<li class="shopcartli">
 				<a class="shopcart" href="<c:url value="/pages/backstageSeller/SellerBackstagePageController.controller"/>">
 					<i class="fa fa-cart-plus fa-2x" aria-hidden="true"></i>
 					<span class="shopcart-total-number">0</span>
 				</a>
+				<a class="gotopay" href="<c:url value="/ShoppingCartCheckController"/>">結帳去</a>
 				<div class="currentShoppingCartList">
-					<ul>購物車空空的</ul>
+					<ul> 購物車空空的 </ul>
 					<p class="calculate">總價錢:<span>0</span></p>
 				</div>
 			</li>
-		
-			<li><a href="<c:url value="/ShoppingCartCheckController"/>">結帳去</a></li>	
+	
 			<c:if test="${empty user}">
-				<li style="margin-top: 15px;"><a href="<c:url value="/pages/member/user_login.jsp"/>">登入</a></li>
-				<li style="margin: 15px 0 0 0;color: #3a939e;">/</li>
-				<li style="margin-top: 15px;"><a href="<c:url value="/pages/member/user_register.jsp"/>">註冊</a></li>
+				<li class="login" style="margin-top: 15px;"><a href="<c:url value="/pages/member/user_login.jsp"/>">登入</a></li>
+				<li class="line" style="margin: 15px 0 0 0;color: #3a939e;padding: 0;">/</li>
+				<li class="register" style="margin-top: 15px;"><a href="<c:url value="/pages/member/user_register.jsp"/>">註冊</a></li>
 			</c:if>
 			<c:if test="${not empty user}">
-				<li><img src="data:image/jpg;base64,${logingPhotoImg}"/>${user.customerName}
+				<li class="loginUser">
+					<img src="data:image/jpg;base64,${logingPhotoImg}"/>${user.customerName}
 					<div class="showMemberPannal">
 						<div class="arrow"></div>
 						<c:if test="${user.userID==2}">
-							<div><a href="${pageContext.servletContext.contextPath}/PersonShopController?storeID=${myStoreID}&email=${user.email}">我的賣場</a></div>
+							<div><a href="<c:url value="PersonShopController"/>?storeID=${myStoreID}&email=${user.email}">我的賣場</a></div>
 							<div><a href="<c:url value="/pages/backstageSeller/SellerBackstagePageController.controller"/>">賣場管理後台</a></div>
 						</c:if>
 						<div><a href="<c:url value="/pages/member/member_account_infor.jsp"/>">我的資訊</a></div>
 						<div><a href="<c:url value="/LoingOutController"/>">安全登出</a></div>
 					</div>
 				</li>
-				
-			</c:if>
-		</ul>
+			</c:if> 
 	</section>
 </div>
 
@@ -52,19 +53,16 @@
 <header>
 	<section class="container">
 		<row>
-			<div class="col-md-2 logo">
-				<a href="<c:url value="/"/>"><img src="<c:url value="/images/logo.jpg"/>"></a>
+			<div class="col-md-3 logo">
+				<a href="<c:url value="/"/>"><img src="<c:url value="/images/logo01.jpg"/>"></a>
 			</div>
-			<div class="col-md-2 slogan" >
-				<span>開心玩樂開心學習~</span>
-				<span>給孩子最好的就在牛寶貝!!</span>
-			</div>
+			
 
 			<form class="col-md-5 pull-right searchProduct" role="search" action="<c:url value='AllProductController'/>" method="post">
 			    <div class="input-group add-on">
 			      	<input class="form-control" style="border: 2px solid #9ee2ea;" placeholder="Search" name="keyWord" id="title" value="${keyWord}" type="text">
 			      	<div class="input-group-btn">
-			        	<button class="btn btn-default searchStyle" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+			        	<button class="btn btn-default searchStyle" style="border: 4px solid #8bd1d9;" type="submit"><i class="glyphicon glyphicon-search"></i></button>
 			      	</div>
 			    </div>
 		  	</form>
@@ -72,7 +70,7 @@
 	</section>
 
 	<section class="container-fliud">
-		<section class="container main-nav">
+		<section class="container main-nav" style="padding:0;">
 			<ul class="nav navbar-nav">
 				<li><a href="<c:url value="/AllProductController"/>"><i class="fa fa-gift fa-2x" aria-hidden="true"></i>全部商品</a></li>
 				<li><a href="<c:url value="/NewArrivalController"/>"><i class="fa fa-diamond fa-2x" aria-hidden="true"></i>最新商品</a></li>
@@ -91,7 +89,7 @@
 
 $(function(){
 	
-	 $(".currentShoppingCartList").hide();
+	$(".currentShoppingCartList").hide();
 
 	$(".shopcart").hover(function(event) {
 	    $(".currentShoppingCartList").show();
@@ -100,13 +98,26 @@ $(function(){
 	$(".currentShoppingCartList").hover(function(event) {
 	    $(".currentShoppingCartList").show();
 	});
-	
-	
+
 	$(".currentShoppingCartList").mouseleave( 'mouseleave', function() {
 	    $(".currentShoppingCartList").hide();
-	}); 
+	});
+	
+	
+	$(".showMemberPannal").hide();
 
- 	
+	var isShowMemberPannal=false;
+	$(".loginUser").click(function(){
+		isShowMemberPannal = !isShowMemberPannal;
+		if(isShowMemberPannal){
+			$(".showMemberPannal").show();
+		}else{
+			$(".showMemberPannal").hide();
+		}
+		
+	})
+	
+
  
  	// 發AJAX 先拿購物車清單
 	$.ajax({
@@ -162,7 +173,5 @@ $(function(){
 
 })
 		
-		
-		
-		
+
 </script>
