@@ -122,4 +122,40 @@ public class Order01ListWebService {
 		}
 	}
 */	
+	
+	// 取得會員資料
+	@RequestMapping(
+			value="/getCustomerOrder",
+			method={RequestMethod.GET},
+			produces={"application/json;charset=UTF-8"}
+	)
+	public String getCustomerOrder(String customerAccount, int pageSize, int pageNumber) {
+		JSONObject jsonObj = new JSONObject();	// json物件,儲存欲回傳資料
+		JSONArray array;						// 儲存List<CustomerBean>的json物件
+		int quantity;							// 回傳的資料筆數
+		int pageQuantity;						// 總頁數
+		
+		System.out.println("customerAccount==>"+customerAccount);
+		System.out.println("pageSize==>"+pageSize);
+		System.out.println("pageNumber==>"+pageNumber);
+		
+		array = new JSONArray(order01Service.getCustomerOrder(customerAccount, pageNumber, pageSize, "orderDate desc"));
+		quantity = order01Service.getCustomerOrderQuantity(customerAccount);
+				
+		// 計算總頁數
+		if((quantity%10) == 0) {
+			pageQuantity = quantity/10;
+		} else {
+			pageQuantity = quantity/10+1;
+		}
+
+		// 將回傳資料塞入json物件
+		jsonObj.put("tatal", quantity); 
+		jsonObj.put("tatalPage", pageQuantity); 
+		jsonObj.put("pageNumber", pageNumber);
+		jsonObj.put("pageSize", pageSize); 
+		jsonObj.put("list", array.toString()); 
+
+		return jsonObj.toString();
+	}
 }

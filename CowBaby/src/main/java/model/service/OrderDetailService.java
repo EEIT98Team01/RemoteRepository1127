@@ -2,15 +2,13 @@ package model.service;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import model.bean.Order01Bean;
 import model.bean.OrderDetailBean;
-import model.bean.ProductBean;
+import model.dao.Order01Dao;
 import model.dao.OrderDetailDao;
 import model.dao.ProductDao;
 
@@ -22,6 +20,8 @@ public class OrderDetailService {
 	private OrderDetailDao orderDetailDao;
 	@Autowired
 	private ProductDao productDao;
+	@Autowired
+	private Order01Dao order01Dao;
 	
 	// 回傳訂單明細資料,若資料不存在,則回傳null
 	@Transactional

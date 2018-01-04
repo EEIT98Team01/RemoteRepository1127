@@ -85,7 +85,7 @@ public class CustomerReviewController {
 			bean.setServiceFeedback(serviceFeedback);
 			
 			customerServiceAuditService.updateCustomerData(bean);
-			messageService.sendMessage("999@gmail.com", bean.getEmail(), "親愛的會員您好");
+			messageService.sendMessage("admini@gmail.com", bean.getEmail(), bean.getServiceFeedback());
 			
 //			CustomerServiceBean bean = new CustomerServiceBean();
 //			bean.setServiceFeedback(serviceFeedback);

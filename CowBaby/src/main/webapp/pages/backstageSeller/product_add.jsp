@@ -90,7 +90,7 @@
 								<select class="form-control" name="suitableAges">
 									<option value="1">0歲-3歲</option>
 									<option value="2">3歲-6歲</option>
-									<option value="3">6歲-12歲</option>
+									<option value="3">6歲-9歲</option>
 									<option value="4">9歲以上</option>
 								</select>
 							</div>

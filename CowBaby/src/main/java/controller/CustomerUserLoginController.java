@@ -53,6 +53,7 @@ public class CustomerUserLoginController {
 
 		// 進行商業服務
 		CustomerBean bean = customerUserLoginService.findByCondition(useremail, password);
+		
 		// 依照執行結果挑選適當的View元件
 		
 

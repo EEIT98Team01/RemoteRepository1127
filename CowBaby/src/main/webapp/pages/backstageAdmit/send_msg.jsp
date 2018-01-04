@@ -56,7 +56,7 @@
 								<div class="col-md-12">    	
 									<label>訊息內容：</label>
 									<br/>
-		                			<textarea  name='msgContent' id='msgContent'></textarea>
+		                			<textarea cols="200" rows="50" name='msgContent' id='msgContent'></textarea>
 	                			</div>
 
 								<button type="button" id="submit" class="btn btn-primary">發信</button>

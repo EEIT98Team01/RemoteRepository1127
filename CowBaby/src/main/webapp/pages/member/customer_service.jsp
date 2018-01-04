@@ -56,9 +56,9 @@
 					<tr>
 						<td><label>問題種類</label></td>
 						<td><select id="problemTypes" name="problemTypes">
-								<option value="1">帳號問題</option>
-								<option value="2">BUG問題</option>
-								<option value="3">黑名單檢舉</option>
+								<option value="1">黑名單檢舉</option>
+								<option value="2">帳號問題</option>
+								<option value="3">BUG問題</option>
 								<option value="4">其他</option>
 						</select></td>
 
