@@ -95,20 +95,20 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td>收件人姓名：</td>
+									<td>收件人姓名</td>
 									<td>${orderData.receiverName}</td>
 								<tr>
 								<tr>
-									<td>收件人信箱：</td>
+									<td>收件人信箱</td>
 									<td>${orderData.receiverEmail}</td>
 								<tr>
-								<tr>
-									<td>收件人信箱：</td>
-									<td>${orderData.pickUpStore}</td>
-								<tr>
-								<tr>
-									<td>收件人電話：</td>
+																<tr>
+									<td>收件人電話</td>
 									<td>${orderData.receiverPhone}</td>
+								<tr>
+								<tr>
+									<td>取貨超商</td>
+									<td>${orderData.pickUpStore}</td>
 								<tr>
 							</tbody>
 							</table>
