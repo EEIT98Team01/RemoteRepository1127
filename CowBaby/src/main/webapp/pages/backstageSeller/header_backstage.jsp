@@ -27,6 +27,9 @@
 	</div>
 	<div class="login">
 		<div class="nav pull-right">
+			<li class="">
+				<a href="${pageContext.servletContext.contextPath}">回到前台</a>
+			</li>
 			<li class="login-user">
 				<img src="${pageContext.request.contextPath}/images/line.jpg"><span>${user.customerName}</span>
 			</li>
