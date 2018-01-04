@@ -69,8 +69,8 @@ public class MessageWebService {
 			
 			if("系統訊息".equals(userType)) {
 				// 只看系統訊息
-				resultMessageList = messageService.receiverMessage(receiverAccount, "Din@gmail.com", readStatus, msgMarker, pageNumber, pageSize, sortCondition);
-				quantity = messageService.getQuantity(receiverAccount, "Din@gmail.com", readStatus, msgMarker);
+				resultMessageList = messageService.receiverMessage(receiverAccount, "admini@gmail.com", readStatus, msgMarker, pageNumber, pageSize, sortCondition);
+				quantity = messageService.getQuantity(receiverAccount, "admini@gmail.com", readStatus, msgMarker);
 				array = new JSONArray(messageList);
 			} else if("一般會員".equals(userType)) {
 				// 只看一般會員訊息
@@ -86,8 +86,8 @@ public class MessageWebService {
 					// 取得訊息發送者資訊
 					CustomerBean customer = customerManagementService.findByCondition(messageList.get(i).getMsgSenderID(), null, null).get(0);
 					
-					if(customer.getCustomerID() != 1) {
-						// ID不為1表示為其餘會員
+					if(customer.getUserID() != 4) {
+						// ID不為4表示為其餘會員
 						tempMessageList.add(messageList.get(i));
 						quantity++;
 					}
@@ -165,7 +165,7 @@ public class MessageWebService {
 			// 指定收件人
 			if(customerManagementService.findByCondition(account, null, null).size() == 1) {
 				// 收件人帳號存在,則發送訊息
-				messageService.sendMessage("Din@gmail.com", account, msgContent);
+				messageService.sendMessage("admini@gmail.com", account, msgContent);
 				jsonObj.put("message", "已成功發送訊息給" + account);
 				jsonObj.put("error", "");
 			} else {
@@ -186,7 +186,7 @@ public class MessageWebService {
 			
 			// 發送訊息給列表內所有人
 			for(CustomerBean customer: customerList) {
-				messageService.sendMessage("Din@gmail.com", customer.getEmail(), msgContent);
+				messageService.sendMessage("admini@gmail.com", customer.getEmail(), msgContent);
 			}
 			
 			jsonObj.put("message", "訊息成功發出");

@@ -171,8 +171,15 @@
 		 		    	html="<tr>"+
 	 							"<td>"+(index+1+ (response.pageSize*(response.pageNumber-1)))+"</td>" +
 	 							"<td>"+order.orderID+"</td>" +
-	 							"<td>"+order.orderDate.substr(0,19)+"</td>" +
-	 							"<td>超商取貨</td>" + 
+	 							"<td>"+order.orderDate.substr(0,19)+"</td>";
+	 							
+	 							if(order.paymentMethod == 1) {
+	 								html = html + "<td>超商取貨</td>";
+	 							} else if(order.paymentMethod == 2) {
+	 								html = html + "<td>毆付寶</td>";
+	 							}
+	 					
+	 					html=html+		
 	 							"<td>"+order.totalAmount+"</td>" +
 	 							"<td>"+order.totalItems+"項</td>";
 	 							
