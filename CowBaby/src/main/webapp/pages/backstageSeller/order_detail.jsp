@@ -102,8 +102,13 @@
 									<td>收件人信箱</td>
 									<td>${orderData.receiverEmail}</td>
 								<tr>
-																<tr>
-									<td>收件人電話</td>
+								<tr>
+									<td>取件地點：</td>
+									<td>${orderData.pickUpStore}</td>
+								<tr>
+								<tr>
+									<td>收件人電話：</td>
+
 									<td>${orderData.receiverPhone}</td>
 								<tr>
 								<tr>

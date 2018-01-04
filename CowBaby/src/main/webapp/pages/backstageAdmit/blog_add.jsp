@@ -91,6 +91,7 @@
 							
 					</form>
 				<div class="dash-line col-md-12" /></div>
+                <input type="button" id="beforePage" class="btn btn-primary pull-left" value="返回查詢頁面" />
 				<button id="add" class="btn btn-primary pull-right" style="margin-top: 15px;">設定儲存</button>
 			</div>
 			</section>
@@ -156,6 +157,10 @@ $(function(){
 	$(".blog").css({'background':'#3a4152'});
 	$(".blog").find('.sub').css({'display':'block'});
 	$(".blog").find('.sub a').eq(1).css({'color':'yellow'});
+	
+	$("#beforePage").on('click', function () {
+		window.location.assign('<c:url value="/pages/backstageAdmit/blog_list.jsp" />');
+	})
 	
 	// 設置 loaading圖案
 	 $.LoadingOverlaySetup({ 
