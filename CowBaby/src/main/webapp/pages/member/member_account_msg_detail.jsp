@@ -72,7 +72,7 @@
 							<i class="fa fa-user-circle-o" aria-hidden="true"></i>
   
   							<!-- 收系統訊息 -->
-                       		<c:if test="${messageData.msgSenderID == 'Din@gmail.com'}">
+                       		<c:if test="${messageData.msgSenderID == 'admini@gmail.com'}">
 								<strong>FROM:</strong>
                           		<strong>${senderName}</strong>
                           		<span>[${messageData.msgSenderID}]</span>
@@ -102,7 +102,7 @@
 					</div>
 					<div class="row">
 						<!-- 系統訊息,只能返回 -->
-			            <c:if test="${messageData.msgSenderID == 'Din@gmail.com'}">
+			            <c:if test="${messageData.msgSenderID == 'admini@gmail.com'}">
 							<input type="button" id="beforePage" class="btn btn-primary pull-left" value="返回" />
 			            </c:if>
 			            
