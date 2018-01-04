@@ -8,6 +8,15 @@
 <title>cow baby 賣家後台</title>
 <link rel="icon" href="logo.ico">
 </head>
+<style>
+ 	.box li{
+ 		float:left;
+ 		width:120px;
+ 		height:100px;
+ 		background:#ccc;
+ 		margin:0 5px;
+ 	}
+</style>
 
 <!--css-->
 <link rel="stylesheet" href="<c:url value="/css/backstageSellerMainStyle.css"/>">
@@ -35,6 +44,11 @@
 					<div class="clear-both"></div>
 				</div>
 				<!--這邊開始寫內容-->
+				<ul class="box">
+					<li>目前訂單數量:0</li>
+					<li>目前訂單數量:0</li>
+					<li>目前訂單數量:0</li>
+				</ul>
 				
 			</section>
 			<!-- wrapper end -->

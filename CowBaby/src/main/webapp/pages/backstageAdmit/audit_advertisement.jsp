@@ -183,7 +183,7 @@ $(function(){
 	 
 	 	$.ajax({
 	       type:"GET",                   
-	       url: "http://localhost:8080/json/text1",    
+	       url: "${pageContext.servletContext.contextPath}/json/text1",    
 	       data: {
 	       	 customerAccount:formData[0].value,
 	       	 pageSize:visiblecount,

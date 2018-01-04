@@ -393,9 +393,11 @@ a, a:hover, a:focus {
     background: #fff;
     overflow: auto;
     border-radius: 5px;
-    display:block;
-    text
+    display: block;
+    height: 200px;
 }
+   
+
 .currentShoppingCartList ul{
 	text-align: center;
     padding: 8px 5px;
@@ -412,15 +414,17 @@ a, a:hover, a:focus {
 
 
 .top-bar .top-bar-menu .currentShoppingCartList li{
-		max-width: 300px;
-		padding-bottom: 10px;
-	    border-right: none;
-	    border-bottom: 1px dashed #ccc;
-	    color:#685e5e;
+	max-width: 300px;
+    padding-bottom: 10px;
+    border-right: none;
+    border-bottom: 1px dashed #ccc;
+    color: #685e5e;
+    overflow: hidden;
+    height: auto;
 }
 
 .top-bar .top-bar-menu .currentShoppingCartList img{
-	margin-right: 10px;
+	margin-right: 5px;
     vertical-align: middle;
     width: 80px;
     height: 60px;
@@ -428,7 +432,7 @@ a, a:hover, a:focus {
     float:left;
 }
 .top-bar .top-bar-menu .currentShoppingCartList .cartList{
-	float:left;
+	    width: 210px;
 }
 
 .top-bar .top-bar-menu .currentShoppingCartList .cartList p{

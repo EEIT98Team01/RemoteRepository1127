@@ -38,7 +38,7 @@ public class CustomerApplySellController {
 	CustomerApplySellerService customerApplySellerService;
 	@Autowired
 	CustomerManagementService customerManagementService;
-	
+
 	@RequestMapping(method = { RequestMethod.GET, RequestMethod.POST })
 	public String method(String email,int customerID){
 		
@@ -52,7 +52,7 @@ public class CustomerApplySellController {
 	    backstageBean.setEmail(email);
 		
 		customerApplySellerService.insertBackstageData(backstageBean);
-		return "apple_seller_success";
+		return "apple_be_seller_success";
 	}
 			
 }

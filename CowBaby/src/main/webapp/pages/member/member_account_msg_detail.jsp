@@ -68,7 +68,7 @@
 			<!--這邊開始寫內容-->
 				<div class="container details-inbox">
 					<div class="row">
-						<div class="col-md-12">
+						<div class="col-md-12" style="margin-top: 15px;">
 							<i class="fa fa-user-circle-o" aria-hidden="true"></i>
   
   							<!-- 收系統訊息 -->
@@ -89,12 +89,12 @@
                           	<span><i class="fa fa-clock-o" aria-hidden="true"></i>${messageTime}</span> 	
                   		</div>
 					</div>
-					<div class="row text">
+					<div class="row text" style="margin-top: 20px;">
 						<div class="col-md-12">
 							<label for="comment">訊息內容:</label>
-							<p>
+							<div style="padding: 15px;padding: 15px;border: 1px solid #ccc;width: 500px;">
 								${messageData.msgContent}
-							</p>
+							</div>
                   		</div>
 					</div>
 					<div class="row">

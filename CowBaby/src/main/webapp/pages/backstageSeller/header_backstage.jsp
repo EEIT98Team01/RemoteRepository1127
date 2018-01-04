@@ -8,7 +8,7 @@
 		<div class="fa fa-bars" data-placement="right"
 			data-original-title="Toggle Navigation"></div>
 	</div>
-	<a href="#" class="logo"><b>COW BABY Admin</b></a>
+	<a href="#" class="logo"><b>COW BABY 賣家後台</b></a>
 	<div class="nav notify-row">
 		<ul class="nav notify-menu">
 			<li>

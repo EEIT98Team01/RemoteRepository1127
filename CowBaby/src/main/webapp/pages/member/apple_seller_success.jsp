@@ -32,7 +32,7 @@
 	<section class="page_container member_register_container">
 		<!-- 主要內容-->
 		<div class="main_container_col_1">
-			申請成功請靜候加音
+			<h3>感謝你的申請，管理員正在審核中</h3>
 		</div>	
 	</section>
 	

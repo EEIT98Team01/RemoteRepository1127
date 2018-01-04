@@ -210,6 +210,10 @@
 	<bean id="customer_Order_Detail" class="org.springframework.web.servlet.view.InternalResourceView">
 		<property name="url" value="/pages/member/member_account_order_detail.jsp"></property>
 	</bean>
+	
+	<bean id="apple_be_seller_success" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/pages/member/apple_seller_success.jsp"></property>
+	</bean>
 
 	<!-- 丁測試用不要刪 -->
 	<!--

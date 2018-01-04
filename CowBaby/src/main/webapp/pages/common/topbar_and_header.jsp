@@ -16,7 +16,7 @@
 			</c:if>
 			
 			<li class="shopcartli">
-				<a class="shopcart" href="<c:url value="/pages/backstageSeller/SellerBackstagePageController.controller"/>">
+				<a class="shopcart" href="#">
 					<i class="fa fa-cart-plus fa-2x" aria-hidden="true"></i>
 					<span class="shopcart-total-number">0</span>
 				</a>
