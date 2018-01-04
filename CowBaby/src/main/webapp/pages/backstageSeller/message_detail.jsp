@@ -41,23 +41,25 @@
 					<div class="row text">
 						<div class="col-md-12">
 							<p>
+								訊息內容：
+							</p>
+							<p>
 								${messageData.msgContent}
 							</p>
                   		</div>
 					</div>
 					<div class="row">
-						<hr/>
-					</div>
-					<div class="row">
 						<c:if test="${messageData.msgSenderID != 'admini@gmail.com'}">
 							<form class="form-inline msgFrom">
 								<div class="form-group col-md-12">
-						  			<label for="comment">回應內容</label>
+						  			<p>
+						  				回應內容：
+									</p>
 						  			<c:if test="${!empty messageData.msgResponse}" >
-						  				<textarea cols="40" rows="10" class="form-control" rows="5" id="msgResponse" name="msgResponse" readonly="readonly">${messageData.msgResponse}</textarea>
-									</c:if>
+						  				<textarea cols="80" rows="10" class="form-control" rows="5" id="msgResponse" name="msgResponse" readonly="readonly">${messageData.msgResponse}</textarea>
+									</c:if>	
 									<c:if test="${empty messageData.msgResponse}" >
-						  				<textarea cols="40" rows="10" class="form-control" rows="5" id="msgResponse" name="msgResponse"></textarea>
+						  				<textarea cols="80" rows="10" class="form-control" rows="5" id="msgResponse" name="msgResponse"></textarea>
 									</c:if>
 								</div>
 								<input type="button" id="beforePage" class="btn btn-primary pull-left" value="返回" />
