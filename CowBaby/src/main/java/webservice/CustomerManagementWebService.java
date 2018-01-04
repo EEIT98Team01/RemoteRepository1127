@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.alibaba.fastjson.JSONObject;
@@ -33,6 +34,7 @@ import model.utils.PrimitiveNumberEditor;
 
 @RestController
 @RequestMapping("/service")
+@SessionAttributes(names = {"myStoreID"})
 public class CustomerManagementWebService {
 	@Autowired
 	private CustomerManagementService customerManagementService;
@@ -167,7 +169,8 @@ public class CustomerManagementWebService {
 			 
 			 if(temp.size() == 0) {
 				 // 資料庫內沒有當初會員的商店資料,故新增
-				 sellerBackstageManageService.insertStoreData(bean);
+				 SellerBackstageManageBean insert = sellerBackstageManageService.insertStoreData(bean);
+				 model.addAttribute("myStoreID", insert.getStoreID());
 			 } else {
 				 bean.setStoreID(temp.get(0).getStoreID());
 				 bean.setStoreRating(temp.get(0).getStoreRating());
@@ -180,7 +183,7 @@ public class CustomerManagementWebService {
 		} catch (IllegalStateException e) {
 			 jsonObj.put("msg_error", "error"); 
 			 e.printStackTrace();
-		} 
+		}
       
 		return jsonObj.toJSONString();
 	}

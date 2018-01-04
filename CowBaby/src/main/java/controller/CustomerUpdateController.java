@@ -8,11 +8,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import model.bean.CustomerBean;
 import model.service.CustomerManagementService;
 
 @Controller
+@SessionAttributes(names = { "user"})
 public class CustomerUpdateController {
 
 	@Autowired
@@ -59,9 +61,12 @@ public class CustomerUpdateController {
 			bean.setLandline(landline);
 			bean.setMobilePhone(mobilePhone);
 			bean.setAddress(address);
-			// bean.setIncome(Integer.parseInt(income));
+			bean.setIncome(Integer.parseInt(income));
 			bean.setSubscription(subscription);
 			customerupdate.updateCustomerData(bean);
+			
+			CustomerBean update = customerupdate.findById(bean.getCustomerID());
+			model.addAttribute("user", update);
 		}
 
 		return "customer_Update";
