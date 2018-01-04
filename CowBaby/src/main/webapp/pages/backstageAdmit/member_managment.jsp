@@ -64,8 +64,7 @@
 							<table class="table table-striped table-bordered table_thead" id="customerList"> 
 								<thead>
 								  <tr>
-								    <th>
-</th>
+								    <th>序號</th>
 								    <th>帳號</th>
 									<th>姓名</th>
 								<%-- 	<th><a href="<c:url value="CustomerManagementList.controller?page=1&orderBy=email&account=${account}&userType=${userType}" />">帳號</a></th>
