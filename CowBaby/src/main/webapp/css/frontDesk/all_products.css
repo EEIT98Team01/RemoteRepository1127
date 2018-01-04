@@ -45,8 +45,12 @@
 }
 .all_products_page_container .proudectList .stroe_name{
 	color: #777a90;
-    font-size: 16px;
+    font-size: 14px;
     text-align: center;
+    line-height: 20px;
+    padding: 10px;
+    font-weight: bold;
+    height:80px;
 }
 
 
@@ -57,6 +61,8 @@
 
 .all_products_page_container .proudectList .item img{
     width: 205px;
+    height:162px;
+    
 }
 
 .all_products_page_container .proudectList .item .title{
@@ -171,9 +177,9 @@
 .all_products_page_container .proudect_detail .product_infor .product_number .add_num,
 .all_products_page_container .proudect_detail .product_infor .product_number .reduce_num{
     display: block;
-    background: #ccc;
+    background: #939191;
     padding: 5px 15px;
-    border: 1px #ccc solid;
+    border: 1px #939191 solid;
     text-align: center;
     font-family: fantasy;
     font-size: 21px;
@@ -186,7 +192,8 @@
     float: left;
     height: 33px;
     text-align: center;
-    width: 100px
+    width: 100px;
+    border: 1px solid #939191;
 }
 .all_products_page_container .proudect_detail .product_infor .checkout{
     margin-top:15px; 
@@ -197,12 +204,70 @@
 .all_products_page_container .proudect_detail .product_infor .checkout .add_cart{
     display: block;
     float: left;
-    padding: 15px;
-    background: #f8cccc;
-    margin: 10px;
+    /* padding: 15px; */
+    width: 150px;
+    height: 40px;
+    color: #fff;
+    background: #dd7979;
+    margin: 10px 0;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 5px;
+    font-size: 16px;
+    border: 1px #dd7979 solid;
+    color:#FFF;
 }
 
+.all_products_page_container .proudect_detail .product_infor .checkout .gopay{
+    display: block;
+    float: left;
+    /* padding: 15px; */
+    width: 150px;
+    height: 40px;
+    color: #fff;
+    background: #75b1cd;
+    margin: 10px 0 10px 15px;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+
+.proudect_ckeditor{
+	    border-top: 1px solid #ccc;
+	    margin-top:40px;
+}
+/* .all_products_page_container .proudect_detail .product_infor .checkout a.add_cart:hover{
+	background: #d16d6d;
+}
+
+.all_products_page_container .proudect_detail .product_infor .checkout a.gopay:hover{
+	background: #559cbd;
+}
+
+ */
 
 .all_products_page_container .proudect_detail .product_infor .product_size .productSpec.select{
 	background:#beeadc;
 }
+
+
+
+/***bootstrap modify***/
+/*  .bx-wrapper{
+    margin: 0 auto;
+}
+
+.pagination>li>a, .pagination>li>span{
+    border-radius: 50%;
+    margin: 0 1px;
+    color: #a0a0a0;
+}
+
+.pagination>li>a:focus, .pagination>li>a:hover, .pagination>li>span:focus, .pagination>li>span:hover{
+    background-color: #77d0e4;
+    color: #fff;
+
+} 
+ */
