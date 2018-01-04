@@ -73,6 +73,7 @@ public class CustomerServiceAuditController {
 			bean.setProblemTypes(problemTypes);
 			bean.setProblemDescription(problemDescription);
 			bean.setReportTime(new java.util.Date());
+			bean.setProcessStatus(1);
 			customerServiceAuditService.insertStoreData(bean);
 			
 			return "customer_service_success";
