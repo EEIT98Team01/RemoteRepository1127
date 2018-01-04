@@ -8,7 +8,6 @@
 	<title>cow babye購物商城</title>
 	<link rel="icon" href="logo.ico">
 </head>
-<!-- YA -->
 
 <!--css-->
 <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -40,11 +39,11 @@
 		        <img src="<c:url value="/images/a3.jpg"/>" alt="Los Angeles" style="width:100%;">
 		      </div>
 		      <div class="item">
-		        <img src="<c:url value="/images/a3.jpg"/>" alt="Chicago" style="width:100%;">
+		        <img src="<c:url value="/images/a8.jpg"/>" alt="Chicago" style="width:100%;">
 		      </div>
 		    
 		      <div class="item">
-		        <img src="<c:url value="/images/a3.jpg"/>" alt="New york" style="width:100%;">
+		        <img src="<c:url value="/images/a9.jpg"/>" alt="New york" style="width:100%;">
 		      </div>
 		    </div>
 
@@ -101,8 +100,7 @@
 						<div class="item">
 							<img src="${newproduct.productImage}">
 							<p class="title">${newproduct.title}</p>
-							<div class="specialPrice">${newproduct.summary}</div>
-							<div class="specialPrice">NT ${newproduct.unitPrice} 元</div>
+							<div class="originalPrice">NT <span class="specialPriceNum">${newproduct.unitPrice}</span> 元</div>
 						</div>
 					</a>
 				</c:forEach>
@@ -117,7 +115,7 @@
 	<section class="hotProuduct">
 		<section class="mainTitle">
 			<div class="topic">
-				<img src="<c:url value="/images/new_arrived.png"/>">
+				<img src="<c:url value="/images/hot_prouduct.png"/>">
 				<p>走過路過快來看看喔!跳樓大牌賣!!</p>
 			</div>
 		</section>
@@ -131,8 +129,7 @@
 							<div class="topIcon">${st.count}</div>
 							<img src="${hotproduct.productImage}">
 							<p class="title">${hotproduct.title}</p>
-							<div class="specialPrice">${hotproduct.summary}</div>
-							<div class="specialPrice">NT ${hotproduct.unitPrice} 元</div>
+							<div class="originalPrice">NT <span class="specialPriceNum">${hotproduct.unitPrice}</span> 元</div>
 						</div>
 					</a>
 				</c:forEach>
@@ -164,7 +161,7 @@
 						<a href='<c:url value='/PersonShopController?storeID=${hotStore[0]}&email=${hotStore[6]}'/>'>
 							<div class="item">
 								<div class="choice"></div>
-									<img src="data:image/jpeg;base64,${hotStore[1]}"/>">
+									<img src="data:image/jpeg;base64,${hotStore[1]}"/>
 									<div class="shopName">${hotStore[2]}</div>
 									<div class="description">
 										${hotStore[3]}
@@ -207,12 +204,13 @@
 				<div class="momArtical">
 					<a  target="_blank" href='<c:url value='/BlogItemOfArticle?articleID=${newBlog[0]}'/>'>
 						<div class="articalL">
-							<img width="120" height="120" src="data:image/jpeg;base64,${newBlog[1]}">
+							<img width="160" height="125" src="data:image/jpeg;base64,${newBlog[1]}">
 						</div>
 
 						<div class="articalR">
 							<p>${newBlog[3]}</p>
 							<p>${newBlog[2]}...MORE</p>
+							<p class="lookdetail">看詳細內容</p>
 						</div>
 					</a>
 				</div>
@@ -222,9 +220,9 @@
 
 		<!--友情連結-->
 		<div class="otherLink">
-			<div class="link facebookLink">asdas</div>
+			<div class="link facebookLink"><img src="<c:url value="/images/linkad01.jpg"/>"></div>
 			<div class="link"><img src="<c:url value="/images/link_ad.png"/>"></div>
-			<div class="link">asdasdads</div>
+			<div class="link"><img src="<c:url value="/images/ad04.jpg"/>"></div>
 		</div>
 	</section>
 
@@ -273,5 +271,12 @@ $(function(){
 		    slideMargin: 40,
 		    pager: false
   		}); 
+  		
+  		$(".description").each(function(){
+  	    	var mytext = $(this).text();
+  			var newText = mytext.substr(0,40);
+  			$(this).text(newText+"..."); 	
+  		});
+  		
 })
 </script>

@@ -47,23 +47,6 @@ a, a:hover, a:focus {
     color: #262626;
 }
 
-/***bootstrap modify***/
-.bx-wrapper{
-    margin: 0 auto;
-}
-
-.pagination>li>a, .pagination>li>span{
-    border-radius: 50%;
-    margin: 0 1px;
-    color: #a0a0a0;
-}
-
-.pagination>li>a:focus, .pagination>li>a:hover, .pagination>li>span:focus, .pagination>li>span:hover{
-    background-color: #77d0e4;
-    color: #fff;
-
-}
-
 
 /******************************************
 *******************header******************
@@ -75,9 +58,12 @@ a, a:hover, a:focus {
     background-image:url("../../images/bk.png"); 
 }
 
+
+
 .top-bar .top-bar-menu li {
     float: left;
-    margin:10px 12px 0 10px;
+    height: 30px;
+    padding: 0 15px;
 }
 
 .top-bar .top-bar-menu li a{
@@ -86,67 +72,51 @@ a, a:hover, a:focus {
     font-weight: bolder;
 }
 
-.top-bar .top-bar-menu li:nth-child(2){
-	position:relative;
+.top-bar .top-bar-menu .myshopStoreLi{
+	border-right: 1px dashed #58969e;
+	padding-top:5px;
+	margin-top: 8px;
+	
 }
 
-.top-bar .top-bar-menu li:nth-child(2),
-.top-bar .top-bar-menu li:nth-child(1){
-    padding-right:20px;
-    border-right: 1px dashed #5fa8b0;
-}
 
-.top-bar .top-bar-menu li:nth-child(3),
-.top-bar .top-bar-menu li:nth-child(4){
-   color: #fff;
-   letter-spacing: 1px;
-   font-size: 14px;
-}
-
-.top-bar .top-bar-menu li a{
-    display: block;
-}
-
-.top-bar .top-bar-menu li a.facebook{
-    background: #3a939e;
-    padding: 5px;
-    color:#fff;
-    border: 1px solid #707bba; 
+.top-bar .top-bar-menu .myshopStore{
+	border: 1px solid #57a6af;
+    padding: 3px 10px;
     border-radius: 5px;
-}
-.top-bar .top-bar-menu li:nth-child(3){
- 	padding-top:2px; 
-}
-.top-bar .top-bar-menu li:nth-child(3) a{
-  	background: #cdf3f7;
-    padding: 4px 8px;
-    border-radius: 5px;
-    color: #3a939e;
-    font-size:14px;
-    border: 1px solid #74c1ca;
+    background: #6ab3bb;
+    color: #eaf5f6;
+    font-size: 14px;
+    letter-spacing: 1px;
 }
 
-.top-bar .top-bar-menu li:nth-child(3) a:hover{
-  	background: #3a939e;
-    color: #fff; 
+
+.top-bar .top-bar-menu .myshopStore img{
+	border-radius: 0px;
+    border: none;
+    line-height: 20px;
+    margin-right: 5px;
+    width: 20px;
+    vertical-align: text-bottom;
 }
 
-.top-bar .top-bar-menu li a.shopcart{
+
+.top-bar .top-bar-menu .shopcartli{
+	border-right: 1px dashed #58969e;
+    margin-top: 8px;
     position: relative;
+    width: 125px;
+	
 }
 
-.top-bar .top-bar-menu li a.shopcart i{
-    color: #3a939e;
-}
 
-.top-bar .top-bar-menu li a.shopcart .shopcart-total-number{
-   right: -10px;
-    top: -5px;
+
+.top-bar .top-bar-menu .shopcartli .shopcart .shopcart-total-number{
+    left: 35px;
+    top: -3px;
     position: absolute;
     width: 18px;
-    height: 18px;
     display: block;
-    /* padding: 10px; */
     border-radius: 50px;
     background: #f2c12f;
     border: 1px solid #fff;
@@ -154,24 +124,33 @@ a, a:hover, a:focus {
     line-height: 16px;
 }
 
-.top-bar .top-bar-menu li a.login{
-    color: #fff;
-    padding-top: 5px;
+.top-bar .top-bar-menu .shopcartli .gotopay{
+	position: absolute;
+    padding: 5px 10px;
+    /* border: 1px solid #62aeb7; */
+    margin-left: 8px;
+    /* background: #6ab3bb; */
+    color: #3594a0;
+    letter-spacing: 1px;
+    border-radius: 5px;
+    top: 3px;
 }
 
-.top-bar .top-bar-menu li a.login:hover{
-    color: #07535c;
-   
+.top-bar .top-bar-menu .loginUser{
+	margin-top: 10px;
+	color: #fff;
+    font-size: 15px;
 }
 
-.top-bar .top-bar-menu img{
+
+.top-bar .top-bar-menu .loginUser img{
     margin-right: 10px;
     vertical-align: middle;
     width: 32px;
     height: 32px;
     border-radius: 50px;
-    border: 1px solid #fff;
-}
+    border: 2px solid #fff;
+} 
 
 
 /********** header *********/
@@ -392,6 +371,7 @@ a, a:hover, a:focus {
     font-size: 14px;
     font-weight: bolder;
     padding: 5px 0;
+    display:block;
    
 }
 
@@ -400,48 +380,38 @@ a, a:hover, a:focus {
     background: #9dd6dd;
 }
 
+
 /***********currentShoppingCartList****************/
 
 .currentShoppingCartList{
 	position: absolute;
     width: 250px;
     border: 2px solid #8bd1d9;
-    height: 200px;
     left: -75px;
-    top: 50px;
+    top: 35px;
     z-index: 999;
     background: #fff;
     overflow: auto;
     border-radius: 5px;
-    display:none;
+    display:block;
+    text
 }
-
-.currentShoppingCartList p.calculate{
-	clear:both;
-	font-size:14px;
+.currentShoppingCartList ul{
 	text-align: center;
+    padding: 8px 5px;
 }
-
-.top-bar .top-bar-menu .myshopStore{
-	border: 1px solid #57a6af;
-    padding: 3px 10px;
-    border-radius: 5px;
-    background: #6ab3bb;
-    color: #eaf5f6;
+.currentShoppingCartList p.calculate{
+	clear: both;
     font-size: 14px;
-    letter-spacing: 1px;
+    text-align: center;
+    padding: 8px;
+    border-top: 1px solid #8bd1d9;
+    background: #e0f0f2;
 }
 
 
-.top-bar .top-bar-menu .myshopStore img{
-	border-radius: 0px;
-    border: none;
-    width: 19px;
-    height: 18px;
-}
-}
 
-.top-bar .top-bar-menu li:nth-child(2) .currentShoppingCartList li{
+.top-bar .top-bar-menu .currentShoppingCartList li{
 		max-width: 300px;
 		padding-bottom: 10px;
 	    border-right: none;
@@ -449,7 +419,7 @@ a, a:hover, a:focus {
 	    color:#685e5e;
 }
 
-.top-bar .top-bar-menu li:nth-child(2) .currentShoppingCartList img{
+.top-bar .top-bar-menu .currentShoppingCartList img{
 	margin-right: 10px;
     vertical-align: middle;
     width: 80px;
@@ -457,14 +427,19 @@ a, a:hover, a:focus {
     border-radius: 0px;
     float:left;
 }
-.top-bar .top-bar-menu li:nth-child(2) .currentShoppingCartList .cartList{
+.top-bar .top-bar-menu .currentShoppingCartList .cartList{
 	float:left;
 }
 
-.top-bar .top-bar-menu li:nth-child(2) .currentShoppingCartList .cartList p{
+.top-bar .top-bar-menu .currentShoppingCartList .cartList p{
 	padding: 2px;
     font-size: 12px;
+} 
+
+.top-bar-menu .line{
+	padding: 0 ;
 }
+
 
 
 

@@ -11,7 +11,7 @@
 .all_blog_page_container .blogList .item:nth-child(4n+4){
     margin-right:0px;
 }
-
+ 
 .all_blog_page_container .blogList .item img{
     width: 270px;
 }
